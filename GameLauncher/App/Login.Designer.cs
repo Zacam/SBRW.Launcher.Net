@@ -281,7 +281,7 @@ namespace GameLauncher
             this.Name = "Form1";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GameLauncher";
+            this.Text = "SBRW Launcher";
             this.TabControl1.ResumeLayout(false);
             this.LoginTab.ResumeLayout(false);
             this.LoginTab.PerformLayout();

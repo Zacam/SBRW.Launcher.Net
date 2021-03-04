@@ -7,7 +7,7 @@
     <ProjectGuid>{DB3302EE-37FF-4312-831B-C0F549E7D8C2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>GameLauncher</RootNamespace>
-    <AssemblyName>GameLauncherSimplified</AssemblyName>
+    <AssemblyName>SBRWLauncher</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
