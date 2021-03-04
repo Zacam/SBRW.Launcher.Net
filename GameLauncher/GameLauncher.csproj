@@ -105,6 +105,7 @@
     <Compile Include="App\Classes\LauncherCore\Proxy\Singleton.cs" />
     <Compile Include="App\Classes\LauncherCore\RPC\DiscordGamePresence.cs" />
     <Compile Include="App\Classes\LauncherCore\RPC\DiscordLauncherPresense.cs" />
+    <Compile Include="App\Classes\LauncherCore\Validator\IsValid.cs" />
     <Compile Include="App\Classes\LauncherCore\Visuals\Prompt.cs" />
     <Compile Include="App\Classes\LauncherCore\Lists\JSON\SimpleJSON.cs" />
     <Compile Include="App\Classes\LauncherCore\ModNet\ModNetLinksCleanup.cs" />

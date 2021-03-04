@@ -19,6 +19,7 @@ using GameLauncher.App.Classes.LauncherCore;
 using GameLauncher.App.Classes.LauncherCore.RPC;
 using GameLauncher.App.Classes.LauncherCore.Client.Game;
 using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
+using GameLauncher.App.Classes.LauncherCore.Validator;
 
 namespace GameLauncher
 {
@@ -143,7 +144,7 @@ namespace GameLauncher
         private void LoginButton_Click(object sender, EventArgs e) 
         {
             Tokens.Clear();
-            if (!ValidateEmail(LoginEmailBox.Text)) 
+            if (!IsValid.Email(LoginEmailBox.Text)) 
             {
                 ActionText.Text = "Please type your email!";
             } 
@@ -191,7 +192,7 @@ namespace GameLauncher
                 MessageBox.Show(null, "A browser window has been opened to complete registration on " + SelectedServerName, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else if (!ValidateEmail(RegisterEmail.Text)) 
+            else if (!IsValid.Email(RegisterEmail.Text)) 
             {
                 ActionText.Text = "Please type your email!";
             } 
@@ -251,27 +252,6 @@ namespace GameLauncher
                 MessageBox.Show(null, Tokens.Error, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ActionText.Text = Tokens.Error;
             }
-        }
-
-        public static bool ValidateEmail(string email) 
-        {
-            if (String.IsNullOrEmpty(email)) return false;
-
-            String theEmailPattern = @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
-                                   + "@"
-                                   + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$";
-
-            return Regex.IsMatch(email, theEmailPattern);
-        }
-
-        private void CloseButton(object sender, DownloadProgressChangedEventArgs e)
-        {
-            if (File.Exists(LinksFile))
-            {
-                ModNetLinksCleanup.CleanLinks(LinksFile);
-            }
-
-            Close();
         }
 
         private string FormatFileSize(long byteCount) 
