@@ -59,9 +59,9 @@ namespace GameLauncher
             InitializeComponent();
 
             Load += new EventHandler(Form1_Load);
-            ServerDropDownList.SelectedIndexChanged += new EventHandler(serverPick_SelectedIndexChanged);
+            ServerDropDownList.SelectedIndexChanged += new EventHandler(ServerPick_SelectedIndexChanged);
 
-            actionText.Text = "Ready!";
+            ActionText.Text = "Ready!";
         }
 
         private void Form1_Load(object sender, EventArgs e) 
@@ -73,15 +73,15 @@ namespace GameLauncher
             ServerDropDownList.SelectedIndex = 0;
         }
 
-        private void serverPick_SelectedIndexChanged(object sender, EventArgs e) 
+        private void ServerPick_SelectedIndexChanged(object sender, EventArgs e) 
         {
             Tokens.Clear();
-            actionText.Text = "Loading info...";
+            ActionText.Text = "Loading info...";
 
             try 
             {
-                ButtonLogin.Enabled = true;
-                ButtonRegister.Enabled = true;
+                LoginButton.Enabled = true;
+                RegisterButton.Enabled = true;
 
                 SelectedServerName = ServerDropDownList.Text.ToString().ToUpper();
                 SelectedServerIP = new Uri(ServerDropDownList.SelectedValue.ToString()).Host;
@@ -93,7 +93,7 @@ namespace GameLauncher
 
                 result = JSON.Parse(serverdata);
 
-                actionText.Text = "Players on server: " + result["onlineNumber"];
+                ActionText.Text = "Players on server: " + result["onlineNumber"];
 
                 try 
                 {
@@ -133,28 +133,28 @@ namespace GameLauncher
             } 
             catch 
             {
-                ButtonLogin.Enabled = false;
-                ButtonRegister.Enabled = false;
+                LoginButton.Enabled = false;
+                RegisterButton.Enabled = false;
 
                 SelectedServerName = "Offline";
                 SelectedServerIP = "http://localhost";
 
-                actionText.Text = "Server is offline.";
+                ActionText.Text = "Server is offline.";
             }
 
-            ticketBox.Enabled = _ticketRequired;
+            RegisterTicketBox.Enabled = _ticketRequired;
         }
 
-        private void button1_Click(object sender, EventArgs e) 
+        private void LoginButton_Click(object sender, EventArgs e) 
         {
             Tokens.Clear();
-            if (!validateEmail(loginEmailBox.Text)) 
+            if (!ValidateEmail(LoginEmailBox.Text)) 
             {
-                actionText.Text = "Please type your email!";
+                ActionText.Text = "Please type your email!";
             } 
-            else if (String.IsNullOrEmpty(loginPasswordBox.Text)) 
+            else if (String.IsNullOrEmpty(LoginPasswordBox.Text)) 
             {
-                actionText.Text = "Please type your password!";
+                ActionText.Text = "Please type your password!";
             } 
             else 
             {
@@ -163,10 +163,10 @@ namespace GameLauncher
 
                 if (_modernAuthSupport == false) 
                 {
-                    ClassicAuth.Login(loginEmailBox.Text, SHA.HashPassword(loginPasswordBox.Text).ToLower());
+                    ClassicAuth.Login(LoginEmailBox.Text, SHA.HashPassword(LoginPasswordBox.Text).ToLower());
                 } else 
                 {
-                    ModernAuth.Login(loginEmailBox.Text, loginPasswordBox.Text);
+                    ModernAuth.Login(LoginEmailBox.Text, LoginPasswordBox.Text);
                 }
 
                 if (String.IsNullOrEmpty(Tokens.Error)) 
@@ -183,12 +183,12 @@ namespace GameLauncher
                 else 
                 {
                     MessageBox.Show(null, Tokens.Error, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    actionText.Text = (String.IsNullOrEmpty(Tokens.Error)) ? "An error occurred." : Tokens.Error;
+                    ActionText.Text = (String.IsNullOrEmpty(Tokens.Error)) ? "An error occurred." : Tokens.Error;
                 }
             }
         }
 
-        private void button2_Click(object sender, EventArgs e) 
+        private void RegisterButton_Click(object sender, EventArgs e) 
         {
             if (SelectedServerName == "WORLDUNITED OFFICIAL")
             {
@@ -196,69 +196,69 @@ namespace GameLauncher
                 MessageBox.Show(null, "A browser window has been opened to complete registration on " + SelectedServerName, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else if (!validateEmail(registerEmail.Text)) 
+            else if (!ValidateEmail(RegisterEmail.Text)) 
             {
-                actionText.Text = "Please type your email!";
+                ActionText.Text = "Please type your email!";
             } 
-            else if (String.IsNullOrEmpty(registerPassword.Text)) 
+            else if (String.IsNullOrEmpty(RegisterPassword.Text)) 
             {
-                actionText.Text = "Please type your password!";
+                ActionText.Text = "Please type your password!";
             } 
-            else if (String.IsNullOrEmpty(registerPassword2.Text)) 
+            else if (String.IsNullOrEmpty(RegisterConfirmPassword.Text)) 
             {
-                actionText.Text = "Please type your confirmation password!";
+                ActionText.Text = "Please type your confirmation password!";
             } 
-            else if (registerPassword.Text != registerPassword2.Text) 
+            else if (RegisterPassword.Text != RegisterConfirmPassword.Text) 
             {
-                actionText.Text = "Password doesn't match!";
+                ActionText.Text = "Password doesn't match!";
             } 
             else if(_ticketRequired) 
             {
-                if(String.IsNullOrEmpty(ticketBox.Text)) 
+                if(String.IsNullOrEmpty(RegisterTicketBox.Text)) 
                 {
-                    actionText.Text = "Ticket is required to play on this server!";
+                    ActionText.Text = "Ticket is required to play on this server!";
                 } 
                 else 
                 {
-                    createAccount();
+                    CreateAccount();
                 }
             } 
             else 
             {
-                createAccount();
+                CreateAccount();
             }
         }
 
-        private void createAccount() 
+        private void CreateAccount() 
         {
-            String token = (_ticketRequired) ? ticketBox.Text : null;
+            String token = (_ticketRequired) ? RegisterTicketBox.Text : null;
             Tokens.IPAddress = ServerDropDownList.SelectedValue.ToString();
             Tokens.ServerName = ServerDropDownList.SelectedItem.ToString();
 
             if (_modernAuthSupport == false)
             {
-                ClassicAuth.Register(registerEmail.Text, SHA.HashPassword(registerPassword.Text), token);
+                ClassicAuth.Register(RegisterEmail.Text, SHA.HashPassword(RegisterPassword.Text), token);
             }
             else
             {
-                ModernAuth.Register(registerEmail.Text, registerPassword.Text, token);
+                ModernAuth.Register(RegisterEmail.Text, RegisterPassword.Text, token);
             }
 
             if (!String.IsNullOrEmpty(Tokens.Success))
             {
                 MessageBox.Show(null, Tokens.Success, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                actionText.Text = Tokens.Success;
+                ActionText.Text = Tokens.Success;
 
-                tabControl1.Visible = true;
+                TabControl1.Visible = true;
             }
             else
             {
                 MessageBox.Show(null, Tokens.Error, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                actionText.Text = Tokens.Error;
+                ActionText.Text = Tokens.Error;
             }
         }
 
-        public static bool validateEmail(string email) 
+        public static bool ValidateEmail(string email) 
         {
             if (String.IsNullOrEmpty(email)) return false;
 
@@ -430,13 +430,13 @@ namespace GameLauncher
             return "0 Bytes";
         }
 
-        void client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e) 
+        void Client_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e) 
         {
             this.BeginInvoke((MethodInvoker)delegate {
                 double bytesIn = double.Parse(e.BytesReceived.ToString());
                 double totalBytes = double.Parse(e.TotalBytesToReceive.ToString());
                 double percentage = bytesIn / totalBytes * 100;
-                actionText.Text = ("Downloaded " + FormatFileSize(e.BytesReceived) + " of " + FormatFileSize(e.TotalBytesToReceive));
+                ActionText.Text = ("Downloaded " + FormatFileSize(e.BytesReceived) + " of " + FormatFileSize(e.TotalBytesToReceive));
             });
         }
 
@@ -444,8 +444,8 @@ namespace GameLauncher
         {
             /* Disable Any Buttons */
             ServerDropDownList.Enabled = false;
-            ButtonLogin.Enabled = false;
-            ButtonRegister.Enabled = false;
+            LoginButton.Enabled = false;
+            RegisterButton.Enabled = false;
             ForgotPassLink.Enabled = false;
 
             if (Directory.Exists("modules")) Directory.Delete("modules", true);
@@ -470,7 +470,7 @@ namespace GameLauncher
 
             if (jsonModNet != String.Empty) 
             {
-                actionText.Text = "Detecting ModNetSupport for " + ServerDropDownList.SelectedItem.ToString();
+                ActionText.Text = "Detecting ModNetSupport for " + ServerDropDownList.SelectedItem.ToString();
 
                 try 
                 {
@@ -492,7 +492,7 @@ namespace GameLauncher
 
                         if (SHATwoFiveSix.HashFile(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList).ToLower() != ModNetSHA || !File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList))
                         {
-                            actionText.Text = ("ModNet: Downloading " + ModNetList).ToUpper();
+                            ActionText.Text = ("ModNet: Downloading " + ModNetList).ToUpper();
 
                             if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList))
                             {
@@ -504,7 +504,7 @@ namespace GameLauncher
                         }
                         else
                         {
-                            actionText.Text = ("ModNet: Up to Date " + ModNetList).ToUpper();
+                            ActionText.Text = ("ModNet: Up to Date " + ModNetList).ToUpper();
                         }
 
                         Application.DoEvents();
@@ -542,7 +542,7 @@ namespace GameLauncher
                     }
                     else
                     {
-                        actionText.Text = "Launching game...";
+                        ActionText.Text = "Launching game...";
                         LaunchGame();
                     }
                 } catch (Exception ex) {
@@ -552,7 +552,7 @@ namespace GameLauncher
             else 
             {
                 //Yikes from me Coders - DavidCarbon
-                actionText.Text = "Launching game...";
+                ActionText.Text = "Launching game...";
                 LaunchGame();
             }
         }
@@ -571,13 +571,13 @@ namespace GameLauncher
                 {
                     WebClient client2 = new WebClient();
 
-                    client2.DownloadProgressChanged += new DownloadProgressChangedEventHandler(client_DownloadProgressChanged);
+                    client2.DownloadProgressChanged += new DownloadProgressChangedEventHandler(Client_DownloadProgressChanged);
                     client2.DownloadFileCompleted += (test, stuff) =>
                     {
                         isDownloadingModNetFiles = false;
                         if (modFilesDownloadUrls.Any() == false)
                         {
-                            actionText.Text = "Launching game...";
+                            ActionText.Text = "Launching game...";
                             LaunchGame();
                         }
                         else
@@ -590,14 +590,14 @@ namespace GameLauncher
                 }
                 catch (Exception error)
                 {
-                    actionText.Text = error.Message;
+                    ActionText.Text = error.Message;
                 }
 
                 isDownloadingModNetFiles = true;
             }
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) 
+        private void ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) 
         {
             if (!string.IsNullOrEmpty(result["WebRecoveryUrl"]))
             {
