@@ -16,6 +16,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using ClassicGameLauncher.App.Classes.LauncherCore.Lists;
 using GameLauncherSimplified.App.Classes.LauncherCore;
+using GameLauncherSimplified.App.Classes.LauncherCore.RPC;
 
 namespace ClassicGameLauncher
 {
@@ -270,6 +271,15 @@ namespace ClassicGameLauncher
 
         private void LaunchGame()
         {
+            try
+            {
+                if (!string.IsNullOrEmpty(result["webPanelUrl"]))
+                {
+                    DiscordLauncherPresense.ServerPanelLink = result["webPanelUrl"];
+                }
+            }
+            catch { }
+
             WindowState = FormWindowState.Minimized;
 
             var args = "EU " + Tokens.IPAddress + " " + Tokens.LoginToken + " " + Tokens.UserId;

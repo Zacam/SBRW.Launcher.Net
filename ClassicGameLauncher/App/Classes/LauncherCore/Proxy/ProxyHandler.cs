@@ -1,73 +1,193 @@
-﻿using Nancy.Bootstrapper;
+﻿using ClassicGameLauncher;
+using ClassicGameLauncher.App.Classes.LauncherCore.Global;
+using Flurl;
+using Flurl.Http;
+using Flurl.Http.Content;
+using GameLauncherSimplified.App.Classes.LauncherCore.FileReadWrite;
+using GameLauncherSimplified.App.Classes.LauncherCore.RPC;
+using GameLauncherSimplified.App.Classes.SystemPlatform.Linux;
+using Nancy;
+using Nancy.Bootstrapper;
+using Nancy.Extensions;
+using Nancy.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using FurlURL = Flurl.Url;
 
 namespace GameLauncherSimplified.App.Classes.LauncherCore.Proxy
 {
     public class ProxyHandler : IApplicationStartup
     {
-        public ServerProxyHandler() { }
-
         public void Initialize(IPipelines pipelines)
         {
             pipelines.BeforeRequest += ProxyRequest;
+            pipelines.OnError += OnError;
         }
 
-        private async Task<Response> ProxyRequest(NancyContext ctx, CancellationToken ct)
+        private async Task<TextResponse> OnError(NancyContext context, Exception exception)
         {
-            Debug.WriteLine("{0} - {1}", ctx.Request.Method, ctx.Request.Path);
+            Log.Error($"PROXY ERROR [handling {context.Request.Path}]");
+            Log.Error($"\tMESSAGE: {exception.Message}");
+            Log.Error($"\t{exception.StackTrace}");
+            CommunicationLog.RecordEntry(Form1.SelectedServerName, "PROXY",
+                CommunicationLogEntryType.Error,
+                new CommunicationLogLauncherError(exception.Message, context.Request.Path,
+                    context.Request.Method));
+            await SubmitError(exception);
 
-            foreach (var requestHeader in ctx.Request.Headers)
+            return new TextResponse(HttpStatusCode.BadRequest, exception.Message);
+        }
+
+        private async Task<Response> ProxyRequest(NancyContext context, CancellationToken cancellationToken)
+        {
+            string path = context.Request.Path;
+            string method = context.Request.Method.ToUpperInvariant();
+
+            if (!path.StartsWith("/nfsw/Engine.svc"))
             {
-                Debug.WriteLine("\t{0}: {1}", requestHeader.Key, string.Join(" ; ", requestHeader.Value));
+                throw new ProxyException("Invalid request path: " + path);
             }
 
-            // Build new request
-            var url = new Flurl.Url(ServerProxy.Instance.GetCurrentServer().ServerAddress)
-                .AppendPathSegment(ctx.Request.Path.Replace("/nfsw/Engine.svc", ""));
-            foreach (var key in ctx.Request.Query)
+            path = path.Substring("/nfsw/Engine.svc".Length);
+
+            FurlURL resolvedUrl = new FurlURL(Form1.SelectedServerIPRaw).AppendPathSegment(path);
+
+            foreach (var queryParamName in context.Request.Query)
             {
-                url = url.SetQueryParam(key, ctx.Request.Query[key], NullValueHandling.Ignore);
+                resolvedUrl = resolvedUrl.SetQueryParam(queryParamName, context.Request.Query[queryParamName],
+                    NullValueHandling.Ignore);
             }
 
-            IFlurlRequest request = url.WithTimeout(TimeSpan.FromSeconds(30));
+            IFlurlRequest request = resolvedUrl.AllowAnyHttpStatus().WithTimeout(TimeSpan.FromSeconds(30));
 
-            foreach (var requestHeader in ctx.Request.Headers)
+            foreach (var header in context.Request.Headers)
             {
-                request = request.WithHeader(requestHeader.Key, requestHeader.Value.First());
+                // Don't send Content-Length for GET requests
+                if (method == "GET" && header.Key.ToLowerInvariant() == "content-length")
+                {
+                    continue;
+                }
+
+                request = request.WithHeader(header.Key,
+                    header.Key == "Host" ? resolvedUrl.ToUri().Host : header.Value.First());
             }
 
-            HttpResponseMessage responseMessage;
+            var requestBody = method != "GET" ? context.Request.Body.AsString(Encoding.UTF8) : "";
 
-            switch (ctx.Request.Method)
+            CommunicationLog.RecordEntry(Form1.SelectedServerName, "SERVER",
+                CommunicationLogEntryType.Request,
+                new CommunicationLogRequest(requestBody, resolvedUrl.ToString(), method));
+
+            IFlurlResponse responseMessage;
+
+            var POSTContent = String.Empty;
+
+            var queryParams = new Dictionary<string, object>();
+
+            foreach (var param in context.Request.Query)
+            {
+                var value = context.Request.Query[param];
+                queryParams[param] = value;
+            }
+
+            var GETContent = string.Join(";", queryParams.Select(x => x.Key + "=" + x.Value).ToArray());
+
+            switch (method)
             {
                 case "GET":
-                    responseMessage = await request.GetAsync(ct);
+                    responseMessage = await request.GetAsync(cancellationToken);
                     break;
                 case "POST":
-                    responseMessage =
-                        await request.PostAsync(new CapturedStringContent(ctx.Request.Body.AsString(Encoding.UTF8)), ct);
+                    responseMessage = await request.PostAsync(new CapturedStringContent(requestBody),
+                        cancellationToken);
+                    POSTContent = context.Request.Body.AsString();
                     break;
                 case "PUT":
-                    responseMessage =
-                        await request.PutAsync(new CapturedStringContent(ctx.Request.Body.AsString(Encoding.UTF8)), ct);
+                    responseMessage = await request.PutAsync(new CapturedStringContent(requestBody),
+                        cancellationToken);
                     break;
                 case "DELETE":
-                    responseMessage =
-                        await request.DeleteAsync(ct);
+                    responseMessage = await request.DeleteAsync(cancellationToken);
                     break;
                 default:
-                    throw new ServerProxyException("Cannot handle request method: " + ctx.Request.Method);
+                    throw new ProxyException("Cannot handle request method: " + method);
             }
 
-            return new TextResponse(await responseMessage.Content.ReadAsStringAsync(),
-                responseMessage.Content.Headers.ContentType?.MediaType ?? "application/xml;charset=UTF-8")
+            var responseBody = await responseMessage.GetStringAsync();
+
+            if (path == "/User/GetPermanentSession")
             {
-                StatusCode = (HttpStatusCode)(int)responseMessage.StatusCode
-            };
+                responseBody = CleanFromUnknownChars(responseBody);
+            }
+
+            int statusCode = responseMessage.StatusCode;
+
+            try
+            {
+                DiscordGamePresence.HandleGameState(path, responseBody, GETContent);
+            }
+            catch (Exception e)
+            {
+                Log.Error($"DISCORD RPC ERROR [handling {context.Request.Path}]");
+                Log.Error($"\tMESSAGE: {e.Message}");
+                Log.Error($"\t{e.StackTrace}");
+                await SubmitError(e);
+            }
+
+            queryParams.Clear();
+
+            CommunicationLog.RecordEntry(Form1.SelectedServerName, "SERVER",
+                CommunicationLogEntryType.Response, new CommunicationLogResponse(
+                    responseBody, resolvedUrl.ToString(), method));
+
+            return new TextResponse(responseBody,
+                responseMessage.ResponseMessage.Content.Headers.ContentType?.MediaType ?? "application/xml;charset=UTF-8")
+            {
+                StatusCode = (HttpStatusCode)statusCode
+            }; ;
         }
+
+        private static string CleanFromUnknownChars(string s)
+        {
+            StringBuilder sb = new StringBuilder(s.Length);
+            foreach (char c in s)
+            {
+                if
+                 (
+                  (int)c >= 48 && (int)c <= 57 ||
+                  (int)c == 60 || (int)c == 62 ||
+                  (int)c >= 65 && (int)c <= 90 ||
+                  (int)c >= 97 && (int)c <= 122 ||
+                  (int)c == 47 || (int)c == 45 ||
+                  (int)c == 46
+                 )
+                {
+                    sb.Append(c);
+                }
+            }
+
+            return sb.ToString();
+        }
+
+        private static async Task SubmitError(Exception exception)
+        {
+            var mainsrv = DetectLinux.LinuxDetected() ? URLs.mainserver.Replace("https", "http") : URLs.mainserver;
+            FurlURL url = new FurlURL(mainsrv + "/error-report");
+            await url.PostJsonAsync(new
+            {
+                message = exception.Message ?? "no message",
+                stackTrace = exception.StackTrace ?? "no stack trace"
+            });
+        }
+    }
+
+    public class Helper
+    {
+        public static int session = 0;
+        public static String personaid = String.Empty;
     }
 }
