@@ -186,7 +186,7 @@ namespace GameLauncher
 
         private void RegisterButton_Click(object sender, EventArgs e) 
         {
-            if (SelectedServerName == "WORLDUNITED OFFICIAL")
+            if (SelectedServerName == "WorldUnited OFFICIAL")
             {
                 Process.Start(result["homePageUrl"]);
                 MessageBox.Show(null, "A browser window has been opened to complete registration on " + SelectedServerName, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
