@@ -9,6 +9,7 @@ using GameLauncher.App.Classes.LauncherCore.Hashes;
 using GameLauncher.App.Classes.LauncherCore.Lists;
 using GameLauncher.App.Classes.LauncherCore.ModNet;
 using GameLauncher.App.Classes.LauncherCore.Client;
+using GameLauncher.App.Classes.LauncherCore.Proxy;
 
 namespace GameLauncher
 {
@@ -76,6 +77,8 @@ namespace GameLauncher
                                 ServicePointManager.SecurityProtocol |= SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
 
                                 ServerListUpdater.GetList();
+
+                                //ProxyServer.Start();
 
                                 Application.Run(new Form1());
                             }

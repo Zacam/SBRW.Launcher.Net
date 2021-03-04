@@ -1,4 +1,5 @@
 using GameLauncher;
+using GameLauncher.App.Classes.LauncherCore.Client.Game;
 using GameLauncher.App.Classes.LauncherCore.Global;
 using GameLauncher.App.Classes.LauncherCore.ModNet;
 using System;
@@ -65,8 +66,8 @@ namespace GameLauncher.App.Classes.LauncherCore
 
                     if (CanKillGame)
                     {
-                        Form1.secondsToShutDown = 0;
-                        Form1.CheatsWasUsed = true;
+                        Launch.secondsToShutDown = 0;
+                        Launch.CheatsWasUsed = true;
                     }
                 }
             })

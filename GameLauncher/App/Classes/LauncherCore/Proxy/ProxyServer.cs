@@ -10,9 +10,9 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
         public static ProxyServer Instance => Lazy.Value;
 
         public static int Port = new Random().Next(2009, 2015);
-        private NancyHost Server;
+        private static NancyHost Server;
 
-        public void Start()
+        public static void Start()
         {
             if (Server != null)
             {
@@ -35,7 +35,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
             }
         }
 
-        public void Stop()
+        public static void Stop()
         {
             Server.Stop();
         }
