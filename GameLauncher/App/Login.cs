@@ -53,7 +53,7 @@ namespace GameLauncher
         /* END Selected Server Cache */
 
         public static string GameFiles = AppDomain.CurrentDomain.BaseDirectory;
-        private static string LinksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\.links");
+        public static string LinksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\.links");
         public Form1() 
         {
             InitializeComponent();
@@ -283,12 +283,12 @@ namespace GameLauncher
             WindowState = FormWindowState.Minimized;
 
             var args = "EU " + Tokens.IPAddress + " " + Tokens.LoginToken + " " + Tokens.UserId;
-            var psi = new ProcessStartInfo();
-
-
-            psi.WorkingDirectory = Directory.GetCurrentDirectory();
-            psi.FileName = "nfsw.exe";
-            psi.Arguments = args;
+            var psi = new ProcessStartInfo
+            {
+                WorkingDirectory = Directory.GetCurrentDirectory(),
+                FileName = "nfsw.exe",
+                Arguments = args
+            };
 
             var nfswProcess = Process.Start(psi);
             nfswProcess.PriorityClass = ProcessPriorityClass.AboveNormal;
