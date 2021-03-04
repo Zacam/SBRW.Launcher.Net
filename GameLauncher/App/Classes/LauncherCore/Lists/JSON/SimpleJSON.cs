@@ -64,22 +64,22 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         #region Enumerators
         public struct Enumerator
         {
-            private enum Type { None, Array, Object }
-            private Type type;
+            public enum Type { None, Array, Object }
+            public Type type;
             private Dictionary<string, JSONNode>.Enumerator m_Object;
             private List<JSONNode>.Enumerator m_Array;
             public bool IsValid { get { return type != Type.None; } }
             public Enumerator(List<JSONNode>.Enumerator aArrayEnum)
             {
                 type = Type.Array;
-                m_Object = default(Dictionary<string, JSONNode>.Enumerator);
+                m_Object = default;
                 m_Array = aArrayEnum;
             }
             public Enumerator(Dictionary<string, JSONNode>.Enumerator aDictEnum)
             {
                 type = Type.Object;
                 m_Object = aDictEnum;
-                m_Array = default(List<JSONNode>.Enumerator);
+                m_Array = default;
             }
             public KeyValuePair<string, JSONNode> Current
             {
@@ -271,8 +271,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             get
             {
-                double v = 0.0;
-                if (double.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out v))
+                if (double.TryParse(Value, NumberStyles.Float, CultureInfo.InvariantCulture, out double v))
                     return v;
                 return 0.0;
             }
@@ -298,8 +297,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             get
             {
-                bool v = false;
-                if (bool.TryParse(Value, out v))
+                if (bool.TryParse(Value, out bool v))
                     return v;
                 return !string.IsNullOrEmpty(Value);
             }
@@ -313,8 +311,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             get
             {
-                long val = 0;
-                if (long.TryParse(Value, out val))
+                if (long.TryParse(Value, out long val))
                     return val;
                 return 0L;
             }
@@ -351,7 +348,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         }
         public static implicit operator string(JSONNode d)
         {
-            return (d == null) ? null : d.Value;
+            return d?.Value;
         }
 
         public static implicit operator JSONNode(double n)
@@ -398,7 +395,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         }
         public static implicit operator bool(JSONNode d)
         {
-            return (d == null) ? false : d.AsBool;
+            return d != null && d.AsBool;
         }
 
         public static implicit operator JSONNode(KeyValuePair<string, JSONNode> aKeyValue)
@@ -410,8 +407,8 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             if (ReferenceEquals(a, b))
                 return true;
-            bool aIsNull = a is JSONNull || ReferenceEquals(a, null) || a is JSONLazyCreator;
-            bool bIsNull = b is JSONNull || ReferenceEquals(b, null) || b is JSONLazyCreator;
+            bool aIsNull = a is JSONNull || a is null || a is JSONLazyCreator;
+            bool bIsNull = b is JSONNull || b is null || b is JSONLazyCreator;
             if (aIsNull && bIsNull)
                 return true;
             return !aIsNull && a.Equals(b);
@@ -501,8 +498,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
                 return tmp == "true";
             if (tmp == "null")
                 return JSONNull.CreateOrGet();
-            double val;
-            if (double.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out val))
+            if (double.TryParse(token, NumberStyles.Float, CultureInfo.InvariantCulture, out double val))
                 return val;
             else
                 return token;
@@ -599,7 +595,6 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
                         }
                         if (Token.Length > 0 || TokenIsQuoted)
                             ctx.Add(TokenName, ParseElement(Token.ToString(), TokenIsQuoted));
-                        TokenIsQuoted = false;
                         TokenName = "";
                         Token.Length = 0;
                         TokenIsQuoted = false;
@@ -683,7 +678,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
 
     public partial class JSONArray : JSONNode
     {
-        private List<JSONNode> m_List = new List<JSONNode>();
+        public List<JSONNode> m_List = new List<JSONNode>();
         private bool inline = false;
         public override bool Inline
         {
@@ -802,7 +797,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
 
     public partial class JSONObject : JSONNode
     {
-        private Dictionary<string, JSONNode> m_Dict = new Dictionary<string, JSONNode>();
+        public Dictionary<string, JSONNode> m_Dict = new Dictionary<string, JSONNode>();
 
         private bool inline = false;
         public override bool Inline
@@ -926,8 +921,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
 
         public override JSONNode GetValueOrDefault(string aKey, JSONNode aDefault)
         {
-            JSONNode res;
-            if (m_Dict.TryGetValue(aKey, out res))
+            if (m_Dict.TryGetValue(aKey, out JSONNode res))
                 return res;
             return aDefault;
         }
@@ -1007,8 +1001,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             if (base.Equals(obj))
                 return true;
-            string s = obj as string;
-            if (s != null)
+            if (obj is string s)
                 return m_Data == s;
             JSONString s2 = obj as JSONString;
             if (s2 != null)
@@ -1035,8 +1028,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
             get { return m_Data.ToString(CultureInfo.InvariantCulture); }
             set
             {
-                double v;
-                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out v))
+                if (double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out double v))
                     m_Data = v;
             }
         }
@@ -1113,8 +1105,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
             get { return m_Data.ToString(); }
             set
             {
-                bool v;
-                if (bool.TryParse(value, out v))
+                if (bool.TryParse(value, out bool v))
                     m_Data = v;
             }
         }
@@ -1147,9 +1138,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
         {
             if (obj == null)
                 return false;
-            if (obj is bool)
-                return m_Data == (bool)obj;
-            return false;
+            return obj is bool boolean && m_Data == boolean;
         }
         public override int GetHashCode()
         {
@@ -1160,7 +1149,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
 
     public partial class JSONNull : JSONNode
     {
-        static JSONNull m_StaticInstance = new JSONNull();
+        public static JSONNull m_StaticInstance = new JSONNull();
         public static bool reuseSameInstance = true;
         public static JSONNull CreateOrGet()
         {
@@ -1168,7 +1157,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
                 return m_StaticInstance;
             return new JSONNull();
         }
-        private JSONNull() { }
+        public JSONNull() { }
 
         public override JSONNodeType Tag { get { return JSONNodeType.NullValue; } }
         public override bool IsNull { get { return true; } }
@@ -1210,8 +1199,8 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists.JSON
 
     internal partial class JSONLazyCreator : JSONNode
     {
-        private JSONNode m_Node = null;
-        private string m_Key = null;
+        public JSONNode m_Node = null;
+        public string m_Key = null;
         public override JSONNodeType Tag { get { return JSONNodeType.None; } }
         public override Enumerator GetEnumerator() { return new Enumerator(); }
 
