@@ -203,6 +203,7 @@ namespace GameLauncher.App.Classes.LauncherCore.RPC
                     };
 
                     Client.Initialize();
+                    Update();
                 }
                 else if (State == "New RPC")
                 {

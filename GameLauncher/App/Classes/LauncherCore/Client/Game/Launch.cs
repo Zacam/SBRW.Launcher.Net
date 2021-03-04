@@ -29,6 +29,8 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
             }
             catch { }
 
+            DiscordLauncherPresense.Status("In-Game", "nfsw");
+
             var args = "EU " + Tokens.IPAddress + " " + Tokens.LoginToken + " " + Tokens.UserId;
             var psi = new ProcessStartInfo
             {

@@ -440,6 +440,7 @@ namespace GameLauncher
 
         public static void LauncherState(string Function)
         {
+            DiscordLauncherPresense.Stop();
             if (File.Exists(LinksFile))
             {
                 ModNetLinksCleanup.CleanLinks(LinksFile);
