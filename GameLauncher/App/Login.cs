@@ -31,8 +31,8 @@ namespace GameLauncher
         public static String ModNetFileNameInUse = String.Empty;
         readonly Queue<Uri> modFilesDownloadUrls = new Queue<Uri>();
         bool isDownloadingModNetFiles = false;
-        int CurrentModFileCount = 0;
-        int TotalModFileCount = 0;
+        public int CurrentModFileCount = 0;
+        public int TotalModFileCount = 0;
         /* END ModNet Global Functions */
 
         /* START SpeedBug Timer */
@@ -52,7 +52,7 @@ namespace GameLauncher
         public static string SelectedServerIPRaw = "http://localhost";
         /* END Selected Server Cache */
 
-        private static string GameFiles = AppDomain.CurrentDomain.BaseDirectory;
+        public static string GameFiles = AppDomain.CurrentDomain.BaseDirectory;
         private static string LinksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\.links");
         public Form1() 
         {

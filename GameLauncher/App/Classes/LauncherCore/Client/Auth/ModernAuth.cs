@@ -7,7 +7,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Auth
 {
     class ModernAuth
     {
-        private static int _serverErrorcode;
+        public static int _serverErrorcode;
         private static string _serverErrormsg;
         private static string serverLoginResponse;
         private static HttpWebResponse httpResponse;

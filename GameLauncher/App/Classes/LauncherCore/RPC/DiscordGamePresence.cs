@@ -19,7 +19,7 @@ namespace GameLauncher.App.Classes.LauncherCore.RPC
         private static readonly string serverName = Form1.SelectedServerName;
         private static bool canUpdateProfileField = false;
         private static bool eventTerminatedManually = false;
-        private static int EventID;
+        public static int EventID;
         private static string carslotsXML = String.Empty;
 
         //Some data related, can be touched.
