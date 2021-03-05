@@ -57,7 +57,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
             AntiCheat.Checks();
 
             //TIMER HERE
-            secondsToShutDown = (ScreenLogin.result["secondsToShutDown"].AsInt == 0) ? ScreenLogin.result["secondsToShutDown"].AsInt : 2 * 60 * 60;
+            secondsToShutDown = (ScreenLogin.result["secondsToShutDown"].AsInt != 0) ? ScreenLogin.result["secondsToShutDown"].AsInt : 2 * 60 * 60;
             System.Timers.Timer shutdowntimer = new System.Timers.Timer();
             shutdowntimer.Elapsed += (x2, y2) =>
             {
