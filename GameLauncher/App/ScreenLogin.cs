@@ -45,6 +45,7 @@ namespace GameLauncher
         public static JsonServerList SelectedServer = null;
         public static string SelectedServerName = "Unknown";
         public static string SelectedServerIP = "http://localhost";
+        public static string SelectedServerCategory = "";
         /* END Selected Server Cache */
 
         public static string GameFiles = FileSettingsSave.GameInstallation;
@@ -116,6 +117,7 @@ namespace GameLauncher
                     SelectedServer = (JsonServerList)ServerDropDownList.SelectedItem;
                     SelectedServerName = SelectedServer.Name;
                     SelectedServerIP = SelectedServer.IpAddress;
+                    SelectedServerCategory = SelectedServer.Category;
 
                     WebClientWithTimeout serverval = new WebClientWithTimeout();
                     var stringToUri = new Uri(SelectedServerIP + "/GetServerInformation");

@@ -56,10 +56,10 @@ namespace GameLauncher
                         }
                         else
                         {
-                            if (!canAccesGameData())
+                            if (!CanAccesGameData())
                             {
                                 MessageBox.Show("This application requires admin priviledge. Restarting...");
-                                runAsAdmin();
+                                RunAsAdmin();
                                 return;
                             }
 
@@ -98,7 +98,7 @@ namespace GameLauncher
             }
         }
 
-        static bool canAccesGameData()
+        static bool CanAccesGameData()
         {
             try
             {
@@ -115,7 +115,7 @@ namespace GameLauncher
             return true;
         }
 
-        public static void runAsAdmin()
+        public static void RunAsAdmin()
         {
             string[] args = Environment.GetCommandLineArgs();
 

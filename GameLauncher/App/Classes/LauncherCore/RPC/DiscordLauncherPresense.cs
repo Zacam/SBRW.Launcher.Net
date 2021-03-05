@@ -177,7 +177,7 @@ namespace GameLauncher.App.Classes.LauncherCore.RPC
                 Presence.Buttons = ButtonsList.ToArray();
             }
 
-            if (Client != null)
+            if ((Client != null) && (ScreenLogin.SelectedServerCategory != "DEV"))
                 Client.SetPresence(Presence);
         }
 
