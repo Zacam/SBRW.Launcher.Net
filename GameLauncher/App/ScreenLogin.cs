@@ -108,6 +108,8 @@ namespace GameLauncher
 
                 try
                 {
+                    LoginEmailBox.Text = FileAccountSave.UserRawEmail;
+                    LoginPasswordBox.Text = FileAccountSave.UserRawPassword;
                     LoginButton.Enabled = true;
                     RegisterButton.Enabled = true;
 
