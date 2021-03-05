@@ -1,3 +1,4 @@
+using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
 using System;
 using System.IO;
 using System.Windows.Forms;
@@ -12,7 +13,7 @@ namespace GameLauncher.App.Classes.LauncherCore.ModNet
             {
                 if (File.Exists(linksPath))
                 {
-                    string dir = AppDomain.CurrentDomain.BaseDirectory;
+                    string dir = FileSettingsSave.GameInstallation;
                     foreach (var readLine in File.ReadLines(linksPath))
                     {
                         var parts = readLine.Split(new[] { '\t' }, StringSplitOptions.RemoveEmptyEntries);

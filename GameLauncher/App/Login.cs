@@ -51,8 +51,8 @@ namespace GameLauncher
         public static string SelectedServerIPRaw = "http://localhost";
         /* END Selected Server Cache */
 
-        public static string GameFiles = AppDomain.CurrentDomain.BaseDirectory;
-        public static string LinksFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\.links");
+        public static string GameFiles = FileSettingsSave.GameInstallation;
+        public static string LinksFile = Path.Combine(GameFiles + "\\.links");
         public Form1() 
         {
             InitializeComponent();
@@ -191,8 +191,8 @@ namespace GameLauncher
             } 
             else 
             {
-                Tokens.IPAddress = ServerDropDownList.SelectedValue.ToString();
-                Tokens.ServerName = ServerDropDownList.SelectedItem.ToString();
+                Tokens.IPAddress = SelectedServerIP;
+                Tokens.ServerName = SelectedServerName;
 
                 if (_modernAuthSupport == false) 
                 {

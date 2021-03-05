@@ -1,5 +1,6 @@
 ﻿using GameLauncher.App.Classes.LauncherCore.Client.Auth;
 using GameLauncher.App.Classes.LauncherCore.Client.Web;
+using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
 using GameLauncher.App.Classes.LauncherCore.Global;
 using GameLauncher.App.Classes.LauncherCore.RPC;
 using System;
@@ -34,8 +35,8 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
             var args = "EU " + Tokens.IPAddress + " " + Tokens.LoginToken + " " + Tokens.UserId;
             var psi = new ProcessStartInfo
             {
-                WorkingDirectory = Directory.GetCurrentDirectory(),
-                FileName = "nfsw.exe",
+                WorkingDirectory = FileSettingsSave.GameInstallation,
+                FileName = FileSettingsSave.GameInstallation + "\\nfsw.exe",
                 Arguments = args
             };
 

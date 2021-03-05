@@ -11,6 +11,7 @@ using GameLauncher.App.Classes.LauncherCore.ModNet;
 using GameLauncher.App.Classes.LauncherCore.Client;
 using GameLauncher.App.Classes.LauncherCore.Proxy;
 using GameLauncher.App.Classes.LauncherCore.RPC;
+using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
 
 namespace GameLauncher
 {
@@ -45,7 +46,7 @@ namespace GameLauncher
                 {
                     if (mutex.WaitOne(0, false))
                     {
-                        if (!File.Exists("nfsw.exe"))
+                        if (!File.Exists(FileSettingsSave.GameInstallation + "\\nfsw.exe"))
                         {
                             MessageBox.Show("nfsw.exe not found! Please put this launcher in the game directory. " +
                                 "If you don't have the game installed, Use the Vanilla Launcher to install it (visit https://soapboxrace.world/)",
@@ -62,15 +63,15 @@ namespace GameLauncher
                                 return;
                             }
 
-                            if (SHA.HashFile("nfsw.exe") != "7C0D6EE08EB1EDA67D5E5087DDA3762182CDE4AC")
+                            if (SHA.HashFile(FileSettingsSave.GameInstallation + "\\nfsw.exe") != "7C0D6EE08EB1EDA67D5E5087DDA3762182CDE4AC")
                             {
                                 MessageBox.Show("Invalid file was detected, please restore original nfsw.exe", UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                             else
                             {
-                                if (File.Exists(".links"))
+                                if (File.Exists(FileSettingsSave.GameInstallation + "\\.links"))
                                 {
-                                    var linksPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory + "\\.links");
+                                    var linksPath = Path.Combine(FileSettingsSave.GameInstallation + "\\.links");
                                     ModNetLinksCleanup.CleanLinks(linksPath);
                                 }
 
