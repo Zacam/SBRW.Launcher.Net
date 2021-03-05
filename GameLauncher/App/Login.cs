@@ -109,6 +109,8 @@ namespace GameLauncher
                 try
                 {
                     LoginButton.Enabled = true;
+                    LoginEmailBox.Text = FileAccountSave.UserRawEmail;
+                    LoginPasswordBox.Text = FileAccountSave.UserRawPassword;
                     RegisterButton.Enabled = true;
 
                     SelectedServer = (JsonServerList)ServerDropDownList.SelectedItem;
@@ -191,7 +193,8 @@ namespace GameLauncher
                 if (ModernAuthSupport == false) 
                 {
                     ClassicAuth.Login(LoginEmailBox.Text, SHA.HashPassword(LoginPasswordBox.Text).ToLower());
-                } else 
+                }
+                else 
                 {
                     ModernAuth.Login(LoginEmailBox.Text, LoginPasswordBox.Text);
                 }
