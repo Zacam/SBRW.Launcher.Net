@@ -99,75 +99,83 @@ namespace GameLauncher
 
         private void ServerPick_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Tokens.Clear();
-            ActionText.Text = "Loading info...";
-
-            try
+            if (((JsonServerList)ServerDropDownList.SelectedItem).IsSpecial)
             {
-                LoginButton.Enabled = true;
-                RegisterButton.Enabled = true;
-
-                SelectedServer = (JsonServerList)ServerDropDownList.SelectedItem;
-                SelectedServerName = SelectedServer.Name;
-                SelectedServerIP = new Uri(SelectedServer.IpAddress).Host;
-                SelectedServerIPRaw = SelectedServer.IpAddress;
-
-                WebClientWithTimeout serverval = new WebClientWithTimeout();
-                var stringToUri = new Uri(SelectedServerIPRaw + "/GetServerInformation");
-                String serverdata = serverval.DownloadString(stringToUri);
-
-                result = JSON.Parse(serverdata);
-
-                ActionText.Text = "Players on server: " + result["onlineNumber"];
+                ServerDropDownList.SelectedIndex = 1;
+                return;
+            }
+            else
+            {
+                Tokens.Clear();
+                ActionText.Text = "Loading info...";
 
                 try
                 {
-                    if (string.IsNullOrEmpty(result["modernAuthSupport"]))
+                    LoginButton.Enabled = true;
+                    RegisterButton.Enabled = true;
+
+                    SelectedServer = (JsonServerList)ServerDropDownList.SelectedItem;
+                    SelectedServerName = SelectedServer.Name;
+                    SelectedServerIP = new Uri(SelectedServer.IpAddress).Host;
+                    SelectedServerIPRaw = SelectedServer.IpAddress;
+
+                    WebClientWithTimeout serverval = new WebClientWithTimeout();
+                    var stringToUri = new Uri(SelectedServerIPRaw + "/GetServerInformation");
+                    String serverdata = serverval.DownloadString(stringToUri);
+
+                    result = JSON.Parse(serverdata);
+
+                    ActionText.Text = "Players on server: " + result["onlineNumber"];
+
+                    try
                     {
-                        _modernAuthSupport = false;
-                    }
-                    else if (result["modernAuthSupport"])
-                    {
-                        if (stringToUri.Scheme == "https")
+                        if (string.IsNullOrEmpty(result["modernAuthSupport"]))
                         {
-                            _modernAuthSupport = true;
+                            _modernAuthSupport = false;
+                        }
+                        else if (result["modernAuthSupport"])
+                        {
+                            if (stringToUri.Scheme == "https")
+                            {
+                                _modernAuthSupport = true;
+                            }
+                            else
+                            {
+                                _modernAuthSupport = false;
+                            }
                         }
                         else
                         {
                             _modernAuthSupport = false;
                         }
                     }
-                    else
+                    catch
                     {
                         _modernAuthSupport = false;
+                    }
+
+                    try
+                    {
+                        _ticketRequired = (bool)result["requireTicket"];
+                    }
+                    catch
+                    {
+                        _ticketRequired = true; //lets assume yes, we gonna check later if ticket is empty or not.
                     }
                 }
                 catch
                 {
-                    _modernAuthSupport = false;
+                    LoginButton.Enabled = false;
+                    RegisterButton.Enabled = false;
+
+                    SelectedServerName = "Offline";
+                    SelectedServerIP = "http://localhost";
+
+                    ActionText.Text = "Server is offline.";
                 }
 
-                try
-                {
-                    _ticketRequired = (bool)result["requireTicket"];
-                }
-                catch
-                {
-                    _ticketRequired = true; //lets assume yes, we gonna check later if ticket is empty or not.
-                }
+                RegisterTicketBox.Enabled = _ticketRequired;
             }
-            catch
-            {
-                LoginButton.Enabled = false;
-                RegisterButton.Enabled = false;
-
-                SelectedServerName = "Offline";
-                SelectedServerIP = "http://localhost";
-
-                ActionText.Text = "Server is offline.";
-            }
-
-            RegisterTicketBox.Enabled = _ticketRequired;
         }
 
         private void LoginButton_Click(object sender, EventArgs e) 
