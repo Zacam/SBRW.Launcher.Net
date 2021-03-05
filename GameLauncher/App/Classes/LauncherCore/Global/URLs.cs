@@ -15,13 +15,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Global
         public static string modnetserver = "http://cdn.soapboxrace.world";
 
 
-        public static string[] serverlisturl = new string[]
-        {
-            "http://api2-sbrw.davidcarbon.download/serverlist.txt",
-            "http://api-sbrw.davidcarbon.download/serverlist.txt"
-        };
-
-        public static string[] Jsonserverlisturl = new string[]
+        public static string[] ServerListURLs = new string[]
         {
             mainserver + "/serverlist.json",
             staticapiserver + "/serverlist.json",
@@ -29,7 +23,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Global
             woplserver + "/serverlist.json"
         };
 
-        public static string[] cdnlisturl = new string[]
+        public static string[] CDNListURLs = new string[]
         {
             mainserver + "/cdn_list.json",
             staticapiserver + "/cdn_list.json",
@@ -37,7 +31,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Global
             woplserver + "/cdn_list.json"
         };
 
-        public static string[] anticheatreporting = new string[]
+        public static string[] AntiCheatReporting = new string[]
         {
             "http://api.worldunited.gg/report",
             "http://anticheat.worldonline.pl/report",

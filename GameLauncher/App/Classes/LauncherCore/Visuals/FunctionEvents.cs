@@ -28,7 +28,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Visuals
             if (serverListText.StartsWith("<GROUP>"))
             {
                 font = new Font(font, FontStyle.Bold);
-                e.Graphics.FillRectangle(Brushes.White, e.Bounds);
+                e.Graphics.FillRectangle(Brushes.LightGray, e.Bounds);
                 e.Graphics.DrawString(serverListText.Replace("<GROUP>", string.Empty), font, Brushes.Black, e.Bounds);
             }
             else

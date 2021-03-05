@@ -25,7 +25,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Lists
         {
             List<JsonServerList> serverInfos = new List<JsonServerList>();
 
-            foreach (var serverListURL in URLs.serverlisturl)
+            foreach (var serverListURL in URLs.ServerListURLs)
             {
                 try
                 {
