@@ -361,17 +361,17 @@ namespace GameLauncher
                         String ModNetList = modules_files[0].Replace("\"", "").Trim();
                         String ModNetSHA = modules_files[1].Replace("\"", "").Replace(",", "").Trim();
 
-                        if (SHATwoFiveSix.HashFile(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList).ToLower() != ModNetSHA || !File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList))
+                        if (SHATwoFiveSix.HashFile(FileSettingsSave.GameInstallation + "\\" + ModNetList).ToLower() != ModNetSHA || !File.Exists(FileSettingsSave.GameInstallation + "\\" + ModNetList))
                         {
                             ActionText.Text = ("ModNet: Downloading " + ModNetList).ToUpper();
 
-                            if (File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList))
+                            if (File.Exists(FileSettingsSave.GameInstallation + "\\" + ModNetList))
                             {
-                                File.Delete(AppDomain.CurrentDomain.BaseDirectory + "\\" + ModNetList);
+                                File.Delete(FileSettingsSave.GameInstallation + "\\" + ModNetList);
                             }
 
                             WebClient newModNetFilesDownload = new WebClient();
-                            newModNetFilesDownload.DownloadFile(URLs.ModNet + "/launcher-modules/" + ModNetList, AppDomain.CurrentDomain.BaseDirectory + "/" + ModNetList);
+                            newModNetFilesDownload.DownloadFile(URLs.ModNet + "/launcher-modules/" + ModNetList, FileSettingsSave.GameInstallation + "/" + ModNetList);
                         }
                         else
                         {
