@@ -96,6 +96,7 @@
     <Compile Include="App\Classes\LauncherCore\Global\NativeFunctions.cs" />
     <Compile Include="App\Classes\LauncherCore\Global\URLs.cs" />
     <Compile Include="App\Classes\LauncherCore\Hashes\SHA256.cs" />
+    <Compile Include="App\Classes\LauncherCore\Lists\JSON\JsonServerList.cs" />
     <Compile Include="App\Classes\LauncherCore\Lists\ServerListUpdater.cs" />
     <Compile Include="App\Classes\LauncherCore\Proxy\CommunicationLog.cs" />
     <Compile Include="App\Classes\LauncherCore\Proxy\ProxyBootstrap.cs" />
@@ -105,6 +106,7 @@
     <Compile Include="App\Classes\LauncherCore\Proxy\Singleton.cs" />
     <Compile Include="App\Classes\LauncherCore\RPC\DiscordGamePresence.cs" />
     <Compile Include="App\Classes\LauncherCore\RPC\DiscordLauncherPresense.cs" />
+    <Compile Include="App\Classes\LauncherCore\Visuals\FunctionEvents.cs" />
     <Compile Include="App\Classes\LauncherCore\Validator\IsValid.cs" />
     <Compile Include="App\Classes\LauncherCore\Visuals\Prompt.cs" />
     <Compile Include="App\Classes\LauncherCore\Lists\JSON\SimpleJSON.cs" />

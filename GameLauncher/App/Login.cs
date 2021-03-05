@@ -20,14 +20,15 @@ using GameLauncher.App.Classes.LauncherCore.RPC;
 using GameLauncher.App.Classes.LauncherCore.Client.Game;
 using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
 using GameLauncher.App.Classes.LauncherCore.Validator;
+using System.Drawing;
 
 namespace GameLauncher
 {
     public partial class Form1 : Form 
     {
         /* START Login Checks */
-        private bool _modernAuthSupport = false;
-        private bool _ticketRequired;
+        public static bool ModernAuthSupport = false;
+        public static bool TicketRequired;
         /* END Login Checks */
 
         /* START ModNet Global Functions */
@@ -55,90 +56,43 @@ namespace GameLauncher
             InitializeComponent();
 
             Load += new EventHandler(Form1_Load);
-            ServerDropDownList.SelectedIndexChanged += new EventHandler(ServerPick_SelectedIndexChanged);
+            ServerDropDownList.SelectedIndexChanged += new EventHandler(FunctionEvents.ServerPick_SelectedIndexChanged);
+            ServerDropDownList.DrawItem += new DrawItemEventHandler(FunctionEvents.ServerDropDownList_DrawItem);
 
             ActionText.Text = "Ready!";
         }
 
         private void Form1_Load(object sender, EventArgs e) 
         {
-            ServerDropDownList.DisplayMember = "Text";
-            ServerDropDownList.ValueMember = "Value";
+            ServerDropDownList.DisplayMember = "Name";
+            ServerDropDownList.DataSource = ServerListUpdater.CleanList;
 
-            ServerDropDownList.DataSource = ServerListUpdater.ServerList;
-            ServerDropDownList.SelectedIndex = 0;
-        }
-
-        private void ServerPick_SelectedIndexChanged(object sender, EventArgs e) 
-        {
-            Tokens.Clear();
-            ActionText.Text = "Loading info...";
-
-            try 
+            if (!string.IsNullOrEmpty(FileAccountSave.ChoosenGameServer))
             {
-                LoginButton.Enabled = true;
-                RegisterButton.Enabled = true;
 
-                SelectedServerName = ServerDropDownList.Text.ToString().ToUpper();
-                SelectedServerIP = new Uri(ServerDropDownList.SelectedValue.ToString()).Host;
-                SelectedServerIPRaw = ServerDropDownList.SelectedValue.ToString();
-
-                WebClientWithTimeout serverval = new WebClientWithTimeout();
-                var stringToUri = new Uri(ServerDropDownList.SelectedValue.ToString() + "/GetServerInformation");
-                String serverdata = serverval.DownloadString(stringToUri);
-
-                result = JSON.Parse(serverdata);
-
-                ActionText.Text = "Players on server: " + result["onlineNumber"];
-
-                try 
+                if (ServerListUpdater.CleanList.FindIndex(i => string.Equals(i.IpAddress, FileAccountSave.ChoosenGameServer)) != 0)
                 {
-                    if (string.IsNullOrEmpty(result["modernAuthSupport"])) 
+                    var index = ServerListUpdater.CleanList.FindIndex(i => string.Equals(i.IpAddress, FileAccountSave.ChoosenGameServer));
+
+                    if (index >= 0)
                     {
-                        _modernAuthSupport = false;
-                    } 
-                    else if (result["modernAuthSupport"]) 
-                    {
-                        if (stringToUri.Scheme == "https") 
-                        {
-                            _modernAuthSupport = true;
-                        } 
-                        else 
-                        {
-                            _modernAuthSupport = false;
-                        }
-                    } 
-                    else 
-                    {
-                        _modernAuthSupport = false;
+                        ServerDropDownList.SelectedIndex = index;
                     }
-                } 
-                catch 
+                }
+                else
                 {
-                    _modernAuthSupport = false;
+                    ServerDropDownList.SelectedIndex = 1;
                 }
 
-                try 
+                if (ServerDropDownList.SelectedIndex == 1)
                 {
-                    _ticketRequired = (bool)result["requireTicket"];
-                } 
-                catch 
-                {
-                    _ticketRequired = true; //lets assume yes, we gonna check later if ticket is empty or not.
+                    FunctionEvents.ServerPick_SelectedIndexChanged(sender, e);
                 }
-            } 
-            catch 
-            {
-                LoginButton.Enabled = false;
-                RegisterButton.Enabled = false;
-
-                SelectedServerName = "Offline";
-                SelectedServerIP = "http://localhost";
-
-                ActionText.Text = "Server is offline.";
             }
-
-            RegisterTicketBox.Enabled = _ticketRequired;
+            else
+            {
+                ServerDropDownList.SelectedIndex = 1;
+            }
         }
 
         private void LoginButton_Click(object sender, EventArgs e) 
@@ -157,7 +111,7 @@ namespace GameLauncher
                 Tokens.IPAddress = ServerDropDownList.SelectedValue.ToString();
                 Tokens.ServerName = ServerDropDownList.SelectedItem.ToString();
 
-                if (_modernAuthSupport == false) 
+                if (ModernAuthSupport == false) 
                 {
                     ClassicAuth.Login(LoginEmailBox.Text, SHA.HashPassword(LoginPasswordBox.Text).ToLower());
                 } else 
@@ -208,7 +162,7 @@ namespace GameLauncher
             {
                 ActionText.Text = "Password doesn't match!";
             } 
-            else if(_ticketRequired) 
+            else if(TicketRequired) 
             {
                 if(String.IsNullOrEmpty(RegisterTicketBox.Text)) 
                 {
@@ -227,11 +181,11 @@ namespace GameLauncher
 
         private void CreateAccount() 
         {
-            String token = (_ticketRequired) ? RegisterTicketBox.Text : null;
+            String token = (TicketRequired) ? RegisterTicketBox.Text : null;
             Tokens.IPAddress = ServerDropDownList.SelectedValue.ToString();
             Tokens.ServerName = ServerDropDownList.SelectedItem.ToString();
 
-            if (_modernAuthSupport == false)
+            if (ModernAuthSupport == false)
             {
                 ClassicAuth.Register(RegisterEmail.Text, SHA.HashPassword(RegisterPassword.Text), token);
             }
@@ -460,6 +414,16 @@ namespace GameLauncher
             {
                 Log.Error("CORE: Unable to Determine Function state for Launcher");
             }
+        }
+
+        public static void UpdateActionText(string State)
+        {
+            if (State == "Server Drop Down")
+            {
+                LoginButton.Enabled = true;
+                RegisterButton.Enabled = true;
+            }
+            Application.DoEvents();
         }
 
         private void ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) 

@@ -68,6 +68,7 @@ namespace GameLauncher
             // 
             // ServerDropDownList
             // 
+            this.ServerDropDownList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ServerDropDownList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ServerDropDownList.FormattingEnabled = true;
             this.ServerDropDownList.Location = new System.Drawing.Point(90, 6);
