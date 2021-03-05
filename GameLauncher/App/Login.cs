@@ -321,25 +321,25 @@ namespace GameLauncher
             RegisterButton.Enabled = false;
             ForgotPassLink.Enabled = false;
 
-            if (Directory.Exists("modules")) Directory.Delete("modules", true);
-            if (!Directory.Exists("scripts")) Directory.CreateDirectory("scripts");
+            if (Directory.Exists(GameFiles + "\\modules")) Directory.Delete(GameFiles + "\\modules", true);
+            if (!Directory.Exists(GameFiles + "\\scripts")) Directory.CreateDirectory(GameFiles + "\\scripts");
 
             String[] RemoveAllFiles = new string[] { "modules/udpcrc.soapbox.module", "modules/udpcrypt1.soapbox.module", "modules/udpcrypt2.soapbox.module", 
                 "modules/xmppsubject.soapbox.module", "scripts/global.ini", "lightfx.dll", "PocoFoundation.dll", "PocoNet.dll", "ModManager.dat"};
 
             foreach (string file in RemoveAllFiles) 
             {
-                if (File.Exists(file)) 
+                if (File.Exists(GameFiles + file)) 
                 {
                     try {
-                        File.Delete(file);
+                        File.Delete(GameFiles + file);
                     } catch {
-                        MessageBox.Show($"File {file} cannot be deleted.", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show($"File {GameFiles + file} cannot be deleted.", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
             
-            String jsonModNet = ModNetReloaded.ModNetSupported(ServerDropDownList.SelectedValue.ToString());
+            String jsonModNet = ModNetReloaded.ModNetSupported(SelectedServerIP);
 
             if (jsonModNet != String.Empty) 
             {
@@ -347,10 +347,8 @@ namespace GameLauncher
 
                 try 
                 {
-                    try { if (File.Exists("lightfx.dll")) File.Delete("lightfx.dll"); } catch { }
-
                     /* Get Remote ModNet list to process for checking required ModNet files are present and current */
-                    String modules = new WebClient().DownloadString(URLs.modnetserver + "/launcher-modules/modules.json");
+                    String modules = new WebClient().DownloadString(URLs.ModNet + "/launcher-modules/modules.json");
                     string[] modules_newlines = modules.Split(new string[] { "\n" }, StringSplitOptions.None);
 
                     foreach (String modules_newline in modules_newlines)
@@ -373,7 +371,7 @@ namespace GameLauncher
                             }
 
                             WebClient newModNetFilesDownload = new WebClient();
-                            newModNetFilesDownload.DownloadFile(URLs.modnetserver + "/launcher-modules/" + ModNetList, AppDomain.CurrentDomain.BaseDirectory + "/" + ModNetList);
+                            newModNetFilesDownload.DownloadFile(URLs.ModNet + "/launcher-modules/" + ModNetList, AppDomain.CurrentDomain.BaseDirectory + "/" + ModNetList);
                         }
                         else
                         {
@@ -390,8 +388,7 @@ namespace GameLauncher
 
                     JSONNode IndexJson = JSON.Parse(jsonindex);
 
-
-                    String path = Path.Combine("MODS", MDFive.HashPassword(MainJson["serverID"]).ToLower());
+                    String path = Path.Combine(FileSettingsSave.GameInstallation, "MODS", MDFive.HashPassword(MainJson["serverID"]).ToLower());
                     if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
                     /* new */

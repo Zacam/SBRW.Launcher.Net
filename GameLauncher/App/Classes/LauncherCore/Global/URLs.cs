@@ -12,7 +12,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Global
 
         public static string woplserver = "http://worldonline.pl";
 
-        public static string modnetserver = "http://cdn.soapboxrace.world";
+        public static string ModNet = "http://cdn.soapboxrace.world";
 
 
         public static string[] ServerListURLs = new string[]
