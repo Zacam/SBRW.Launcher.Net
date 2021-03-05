@@ -6,6 +6,7 @@ using GameLauncher.App.Classes.LauncherCore.RPC;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameLauncher.App.Classes.LauncherCore.Client.Game
@@ -32,11 +33,12 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
 
             DiscordLauncherPresense.Status("In-Game", "nfsw");
 
+            var GameFile = FileSettingsSave.GameInstallation + "\\nfsw.exe";
             var args = "EU " + Tokens.IPAddress + " " + Tokens.LoginToken + " " + Tokens.UserId;
             var psi = new ProcessStartInfo
             {
                 WorkingDirectory = FileSettingsSave.GameInstallation,
-                FileName = FileSettingsSave.GameInstallation + "\\nfsw.exe",
+                FileName = GameFile,
                 Arguments = args
             };
 
@@ -51,7 +53,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
 
             nfswProcess.ProcessorAffinity = (IntPtr)processorAffinity;
 
-            AntiCheat.process_id = nfswProcess.Id;
+            NFSWPID = nfswProcess.Id;
             AntiCheat.Checks();
 
             //TIMER HERE

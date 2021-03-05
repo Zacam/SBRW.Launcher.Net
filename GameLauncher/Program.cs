@@ -102,7 +102,7 @@ namespace GameLauncher
         {
             try
             {
-                using (var test = File.OpenRead("nfsw.exe"))
+                using (var test = File.OpenRead(FileSettingsSave.GameInstallation + "\\nfsw.exe"))
                 {
                     
                 }

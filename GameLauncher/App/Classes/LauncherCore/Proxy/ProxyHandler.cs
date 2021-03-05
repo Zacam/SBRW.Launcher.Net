@@ -54,7 +54,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
 
             path = path.Substring("/nfsw/Engine.svc".Length);
 
-            FurlURL resolvedUrl = new FurlURL(Form1.SelectedServerIPRaw).AppendPathSegment(path);
+            FurlURL resolvedUrl = new FurlURL(Form1.SelectedServerIP).AppendPathSegment(path);
 
             foreach (var queryParamName in context.Request.Query)
             {

@@ -12,7 +12,6 @@ namespace GameLauncher.App.Classes.LauncherCore
 {
     class AntiCheat
     {
-        public static int process_id = 0;
         public static Thread thread = new Thread(() => { });
         public static List<int> addresses = new List<int> {
                     418534,  // GMZ_MULTIHACK
@@ -28,7 +27,7 @@ namespace GameLauncher.App.Classes.LauncherCore
 
         public static void Checks()
         {
-            Process process = Process.GetProcessById(process_id);
+            Process process = Process.GetProcessById(Launch.NFSWPID);
             IntPtr processHandle = Kernel32.OpenProcess(0x0010, false, process.Id);
             int baseAddress = process.MainModule.BaseAddress.ToInt32();
 
