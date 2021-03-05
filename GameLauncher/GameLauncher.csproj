@@ -115,11 +115,11 @@
     <Compile Include="App\Classes\SystemPlatform\Components\HardwareID.cs" />
     <Compile Include="App\Classes\SystemPlatform\Linux\DetectLinux.cs" />
     <Compile Include="App\Classes\SystemPlatform\Windows\WindowsProductVersion.cs" />
-    <Compile Include="App\Login.cs">
+    <Compile Include="App\ScreenLogin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="App\Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="App\ScreenLogin.Designer.cs">
+      <DependentUpon>ScreenLogin.cs</DependentUpon>
     </Compile>
     <Compile Include="App\Classes\LauncherCore\Hashes\MD5.cs" />
     <Compile Include="App\Classes\LauncherCore\ModNet\ModNetReloaded.cs" />
@@ -133,8 +133,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="App\Classes\LauncherCore\Hashes\SHA.cs" />
-    <EmbeddedResource Include="App\Login.resx">
-      <DependentUpon>Login.cs</DependentUpon>
+    <EmbeddedResource Include="App\ScreenLogin.resx">
+      <DependentUpon>ScreenLogin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="App\ScreenRegister.resx">
       <DependentUpon>ScreenRegister.cs</DependentUpon>

@@ -128,17 +128,17 @@ namespace GameLauncher.App.Classes.LauncherCore.RPC
             else if (State == "In-Game")
             {
                 /* Server Panel Link (If one is Available) */
-                //ServerPanelLink = Form1.json.webPanelUrl;
+                //ServerPanelLink = ScreenLogin.json.webPanelUrl;
 
                 //Presence.State = MainScreen.FullServerName;
-                Presence.State = Form1.SelectedServerName;
+                Presence.State = ScreenLogin.SelectedServerName;
                 Presence.Details = "In-Game";
                 Presence.Assets = new Assets
                 {
                     LargeImageText = "Need for Speed: World",
                     LargeImageKey = "nfsw",
                     //SmallImageText = MainScreen.FullServerName,
-                    SmallImageText = Form1.SelectedServerName,
+                    SmallImageText = ScreenLogin.SelectedServerName,
                     SmallImageKey = Status
                 };
 

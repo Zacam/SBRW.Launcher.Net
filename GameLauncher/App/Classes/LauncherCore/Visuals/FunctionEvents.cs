@@ -66,10 +66,10 @@ namespace GameLauncher.App.Classes.LauncherCore.Visuals
 
         public static void ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (!string.IsNullOrEmpty(Form1.result["webRecoveryUrl"]))
+            if (!string.IsNullOrEmpty(ScreenLogin.result["webRecoveryUrl"]))
             {
-                Process.Start(Form1.result["webRecoveryUrl"]);
-                MessageBox.Show(null, "A browser window has been opened to complete password recovery on " + Form1.SelectedServerName, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Process.Start(ScreenLogin.result["webRecoveryUrl"]);
+                MessageBox.Show(null, "A browser window has been opened to complete password recovery on " + ScreenLogin.SelectedServerName, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             else
@@ -81,7 +81,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Visuals
                     String responseString;
                     try
                     {
-                        Uri resetPasswordUrl = new Uri(Form1.SelectedServerIP + "/RecoveryPassword/forgotPassword");
+                        Uri resetPasswordUrl = new Uri(ScreenLogin.SelectedServerIP + "/RecoveryPassword/forgotPassword");
 
                         var request = (HttpWebRequest)System.Net.WebRequest.Create(resetPasswordUrl);
                         var postData = "email=" + send;

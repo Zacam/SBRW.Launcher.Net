@@ -82,7 +82,7 @@ namespace GameLauncher
                                 DiscordLauncherPresense.Start("Start Up", "540651192179752970");
                                 //ProxyServer.Start();
 
-                                Application.Run(new Form1());
+                                Application.Run(new ScreenLogin());
                             }
                         }
                     }

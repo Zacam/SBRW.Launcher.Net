@@ -55,10 +55,10 @@ namespace GameLauncher.App
         private void CreateAccount()
         {
             String token = (TicketRequired) ? UserTicketBox.Text : null;
-            Tokens.IPAddress = Form1.SelectedServerIP;
-            Tokens.ServerName = Form1.SelectedServerName;
+            Tokens.IPAddress = ScreenLogin.SelectedServerIP;
+            Tokens.ServerName = ScreenLogin.SelectedServerName;
 
-            if (Form1.ModernAuthSupport == false)
+            if (ScreenLogin.ModernAuthSupport == false)
             {
                 ClassicAuth.Register(UserEmailBox.Text, SHA.HashPassword(UserPasswordBox.Text), token);
             }

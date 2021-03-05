@@ -24,9 +24,9 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
         {
             try
             {
-                if (!string.IsNullOrEmpty(Form1.result["webPanelUrl"]))
+                if (!string.IsNullOrEmpty(ScreenLogin.result["webPanelUrl"]))
                 {
-                    DiscordLauncherPresense.ServerPanelLink = Form1.result["webPanelUrl"];
+                    DiscordLauncherPresense.ServerPanelLink = ScreenLogin.result["webPanelUrl"];
                 }
             }
             catch { }
@@ -57,7 +57,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
             AntiCheat.Checks();
 
             //TIMER HERE
-            secondsToShutDown = (Form1.result["secondsToShutDown"].AsInt == 0) ? Form1.result["secondsToShutDown"].AsInt : 2 * 60 * 60;
+            secondsToShutDown = (ScreenLogin.result["secondsToShutDown"].AsInt == 0) ? ScreenLogin.result["secondsToShutDown"].AsInt : 2 * 60 * 60;
             System.Timers.Timer shutdowntimer = new System.Timers.Timer();
             shutdowntimer.Elapsed += (x2, y2) =>
             {
@@ -81,7 +81,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
                     TimeSpan t = TimeSpan.FromSeconds(secondsToShutDown);
                     string secondsToShutDownNamed = string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);
 
-                    User32.SetWindowText((IntPtr)p, "NEED FOR SPEED™ WORLD | Server: " + Form1.SelectedServerName + " | " + UserAgent.WindowTextForGame + " | Force Restart In: " + secondsToShutDownNamed);
+                    User32.SetWindowText((IntPtr)p, "NEED FOR SPEED™ WORLD | Server: " + ScreenLogin.SelectedServerName + " | " + UserAgent.WindowTextForGame + " | Force Restart In: " + secondsToShutDownNamed);
                 }
 
                 --secondsToShutDown;
@@ -105,7 +105,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
 
                     if (exitCode == 0)
                     {
-                        Form1.LauncherState("Launcher Shutdown");
+                        ScreenLogin.LauncherState("Launcher Shutdown");
                     }
                     else
                     {
@@ -147,11 +147,11 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
                         DialogResult restartApp = MessageBox.Show(null, errorMsg + "\nWould you like to restart the launcher?", "GameLauncher", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                         if (restartApp == DialogResult.Yes)
                         {
-                            Form1.LauncherState("Launcher Restart");
+                            ScreenLogin.LauncherState("Launcher Restart");
                         }
                         else
                         {
-                            Form1.LauncherState("Launcher Shutdown");
+                            ScreenLogin.LauncherState("Launcher Shutdown");
                         }
                     }
                 };

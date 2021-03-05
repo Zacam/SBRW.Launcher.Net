@@ -33,7 +33,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
             Log.Error($"PROXY ERROR [handling {context.Request.Path}]");
             Log.Error($"\tMESSAGE: {exception.Message}");
             Log.Error($"\t{exception.StackTrace}");
-            CommunicationLog.RecordEntry(Form1.SelectedServerName, "PROXY",
+            CommunicationLog.RecordEntry(ScreenLogin.SelectedServerName, "PROXY",
                 CommunicationLogEntryType.Error,
                 new CommunicationLogLauncherError(exception.Message, context.Request.Path,
                     context.Request.Method));
@@ -54,7 +54,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
 
             path = path.Substring("/nfsw/Engine.svc".Length);
 
-            FurlURL resolvedUrl = new FurlURL(Form1.SelectedServerIP).AppendPathSegment(path);
+            FurlURL resolvedUrl = new FurlURL(ScreenLogin.SelectedServerIP).AppendPathSegment(path);
 
             foreach (var queryParamName in context.Request.Query)
             {
@@ -78,7 +78,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
 
             var requestBody = method != "GET" ? context.Request.Body.AsString(Encoding.UTF8) : "";
 
-            CommunicationLog.RecordEntry(Form1.SelectedServerName, "SERVER",
+            CommunicationLog.RecordEntry(ScreenLogin.SelectedServerName, "SERVER",
                 CommunicationLogEntryType.Request,
                 new CommunicationLogRequest(requestBody, resolvedUrl.ToString(), method));
 
@@ -140,7 +140,7 @@ namespace GameLauncher.App.Classes.LauncherCore.Proxy
 
             queryParams.Clear();
 
-            CommunicationLog.RecordEntry(Form1.SelectedServerName, "SERVER",
+            CommunicationLog.RecordEntry(ScreenLogin.SelectedServerName, "SERVER",
                 CommunicationLogEntryType.Response, new CommunicationLogResponse(
                     responseBody, resolvedUrl.ToString(), method));
 

@@ -16,7 +16,7 @@ namespace GameLauncher.App.Classes.LauncherCore.RPC
         public static RichPresence _presence = new RichPresence();
 
         //Some checks
-        private static readonly string serverName = Form1.SelectedServerName;
+        private static readonly string serverName = ScreenLogin.SelectedServerName;
         private static bool canUpdateProfileField = false;
         private static bool eventTerminatedManually = false;
         public static int EventID;
