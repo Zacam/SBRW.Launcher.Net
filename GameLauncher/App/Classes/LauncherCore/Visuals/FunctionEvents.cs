@@ -1,7 +1,12 @@
 ﻿using GameLauncher.App.Classes.LauncherCore.Client.Auth;
+using GameLauncher.App.Classes.LauncherCore.Client.Web;
 using GameLauncher.App.Classes.LauncherCore.Lists.JSON;
 using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
+using System.Net;
+using System.Text;
 using System.Windows.Forms;
 
 namespace GameLauncher.App.Classes.LauncherCore.Visuals
@@ -56,6 +61,50 @@ namespace GameLauncher.App.Classes.LauncherCore.Visuals
 
                 e.Graphics.FillRectangle(backgroundColor, e.Bounds);
                 e.Graphics.DrawString("    " + serverListText, font, textColor, e.Bounds);
+            }
+        }
+
+        public static void ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Form1.result["webRecoveryUrl"]))
+            {
+                Process.Start(Form1.result["webRecoveryUrl"]);
+                MessageBox.Show(null, "A browser window has been opened to complete password recovery on " + Form1.SelectedServerName, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                string send = Prompt.ShowDialog("Please specify your email address.", UserAgent.AgentAltName);
+
+                if (send != String.Empty)
+                {
+                    String responseString;
+                    try
+                    {
+                        Uri resetPasswordUrl = new Uri(Form1.SelectedServerIP + "/RecoveryPassword/forgotPassword");
+
+                        var request = (HttpWebRequest)System.Net.WebRequest.Create(resetPasswordUrl);
+                        var postData = "email=" + send;
+                        var data = Encoding.ASCII.GetBytes(postData);
+                        request.Method = "POST";
+                        request.ContentType = "application/x-www-form-urlencoded";
+                        request.ContentLength = data.Length;
+
+                        using (var stream = request.GetRequestStream())
+                        {
+                            stream.Write(data, 0, data.Length);
+                        }
+
+                        var response = (HttpWebResponse)request.GetResponse();
+                        responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+                    }
+                    catch
+                    {
+                        responseString = "Failed to send email!";
+                    }
+
+                    MessageBox.Show(null, responseString, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

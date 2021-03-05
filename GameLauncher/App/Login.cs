@@ -12,23 +12,20 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using GameLauncher.App.Classes.LauncherCore.Lists;
-using GameLauncher.App.Classes.LauncherCore;
 using GameLauncher.App.Classes.LauncherCore.RPC;
 using GameLauncher.App.Classes.LauncherCore.Client.Game;
 using GameLauncher.App.Classes.LauncherCore.FileReadWrite;
 using GameLauncher.App.Classes.LauncherCore.Validator;
-using System.Drawing;
+using GameLauncher.App;
 
 namespace GameLauncher
 {
     public partial class Form1 : Form 
     {
         /* START Login Checks */
-        public static bool _modernAuthSupport = false;
-        public static bool _ticketRequired;
+        public static bool ModernAuthSupport = false;
         /* END Login Checks */
 
         /* START ModNet Global Functions */
@@ -59,6 +56,7 @@ namespace GameLauncher
             Load += new EventHandler(Form1_Load);
             ServerDropDownList.SelectedIndexChanged += new EventHandler(ServerPick_SelectedIndexChanged);
             ServerDropDownList.DrawItem += new DrawItemEventHandler(FunctionEvents.ServerDropDownList_DrawItem);
+            ForgotPassLink.LinkClicked += new LinkLabelLinkClickedEventHandler(FunctionEvents.ForgotPass_LinkClicked);
 
             ActionText.Text = "Ready!";
         }
@@ -129,36 +127,36 @@ namespace GameLauncher
                     {
                         if (string.IsNullOrEmpty(result["modernAuthSupport"]))
                         {
-                            _modernAuthSupport = false;
+                            ModernAuthSupport = false;
                         }
                         else if (result["modernAuthSupport"])
                         {
                             if (stringToUri.Scheme == "https")
                             {
-                                _modernAuthSupport = true;
+                                ModernAuthSupport = true;
                             }
                             else
                             {
-                                _modernAuthSupport = false;
+                                ModernAuthSupport = false;
                             }
                         }
                         else
                         {
-                            _modernAuthSupport = false;
+                            ModernAuthSupport = false;
                         }
                     }
                     catch
                     {
-                        _modernAuthSupport = false;
+                        ModernAuthSupport = false;
                     }
 
                     try
                     {
-                        _ticketRequired = (bool)result["requireTicket"];
+                        ScreenRegister.TicketRequired = (bool)result["requireTicket"];
                     }
                     catch
                     {
-                        _ticketRequired = true; //lets assume yes, we gonna check later if ticket is empty or not.
+                        ScreenRegister.TicketRequired = true; //lets assume yes, we gonna check later if ticket is empty or not.
                     }
                 }
                 catch
@@ -171,8 +169,6 @@ namespace GameLauncher
 
                     ActionText.Text = "Server is offline.";
                 }
-
-                RegisterTicketBox.Enabled = _ticketRequired;
             }
         }
 
@@ -192,7 +188,7 @@ namespace GameLauncher
                 Tokens.IPAddress = SelectedServerIP;
                 Tokens.ServerName = SelectedServerName;
 
-                if (_modernAuthSupport == false) 
+                if (ModernAuthSupport == false) 
                 {
                     ClassicAuth.Login(LoginEmailBox.Text, SHA.HashPassword(LoginPasswordBox.Text).ToLower());
                 } else 
@@ -227,65 +223,9 @@ namespace GameLauncher
                 MessageBox.Show(null, "A browser window has been opened to complete registration on " + SelectedServerName, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else if (!IsValid.Email(RegisterEmail.Text)) 
-            {
-                ActionText.Text = "Please type your email!";
-            } 
-            else if (String.IsNullOrEmpty(RegisterPassword.Text)) 
-            {
-                ActionText.Text = "Please type your password!";
-            } 
-            else if (String.IsNullOrEmpty(RegisterConfirmPassword.Text)) 
-            {
-                ActionText.Text = "Please type your confirmation password!";
-            } 
-            else if (RegisterPassword.Text != RegisterConfirmPassword.Text) 
-            {
-                ActionText.Text = "Password doesn't match!";
-            } 
-            else if(_ticketRequired) 
-            {
-                if(String.IsNullOrEmpty(RegisterTicketBox.Text)) 
-                {
-                    ActionText.Text = "Ticket is required to play on this server!";
-                } 
-                else 
-                {
-                    CreateAccount();
-                }
-            } 
-            else 
-            {
-                CreateAccount();
-            }
-        }
-
-        private void CreateAccount() 
-        {
-            String token = (_ticketRequired) ? RegisterTicketBox.Text : null;
-            Tokens.IPAddress = ServerDropDownList.SelectedValue.ToString();
-            Tokens.ServerName = ServerDropDownList.SelectedItem.ToString();
-
-            if (_modernAuthSupport == false)
-            {
-                ClassicAuth.Register(RegisterEmail.Text, SHA.HashPassword(RegisterPassword.Text), token);
-            }
             else
             {
-                ModernAuth.Register(RegisterEmail.Text, RegisterPassword.Text, token);
-            }
-
-            if (!String.IsNullOrEmpty(Tokens.Success))
-            {
-                MessageBox.Show(null, Tokens.Success, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ActionText.Text = Tokens.Success;
-
-                TabControl1.Visible = true;
-            }
-            else
-            {
-                MessageBox.Show(null, Tokens.Error, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                ActionText.Text = Tokens.Error;
+                new ScreenRegister().ShowDialog();
             }
         }
 
@@ -491,50 +431,6 @@ namespace GameLauncher
             else
             {
                 Log.Error("CORE: Unable to Determine Function state for Launcher");
-            }
-        }
-
-        private void ForgotPass_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) 
-        {
-            if (!string.IsNullOrEmpty(result["WebRecoveryUrl"]))
-            {
-                Process.Start(result["WebRecoveryUrl"]);
-                MessageBox.Show(null, "A browser window has been opened to complete password recovery on " + ServerDropDownList.SelectedItem.ToString(), "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            else
-            {
-                string send = Prompt.ShowDialog("Please specify your email address.", UserAgent.AgentAltName);
-
-                if (send != String.Empty)
-                {
-                    String responseString;
-                    try
-                    {
-                        Uri resetPasswordUrl = new Uri(ServerDropDownList.SelectedValue.ToString() + "/RecoveryPassword/forgotPassword");
-
-                        var request = (HttpWebRequest)System.Net.WebRequest.Create(resetPasswordUrl);
-                        var postData = "email=" + send;
-                        var data = Encoding.ASCII.GetBytes(postData);
-                        request.Method = "POST";
-                        request.ContentType = "application/x-www-form-urlencoded";
-                        request.ContentLength = data.Length;
-
-                        using (var stream = request.GetRequestStream())
-                        {
-                            stream.Write(data, 0, data.Length);
-                        }
-
-                        var response = (HttpWebResponse)request.GetResponse();
-                        responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
-                    }
-                    catch
-                    {
-                        responseString = "Failed to send email!";
-                    }
-
-                    MessageBox.Show(null, responseString, UserAgent.AgentAltName, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
             }
         }
     }
