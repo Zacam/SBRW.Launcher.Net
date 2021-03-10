@@ -5,8 +5,6 @@ using GameLauncher.App.Classes.LauncherCore.Global;
 using GameLauncher.App.Classes.LauncherCore.RPC;
 using System;
 using System.Diagnostics;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GameLauncher.App.Classes.LauncherCore.Client.Game
@@ -54,7 +52,6 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
             nfswProcess.ProcessorAffinity = (IntPtr)processorAffinity;
 
             NFSWPID = nfswProcess.Id;
-            AntiCheat.Checks();
 
             //TIMER HERE
             secondsToShutDown = (ScreenLogin.result["secondsToShutDown"].AsInt != 0) ? ScreenLogin.result["secondsToShutDown"].AsInt : 2 * 60 * 60;
@@ -77,6 +74,13 @@ namespace GameLauncher.App.Classes.LauncherCore.Client.Game
 
                 foreach (var oneProcess in allOfThem)
                 {
+                    int RunOnce = 0;
+                    if (RunOnce == 0)
+                    {
+                        RunOnce = 1;
+                        AntiCheat.Checks(NFSWPID);
+                        Log.Debug("RunOnce is now 1");
+                    }
                     long p = oneProcess.MainWindowHandle.ToInt64();
                     TimeSpan t = TimeSpan.FromSeconds(secondsToShutDown);
                     string secondsToShutDownNamed = string.Format("{0:D2}:{1:D2}:{2:D2}", t.Hours, t.Minutes, t.Seconds);

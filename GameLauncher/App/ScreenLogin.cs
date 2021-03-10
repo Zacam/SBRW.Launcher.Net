@@ -11,7 +11,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
 using System.Windows.Forms;
 using GameLauncher.App.Classes.LauncherCore.Lists;
 using GameLauncher.App.Classes.LauncherCore.RPC;
@@ -92,6 +91,14 @@ namespace GameLauncher
             else
             {
                 ServerDropDownList.SelectedIndex = 1;
+            }
+
+            LoginEmailBox.Text = FileAccountSave.UserRawEmail;
+            LoginPasswordBox.Text = FileAccountSave.UserRawPassword;
+            if (!string.IsNullOrEmpty(FileAccountSave.UserRawEmail) && 
+                (!string.IsNullOrEmpty(FileAccountSave.UserRawPassword) || !string.IsNullOrEmpty(FileAccountSave.UserHashedPassword)))
+            {
+                CheckRememberMe.Checked = true;
             }
         }
 

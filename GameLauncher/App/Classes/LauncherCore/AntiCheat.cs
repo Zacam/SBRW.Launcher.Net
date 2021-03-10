@@ -1,11 +1,8 @@
-using GameLauncher;
 using GameLauncher.App.Classes.LauncherCore.Client.Game;
 using GameLauncher.App.Classes.LauncherCore.Global;
-using GameLauncher.App.Classes.LauncherCore.ModNet;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Threading;
 
 namespace GameLauncher.App.Classes.LauncherCore
@@ -25,9 +22,9 @@ namespace GameLauncher.App.Classes.LauncherCore
                     8972152 // PROFILEMASKER!
                 };
 
-        public static void Checks()
+        public static void Checks(int ProcessID)
         {
-            Process process = Process.GetProcessById(Launch.NFSWPID);
+            Process process = Process.GetProcessById(ProcessID);
             IntPtr processHandle = Kernel32.OpenProcess(0x0010, false, process.Id);
             int baseAddress = process.MainModule.BaseAddress.ToInt32();
 

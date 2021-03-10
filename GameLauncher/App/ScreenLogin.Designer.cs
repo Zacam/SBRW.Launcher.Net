@@ -40,13 +40,14 @@ namespace GameLauncher
             this.RegisterButton = new System.Windows.Forms.Button();
             this.StatusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ActionText = new System.Windows.Forms.ToolStripStatusLabel();
+            this.CheckRememberMe = new System.Windows.Forms.CheckBox();
             this.StatusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ServerLabel
             // 
             this.ServerLabel.AutoSize = true;
-            this.ServerLabel.Location = new System.Drawing.Point(9, 10);
+            this.ServerLabel.Location = new System.Drawing.Point(19, 16);
             this.ServerLabel.Name = "ServerLabel";
             this.ServerLabel.Size = new System.Drawing.Size(74, 13);
             this.ServerLabel.TabIndex = 0;
@@ -57,7 +58,7 @@ namespace GameLauncher
             this.ServerDropDownList.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ServerDropDownList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ServerDropDownList.FormattingEnabled = true;
-            this.ServerDropDownList.Location = new System.Drawing.Point(90, 6);
+            this.ServerDropDownList.Location = new System.Drawing.Point(100, 12);
             this.ServerDropDownList.Name = "ServerDropDownList";
             this.ServerDropDownList.Size = new System.Drawing.Size(195, 21);
             this.ServerDropDownList.TabIndex = 1;
@@ -65,7 +66,7 @@ namespace GameLauncher
             // ForgotPassLink
             // 
             this.ForgotPassLink.AutoSize = true;
-            this.ForgotPassLink.Location = new System.Drawing.Point(20, 97);
+            this.ForgotPassLink.Location = new System.Drawing.Point(29, 126);
             this.ForgotPassLink.Name = "ForgotPassLink";
             this.ForgotPassLink.Size = new System.Drawing.Size(107, 13);
             this.ForgotPassLink.TabIndex = 7;
@@ -74,7 +75,7 @@ namespace GameLauncher
             // 
             // LoginButton
             // 
-            this.LoginButton.Location = new System.Drawing.Point(23, 123);
+            this.LoginButton.Location = new System.Drawing.Point(32, 182);
             this.LoginButton.Name = "LoginButton";
             this.LoginButton.Size = new System.Drawing.Size(253, 32);
             this.LoginButton.TabIndex = 6;
@@ -84,7 +85,7 @@ namespace GameLauncher
             // 
             // LoginPasswordBox
             // 
-            this.LoginPasswordBox.Location = new System.Drawing.Point(89, 69);
+            this.LoginPasswordBox.Location = new System.Drawing.Point(100, 77);
             this.LoginPasswordBox.Name = "LoginPasswordBox";
             this.LoginPasswordBox.PasswordChar = '*';
             this.LoginPasswordBox.Size = new System.Drawing.Size(185, 20);
@@ -93,7 +94,7 @@ namespace GameLauncher
             // LoginPasswordLabel
             // 
             this.LoginPasswordLabel.AutoSize = true;
-            this.LoginPasswordLabel.Location = new System.Drawing.Point(20, 72);
+            this.LoginPasswordLabel.Location = new System.Drawing.Point(31, 80);
             this.LoginPasswordLabel.Name = "LoginPasswordLabel";
             this.LoginPasswordLabel.Size = new System.Drawing.Size(56, 13);
             this.LoginPasswordLabel.TabIndex = 4;
@@ -101,7 +102,7 @@ namespace GameLauncher
             // 
             // LoginEmailBox
             // 
-            this.LoginEmailBox.Location = new System.Drawing.Point(89, 43);
+            this.LoginEmailBox.Location = new System.Drawing.Point(100, 51);
             this.LoginEmailBox.Name = "LoginEmailBox";
             this.LoginEmailBox.Size = new System.Drawing.Size(185, 20);
             this.LoginEmailBox.TabIndex = 3;
@@ -109,7 +110,7 @@ namespace GameLauncher
             // LoginEmailLabel
             // 
             this.LoginEmailLabel.AutoSize = true;
-            this.LoginEmailLabel.Location = new System.Drawing.Point(20, 46);
+            this.LoginEmailLabel.Location = new System.Drawing.Point(31, 54);
             this.LoginEmailLabel.Name = "LoginEmailLabel";
             this.LoginEmailLabel.Size = new System.Drawing.Size(39, 13);
             this.LoginEmailLabel.TabIndex = 2;
@@ -117,7 +118,7 @@ namespace GameLauncher
             // 
             // RegisterButton
             // 
-            this.RegisterButton.Location = new System.Drawing.Point(23, 161);
+            this.RegisterButton.Location = new System.Drawing.Point(32, 220);
             this.RegisterButton.Name = "RegisterButton";
             this.RegisterButton.Size = new System.Drawing.Size(253, 32);
             this.RegisterButton.TabIndex = 11;
@@ -129,9 +130,9 @@ namespace GameLauncher
             // 
             this.StatusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ActionText});
-            this.StatusStrip1.Location = new System.Drawing.Point(0, 204);
+            this.StatusStrip1.Location = new System.Drawing.Point(0, 264);
             this.StatusStrip1.Name = "StatusStrip1";
-            this.StatusStrip1.Size = new System.Drawing.Size(297, 22);
+            this.StatusStrip1.Size = new System.Drawing.Size(317, 22);
             this.StatusStrip1.SizingGrip = false;
             this.StatusStrip1.TabIndex = 3;
             this.StatusStrip1.Text = "statusStrip1";
@@ -141,11 +142,22 @@ namespace GameLauncher
             this.ActionText.Name = "ActionText";
             this.ActionText.Size = new System.Drawing.Size(0, 17);
             // 
+            // CheckRememberMe
+            // 
+            this.CheckRememberMe.AutoSize = true;
+            this.CheckRememberMe.Location = new System.Drawing.Point(32, 103);
+            this.CheckRememberMe.Name = "CheckRememberMe";
+            this.CheckRememberMe.Size = new System.Drawing.Size(143, 17);
+            this.CheckRememberMe.TabIndex = 12;
+            this.CheckRememberMe.Text = "Remember My Password";
+            this.CheckRememberMe.UseVisualStyleBackColor = true;
+            // 
             // ScreenLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(297, 226);
+            this.ClientSize = new System.Drawing.Size(317, 286);
+            this.Controls.Add(this.CheckRememberMe);
             this.Controls.Add(this.ForgotPassLink);
             this.Controls.Add(this.StatusStrip1);
             this.Controls.Add(this.LoginButton);
@@ -183,6 +195,7 @@ namespace GameLauncher
         private System.Windows.Forms.ToolStripStatusLabel ActionText;
         private System.Windows.Forms.Button RegisterButton;
         private System.Windows.Forms.LinkLabel ForgotPassLink;
+        private System.Windows.Forms.CheckBox CheckRememberMe;
     }
 }
 
