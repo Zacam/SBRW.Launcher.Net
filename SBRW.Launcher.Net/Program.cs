@@ -346,7 +346,7 @@ namespace SBRW.Launcher.Net
                                 /* MONO Hates this... */
                                 string[] File_List =
                                 {
-                                        "DiscordRPC.dll - 1.1.3.18",
+                                        "DiscordRPC.dll - 1.1.4.20",
                                         "Flurl.dll - 3.0.6",
                                         "Flurl.Http.dll - 3.2.4",
                                         "LZMA.dll - 9.10 beta",
@@ -357,13 +357,13 @@ namespace SBRW.Launcher.Net
                                         "SBRW.Ini.Parser.dll - 3.0.2",
                                         "SBRW.Nancy.dll - 2.0.13",
                                         "SBRW.Nancy.Hosting.Self.dll - 2.0.11",
-                                        "SBRW.Launcher.Core.dll - 0.3.0",
-                                        "SBRW.Launcher.Core.Extra.dll - 0.3.6",
-                                        "SBRW.Launcher.Core.Discord.dll - 0.3.0",
-                                        "SBRW.Launcher.Core.Proxy.dll - 0.3.0",
-                                        "SBRW.Launcher.Core.Theme.dll - 0.2.0",
-                                        "SBRW.Launcher.Core.Downloader.dll - 0.3.7",
-                                        "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.1"
+                                        "SBRW.Launcher.Core.dll - 0.3.1",
+                                        "SBRW.Launcher.Core.Extra.dll - 0.3.11",
+                                        "SBRW.Launcher.Core.Discord.dll - 0.3.2",
+                                        "SBRW.Launcher.Core.Proxy.dll - 0.3.3",
+                                        "SBRW.Launcher.Core.Theme.dll - 0.2.2",
+                                        "SBRW.Launcher.Core.Downloader.dll - 0.3.8-preview001",
+                                        "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.2"
                                 };
 
                                 List<string> Missing_File_List = new List<string>();
