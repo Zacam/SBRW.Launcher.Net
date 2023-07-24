@@ -1983,14 +1983,23 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
             {
                 
                 DisableButtonFRAPI = DisableButtonDRAPI = DisableButtonDRAPI = DisableButtonPRC = false;
-                if (!string.IsNullOrWhiteSpace(RPCStateCache) && Screen_Main.Screen_Instance != null)
+                if (!string.IsNullOrWhiteSpace(RPCStateCache) || Parent_Screen.Launcher_Setup.Equals(1))
                 {
-                    if (RPCStateCache.Contains("Settings"))
+                    if (RPCStateCache.Contains("Settings") || Parent_Screen.Launcher_Setup.Equals(1))
                     {
                         Presence_Launcher.Status(22);
-                        Screen_Settings.Clear_Hide_Screen_Form_Panel();
+                        if (Screen_Settings.Screen_Instance != default)
+                        {
+                            Screen_Settings.Screen_Instance.Panel_Form_Screens.Controls.Clear();
+                            Screen_Settings.Screen_Instance.Panel_Form_Screens.Visible = false;
+                        }
+                        
+                        if (Parent_Screen.Screen_Instance != default)
+                        {
+                            Parent_Screen.Screen_Instance.Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
+                        }
                     }
-                    else if (RPCStateCache.Contains("Ready"))
+                    else if (RPCStateCache.Contains("Ready") && Screen_Main.Screen_Instance != default)
                     {
                         Presence_Launcher.Status(4);
                         Screen_Main.Clear_Hide_Screen_Form_Panel();

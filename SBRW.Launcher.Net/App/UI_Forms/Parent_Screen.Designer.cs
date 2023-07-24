@@ -36,6 +36,7 @@
             this.Panel_Splash_Screen = new System.Windows.Forms.Panel();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
+            this.Panel_Alert_Box = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Screen_Splash)).BeginInit();
             this.GroupBox_Launcherlog.SuspendLayout();
             this.Panel_Splash_Screen.SuspendLayout();
@@ -49,7 +50,7 @@
             this.Panel_Form_Screens.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Form_Screens.Location = new System.Drawing.Point(0, 0);
             this.Panel_Form_Screens.Name = "Panel_Form_Screens";
-            this.Panel_Form_Screens.Size = new System.Drawing.Size(563, 404);
+            this.Panel_Form_Screens.Size = new System.Drawing.Size(891, 529);
             this.Panel_Form_Screens.TabIndex = 0;
             this.Panel_Form_Screens.Visible = false;
             // 
@@ -58,7 +59,7 @@
             this.PictureBox_Screen_Splash.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.PictureBox_Screen_Splash.ErrorImage = null;
             this.PictureBox_Screen_Splash.InitialImage = null;
-            this.PictureBox_Screen_Splash.Location = new System.Drawing.Point(25, 29);
+            this.PictureBox_Screen_Splash.Location = new System.Drawing.Point(205, 32);
             this.PictureBox_Screen_Splash.Name = "PictureBox_Screen_Splash";
             this.PictureBox_Screen_Splash.Size = new System.Drawing.Size(512, 181);
             this.PictureBox_Screen_Splash.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -70,9 +71,9 @@
             this.GroupBox_Launcherlog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.GroupBox_Launcherlog.Controls.Add(this.TextBox_Live_Log);
             this.GroupBox_Launcherlog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.GroupBox_Launcherlog.Location = new System.Drawing.Point(25, 216);
+            this.GroupBox_Launcherlog.Location = new System.Drawing.Point(33, 220);
             this.GroupBox_Launcherlog.Name = "GroupBox_Launcherlog";
-            this.GroupBox_Launcherlog.Size = new System.Drawing.Size(512, 157);
+            this.GroupBox_Launcherlog.Size = new System.Drawing.Size(825, 276);
             this.GroupBox_Launcherlog.TabIndex = 28;
             this.GroupBox_Launcherlog.TabStop = false;
             this.GroupBox_Launcherlog.Text = "Log:";
@@ -85,7 +86,7 @@
             this.TextBox_Live_Log.Name = "TextBox_Live_Log";
             this.TextBox_Live_Log.ReadOnly = true;
             this.TextBox_Live_Log.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBox_Live_Log.Size = new System.Drawing.Size(500, 135);
+            this.TextBox_Live_Log.Size = new System.Drawing.Size(814, 245);
             this.TextBox_Live_Log.TabIndex = 35;
             // 
             // Panel_Splash_Screen
@@ -98,7 +99,7 @@
             this.Panel_Splash_Screen.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Splash_Screen.Location = new System.Drawing.Point(0, 0);
             this.Panel_Splash_Screen.Name = "Panel_Splash_Screen";
-            this.Panel_Splash_Screen.Size = new System.Drawing.Size(563, 404);
+            this.Panel_Splash_Screen.Size = new System.Drawing.Size(891, 529);
             this.Panel_Splash_Screen.TabIndex = 29;
             // 
             // Button_Close
@@ -106,7 +107,7 @@
             this.Button_Close.BackColor = System.Drawing.Color.Transparent;
             this.Button_Close.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.Button_Close.InitialImage = null;
-            this.Button_Close.Location = new System.Drawing.Point(526, 12);
+            this.Button_Close.Location = new System.Drawing.Point(840, 15);
             this.Button_Close.Name = "Button_Close";
             this.Button_Close.Size = new System.Drawing.Size(25, 25);
             this.Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -118,12 +119,22 @@
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
             // 
+            // Panel_Alert_Box
+            // 
+            this.Panel_Alert_Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_Alert_Box.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Alert_Box.Name = "Panel_Alert_Box";
+            this.Panel_Alert_Box.Size = new System.Drawing.Size(891, 529);
+            this.Panel_Alert_Box.TabIndex = 0;
+            this.Panel_Alert_Box.Visible = false;
+            // 
             // Parent_Screen
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.Desktop;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(563, 404);
+            this.ClientSize = new System.Drawing.Size(891, 529);
+            this.Controls.Add(this.Panel_Alert_Box);
             this.Controls.Add(this.Panel_Form_Screens);
             this.Controls.Add(this.Panel_Splash_Screen);
             this.DoubleBuffered = true;
@@ -151,5 +162,6 @@
         public System.Windows.Forms.GroupBox GroupBox_Launcherlog;
         public System.Windows.Forms.Panel Panel_Splash_Screen;
         public System.Windows.Forms.PictureBox Button_Close;
+        private System.Windows.Forms.Panel Panel_Alert_Box;
     }
 }

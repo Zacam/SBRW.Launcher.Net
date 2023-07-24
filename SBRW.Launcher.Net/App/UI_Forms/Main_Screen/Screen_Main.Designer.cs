@@ -399,7 +399,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             // 
             // Label_Client_Ping
             // 
-            this.Label_Client_Ping.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Label_Client_Ping.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Client_Ping.ForeColor = System.Drawing.Color.White;
             this.Label_Client_Ping.Location = new System.Drawing.Point(6, 0);
             this.Label_Client_Ping.Name = "Label_Client_Ping";
@@ -438,13 +438,13 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.ComboBox_Server_List.FormattingEnabled = true;
             this.ComboBox_Server_List.Location = new System.Drawing.Point(586, 50);
             this.ComboBox_Server_List.Name = "ComboBox_Server_List";
-            this.ComboBox_Server_List.Size = new System.Drawing.Size(241, 24);
+            this.ComboBox_Server_List.Size = new System.Drawing.Size(241, 21);
             this.ComboBox_Server_List.TabIndex = 15;
             // 
             // Label_Information_Window
             // 
             this.Label_Information_Window.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Information_Window.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Label_Information_Window.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.Label_Information_Window.ForeColor = System.Drawing.Color.White;
             this.Label_Information_Window.Location = new System.Drawing.Point(625, 82);
             this.Label_Information_Window.Name = "Label_Information_Window";
@@ -459,7 +459,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Input_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Email.Location = new System.Drawing.Point(645, 173);
             this.Input_Email.Name = "Input_Email";
-            this.Input_Email.Size = new System.Drawing.Size(180, 16);
+            this.Input_Email.Size = new System.Drawing.Size(180, 13);
             this.Input_Email.TabIndex = 17;
             // 
             // Input_Password
@@ -468,7 +468,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Input_Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Password.Location = new System.Drawing.Point(645, 221);
             this.Input_Password.Name = "Input_Password";
-            this.Input_Password.Size = new System.Drawing.Size(180, 16);
+            this.Input_Password.Size = new System.Drawing.Size(180, 13);
             this.Input_Password.TabIndex = 18;
             this.Input_Password.UseSystemPasswordChar = true;
             // 
@@ -590,6 +590,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             // 
             this.ProgressBar.DrawHorizontalBarCustomColor = true;
             this.ProgressBar.DrawHorizontalBarDefault = false;
+            this.ProgressBar.ID = 0;
             this.ProgressBar.InnerRectangle = 0;
             this.ProgressBar.InnerRectangleLinearGradient = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
             this.ProgressBar.Location = new System.Drawing.Point(30, 430);
@@ -666,6 +667,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             // Panel_Form_Screens
             // 
             this.Panel_Form_Screens.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Form_Screens.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Form_Screens.ForeColor = System.Drawing.Color.Transparent;
             this.Panel_Form_Screens.Location = new System.Drawing.Point(0, 0);
             this.Panel_Form_Screens.Name = "Panel_Form_Screens";
@@ -695,7 +697,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Input_Console.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Input_Console.Location = new System.Drawing.Point(329, 15);
             this.Input_Console.Name = "Input_Console";
-            this.Input_Console.Size = new System.Drawing.Size(405, 23);
+            this.Input_Console.Size = new System.Drawing.Size(405, 20);
             this.Input_Console.TabIndex = 151;
             this.Input_Console.Visible = false;
             // 

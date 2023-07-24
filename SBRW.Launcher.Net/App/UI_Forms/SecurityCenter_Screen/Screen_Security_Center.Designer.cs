@@ -349,7 +349,7 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
             this.ButtonClose.BackColor = System.Drawing.Color.Transparent;
             this.ButtonClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ButtonClose.InitialImage = null;
-            this.ButtonClose.Location = new System.Drawing.Point(841, 15);
+            this.ButtonClose.Location = new System.Drawing.Point(840, 15);
             this.ButtonClose.Name = "ButtonClose";
             this.ButtonClose.Size = new System.Drawing.Size(25, 25);
             this.ButtonClose.TabIndex = 211;

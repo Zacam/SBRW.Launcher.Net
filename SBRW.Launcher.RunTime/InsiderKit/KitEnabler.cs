@@ -9,7 +9,7 @@ namespace SBRW.Launcher.RunTime.InsiderKit
         /* Current month, day, year (2 digits), and letter! Ex: 12-15-20-A */
         /* If a second build gets release within the same day bump letter version up (No R2 or D2)*/
 
-        private static string InsiderBuildNumber { get; set; } = "07-22-23-C";
+        private static string InsiderBuildNumber { get; set; } = "07-24-23-A";
 
         public static string BuildNumberOnly()
         {

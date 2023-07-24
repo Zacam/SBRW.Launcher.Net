@@ -12,6 +12,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
     internal class FormsFont
     {
         private static Font_Wrapper? Live_Instance { get; set; }
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
         /// <summary>
         /// 
         /// </summary>
@@ -62,9 +63,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
             {
                 using MemoryStream Live_Memory_Cache = new MemoryStream(Embeded_Files.DejaVuSans_Bold_Ttf_Bytes());
                 Live_Instance.Font_Bold = Live_Instance.GetFontFamily("DejaVuSans-Bold.ttf", Live_Memory_Cache);
+
             }
 
             return Live_Instance.Font_Bold;
         }
     }
 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.

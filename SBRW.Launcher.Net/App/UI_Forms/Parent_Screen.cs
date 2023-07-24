@@ -40,6 +40,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SBRW.Launcher.Core.Required.DLL;
 using SBRW.Launcher.Core.Extension.Hash_;
+using SBRW.Launcher.App.UI_Forms.Settings_Screen;
+using System.Threading;
 
 namespace SBRW.Launcher.App.UI_Forms
 {
@@ -51,8 +53,13 @@ namespace SBRW.Launcher.App.UI_Forms
         private static bool Clock_Tick_Theme_Update { get; set; }
         #endregion
 
-        #region Screen Login Variables
+        #region Screen Variables
         public static bool Launcher_Restart { get; set; }
+        /// <summary>
+        /// First time Run Is Active
+        /// </summary>
+        /// <remarks>-1 - Closing<br/>0 - Not Active<br/>1 - Active</remarks>
+        public static int Launcher_Setup { get; set; } = 0;
         #endregion
 
         #region Dragable Form Window & Functions
@@ -763,16 +770,45 @@ namespace SBRW.Launcher.App.UI_Forms
 
                 try
                 {
-                    Form welcome = new Screen_Welcome();
-                    DialogResult welcomereply = welcome.ShowDialog();
+                    if (Screen_Instance != default)
+                    {
+                        Launcher_Setup = 1;
+                        Screen_Instance.Text = "Setup - SBRW Launcher: " + Application.ProductVersion;
+                        Screen_Settings Custom_Instance_Settings = new Screen_Settings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
+                        Screen_Instance.Panel_Form_Screens.Visible = true;
+                        Screen_Instance.Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
+                        Custom_Instance_Settings.Show();
+                        Screen_Instance.Panel_Splash_Screen.Visible = false;
 
-                    if (welcomereply != DialogResult.OK)
+                        await Task.Run(() =>
+                        {
+                            while (Launcher_Setup.Equals(1))
+                            {
+                                /* Just keep looping until the user completes the setup (Screen) */
+                                Thread.Sleep(1000);
+                            }
+                        });
+
+                        if (Launcher_Setup.Equals(0))
+                        {
+                            Screen_Instance.Text = "SBRW Launcher: " + Application.ProductVersion;
+                            Screen_Instance.Panel_Splash_Screen.Visible = true;
+                            Screen_Instance.Panel_Form_Screens.Visible = false;
+                        }
+                        else
+                        {
+                            FunctionStatus.LauncherForceClose = true;
+                        }
+                    }
+                    else
                     {
                         FunctionStatus.LauncherForceClose = true;
                     }
                 }
-                catch
+                catch (Exception Error)
                 {
+                    LogToFileAddons.OpenLog("FOLDER SELECT DIALOG", string.Empty, Error, string.Empty, true);
+
                     if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_CDN))
                     {
                         LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "CDN Source URL was Empty! Setting a Null Safe URL 'http://localhost'");
@@ -790,7 +826,7 @@ namespace SBRW.Launcher.App.UI_Forms
 
                 if (FunctionStatus.LauncherForceClose)
                 {
-                    FunctionStatus.ErrorCloseLauncher("Closing From Welcome Dialog", false);
+                    FunctionStatus.ErrorCloseLauncher("Closing From Setup Screen", false);
                 }
                 else
                 {
@@ -1257,7 +1293,7 @@ namespace SBRW.Launcher.App.UI_Forms
             SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer, true);
 
             TransparencyKey = Color_Screen.BG_Splash;
-            BackgroundImage = Image_Background.Splash;
+            BackgroundImage = Image_Background.Settings;
 
             Button_Close.BackgroundImage = Image_Icon.Close;
             PictureBox_Screen_Splash.BackgroundImage = Image_Other.Logo_Splash;
@@ -1297,6 +1333,7 @@ namespace SBRW.Launcher.App.UI_Forms
 
 #region Update Variables
             Screen_Instance = this;
+            //Button_One.Text = DialogResult.OK.ToString();
 #endregion
         }
     }

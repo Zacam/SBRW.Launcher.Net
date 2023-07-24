@@ -755,6 +755,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             try
             {
                 Screen_Settings Custom_Instance_Settings = new Screen_Settings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
+                ((Control)Custom_Instance_Settings.TabPage_Setup).Enabled = false;
                 Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
                 Panel_Form_Screens.Visible = true;
                 Custom_Instance_Settings.Show();
@@ -915,7 +916,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             if (!match.Success)
                             {
                                 Launcher_Value.Launcher_Select_Server_Data.IPAddress =
-                                Launcher_Value.Launcher_Select_Server_Data.IPAddress.Replace(convert.Host, FunctionStatus.HostName2IP(convert.Host));
+                                Launcher_Value.Launcher_Select_Server_Data.IPAddress.Replace(convert.Host, FunctionStatus.HostName2IP(convert.Host, !Save_Settings.Legacy_Host_To_IP()));
                             }
                         }
 
@@ -3901,7 +3902,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
 
                 /* Use Local Packed Archive for Install Source - DavidCarbon */
-                if (!InformationCache.EnableLZMADownloader() && !From_PackDownloader)
+                if (Save_Settings.Downloader_Game_Pack() && !From_PackDownloader)
                 {
                     try
                     {
@@ -3913,7 +3914,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         LogToFileAddons.OpenLog("New Download Game Files", string.Empty, Error, string.Empty, true);
                     }
                 }
-                else
+                else if (Save_Settings.Downloader_Game_LZMA())
                 {
                     try
                     {
@@ -4011,6 +4012,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     {
                         LogToFileAddons.OpenLog("Classic Download Game Files", string.Empty, Error, string.Empty, true);
                     }
+                }
+                else
+                {
+                    Log.Debug("[GAME DOWNLOADER] RAW DOWNLOADER NOT IMPLEMENTED");
                 }
             });
         }

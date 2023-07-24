@@ -22,6 +22,7 @@ using SBRW.Launcher.App.UI_Forms.Settings_Screen;
 using SBRW.Launcher.Core.Required.System;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Proxy.Nancy_;
+using SBRW.Launcher.App.UI_Forms;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Global
 {
@@ -571,6 +572,60 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                             }
                         }
                         break;
+                    case "proxy log":
+                        if (Save_Settings.Live_Data != default)
+                        {
+                            if (Save_Settings.Live_Data.Launcher_Proxy.Equals("0"))
+                            {
+                                if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
+                                {
+                                    string Entry_Text = Prompt.ShowDialog("Enter Proxy Log Mode (Does not Save on Relaunch)", "SBRW Launcher");
+
+                                    if (!string.IsNullOrWhiteSpace(Entry_Text))
+                                    {
+                                        DialogResult WIN_OWNER = DialogResult.OK;
+
+                                        if (Screen_Settings.Screen_Instance != default)
+                                        {
+                                            WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "Confirm the Following Changes:" +
+                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
+                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                        }
+                                        else if (Screen_Main.Screen_Instance != default)
+                                        {
+                                            WIN_OWNER = MessageBox.Show(Screen_Main.Screen_Instance, "Confirm the Following Changes:" +
+                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
+                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                        }
+
+                                        if (WIN_OWNER == DialogResult.Yes)
+                                        {
+                                            if(Entry_Text == "0")
+                                            {
+                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.None;
+                                            }
+                                            else if (Entry_Text == "1")
+                                            {
+                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.All;
+                                            }
+                                            else if (Entry_Text == "2")
+                                            {
+                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Requests;
+                                            }
+                                            else if (Entry_Text == "3")
+                                            {
+                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Responses;
+                                            }
+                                            else if (Entry_Text == "4")
+                                            {
+                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Errors;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
 #if (DEBUG_UNIX || RELEASE_UNIX)
                     case "alert storage space":
                     case "alert storage":
@@ -661,6 +716,9 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
 #else
                         Process.Start(new ProcessStartInfo { FileName = "https://youtu.be/2m5vQo81Jik", UseShellExecute = true });
 #endif
+                        break;
+                    case "debug":
+                        //new Screen_Debug().ShowDialog();
                         break;
                     default:
                         if (!string.IsNullOrWhiteSpace(Live_Commands))

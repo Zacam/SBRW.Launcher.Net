@@ -43,8 +43,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /* Global Functions             /
         /*******************************/
 #pragma warning disable CS8618
-        public static Screen_Settings Screen_Instance { get; set; }
-        public static Panel Screen_Panel_Forms { get; set; }
+        public static Screen_Settings? Screen_Instance { get; set; }
 #pragma warning restore CS8618
         private int LastSelectedLanguage { get; set; }
 
@@ -55,6 +54,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         public string New_Choosen_CDN { get; set; }
 
         #region Support Functions
+        private void Setup_Save_Button_Check()
+        {
+            if (!string.IsNullOrWhiteSpace(Save_Settings.Game_Archive_Path()) && !string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_CDN))
+            {
+                ButtonsColorSet(Button_Save_Setup, 1, true);
+            }
+        }
+
         private void WindowsDefenderGameFilesDirctoryChange()
         {
 #if !(RELEASE_UNIX || DEBUG_UNIX)
@@ -77,6 +84,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
 
             ButtonsColorSet(Button_Change_Game_Path, 1, true);
+            if (Parent_Screen.Launcher_Setup.Equals(1))
+            {
+                ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
+                Setup_Save_Button_Check();
+            }
             RestartRequired = true;
         }
 
@@ -177,8 +189,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Log.Error("SETTINGS PINGING CDN: Settings.ini has an Empty CDN URL");
             }
         }
-#endregion
-#region Loading
+        #endregion
+        #region Loading
         private void Display_Timer_Button()
         {
             if (Save_Settings.Live_Data.Launcher_Display_Timer == "1")
@@ -192,6 +204,22 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 Radio_Button_Static_Timer.Checked = true;
+            }
+        }
+
+        private string GameDownloaderButtonSelection()
+        {
+            if (Radio_Button_LZMA.Checked)
+            {
+                return "0";
+            }
+            else if (Radio_Button_SBRW_Pack.Checked)
+            {
+                return "1";
+            }
+            else
+            {
+                return "2";
             }
         }
 
@@ -221,18 +249,43 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             NewGameFilesPath = Save_Settings.Live_Data.Game_Path;
             NewLauncherPath = Locations.LauncherFolder;
 
-            CheckBox_Proxy.Checked = InformationCache.DisableProxy();
-            CheckBox_RPC.Checked = InformationCache.DisableDiscordRPC();
-            CheckBox_Alt_WebCalls.Checked = InformationCache.EnableAltWebCalls();
+            CheckBox_Proxy.Checked = !Save_Settings.Proxy_RunTime();
+            CheckBox_RPC.Checked = !Save_Settings.RPC_Discord();
+            CheckBox_Alt_WebCalls.Checked = Save_Settings.WebCalls_Alt();
             CheckBox_Opt_Insider.Checked = InformationCache.EnableInsiderPreview();
-            CheckBox_Theme_Support.Checked = InformationCache.EnableThemeSupport();
-            CheckBox_LZMA_Downloader.Checked = InformationCache.EnableLZMADownloader();
-            CheckBox_JSON_Update_Cache.Checked = InformationCache.DisableFrequencyJSONUpdate();
-            CheckBox_Proxy_Domain.Checked = InformationCache.EnableProxyDomain();
+            CheckBox_Theme_Support.Checked = Save_Settings.Theme_Custom();
+            CheckBox_JSON_Update_Cache.Checked = Save_Settings.Update_Frequency_JSON();
+            CheckBox_Proxy_Domain.Checked = Save_Settings.Proxy_Domain();
             CheckBox_Host_to_IP.Checked = !Save_Settings.Legacy_Host_To_IP();
 
+            switch(Save_Settings.Downloader_Game())
+            {
+                case 0:
+                    Radio_Button_LZMA.Checked = true;
+                    break;
+                case 1:
+                    Radio_Button_SBRW_Pack.Checked = true;
+                    break;
+                case 2:
+                    Radio_Button_Raw.Checked = true;
+                    break;
+            }
+
+            switch (Save_Settings.Preview_Mode_Int())
+            {
+                case 0:
+                    Radio_Button_Stable.Checked = true;
+                    break;
+                case 1:
+                    Radio_Button_Beta.Checked = true;
+                    break;
+                case 2:
+                    Radio_Button_Developer.Checked = true;
+                    break;
+            }
+
             int Proxy_Port_Convert = 0;
-            if(int.TryParse(Save_Settings.Live_Data.Launcher_Proxy_Port, out Proxy_Port_Convert))
+            if (int.TryParse(Save_Settings.Live_Data.Launcher_Proxy_Port, out Proxy_Port_Convert))
             {
                 if ((Proxy_Port_Convert < 0) || (Proxy_Port_Convert > 65353))
                 {
@@ -267,9 +320,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Enable/Disable Visuals       /
             /*******************************/
 
-            if (File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, "NFSWO_COMMUNICATION_LOG.txt")))
+            if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
             {
-                ButtonsColorSet(Button_Clear_NFSWO_Logs, 2, true);
+                if (File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, "NFSWO_COMMUNICATION_LOG.txt")))
+                {
+                    ButtonsColorSet(Button_Clear_NFSWO_Logs, 2, true);
+                }
+                else
+                {
+                    ButtonsColorSet(Button_Clear_NFSWO_Logs, 4, false);
+                }
             }
             else
             {
@@ -285,31 +345,35 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ButtonsColorSet(Button_Clear_Server_Mods, 4, false);
             }
 
-            await Task.Run(() =>
+            if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
             {
-                try
+                await Task.Run(() =>
                 {
-                    DirectoryInfo CrashLogFilesDirectory = new DirectoryInfo(Save_Settings.Live_Data.Game_Path);
+                    try
+                    {
+                        DirectoryInfo CrashLogFilesDirectory = new DirectoryInfo(Save_Settings.Live_Data.Game_Path);
 
-                    if (CrashLogFilesDirectory.EnumerateFiles("SBRCrashDump_CL0*.dmp", SearchOption.TopDirectoryOnly).Count() != 0)
-                    {
-                        ButtonsColorSet(Button_Clear_Crash_Logs, 2, true);
+                        if (CrashLogFilesDirectory.EnumerateFiles("SBRCrashDump_CL0*.dmp", SearchOption.TopDirectoryOnly).Count() != 0)
+                        {
+                            ButtonsColorSet(Button_Clear_Crash_Logs, 2, true);
+                        }
+                        else if (CrashLogFilesDirectory.EnumerateFiles("SBRCrashDump_CL0*.dmp", SearchOption.TopDirectoryOnly).Count() == 0)
+                        {
+                            ButtonsColorSet(Button_Clear_Crash_Logs, 4, false);
+                        }
+                        else
+                        {
+                            ButtonsColorSet(Button_Clear_Crash_Logs, 1, false);
+                        }
                     }
-                    else if (CrashLogFilesDirectory.EnumerateFiles("SBRCrashDump_CL0*.dmp", SearchOption.TopDirectoryOnly).Count() == 0)
+                    catch (Exception Error)
                     {
-                        ButtonsColorSet(Button_Clear_Crash_Logs, 4, false);
+                        ButtonsColorSet(Button_Clear_Crash_Logs, 3, false);
+                        LogToFileAddons.OpenLog("SettingsScreen [SBRCrashDump_Check]", string.Empty, Error, string.Empty, true);
                     }
-                    else
-                    {
-                        ButtonsColorSet(Button_Clear_Crash_Logs, 1, false);
-                    }
-                }
-                catch (Exception Error)
-                {
-                    ButtonsColorSet(Button_Clear_Crash_Logs, 3, false);
-                    LogToFileAddons.OpenLog("SettingsScreen [SBRCrashDump_Check]", string.Empty, Error, string.Empty, true);
-                }
-            });
+                });
+            }
+
 
             await Task.Run(() =>
             {
@@ -392,8 +456,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 LogToFileAddons.OpenLog("SETTINGS VERIFYHASH", string.Empty, Error, string.Empty, true);
             }
         }
-#endregion
-#region ComboxList Setup
+        #endregion
+        #region ComboxList Setup
         private void RememberLastLanguage()
         {
             /* Last Selected CDN */
@@ -454,7 +518,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 // Handle key at form level.
                 // Do not send event to focused control by returning true.
 
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
                 Label_Version_Build_Click(default, default);
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
                 return true;
             }
@@ -479,14 +545,18 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         }
         private void Button_CDN_Selector_Click(object sender, EventArgs e)
         {
-            if (VisualsAPIChecker.CarbonAPITwo())
+            if (VisualsAPIChecker.Local_Cached_API())
             {
                 Screen_CDN_Selection.OpenScreen(2);
             }
             else
             {
                 ButtonsColorSet(Button_CDN_List, 4, true);
-                MessageBox.Show(null, "Launcher failed to reach any APIs. CDN Selection Screen is not available.", 
+                if (Parent_Screen.Launcher_Setup.Equals(1))
+                {
+                    ButtonsColorSet(Button_CDN_List_Setup, 4, true);
+                }
+                MessageBox.Show(null, "Launcher failed to reach any APIs. CDN Selection Screen is not available.",
                     "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
@@ -564,44 +634,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             bool Stop_and_Restart_Downloader = false;
             bool CDN_Changed_Button_Update = false;
 
-            Button_Save.Text = "SAVING";
-            /* TODO null check */
-            if (ComboBox_Language_List.SelectedItem != null && !string.IsNullOrWhiteSpace(((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini))
+            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
             {
-                Save_Settings.Live_Data.Launcher_Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini;
-                XML_File.XML_Settings_Data.Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_XML;
-
-                /* TODO: Inform player about custom languagepack used. */
-                if (((Json_List_Language)ComboBox_Language_List.SelectedItem).Category == "Custom")
-                {
-                    MessageBox.Show(null, "Please Note: If a Server does not provide a Language Pack, it will fallback to English Language Pack instead.",
-                        "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    if (!Directory.Exists(Save_Settings.Live_Data.Game_Path + "/scripts"))
-                    {
-                        try { Directory.CreateDirectory(Save_Settings.Live_Data.Game_Path + "/scripts"); }
-                        catch { }
-                    }
-
-                    if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
-                    {
-                        try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
-                        catch { }
-                    }
-
-                    try
-                    {
-                        Ini_File LanguagePickerFile = new Ini_File(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini");
-                        LanguagePickerFile.Key_Write("Language", ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini);
-                    }
-                    catch { }
-                }
-                /* Delete Custom Settings.ini for LangPicker.asi module */
-                else if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
-                {
-                    try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
-                    catch { }
-                }
+                Button_Save.Text = "SAVING";
             }
 
             if (!string.IsNullOrWhiteSpace(NewGameFilesPath))
@@ -634,6 +669,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
 
                     ButtonsColorSet(Button_Change_Game_Path, 1, true);
+                    if (Parent_Screen.Launcher_Setup.Equals(1))
+                    {
+                        ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
+                        Setup_Save_Button_Check();
+                    }
                     RestartRequired = true;
                 }
             }
@@ -646,120 +686,166 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ButtonsColorSet(Button_Game_Verify_Files, 0, false);
             }
 
-            if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "1" : "0"))
+            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
             {
-                Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "1" : "0";
-
-                if (Save_Settings.Live_Data.Launcher_Proxy == "1" && InformationCache.SelectedServerEnforceProxy)
+                /* TODO null check */
+                if (ComboBox_Language_List.SelectedItem != null && !string.IsNullOrWhiteSpace(((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini))
                 {
-                    MessageBox.Show(null, ServerListUpdater.ServerName("Settings") + " requires Proxy to be Enabled." +
-                            "\nThe launcher will turn on Proxy, even if you have chosen to Disable it",
+                    Save_Settings.Live_Data.Launcher_Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini;
+                    XML_File.XML_Settings_Data.Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_XML;
+
+                    /* TODO: Inform player about custom languagepack used. */
+                    if (((Json_List_Language)ComboBox_Language_List.SelectedItem).Category == "Custom")
+                    {
+                        MessageBox.Show(null, "Please Note: If a Server does not provide a Language Pack, it will fallback to English Language Pack instead.",
                             "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
 
-            if (Save_Settings.Live_Data.Launcher_Proxy_Port != NumericUpDown_Proxy_Port.Value.ToStringInvariant())
-            {
-                Save_Settings.Live_Data.Launcher_Proxy_Port = NumericUpDown_Proxy_Port.Value.ToStringInvariant();
-            }
+                        if (!Directory.Exists(Save_Settings.Live_Data.Game_Path + "/scripts"))
+                        {
+                            try { Directory.CreateDirectory(Save_Settings.Live_Data.Game_Path + "/scripts"); }
+                            catch { }
+                        }
 
-            if (Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP != (CheckBox_Host_to_IP.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP = CheckBox_Host_to_IP.Checked ? "1" : "0";
-            }
+                        if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
+                        {
+                            try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
+                            catch { }
+                        }
 
-            if (Save_Settings.Live_Data.Launcher_Proxy_Domain != (CheckBox_Proxy_Domain.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_Proxy_Domain = CheckBox_Proxy_Domain.Checked ? "1" : "0";
-            }
-
-            if (Save_Settings.Live_Data.Launcher_Discord_Presence != (CheckBox_RPC.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "1" : "0";
-            }
-
-            if ((Save_Settings.Live_Data.Launcher_Insider != (CheckBox_Opt_Insider.Checked ? "1" : "0")) && 
-                !Insider_Settings_Lock && !EnableInsiderDeveloper.Allowed())
-            {
-                EnableInsiderBetaTester.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
-                RestartRequired = true;
-            }
-
-            if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_Theme_Support = CheckBox_Theme_Support.Checked ? "1" : "0";
-                RestartRequired = true;
-            }
-
-            if (Save_Settings.Live_Data.Launcher_WebClient_Method != (CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient"))
-            {
-                Save_Settings.Live_Data.Launcher_WebClient_Method = CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient";
-                Launcher_Value.Launcher_Alternative_Webcalls(Save_Settings.Live_Data.Launcher_WebClient_Method == "WebClient");
-            }
-
-            if (Save_Settings.Live_Data.Launcher_Display_Timer != Display_Timer_Button_Selection())
-            {
-                Save_Settings.Live_Data.Launcher_Display_Timer = Display_Timer_Button_Selection();
-            }
-
-            if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
-            {
-                Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = NumericUpDown_WebClient_Timeout.Value.ToString();
-
-                if (NumericUpDown_WebClient_Timeout.Value > 0)
-                {
-                    Launcher_Value.Launcher_WebCall_Timeout_Enable = true;
-                }
-                else
-                {
-                    Launcher_Value.Launcher_WebCall_Timeout_Enable = false;
-                }
-            }
-
-            if (Save_Settings.Live_Data.Launcher_LZMA_Downloader != (CheckBox_LZMA_Downloader.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_LZMA_Downloader = CheckBox_LZMA_Downloader.Checked ? "1" : "0";
-                Stop_and_Restart_Downloader = true;
-            }
-
-            if (Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache != (CheckBox_JSON_Update_Cache.Checked ? "1" : "0"))
-            {
-                Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache = CheckBox_JSON_Update_Cache.Checked ? "1" : "0";
-            }
-
-            try
-            {
-                /* Actually lets check those 2 files */
-                if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords") && File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
-                {
-                    File.Delete(Save_Settings.Live_Data.Game_Path + "/profwords_dis");
-                }
-
-                /* Delete/Enable profwords filter here */
-                if (CheckBox_Word_Filter_Check.Checked)
-                {
-                    if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords"))
+                        try
+                        {
+                            Ini_File LanguagePickerFile = new Ini_File(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini");
+                            LanguagePickerFile.Key_Write("Language", ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini);
+                        }
+                        catch { }
+                    }
+                    /* Delete Custom Settings.ini for LangPicker.asi module */
+                    else if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
                     {
-                        File.Move(Save_Settings.Live_Data.Game_Path + "/profwords", Save_Settings.Live_Data.Game_Path + "/profwords_dis");
+                        try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
+                        catch { }
                     }
                 }
-                else
+
+                if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "1" : "0"))
                 {
-                    if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
+                    Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "1" : "0";
+
+                    if (Save_Settings.Live_Data.Launcher_Proxy == "1" && InformationCache.SelectedServerEnforceProxy)
                     {
-                        File.Move(Save_Settings.Live_Data.Game_Path + "/profwords_dis", Save_Settings.Live_Data.Game_Path + "/profwords");
+                        MessageBox.Show(null, ServerListUpdater.ServerName("Settings") + " requires Proxy to be Enabled." +
+                                "\nThe launcher will turn on Proxy, even if you have chosen to Disable it",
+                                "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-            }
-            catch (Exception Error)
-            {
-                LogToFileAddons.OpenLog("SETTINGS SAVE [Profwords]", string.Empty, Error, string.Empty, true);
+
+                if (Save_Settings.Live_Data.Launcher_Proxy_Port != NumericUpDown_Proxy_Port.Value.ToStringInvariant())
+                {
+                    Save_Settings.Live_Data.Launcher_Proxy_Port = NumericUpDown_Proxy_Port.Value.ToStringInvariant();
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP != (CheckBox_Host_to_IP.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP = CheckBox_Host_to_IP.Checked ? "1" : "0";
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Proxy_Domain != (CheckBox_Proxy_Domain.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Proxy_Domain = CheckBox_Proxy_Domain.Checked ? "1" : "0";
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Discord_Presence != (CheckBox_RPC.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "1" : "0";
+                }
+
+                if ((Save_Settings.Live_Data.Launcher_Insider != (CheckBox_Opt_Insider.Checked ? "1" : "0")) &&
+    !Insider_Settings_Lock && !EnableInsiderDeveloper.Allowed())
+                {
+                    EnableInsiderBetaTester.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
+                    RestartRequired = true;
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Theme_Support = CheckBox_Theme_Support.Checked ? "1" : "0";
+                    RestartRequired = true;
+                }
+
+                if (Save_Settings.Live_Data.Launcher_WebClient_Method != (CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient"))
+                {
+                    Save_Settings.Live_Data.Launcher_WebClient_Method = CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient";
+                    Launcher_Value.Launcher_Alternative_Webcalls(Save_Settings.Live_Data.Launcher_WebClient_Method == "WebClient");
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Display_Timer != Display_Timer_Button_Selection())
+                {
+                    Save_Settings.Live_Data.Launcher_Display_Timer = Display_Timer_Button_Selection();
+                }
+
+                if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
+                {
+                    Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = NumericUpDown_WebClient_Timeout.Value.ToString();
+
+                    if (NumericUpDown_WebClient_Timeout.Value > 0)
+                    {
+                        Launcher_Value.Launcher_WebCall_Timeout_Enable = true;
+                    }
+                    else
+                    {
+                        Launcher_Value.Launcher_WebCall_Timeout_Enable = false;
+                    }
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Game_Downloader != GameDownloaderButtonSelection())
+                {
+                    Save_Settings.Live_Data.Launcher_Game_Downloader = GameDownloaderButtonSelection();
+                    Stop_and_Restart_Downloader = true;
+                }
+
+                if (Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache != (CheckBox_JSON_Update_Cache.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache = CheckBox_JSON_Update_Cache.Checked ? "1" : "0";
+                }
+
+                try
+                {
+                    /* Actually lets check those 2 files */
+                    if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords") && File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
+                    {
+                        File.Delete(Save_Settings.Live_Data.Game_Path + "/profwords_dis");
+                    }
+
+                    /* Delete/Enable profwords filter here */
+                    if (CheckBox_Word_Filter_Check.Checked)
+                    {
+                        if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords"))
+                        {
+                            File.Move(Save_Settings.Live_Data.Game_Path + "/profwords", Save_Settings.Live_Data.Game_Path + "/profwords_dis");
+                        }
+                    }
+                    else
+                    {
+                        if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
+                        {
+                            File.Move(Save_Settings.Live_Data.Game_Path + "/profwords_dis", Save_Settings.Live_Data.Game_Path + "/profwords");
+                        }
+                    }
+                }
+                catch (Exception Error)
+                {
+                    LogToFileAddons.OpenLog("SETTINGS SAVE [Profwords]", string.Empty, Error, string.Empty, true);
+                }
             }
 
             /* Save Settings */
             Save_Settings.Save();
             XML_File.Save(1);
-            Button_Save.Text = "SAVED";
+
+            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
+            {
+                Button_Save.Text = "SAVED";
+            }
 
             if (RestartRequired)
             {
@@ -767,7 +853,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (Stop_and_Restart_Downloader)
+            if (Stop_and_Restart_Downloader && Parent_Screen.Launcher_Setup.Equals(0))
             {
                 try
                 {
@@ -808,12 +894,21 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     });
                 }
             }
+            Parent_Screen.Launcher_Setup = 0;
+            Close();
         }
 
         /* Settings Cancel */
         private void SettingsCancel_Click(object sender, EventArgs e)
         {
-            Close();
+            if (Parent_Screen.Launcher_Setup.Equals(1))
+            {
+                TabControl_Shared_Hub.SelectedTab = TabPage_Setup;
+            }
+            else
+            {
+                Close();
+            }
         }
 
         /* Settings UserSettings XML Editor */
@@ -905,6 +1000,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
         }
 
+        /* Switch Tabs */
+        private void Button_Change_Tabs_Click(object sender, EventArgs e)
+        {
+            TabControl_Shared_Hub.SelectedTab = TabPage_Settings;
+        }
+
         /* Settings Clear Old Launcher Logs */
         private void SettingsClearLauncherLogsButton_Click(object sender, EventArgs e)
         {
@@ -936,6 +1037,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /* Settings Change Game Files Location */
         private void SettingsGameFiles_Click(object sender, EventArgs e)
         {
+            DialogResult Status_Dialog_Result = default;
 #if !(RELEASE_UNIX || DEBUG_UNIX)
             OpenFileDialog changeGameFilesPath = new OpenFileDialog
             {
@@ -948,24 +1050,34 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 FileName = "   Select Game Files Folder"
             };
 
-            if (changeGameFilesPath.ShowDialog() == DialogResult.OK)
+            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog()) == DialogResult.OK)
             {
                 NewGameFilesPath = Path.GetDirectoryName(changeGameFilesPath.FileName) ?? "Invalid Folder Path";
-                Label_Game_Current_Path.Text = "NEW DIRECTORY";
-                LinkLabel_Game_Path.Text = NewGameFilesPath;
+                Label_Game_Current_Path_Setup.Text = Label_Game_Current_Path.Text = "NEW DIRECTORY";
+                LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = NewGameFilesPath;
             }
 
             changeGameFilesPath.Dispose();
 #else
             FolderBrowserDialog changeGameFilesPath = new FolderBrowserDialog();
 
-            if (changeGameFilesPath.ShowDialog() == DialogResult.OK)
+            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog()) == DialogResult.OK)
             {
                 NewGameFilesPath = Path.GetFullPath(changeGameFilesPath.SelectedPath);
-                Label_Game_Current_Path.Text = "NEW DIRECTORY";
-                LinkLabel_Game_Path.Text = NewGameFilesPath;
+                Label_Game_Current_Path_Setup.Text = Label_Game_Current_Path.Text = "NEW DIRECTORY";
+                LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = NewGameFilesPath;
             }
 #endif
+            if (Parent_Screen.Launcher_Setup.Equals(1) && (Status_Dialog_Result == DialogResult.OK))
+            {
+                ButtonsColorSet(Button_Change_Game_Path, 1, true);
+                ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
+
+                if (!string.IsNullOrWhiteSpace(New_Choosen_CDN))
+                {
+                    ButtonsColorSet(Button_Save_Setup, 0, true);
+                }
+            }
         }
 
         /* Settings Open Current CDN in Browser */
@@ -1025,10 +1137,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
             catch { }
         }
-#endregion
-#endregion
-#region Theme, Text, and Function Setter
-#region Draw and Regular Events
+        #endregion
+        #endregion
+        #region Theme, Text, and Function Setter
+        #region Draw and Regular Events
         /// <summary>
         /// Sets the Category for the Language Drop Down Menu with its set of Colors
         /// </summary>
@@ -1085,17 +1197,17 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             catch { }
             finally
             {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+                GC.Collect();
+#endif
             }
         }
         private void DropDownMenu_MouseWheel(object sender, MouseEventArgs e)
         {
             ((HandledMouseEventArgs)e).Handled = true;
         }
-#endregion
-#region Buttons and API
+        #endregion
+        #region Buttons and API
         /* DavidCarbon */
         private void PingAPIStatus()
         {
@@ -1107,13 +1219,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 Label_API_Status_One.ForeColor = Color_Text.S_Warning;
-                if (VisualsAPIChecker.UnitedSL && !VisualsAPIChecker.UnitedCDNL) 
+                if (VisualsAPIChecker.UnitedSL && !VisualsAPIChecker.UnitedCDNL)
                 {
-                    Label_API_Status_One.Text = "[API] United: Server List Only"; 
+                    Label_API_Status_One.Text = "[API] United: Server List Only";
                 }
-                else if (!VisualsAPIChecker.UnitedSL && VisualsAPIChecker.UnitedCDNL) 
-                { 
-                    Label_API_Status_One.Text = "[API] United: CDN List Only"; 
+                else if (!VisualsAPIChecker.UnitedSL && VisualsAPIChecker.UnitedCDNL)
+                {
+                    Label_API_Status_One.Text = "[API] United: CDN List Only";
                 }
                 else
                 {
@@ -1131,13 +1243,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 Label_API_Status_Two.ForeColor = Color_Text.S_Warning;
-                if (VisualsAPIChecker.CarbonSL && !VisualsAPIChecker.CarbonCDNL) 
-                { 
-                    Label_API_Status_Two.Text = "[API] Carbon: Server List Only"; 
+                if (VisualsAPIChecker.CarbonSL && !VisualsAPIChecker.CarbonCDNL)
+                {
+                    Label_API_Status_Two.Text = "[API] Carbon: Server List Only";
                 }
-                else if (!VisualsAPIChecker.CarbonSL && VisualsAPIChecker.CarbonCDNL) 
-                { 
-                    Label_API_Status_Two.Text = "[API] Carbon: CDN List Only"; 
+                else if (!VisualsAPIChecker.CarbonSL && VisualsAPIChecker.CarbonCDNL)
+                {
+                    Label_API_Status_Two.Text = "[API] Carbon: CDN List Only";
                 }
                 else
                 {
@@ -1155,13 +1267,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 Label_API_Status_Three.ForeColor = Color_Text.S_Warning;
-                if (VisualsAPIChecker.CarbonTwoSL && !VisualsAPIChecker.CarbonTwoCDNL) 
-                { 
-                    Label_API_Status_Three.Text = "[API] Carbon (2nd): Server List Only"; 
+                if (VisualsAPIChecker.CarbonTwoSL && !VisualsAPIChecker.CarbonTwoCDNL)
+                {
+                    Label_API_Status_Three.Text = "[API] Carbon (2nd): Server List Only";
                 }
-                else if (!VisualsAPIChecker.CarbonTwoSL && VisualsAPIChecker.CarbonTwoCDNL) 
-                { 
-                    Label_API_Status_Three.Text = "[API] Carbon (2nd): CDN List Only"; 
+                else if (!VisualsAPIChecker.CarbonTwoSL && VisualsAPIChecker.CarbonTwoCDNL)
+                {
+                    Label_API_Status_Three.Text = "[API] Carbon (2nd): CDN List Only";
                 }
                 else
                 {
@@ -1337,7 +1449,32 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Button_Exit.Image = Image_Button.Grey_Hover;
             }
         }
-#endregion
+
+        private void ButtonClose_Click(object sender, EventArgs e)
+        {
+            if (Parent_Screen.Launcher_Setup.Equals(1))
+            {
+                Parent_Screen.Launcher_Setup = -1;
+            }
+
+            Close();
+        }
+
+        private void ButtonClose_MouseDown(object sender, EventArgs e)
+        {
+            Button_Close.BackgroundImage = Image_Icon.Close_Click;
+        }
+
+        private void ButtonClose_MouseEnter(object sender, EventArgs e)
+        {
+            Button_Close.BackgroundImage = Image_Icon.Close_Hover;
+        }
+
+        private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
+        {
+            Button_Close.BackgroundImage = Image_Icon.Close;
+        }
+        #endregion
         /// <summary>
         /// Sets the Button, Image, Text, and Fonts. Enables/Disables Certain Elements of the Screen for Certain Platforms. Also contains functions that act as helper functions
         /// </summary>
@@ -1365,7 +1502,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             New_Choosen_CDN = LinkLabel_CDN_Current.Text = Save_Settings.Live_Data.Launcher_CDN;
             LinkLabel_Game_Path.Text = Save_Settings.Live_Data.Game_Path;
             LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
-            Label_Version_Build.Text = "Version: " + Application.ProductVersion;
+            TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
 
             /*******************************/
             /* Set Font                     /
@@ -1380,14 +1517,15 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
             Button_Security_Center.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_About.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_Verify_Files.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_CDN.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_GameFiles_Downloader.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             ComboBox_Language_List.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
             Button_CDN_List.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Launcher_logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -1399,13 +1537,15 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Alt_WebCalls.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_Opt_Insider.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_Theme_Support.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_LZMA_Downloader.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_JSON_Update_Cache.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_Host_to_IP.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_Proxy_Domain.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -1423,7 +1563,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_API_Status_Three.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Four.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Five.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Version_Build.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Version_Build_About.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Exit.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Theme_Name.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -1436,8 +1576,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /********************************/
 
             /* Buttons */
-            ButtonsColorSet(Button_Change_Game_Path, 0, true);
-            ButtonsColorSet(Button_About, 0, true);
+            ButtonsColorSet(Button_Change_Game_Path, Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0, true);
+            ButtonsColorSet(Button_Change_Game_Path_Setup, Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_Game_Verify_Files, 0, false);
             ButtonsColorSet(Button_Game_User_Settings, 0, true);
             ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
@@ -1445,8 +1585,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
             ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
             ButtonsColorSet(Button_Security_Center, 0, true);
-            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.CarbonAPITwo() ? 0 : 4, true);
+            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0): 4, true);
+            ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
             ButtonsColorSet(Button_Console_Submit, 1, true);
+            ButtonsColorSet(Button_Save_Setup, 4, false);
+            ButtonsColorSet(Button_Change_Tabs, 0, true);
 
             /* Label Links */
             LinkLabel_Game_Path.LinkColor = Color_Winform_Other.Link_Settings;
@@ -1461,7 +1604,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
             Label_CDN_Current.ForeColor = Color_Text.L_Five;
             Label_Launcher_Path.ForeColor = Color_Text.L_Five;
-            Label_CDN.ForeColor = Color_Text.L_Five;
+            Label_GameFiles_Downloader.ForeColor = Color_Text.L_Five;
             Label_Game_Settings.ForeColor = Color_Text.L_Five;
             Label_API_Status.ForeColor = Color_Text.L_Five;
             Label_Display_Timer.ForeColor = Color_Text.L_Five;
@@ -1490,9 +1633,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_Static_Timer.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_Dynamic_Timer.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_No_Timer.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_Raw.ForeColor = Color_Winform.Text_Fore_Color;
 
             /* Bottom Left */
-            Label_Version_Build.ForeColor = Color_Text.L_Five;
+            Label_Version_Build_About.ForeColor = Color_Text.L_Five;
             Label_Theme_Name.ForeColor = Color_Text.L_Five;
             Label_Theme_Author.ForeColor = Color_Text.L_Five;
 
@@ -1504,6 +1650,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             Input_Console.BackColor = Color_Winform_Other.Input;
             Input_Console.ForeColor = Color_Text.L_Five;
+
+            /* Secondary Buttons */
+            Button_Close.BackgroundImage = Image_Icon.Close;
 
             /*******************************/
             /* Load CDN List                /
@@ -1539,18 +1688,28 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Input_Console.KeyDown += new KeyEventHandler(Console_Quick_Send);
             Button_Console_Submit.Click += new EventHandler(Console_Enter);
             Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
+            Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_Security_Center.Click += new EventHandler(Button_Security_Center_Click);
             Button_Game_Verify_Files.Click += new EventHandler(Button_Game_Verify_Files_Click);
             Button_Save.Click += new EventHandler(SettingsSave_Click);
+            Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
             Button_Exit.Click += new EventHandler(SettingsCancel_Click);
             Button_Game_User_Settings.Click += new EventHandler(SettingsUEditorButton_Click);
             Button_Clear_Server_Mods.Click += new EventHandler(SettingsClearServerModCacheButton_Click);
             Button_Clear_NFSWO_Logs.Click += new EventHandler(SettingsClearCommunicationLogButton_Click);
             Button_Clear_Crash_Logs.Click += new EventHandler(SettingsClearCrashLogsButton_Click);
-            Button_About.Click += new EventHandler(SettingsAboutButton_Click);
-            Label_Version_Build.Click += new EventHandler(Label_Version_Build_Click);
+            Label_Version_Build_About.Click += new EventHandler(Label_Version_Build_Click);
             Button_Change_Game_Path.Click += new EventHandler(SettingsGameFiles_Click);
+            Button_Change_Game_Path_Setup.Click += new EventHandler(SettingsGameFiles_Click);
             Button_Launcher_logs.Click += new EventHandler(SettingsClearLauncherLogsButton_Click);
+
+            Button_Change_Tabs.Click += new EventHandler(Button_Change_Tabs_Click);
+            /* Close */
+            Button_Close.MouseEnter += new EventHandler(ButtonClose_MouseEnter);
+            Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
+            Button_Close.MouseUp += new MouseEventHandler(ButtonClose_MouseLeaveANDMouseUp);
+            Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
+            Button_Close.Click += new EventHandler(ButtonClose_Click);
 
             LinkLabel_Launcher_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsLauncherPathCurrent_LinkClicked);
             LinkLabel_CDN_Current.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsCDNCurrent_LinkClicked);
@@ -1587,8 +1746,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /*******************************/
 
             ToolTip_Hover.SetToolTip(Button_Change_Game_Path, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
+            ToolTip_Hover.SetToolTip(Button_Change_Game_Path_Setup, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
             ToolTip_Hover.SetToolTip(Button_Game_Verify_Files, "Checks and Restores GameFiles back to \"Stock\"");
             ToolTip_Hover.SetToolTip(Button_CDN_List, "Download Location for Fetching the base GameFiles\n" +
+                "Can also be a Soruce for VerifyHash to get replacement files");
+            ToolTip_Hover.SetToolTip(Button_CDN_List_Setup, "Download Location for Fetching the base GameFiles\n" +
                 "Can also be a Soruce for VerifyHash to get replacement files");
             ToolTip_Hover.SetToolTip(ComboBox_Language_List, "Controls the In-Game Lanuguage setting\n" +
                 "This also includes setting the Default Chat joined In-Game");
@@ -1629,18 +1791,57 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 PingSavedCDN();
                 PingAPIStatus();
             };
-        }
-#endregion
 
-        public static void Clear_Hide_Screen_Form_Panel()
-        {
-            Screen_Panel_Forms.Controls.Clear();
-            Screen_Panel_Forms.Visible = false;
-            if (Parent_Screen.Screen_Instance != null)
+            Picture_Logo.BackgroundImage = Image_Other.Logo;
+
+            BackColor = Color_Winform_About.BG_Fore_Color;
+            ForeColor = Color_Winform_About.Text_Fore_Color;
+
+            /* Tabs Global Background Color */
+            TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = Color.FromArgb(22, 29, 38);
+            /* Tabs (Menu) Text Color */
+            TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = Color.FromArgb(192, 192, 192);
+            /* Tabs Current Selected & Hover Menu Tab */
+            TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
+            /* Tabs Other Menu Tab */
+            TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = Color.FromArgb(44, 58, 76);
+            /* */
+            TabControl_Shared_Hub.TabsHide = true;
+            /* */
+            Button_Save.DialogResult = DialogResult.OK;
+            Button_Exit.DialogResult = DialogResult.Cancel;
+
+            if (Parent_Screen.Launcher_Setup.Equals(1))
             {
-                Parent_Screen.Screen_Instance.Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
+                Button_Exit.Text = "Basic";
+            }
+            else
+            {
+                /* */
+                ((Control)TabPage_Setup).Enabled = false;
             }
         }
+
+        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            // Set Border header  
+            e.Graphics.FillRectangle(new SolidBrush(Color.FromArgb(45, 45, 45)), e.Bounds);
+            Rectangle paddedBounds = e.Bounds;
+            paddedBounds.Inflate(-2, -2);
+            e.Graphics.DrawString(TabControl_Settings.TabPages[e.Index].Text, this.Font, SystemBrushes.ButtonHighlight, paddedBounds);
+
+            //set  Tabcontrol border  
+            Graphics g = e.Graphics;
+            Pen p = new Pen(Color.FromArgb(45, 45, 45), 10);
+            g.DrawRectangle(p, TabPage_Launcher.Bounds);
+        }
+
+        private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
+        {
+            e.Cancel = !((Control)e.TabPage).Enabled;
+        }
+
+        #endregion
 
 #pragma warning disable CS8618
         public Screen_Settings()
@@ -1659,9 +1860,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     ToolTip_Hover.Dispose();
                 }
 
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+                GC.Collect();
+#endif
 
                 if (Screen_Main.Screen_Instance != default)
                 {
@@ -1671,7 +1872,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Screen_Instance = default;
             };
             Screen_Instance = this;
-            Screen_Panel_Forms = Panel_Form_Screens;
 
             Presence_Launcher.Status(22);
         }

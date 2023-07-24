@@ -127,7 +127,7 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                                     string[] Queue_Local_Server_Info = QueueContent.Split(new string[] { "_|||_" }, StringSplitOptions.None);
 
                                     int serverid = Convert.ToInt32(Queue_Local_Server_Info[0]) - 1;
-                                    string serverurl = Queue_Local_Server_Info[1];
+                                    string serverurl = Queue_Local_Server_Info[1].EndsWith("/") ? Queue_Local_Server_Info[1].TrimEnd('/') : Queue_Local_Server_Info[1];
 
                                     try
                                     {
@@ -404,16 +404,20 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                 {
                     switch (Screen_Mode_Update)
                     {
-                        case 1:
-                            LogToFileAddons.Parent_Log_Screen(0, "LAUNCHER", "Selected CDN: " + Selected_CDN.Name);
-                            Save_Settings.Live_Data.Launcher_CDN = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
-                            Save_Settings.Save();
-                            Screen_Welcome.Screen_Instance.Button_Save.Visible = true;
-                            break;
                         case 2:
-                            Screen_Settings.Screen_Instance.Label_CDN_Current.Text = "NEW SELECTED CDN:";
-                            Screen_Settings.Screen_Instance.LinkLabel_CDN_Current.Text = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
-                            Screen_Settings.Screen_Instance.New_Choosen_CDN = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
+                            if (Parent_Screen.Launcher_Setup.Equals(1))
+                            {
+                                LogToFileAddons.Parent_Log_Screen(0, "LAUNCHER", "Selected CDN: " + Selected_CDN.Name);
+                            }
+
+                            if (Screen_Settings.Screen_Instance != default)
+                            {
+                                Screen_Settings.Screen_Instance.Label_CDN_Current_Setup.Text = Screen_Settings.Screen_Instance.Label_CDN_Current.Text = "NEW SELECTED CDN:";
+                                Screen_Settings.Screen_Instance.LinkLabel_CDN_Current_Setup.Text = Screen_Settings.Screen_Instance.LinkLabel_CDN_Current.Text = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
+                                Screen_Settings.Screen_Instance.New_Choosen_CDN = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
+                                Screen_Settings.ButtonsColorSet(Screen_Settings.Screen_Instance.Button_CDN_List, 1, true);
+                                Screen_Settings.ButtonsColorSet(Screen_Settings.Screen_Instance.Button_CDN_List_Setup, 1, true);
+                            }
                             break;
                         default:
                             Save_Settings.Live_Data.Launcher_CDN = Selected_CDN.Url.EndsWith("/") ? Selected_CDN.Url.TrimEnd('/') : Selected_CDN.Url;
