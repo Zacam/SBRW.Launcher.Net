@@ -1514,63 +1514,88 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             float MainFontSize = 9f;
             float SecondaryFontSize = 8f;
 #endif
-
+            /* General */
             Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
+
+            Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* */
             Button_Security_Center.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_Verify_Files.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_GameFiles_Downloader.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             ComboBox_Language_List.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
-            Button_CDN_List.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Launcher_logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_NFSWO_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            CheckBox_Word_Filter_Check.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Proxy.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_RPC.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Alt_WebCalls.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            
+
+            
+
             CheckBox_Opt_Insider.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Theme_Support.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_JSON_Update_Cache.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Host_to_IP.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Proxy_Domain.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_GameFiles_Downloader_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            NumericUpDown_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            NumericUpDown_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Game_Current_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            LinkLabel_Game_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_CDN_Current.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            LinkLabel_CDN_Current.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Launcher_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            LinkLabel_Launcher_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+
+            #region FONT: Setup Tab
+            /* Setup Tab */
+            Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            #endregion
+            #region FONT: Settings Tab
+            /* Global */
+            Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Exit.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            #region FONT: Launcher Tab
+            /* About Tab */
+            Label_Version_Build_About.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Theme_Name.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Theme_Author.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* API Tab */
             Label_API_Status.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_API_Status_One.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Two.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Three.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Four.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Five.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Version_Build_About.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_Exit.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Theme_Name.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Theme_Author.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* Downloader Tab */
+            CheckBox_Alt_WebCalls.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Alt_WebCalls_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_WebClient_Timeout_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            NumericUpDown_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_CDN_Current.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_CDN_Current_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            LinkLabel_CDN_Current.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Button_CDN_List.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Label_GameFiles_Downloader.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_GameFiles_Downloader_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_GameFiles_Downloader_LZMA.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_GameFiles_Downloader_Pack.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Radio_Button_GameFiles_Downloader_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             /* Proxy Tab */
+            CheckBox_Proxy.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_Host_to_IP.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_Proxy_Domain.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            NumericUpDown_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Logging.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Logging_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Proxy_Logging_All.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
@@ -1583,6 +1608,32 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_Proxy_Logging_Requests.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Proxy_Logging_Responses.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Proxy_Logging_None.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* Miscellaneous */
+            CheckBox_RPC.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_JSON_Update_Cache.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_Theme_Support.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Launcher_Builds_Branch.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Launcher_Builds_Branch_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Launcher_Builds_Branch_Stable.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Launcher_Builds_Branch_Beta.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Launcher_Builds_Branch_Developer.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Radio_Button_Launcher_Builds_Branch_Stable.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Launcher_Builds_Branch_Beta.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Launcher_Builds_Branch_Developer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Launcher_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            LinkLabel_Launcher_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            #endregion
+            #region FONT: Game Tab
+            Label_Game_Current_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            LinkLabel_Game_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+
+            Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_Word_Filter_Check.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            #endregion
+            #endregion
 
             /********************************/
             /* Set Theme Colors & Images     /
@@ -1811,13 +1862,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ForeColor = Color_Winform_About.Text_Fore_Color;
 
             /* Tabs Global Background Color */
-            TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = Color.FromArgb(22, 29, 38);
+            TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = TabControl_Game.BackColor = TabControl_Security_Center.BackColor = Color.FromArgb(22, 29, 38);
             /* Tabs (Menu) Text Color */
-            TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = Color.FromArgb(192, 192, 192);
+            TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = TabControl_Game.ForeColor = TabControl_Security_Center.ForeColor = Color.FromArgb(192, 192, 192);
             /* Tabs Current Selected & Hover Menu Tab */
-            TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
+            TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = TabControl_Game.SelectedTabColor = TabControl_Security_Center.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
             /* Tabs Other Menu Tab */
-            TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = Color.FromArgb(44, 58, 76);
+            TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = TabControl_Game.TabColor = TabControl_Security_Center.TabColor = Color.FromArgb(44, 58, 76);
             /* */
             TabControl_Shared_Hub.TabsHide = true;
             /* */
