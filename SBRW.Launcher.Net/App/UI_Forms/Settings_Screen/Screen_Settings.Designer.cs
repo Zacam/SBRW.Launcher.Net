@@ -54,16 +54,16 @@
             this.TabPage_Launcher = new System.Windows.Forms.TabPage();
             this.TabControl_Launcher = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Downloader = new System.Windows.Forms.TabPage();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.Panel_Game_Downloader = new System.Windows.Forms.Panel();
-            this.Radio_Button_LZMA = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_SBRW_Pack = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Raw = new System.Windows.Forms.RadioButton();
+            this.Label_GameFiles_Downloader_Raw = new System.Windows.Forms.Label();
+            this.Label_GameFiles_Downloader_Pack = new System.Windows.Forms.Label();
+            this.Label_GameFiles_Downloader_LZMA = new System.Windows.Forms.Label();
+            this.Panel_GameFiles_Downloader = new System.Windows.Forms.Panel();
+            this.Radio_Button_GameFiles_Downloader_LZMA = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_GameFiles_Downloader_Raw = new System.Windows.Forms.RadioButton();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
+            this.Label_GameFiles_Downloader_Details = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.Label_CDN_Current = new System.Windows.Forms.Label();
             this.Button_CDN_List = new System.Windows.Forms.Button();
@@ -80,15 +80,15 @@
             this.CheckBox_Proxy_Domain = new System.Windows.Forms.CheckBox();
             this.CheckBox_Host_to_IP = new System.Windows.Forms.CheckBox();
             this.TabPage_Launcher_Miscellaneous = new System.Windows.Forms.TabPage();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.Panel_Launcher_Builds = new System.Windows.Forms.Panel();
-            this.Radio_Button_Stable = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Beta = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Developer = new System.Windows.Forms.RadioButton();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
+            this.Label_Launcher_Builds_Branch_Developer = new System.Windows.Forms.Label();
+            this.Label_Launcher_Builds_Branch_Beta = new System.Windows.Forms.Label();
+            this.Label_Launcher_Builds_Branch_Stable = new System.Windows.Forms.Label();
+            this.Panel_Launcher_Builds_Branch = new System.Windows.Forms.Panel();
+            this.Radio_Button_Launcher_Builds_Branch_Stable = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Launcher_Builds_Branch_Beta = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Launcher_Builds_Branch_Developer = new System.Windows.Forms.RadioButton();
+            this.Label_Launcher_Builds_Branch_Details = new System.Windows.Forms.Label();
+            this.Label_Launcher_Builds_Branch = new System.Windows.Forms.Label();
             this.CheckBox_RPC = new System.Windows.Forms.CheckBox();
             this.LinkLabel_Launcher_Path = new System.Windows.Forms.LinkLabel();
             this.CheckBox_JSON_Update_Cache = new System.Windows.Forms.CheckBox();
@@ -137,6 +137,19 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
+            this.Label_Proxy_Logging_Requests = new System.Windows.Forms.Label();
+            this.Label_Proxy_Logging_Errors = new System.Windows.Forms.Label();
+            this.Label_Proxy_Logging_All = new System.Windows.Forms.Label();
+            this.Panel_Proxy_Logging = new System.Windows.Forms.Panel();
+            this.Radio_Button_Proxy_Logging_All = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Proxy_Logging_Errors = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Proxy_Logging_Requests = new System.Windows.Forms.RadioButton();
+            this.Label_Proxy_Logging_Details = new System.Windows.Forms.Label();
+            this.Label_Proxy_Logging = new System.Windows.Forms.Label();
+            this.Radio_Button_Proxy_Logging_Responses = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Proxy_Logging_None = new System.Windows.Forms.RadioButton();
+            this.Label_Proxy_Logging_None = new System.Windows.Forms.Label();
+            this.Label_Proxy_Logging_Responses = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -145,12 +158,12 @@
             this.TabPage_Launcher.SuspendLayout();
             this.TabControl_Launcher.SuspendLayout();
             this.TabPage_Downloader.SuspendLayout();
-            this.Panel_Game_Downloader.SuspendLayout();
+            this.Panel_GameFiles_Downloader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_WebClient_Timeout)).BeginInit();
             this.TabPage_Proxy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).BeginInit();
             this.TabPage_Launcher_Miscellaneous.SuspendLayout();
-            this.Panel_Launcher_Builds.SuspendLayout();
+            this.Panel_Launcher_Builds_Branch.SuspendLayout();
             this.TabPage_Game.SuspendLayout();
             this.Panel_Display_Timer.SuspendLayout();
             this.TabPage_API.SuspendLayout();
@@ -159,6 +172,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
+            this.Panel_Proxy_Logging.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -313,7 +327,7 @@
             // 
             this.Label_Version.BackColor = System.Drawing.Color.Transparent;
             this.Label_Version.ForeColor = System.Drawing.Color.Black;
-            this.Label_Version.Location = new System.Drawing.Point(348, 356);
+            this.Label_Version.Location = new System.Drawing.Point(349, 405);
             this.Label_Version.Name = "Label_Version";
             this.Label_Version.Size = new System.Drawing.Size(141, 12);
             this.Label_Version.TabIndex = 192;
@@ -323,9 +337,9 @@
             // Button_Save_Setup
             // 
             this.Button_Save_Setup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Save_Setup.Location = new System.Drawing.Point(14, 300);
+            this.Button_Save_Setup.Location = new System.Drawing.Point(696, 389);
             this.Button_Save_Setup.Name = "Button_Save_Setup";
-            this.Button_Save_Setup.Size = new System.Drawing.Size(190, 28);
+            this.Button_Save_Setup.Size = new System.Drawing.Size(133, 28);
             this.Button_Save_Setup.TabIndex = 191;
             this.Button_Save_Setup.Text = "Save";
             this.Button_Save_Setup.UseVisualStyleBackColor = true;
@@ -345,9 +359,9 @@
             // 
             this.Button_Change_Tabs.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Button_Change_Tabs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Change_Tabs.Location = new System.Drawing.Point(244, 300);
+            this.Button_Change_Tabs.Location = new System.Drawing.Point(515, 389);
             this.Button_Change_Tabs.Name = "Button_Change_Tabs";
-            this.Button_Change_Tabs.Size = new System.Drawing.Size(226, 28);
+            this.Button_Change_Tabs.Size = new System.Drawing.Size(160, 28);
             this.Button_Change_Tabs.TabIndex = 185;
             this.Button_Change_Tabs.Text = "Advanced";
             this.Button_Change_Tabs.UseVisualStyleBackColor = false;
@@ -443,13 +457,13 @@
             // 
             // TabPage_Downloader
             // 
-            this.TabPage_Downloader.Controls.Add(this.label13);
-            this.TabPage_Downloader.Controls.Add(this.label12);
-            this.TabPage_Downloader.Controls.Add(this.label11);
-            this.TabPage_Downloader.Controls.Add(this.Panel_Game_Downloader);
+            this.TabPage_Downloader.Controls.Add(this.Label_GameFiles_Downloader_Raw);
+            this.TabPage_Downloader.Controls.Add(this.Label_GameFiles_Downloader_Pack);
+            this.TabPage_Downloader.Controls.Add(this.Label_GameFiles_Downloader_LZMA);
+            this.TabPage_Downloader.Controls.Add(this.Panel_GameFiles_Downloader);
             this.TabPage_Downloader.Controls.Add(this.label10);
             this.TabPage_Downloader.Controls.Add(this.label9);
-            this.TabPage_Downloader.Controls.Add(this.label8);
+            this.TabPage_Downloader.Controls.Add(this.Label_GameFiles_Downloader_Details);
             this.TabPage_Downloader.Controls.Add(this.label7);
             this.TabPage_Downloader.Controls.Add(this.Label_CDN_Current);
             this.TabPage_Downloader.Controls.Add(this.Button_CDN_List);
@@ -467,96 +481,96 @@
             this.TabPage_Downloader.Text = "Downloader";
             this.TabPage_Downloader.UseVisualStyleBackColor = true;
             // 
-            // label13
+            // Label_GameFiles_Downloader_Raw
             // 
-            this.label13.BackColor = System.Drawing.Color.Transparent;
-            this.label13.ForeColor = System.Drawing.Color.DarkGray;
-            this.label13.Location = new System.Drawing.Point(237, 224);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(576, 18);
-            this.label13.TabIndex = 192;
-            this.label13.Text = "Downloads files indivdually.";
-            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_GameFiles_Downloader_Raw.BackColor = System.Drawing.Color.Transparent;
+            this.Label_GameFiles_Downloader_Raw.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_GameFiles_Downloader_Raw.Location = new System.Drawing.Point(237, 231);
+            this.Label_GameFiles_Downloader_Raw.Name = "Label_GameFiles_Downloader_Raw";
+            this.Label_GameFiles_Downloader_Raw.Size = new System.Drawing.Size(576, 18);
+            this.Label_GameFiles_Downloader_Raw.TabIndex = 192;
+            this.Label_GameFiles_Downloader_Raw.Text = "Downloads files indivdually.";
+            this.Label_GameFiles_Downloader_Raw.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label12
+            // Label_GameFiles_Downloader_Pack
             // 
-            this.label12.BackColor = System.Drawing.Color.Transparent;
-            this.label12.ForeColor = System.Drawing.Color.DarkGray;
-            this.label12.Location = new System.Drawing.Point(237, 200);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(576, 18);
-            this.label12.TabIndex = 191;
-            this.label12.Text = "Downloads a single large file and extracts it. Download can be resumed if needed." +
+            this.Label_GameFiles_Downloader_Pack.BackColor = System.Drawing.Color.Transparent;
+            this.Label_GameFiles_Downloader_Pack.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_GameFiles_Downloader_Pack.Location = new System.Drawing.Point(237, 207);
+            this.Label_GameFiles_Downloader_Pack.Name = "Label_GameFiles_Downloader_Pack";
+            this.Label_GameFiles_Downloader_Pack.Size = new System.Drawing.Size(576, 18);
+            this.Label_GameFiles_Downloader_Pack.TabIndex = 191;
+            this.Label_GameFiles_Downloader_Pack.Text = "Downloads a single large file and extracts it. Download can be resumed if needed." +
     "";
-            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_GameFiles_Downloader_Pack.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label11
+            // Label_GameFiles_Downloader_LZMA
             // 
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.ForeColor = System.Drawing.Color.DarkGray;
-            this.label11.Location = new System.Drawing.Point(237, 176);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(576, 18);
-            this.label11.TabIndex = 190;
-            this.label11.Text = "Downloads compressed files indivdually. Uses less bandwith.\r\n";
-            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_GameFiles_Downloader_LZMA.BackColor = System.Drawing.Color.Transparent;
+            this.Label_GameFiles_Downloader_LZMA.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_GameFiles_Downloader_LZMA.Location = new System.Drawing.Point(237, 183);
+            this.Label_GameFiles_Downloader_LZMA.Name = "Label_GameFiles_Downloader_LZMA";
+            this.Label_GameFiles_Downloader_LZMA.Size = new System.Drawing.Size(576, 18);
+            this.Label_GameFiles_Downloader_LZMA.TabIndex = 190;
+            this.Label_GameFiles_Downloader_LZMA.Text = "Downloads compressed files indivdually. Uses less bandwith.\r\n";
+            this.Label_GameFiles_Downloader_LZMA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Panel_Game_Downloader
+            // Panel_GameFiles_Downloader
             // 
-            this.Panel_Game_Downloader.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Game_Downloader.Controls.Add(this.Radio_Button_LZMA);
-            this.Panel_Game_Downloader.Controls.Add(this.Radio_Button_SBRW_Pack);
-            this.Panel_Game_Downloader.Controls.Add(this.Radio_Button_Raw);
-            this.Panel_Game_Downloader.Location = new System.Drawing.Point(9, 171);
-            this.Panel_Game_Downloader.Name = "Panel_Game_Downloader";
-            this.Panel_Game_Downloader.Size = new System.Drawing.Size(153, 77);
-            this.Panel_Game_Downloader.TabIndex = 189;
-            this.Panel_Game_Downloader.Tag = "SkidMarks";
+            this.Panel_GameFiles_Downloader.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_GameFiles_Downloader.Controls.Add(this.Radio_Button_GameFiles_Downloader_LZMA);
+            this.Panel_GameFiles_Downloader.Controls.Add(this.Radio_Button_GameFiles_Downloader_SBRW_Pack);
+            this.Panel_GameFiles_Downloader.Controls.Add(this.Radio_Button_GameFiles_Downloader_Raw);
+            this.Panel_GameFiles_Downloader.Location = new System.Drawing.Point(9, 178);
+            this.Panel_GameFiles_Downloader.Name = "Panel_GameFiles_Downloader";
+            this.Panel_GameFiles_Downloader.Size = new System.Drawing.Size(153, 77);
+            this.Panel_GameFiles_Downloader.TabIndex = 189;
+            this.Panel_GameFiles_Downloader.Tag = "SkidMarks";
             // 
-            // Radio_Button_LZMA
+            // Radio_Button_GameFiles_Downloader_LZMA
             // 
-            this.Radio_Button_LZMA.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_LZMA.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_LZMA.Location = new System.Drawing.Point(5, 5);
-            this.Radio_Button_LZMA.Name = "Radio_Button_LZMA";
-            this.Radio_Button_LZMA.Size = new System.Drawing.Size(80, 18);
-            this.Radio_Button_LZMA.TabIndex = 95;
-            this.Radio_Button_LZMA.TabStop = true;
-            this.Radio_Button_LZMA.Tag = "0";
-            this.Radio_Button_LZMA.Text = "LZMA";
-            this.Radio_Button_LZMA.UseVisualStyleBackColor = false;
+            this.Radio_Button_GameFiles_Downloader_LZMA.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_GameFiles_Downloader_LZMA.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_LZMA.Location = new System.Drawing.Point(5, 5);
+            this.Radio_Button_GameFiles_Downloader_LZMA.Name = "Radio_Button_GameFiles_Downloader_LZMA";
+            this.Radio_Button_GameFiles_Downloader_LZMA.Size = new System.Drawing.Size(80, 18);
+            this.Radio_Button_GameFiles_Downloader_LZMA.TabIndex = 95;
+            this.Radio_Button_GameFiles_Downloader_LZMA.TabStop = true;
+            this.Radio_Button_GameFiles_Downloader_LZMA.Tag = "0";
+            this.Radio_Button_GameFiles_Downloader_LZMA.Text = "LZMA";
+            this.Radio_Button_GameFiles_Downloader_LZMA.UseVisualStyleBackColor = false;
             // 
-            // Radio_Button_SBRW_Pack
+            // Radio_Button_GameFiles_Downloader_SBRW_Pack
             // 
-            this.Radio_Button_SBRW_Pack.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_SBRW_Pack.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_SBRW_Pack.Location = new System.Drawing.Point(5, 29);
-            this.Radio_Button_SBRW_Pack.Name = "Radio_Button_SBRW_Pack";
-            this.Radio_Button_SBRW_Pack.Size = new System.Drawing.Size(80, 18);
-            this.Radio_Button_SBRW_Pack.TabIndex = 96;
-            this.Radio_Button_SBRW_Pack.TabStop = true;
-            this.Radio_Button_SBRW_Pack.Tag = "1";
-            this.Radio_Button_SBRW_Pack.Text = "Pack";
-            this.Radio_Button_SBRW_Pack.UseVisualStyleBackColor = false;
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Location = new System.Drawing.Point(5, 29);
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Name = "Radio_Button_GameFiles_Downloader_SBRW_Pack";
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Size = new System.Drawing.Size(80, 18);
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.TabIndex = 96;
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.TabStop = true;
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Tag = "1";
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Text = "Pack";
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.UseVisualStyleBackColor = false;
             // 
-            // Radio_Button_Raw
+            // Radio_Button_GameFiles_Downloader_Raw
             // 
-            this.Radio_Button_Raw.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Raw.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Raw.Location = new System.Drawing.Point(5, 53);
-            this.Radio_Button_Raw.Name = "Radio_Button_Raw";
-            this.Radio_Button_Raw.Size = new System.Drawing.Size(80, 18);
-            this.Radio_Button_Raw.TabIndex = 97;
-            this.Radio_Button_Raw.TabStop = true;
-            this.Radio_Button_Raw.Tag = "2";
-            this.Radio_Button_Raw.Text = "Raw";
-            this.Radio_Button_Raw.UseVisualStyleBackColor = false;
+            this.Radio_Button_GameFiles_Downloader_Raw.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_GameFiles_Downloader_Raw.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_Raw.Location = new System.Drawing.Point(5, 53);
+            this.Radio_Button_GameFiles_Downloader_Raw.Name = "Radio_Button_GameFiles_Downloader_Raw";
+            this.Radio_Button_GameFiles_Downloader_Raw.Size = new System.Drawing.Size(80, 18);
+            this.Radio_Button_GameFiles_Downloader_Raw.TabIndex = 97;
+            this.Radio_Button_GameFiles_Downloader_Raw.TabStop = true;
+            this.Radio_Button_GameFiles_Downloader_Raw.Tag = "2";
+            this.Radio_Button_GameFiles_Downloader_Raw.Text = "Raw";
+            this.Radio_Button_GameFiles_Downloader_Raw.UseVisualStyleBackColor = false;
             // 
             // label10
             // 
             this.label10.BackColor = System.Drawing.Color.Transparent;
             this.label10.ForeColor = System.Drawing.Color.DarkGray;
-            this.label10.Location = new System.Drawing.Point(237, 118);
+            this.label10.Location = new System.Drawing.Point(237, 123);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(576, 18);
             this.label10.TabIndex = 188;
@@ -567,24 +581,24 @@
             // 
             this.label9.BackColor = System.Drawing.Color.Transparent;
             this.label9.ForeColor = System.Drawing.Color.DarkGray;
-            this.label9.Location = new System.Drawing.Point(237, 53);
+            this.label9.Location = new System.Drawing.Point(237, 55);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(576, 18);
             this.label9.TabIndex = 187;
             this.label9.Text = "Changes Game Files Downloader System\r\n";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label8
+            // Label_GameFiles_Downloader_Details
             // 
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.ForeColor = System.Drawing.Color.DarkGray;
-            this.label8.Location = new System.Drawing.Point(237, 151);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(576, 18);
-            this.label8.TabIndex = 186;
-            this.label8.Text = "Changes Game Files Downloader System\r\n";
-            this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label8.Visible = false;
+            this.Label_GameFiles_Downloader_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_GameFiles_Downloader_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_GameFiles_Downloader_Details.Location = new System.Drawing.Point(237, 158);
+            this.Label_GameFiles_Downloader_Details.Name = "Label_GameFiles_Downloader_Details";
+            this.Label_GameFiles_Downloader_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_GameFiles_Downloader_Details.TabIndex = 186;
+            this.Label_GameFiles_Downloader_Details.Text = "Changes Game Files Downloader System\r\n";
+            this.Label_GameFiles_Downloader_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_GameFiles_Downloader_Details.Visible = false;
             // 
             // label7
             // 
@@ -602,7 +616,7 @@
             // 
             this.Label_CDN_Current.BackColor = System.Drawing.Color.Transparent;
             this.Label_CDN_Current.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_CDN_Current.Location = new System.Drawing.Point(7, 76);
+            this.Label_CDN_Current.Location = new System.Drawing.Point(7, 81);
             this.Label_CDN_Current.Name = "Label_CDN_Current";
             this.Label_CDN_Current.Size = new System.Drawing.Size(224, 16);
             this.Label_CDN_Current.TabIndex = 175;
@@ -613,7 +627,7 @@
             // 
             this.Button_CDN_List.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Button_CDN_List.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_CDN_List.Location = new System.Drawing.Point(10, 119);
+            this.Button_CDN_List.Location = new System.Drawing.Point(10, 124);
             this.Button_CDN_List.Name = "Button_CDN_List";
             this.Button_CDN_List.Size = new System.Drawing.Size(154, 25);
             this.Button_CDN_List.TabIndex = 184;
@@ -623,7 +637,7 @@
             // LinkLabel_CDN_Current
             // 
             this.LinkLabel_CDN_Current.BackColor = System.Drawing.Color.Transparent;
-            this.LinkLabel_CDN_Current.Location = new System.Drawing.Point(7, 97);
+            this.LinkLabel_CDN_Current.Location = new System.Drawing.Point(7, 102);
             this.LinkLabel_CDN_Current.Name = "LinkLabel_CDN_Current";
             this.LinkLabel_CDN_Current.Size = new System.Drawing.Size(806, 16);
             this.LinkLabel_CDN_Current.TabIndex = 176;
@@ -634,7 +648,7 @@
             // 
             this.Label_GameFiles_Downloader.BackColor = System.Drawing.Color.Transparent;
             this.Label_GameFiles_Downloader.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_GameFiles_Downloader.Location = new System.Drawing.Point(8, 151);
+            this.Label_GameFiles_Downloader.Location = new System.Drawing.Point(8, 158);
             this.Label_GameFiles_Downloader.Name = "Label_GameFiles_Downloader";
             this.Label_GameFiles_Downloader.Size = new System.Drawing.Size(223, 16);
             this.Label_GameFiles_Downloader.TabIndex = 183;
@@ -668,7 +682,7 @@
             this.Label_WebClient_Timeout.BackColor = System.Drawing.Color.Transparent;
             this.Label_WebClient_Timeout.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
             this.Label_WebClient_Timeout.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_WebClient_Timeout.Location = new System.Drawing.Point(6, 33);
+            this.Label_WebClient_Timeout.Location = new System.Drawing.Point(6, 35);
             this.Label_WebClient_Timeout.Name = "Label_WebClient_Timeout";
             this.Label_WebClient_Timeout.Size = new System.Drawing.Size(226, 16);
             this.Label_WebClient_Timeout.TabIndex = 165;
@@ -681,7 +695,7 @@
             this.NumericUpDown_WebClient_Timeout.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NumericUpDown_WebClient_Timeout.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
             this.NumericUpDown_WebClient_Timeout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.NumericUpDown_WebClient_Timeout.Location = new System.Drawing.Point(10, 53);
+            this.NumericUpDown_WebClient_Timeout.Location = new System.Drawing.Point(10, 55);
             this.NumericUpDown_WebClient_Timeout.Maximum = new decimal(new int[] {
             179,
             0,
@@ -695,15 +709,23 @@
             // 
             // TabPage_Proxy
             // 
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_None);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_Responses);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_Requests);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_Errors);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_All);
+            this.TabPage_Proxy.Controls.Add(this.Panel_Proxy_Logging);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging_Details);
+            this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Logging);
             this.TabPage_Proxy.Controls.Add(this.Label_Proxy_Port);
             this.TabPage_Proxy.Controls.Add(this.NumericUpDown_Proxy_Port);
             this.TabPage_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Proxy.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Proxy.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Proxy.Name = "TabPage_Proxy";
             this.TabPage_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Proxy.Size = new System.Drawing.Size(819, 327);
+            this.TabPage_Proxy.Size = new System.Drawing.Size(819, 328);
             this.TabPage_Proxy.TabIndex = 1;
             this.TabPage_Proxy.Text = "Proxy";
             this.TabPage_Proxy.UseVisualStyleBackColor = true;
@@ -713,7 +735,7 @@
             this.Label_Proxy_Port.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Port.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Proxy_Port.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Port.Location = new System.Drawing.Point(6, 65);
+            this.Label_Proxy_Port.Location = new System.Drawing.Point(6, 84);
             this.Label_Proxy_Port.Name = "Label_Proxy_Port";
             this.Label_Proxy_Port.Size = new System.Drawing.Size(95, 14);
             this.Label_Proxy_Port.TabIndex = 181;
@@ -726,7 +748,7 @@
             this.NumericUpDown_Proxy_Port.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.NumericUpDown_Proxy_Port.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
             this.NumericUpDown_Proxy_Port.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.NumericUpDown_Proxy_Port.Location = new System.Drawing.Point(107, 65);
+            this.NumericUpDown_Proxy_Port.Location = new System.Drawing.Point(107, 84);
             this.NumericUpDown_Proxy_Port.Maximum = new decimal(new int[] {
             65353,
             0,
@@ -742,7 +764,7 @@
             // 
             this.CheckBox_Proxy.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_Proxy.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Proxy.Location = new System.Drawing.Point(9, 6);
+            this.CheckBox_Proxy.Location = new System.Drawing.Point(9, 10);
             this.CheckBox_Proxy.Name = "CheckBox_Proxy";
             this.CheckBox_Proxy.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Proxy.TabIndex = 177;
@@ -753,7 +775,7 @@
             // 
             this.CheckBox_Proxy_Domain.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_Proxy_Domain.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Proxy_Domain.Location = new System.Drawing.Point(9, 44);
+            this.CheckBox_Proxy_Domain.Location = new System.Drawing.Point(9, 58);
             this.CheckBox_Proxy_Domain.Name = "CheckBox_Proxy_Domain";
             this.CheckBox_Proxy_Domain.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Proxy_Domain.TabIndex = 178;
@@ -764,7 +786,7 @@
             // 
             this.CheckBox_Host_to_IP.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_Host_to_IP.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Host_to_IP.Location = new System.Drawing.Point(9, 24);
+            this.CheckBox_Host_to_IP.Location = new System.Drawing.Point(9, 34);
             this.CheckBox_Host_to_IP.Name = "CheckBox_Host_to_IP";
             this.CheckBox_Host_to_IP.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Host_to_IP.TabIndex = 162;
@@ -773,12 +795,12 @@
             // 
             // TabPage_Launcher_Miscellaneous
             // 
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label14);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label15);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label16);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Panel_Launcher_Builds);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label17);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label18);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Developer);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Beta);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Stable);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Panel_Launcher_Builds_Branch);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Details);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_RPC);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.LinkLabel_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_JSON_Update_Cache);
@@ -792,113 +814,113 @@
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
             // 
-            // label14
+            // Label_Launcher_Builds_Branch_Developer
             // 
-            this.label14.BackColor = System.Drawing.Color.Transparent;
-            this.label14.ForeColor = System.Drawing.Color.DarkGray;
-            this.label14.Location = new System.Drawing.Point(236, 153);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(576, 18);
-            this.label14.TabIndex = 198;
-            this.label14.Text = "Bleading Edge Updates. Unofficial and is not allowed on most servers. Can Break t" +
+            this.Label_Launcher_Builds_Branch_Developer.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Builds_Branch_Developer.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Builds_Branch_Developer.Location = new System.Drawing.Point(236, 153);
+            this.Label_Launcher_Builds_Branch_Developer.Name = "Label_Launcher_Builds_Branch_Developer";
+            this.Label_Launcher_Builds_Branch_Developer.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Builds_Branch_Developer.TabIndex = 198;
+            this.Label_Launcher_Builds_Branch_Developer.Text = "Bleading Edge Updates. Unofficial and is not allowed on most servers. Can Break t" +
     "hings";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Launcher_Builds_Branch_Developer.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label15
+            // Label_Launcher_Builds_Branch_Beta
             // 
-            this.label15.BackColor = System.Drawing.Color.Transparent;
-            this.label15.ForeColor = System.Drawing.Color.DarkGray;
-            this.label15.Location = new System.Drawing.Point(236, 129);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(576, 18);
-            this.label15.TabIndex = 197;
-            this.label15.Text = "Insider/Beta Builds if available, otherwise, Release Builds";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Launcher_Builds_Branch_Beta.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Builds_Branch_Beta.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Builds_Branch_Beta.Location = new System.Drawing.Point(236, 129);
+            this.Label_Launcher_Builds_Branch_Beta.Name = "Label_Launcher_Builds_Branch_Beta";
+            this.Label_Launcher_Builds_Branch_Beta.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Builds_Branch_Beta.TabIndex = 197;
+            this.Label_Launcher_Builds_Branch_Beta.Text = "Insider/Beta Builds if available, otherwise, Release Builds";
+            this.Label_Launcher_Builds_Branch_Beta.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // label16
+            // Label_Launcher_Builds_Branch_Stable
             // 
-            this.label16.BackColor = System.Drawing.Color.Transparent;
-            this.label16.ForeColor = System.Drawing.Color.DarkGray;
-            this.label16.Location = new System.Drawing.Point(236, 105);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(576, 18);
-            this.label16.TabIndex = 196;
-            this.label16.Text = "Only Official Release Builds\r\n";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Launcher_Builds_Branch_Stable.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Builds_Branch_Stable.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Builds_Branch_Stable.Location = new System.Drawing.Point(236, 105);
+            this.Label_Launcher_Builds_Branch_Stable.Name = "Label_Launcher_Builds_Branch_Stable";
+            this.Label_Launcher_Builds_Branch_Stable.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Builds_Branch_Stable.TabIndex = 196;
+            this.Label_Launcher_Builds_Branch_Stable.Text = "Only Official Release Builds\r\n";
+            this.Label_Launcher_Builds_Branch_Stable.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Panel_Launcher_Builds
+            // Panel_Launcher_Builds_Branch
             // 
-            this.Panel_Launcher_Builds.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Launcher_Builds.Controls.Add(this.Radio_Button_Stable);
-            this.Panel_Launcher_Builds.Controls.Add(this.Radio_Button_Beta);
-            this.Panel_Launcher_Builds.Controls.Add(this.Radio_Button_Developer);
-            this.Panel_Launcher_Builds.Location = new System.Drawing.Point(8, 100);
-            this.Panel_Launcher_Builds.Name = "Panel_Launcher_Builds";
-            this.Panel_Launcher_Builds.Size = new System.Drawing.Size(153, 77);
-            this.Panel_Launcher_Builds.TabIndex = 195;
-            this.Panel_Launcher_Builds.Tag = "SkidMarks";
+            this.Panel_Launcher_Builds_Branch.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Stable);
+            this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Beta);
+            this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Developer);
+            this.Panel_Launcher_Builds_Branch.Location = new System.Drawing.Point(8, 100);
+            this.Panel_Launcher_Builds_Branch.Name = "Panel_Launcher_Builds_Branch";
+            this.Panel_Launcher_Builds_Branch.Size = new System.Drawing.Size(153, 77);
+            this.Panel_Launcher_Builds_Branch.TabIndex = 195;
+            this.Panel_Launcher_Builds_Branch.Tag = "SkidMarks";
             // 
-            // Radio_Button_Stable
+            // Radio_Button_Launcher_Builds_Branch_Stable
             // 
-            this.Radio_Button_Stable.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Stable.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Stable.Location = new System.Drawing.Point(5, 5);
-            this.Radio_Button_Stable.Name = "Radio_Button_Stable";
-            this.Radio_Button_Stable.Size = new System.Drawing.Size(143, 18);
-            this.Radio_Button_Stable.TabIndex = 95;
-            this.Radio_Button_Stable.TabStop = true;
-            this.Radio_Button_Stable.Tag = "0";
-            this.Radio_Button_Stable.Text = "Stable";
-            this.Radio_Button_Stable.UseVisualStyleBackColor = false;
+            this.Radio_Button_Launcher_Builds_Branch_Stable.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Location = new System.Drawing.Point(5, 5);
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Name = "Radio_Button_Launcher_Builds_Branch_Stable";
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Size = new System.Drawing.Size(143, 18);
+            this.Radio_Button_Launcher_Builds_Branch_Stable.TabIndex = 95;
+            this.Radio_Button_Launcher_Builds_Branch_Stable.TabStop = true;
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Tag = "0";
+            this.Radio_Button_Launcher_Builds_Branch_Stable.Text = "Stable";
+            this.Radio_Button_Launcher_Builds_Branch_Stable.UseVisualStyleBackColor = false;
             // 
-            // Radio_Button_Beta
+            // Radio_Button_Launcher_Builds_Branch_Beta
             // 
-            this.Radio_Button_Beta.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Beta.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Beta.Location = new System.Drawing.Point(5, 29);
-            this.Radio_Button_Beta.Name = "Radio_Button_Beta";
-            this.Radio_Button_Beta.Size = new System.Drawing.Size(143, 18);
-            this.Radio_Button_Beta.TabIndex = 96;
-            this.Radio_Button_Beta.TabStop = true;
-            this.Radio_Button_Beta.Tag = "1";
-            this.Radio_Button_Beta.Text = "Beta";
-            this.Radio_Button_Beta.UseVisualStyleBackColor = false;
+            this.Radio_Button_Launcher_Builds_Branch_Beta.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Location = new System.Drawing.Point(5, 29);
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Name = "Radio_Button_Launcher_Builds_Branch_Beta";
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Size = new System.Drawing.Size(143, 18);
+            this.Radio_Button_Launcher_Builds_Branch_Beta.TabIndex = 96;
+            this.Radio_Button_Launcher_Builds_Branch_Beta.TabStop = true;
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Tag = "1";
+            this.Radio_Button_Launcher_Builds_Branch_Beta.Text = "Beta";
+            this.Radio_Button_Launcher_Builds_Branch_Beta.UseVisualStyleBackColor = false;
             // 
-            // Radio_Button_Developer
+            // Radio_Button_Launcher_Builds_Branch_Developer
             // 
-            this.Radio_Button_Developer.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Developer.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Developer.Location = new System.Drawing.Point(5, 53);
-            this.Radio_Button_Developer.Name = "Radio_Button_Developer";
-            this.Radio_Button_Developer.Size = new System.Drawing.Size(143, 18);
-            this.Radio_Button_Developer.TabIndex = 97;
-            this.Radio_Button_Developer.TabStop = true;
-            this.Radio_Button_Developer.Tag = "2";
-            this.Radio_Button_Developer.Text = "Developer";
-            this.Radio_Button_Developer.UseVisualStyleBackColor = false;
+            this.Radio_Button_Launcher_Builds_Branch_Developer.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Location = new System.Drawing.Point(5, 53);
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Name = "Radio_Button_Launcher_Builds_Branch_Developer";
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Size = new System.Drawing.Size(143, 18);
+            this.Radio_Button_Launcher_Builds_Branch_Developer.TabIndex = 97;
+            this.Radio_Button_Launcher_Builds_Branch_Developer.TabStop = true;
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Tag = "2";
+            this.Radio_Button_Launcher_Builds_Branch_Developer.Text = "Developer";
+            this.Radio_Button_Launcher_Builds_Branch_Developer.UseVisualStyleBackColor = false;
             // 
-            // label17
+            // Label_Launcher_Builds_Branch_Details
             // 
-            this.label17.BackColor = System.Drawing.Color.Transparent;
-            this.label17.ForeColor = System.Drawing.Color.DarkGray;
-            this.label17.Location = new System.Drawing.Point(236, 80);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(576, 18);
-            this.label17.TabIndex = 194;
-            this.label17.Text = "Changes Launcher Build Update prompts\r\n";
-            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.label17.Visible = false;
+            this.Label_Launcher_Builds_Branch_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Builds_Branch_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Builds_Branch_Details.Location = new System.Drawing.Point(236, 80);
+            this.Label_Launcher_Builds_Branch_Details.Name = "Label_Launcher_Builds_Branch_Details";
+            this.Label_Launcher_Builds_Branch_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Builds_Branch_Details.TabIndex = 194;
+            this.Label_Launcher_Builds_Branch_Details.Text = "Changes Launcher Build Update prompts\r\n";
+            this.Label_Launcher_Builds_Branch_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Launcher_Builds_Branch_Details.Visible = false;
             // 
-            // label18
+            // Label_Launcher_Builds_Branch
             // 
-            this.label18.BackColor = System.Drawing.Color.Transparent;
-            this.label18.ForeColor = System.Drawing.Color.DarkGray;
-            this.label18.Location = new System.Drawing.Point(7, 80);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(223, 16);
-            this.label18.TabIndex = 193;
-            this.label18.Text = "Launcher Builds Branch:";
-            this.label18.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.Label_Launcher_Builds_Branch.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Builds_Branch.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Builds_Branch.Location = new System.Drawing.Point(7, 80);
+            this.Label_Launcher_Builds_Branch.Name = "Label_Launcher_Builds_Branch";
+            this.Label_Launcher_Builds_Branch.Size = new System.Drawing.Size(223, 16);
+            this.Label_Launcher_Builds_Branch.TabIndex = 193;
+            this.Label_Launcher_Builds_Branch.Text = "Launcher Builds Branch:";
+            this.Label_Launcher_Builds_Branch.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // CheckBox_RPC
             // 
@@ -1310,7 +1332,7 @@
             this.TabPage_About.Location = new System.Drawing.Point(0, 26);
             this.TabPage_About.Name = "TabPage_About";
             this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_About.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_About.Size = new System.Drawing.Size(819, 354);
             this.TabPage_About.TabIndex = 1;
             this.TabPage_About.Text = "Version: XXX.XXX.XXX";
             this.TabPage_About.UseVisualStyleBackColor = true;
@@ -1472,6 +1494,162 @@
             this.Button_Close.TabIndex = 157;
             this.Button_Close.TabStop = false;
             // 
+            // Label_Proxy_Logging_Requests
+            // 
+            this.Label_Proxy_Logging_Requests.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_Requests.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_Requests.Location = new System.Drawing.Point(236, 181);
+            this.Label_Proxy_Logging_Requests.Name = "Label_Proxy_Logging_Requests";
+            this.Label_Proxy_Logging_Requests.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_Requests.TabIndex = 198;
+            this.Label_Proxy_Logging_Requests.Text = "Saves Requests Only";
+            this.Label_Proxy_Logging_Requests.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_Logging_Errors
+            // 
+            this.Label_Proxy_Logging_Errors.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_Errors.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_Errors.Location = new System.Drawing.Point(236, 157);
+            this.Label_Proxy_Logging_Errors.Name = "Label_Proxy_Logging_Errors";
+            this.Label_Proxy_Logging_Errors.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_Errors.TabIndex = 197;
+            this.Label_Proxy_Logging_Errors.Text = "Saves Errors Only (Recommended)";
+            this.Label_Proxy_Logging_Errors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_Logging_All
+            // 
+            this.Label_Proxy_Logging_All.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_All.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_All.Location = new System.Drawing.Point(236, 133);
+            this.Label_Proxy_Logging_All.Name = "Label_Proxy_Logging_All";
+            this.Label_Proxy_Logging_All.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_All.TabIndex = 196;
+            this.Label_Proxy_Logging_All.Text = "Saves all Information";
+            this.Label_Proxy_Logging_All.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Panel_Proxy_Logging
+            // 
+            this.Panel_Proxy_Logging.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_None);
+            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Responses);
+            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_All);
+            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Errors);
+            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Requests);
+            this.Panel_Proxy_Logging.Location = new System.Drawing.Point(8, 128);
+            this.Panel_Proxy_Logging.Name = "Panel_Proxy_Logging";
+            this.Panel_Proxy_Logging.Size = new System.Drawing.Size(153, 125);
+            this.Panel_Proxy_Logging.TabIndex = 195;
+            this.Panel_Proxy_Logging.Tag = "SkidMarks";
+            // 
+            // Radio_Button_Proxy_Logging_All
+            // 
+            this.Radio_Button_Proxy_Logging_All.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Proxy_Logging_All.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Proxy_Logging_All.Location = new System.Drawing.Point(5, 5);
+            this.Radio_Button_Proxy_Logging_All.Name = "Radio_Button_Proxy_Logging_All";
+            this.Radio_Button_Proxy_Logging_All.Size = new System.Drawing.Size(141, 18);
+            this.Radio_Button_Proxy_Logging_All.TabIndex = 95;
+            this.Radio_Button_Proxy_Logging_All.TabStop = true;
+            this.Radio_Button_Proxy_Logging_All.Tag = "0";
+            this.Radio_Button_Proxy_Logging_All.Text = "All";
+            this.Radio_Button_Proxy_Logging_All.UseVisualStyleBackColor = false;
+            // 
+            // Radio_Button_Proxy_Logging_Errors
+            // 
+            this.Radio_Button_Proxy_Logging_Errors.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Proxy_Logging_Errors.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Proxy_Logging_Errors.Location = new System.Drawing.Point(5, 29);
+            this.Radio_Button_Proxy_Logging_Errors.Name = "Radio_Button_Proxy_Logging_Errors";
+            this.Radio_Button_Proxy_Logging_Errors.Size = new System.Drawing.Size(141, 18);
+            this.Radio_Button_Proxy_Logging_Errors.TabIndex = 96;
+            this.Radio_Button_Proxy_Logging_Errors.TabStop = true;
+            this.Radio_Button_Proxy_Logging_Errors.Tag = "1";
+            this.Radio_Button_Proxy_Logging_Errors.Text = "Errors";
+            this.Radio_Button_Proxy_Logging_Errors.UseVisualStyleBackColor = false;
+            // 
+            // Radio_Button_Proxy_Logging_Requests
+            // 
+            this.Radio_Button_Proxy_Logging_Requests.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Proxy_Logging_Requests.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Proxy_Logging_Requests.Location = new System.Drawing.Point(5, 53);
+            this.Radio_Button_Proxy_Logging_Requests.Name = "Radio_Button_Proxy_Logging_Requests";
+            this.Radio_Button_Proxy_Logging_Requests.Size = new System.Drawing.Size(141, 18);
+            this.Radio_Button_Proxy_Logging_Requests.TabIndex = 97;
+            this.Radio_Button_Proxy_Logging_Requests.TabStop = true;
+            this.Radio_Button_Proxy_Logging_Requests.Tag = "2";
+            this.Radio_Button_Proxy_Logging_Requests.Text = "Requests";
+            this.Radio_Button_Proxy_Logging_Requests.UseVisualStyleBackColor = false;
+            // 
+            // Label_Proxy_Logging_Details
+            // 
+            this.Label_Proxy_Logging_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_Details.Location = new System.Drawing.Point(236, 108);
+            this.Label_Proxy_Logging_Details.Name = "Label_Proxy_Logging_Details";
+            this.Label_Proxy_Logging_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_Details.TabIndex = 194;
+            this.Label_Proxy_Logging_Details.Text = "Changes the Logging System being saved to a File on the Drive";
+            this.Label_Proxy_Logging_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_Logging
+            // 
+            this.Label_Proxy_Logging.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging.Location = new System.Drawing.Point(7, 108);
+            this.Label_Proxy_Logging.Name = "Label_Proxy_Logging";
+            this.Label_Proxy_Logging.Size = new System.Drawing.Size(223, 16);
+            this.Label_Proxy_Logging.TabIndex = 193;
+            this.Label_Proxy_Logging.Text = "Log to File:";
+            this.Label_Proxy_Logging.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // Radio_Button_Proxy_Logging_Responses
+            // 
+            this.Radio_Button_Proxy_Logging_Responses.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Proxy_Logging_Responses.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Proxy_Logging_Responses.Location = new System.Drawing.Point(5, 77);
+            this.Radio_Button_Proxy_Logging_Responses.Name = "Radio_Button_Proxy_Logging_Responses";
+            this.Radio_Button_Proxy_Logging_Responses.Size = new System.Drawing.Size(141, 18);
+            this.Radio_Button_Proxy_Logging_Responses.TabIndex = 98;
+            this.Radio_Button_Proxy_Logging_Responses.TabStop = true;
+            this.Radio_Button_Proxy_Logging_Responses.Tag = "2";
+            this.Radio_Button_Proxy_Logging_Responses.Text = "Responses";
+            this.Radio_Button_Proxy_Logging_Responses.UseVisualStyleBackColor = false;
+            // 
+            // Radio_Button_Proxy_Logging_None
+            // 
+            this.Radio_Button_Proxy_Logging_None.BackColor = System.Drawing.Color.Transparent;
+            this.Radio_Button_Proxy_Logging_None.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Proxy_Logging_None.Location = new System.Drawing.Point(6, 101);
+            this.Radio_Button_Proxy_Logging_None.Name = "Radio_Button_Proxy_Logging_None";
+            this.Radio_Button_Proxy_Logging_None.Size = new System.Drawing.Size(141, 18);
+            this.Radio_Button_Proxy_Logging_None.TabIndex = 99;
+            this.Radio_Button_Proxy_Logging_None.TabStop = true;
+            this.Radio_Button_Proxy_Logging_None.Tag = "2";
+            this.Radio_Button_Proxy_Logging_None.Text = "None";
+            this.Radio_Button_Proxy_Logging_None.UseVisualStyleBackColor = false;
+            // 
+            // Label_Proxy_Logging_None
+            // 
+            this.Label_Proxy_Logging_None.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_None.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_None.Location = new System.Drawing.Point(236, 229);
+            this.Label_Proxy_Logging_None.Name = "Label_Proxy_Logging_None";
+            this.Label_Proxy_Logging_None.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_None.TabIndex = 200;
+            this.Label_Proxy_Logging_None.Text = "Disables Logging and Improves Performance";
+            this.Label_Proxy_Logging_None.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_Logging_Responses
+            // 
+            this.Label_Proxy_Logging_Responses.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_Responses.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_Responses.Location = new System.Drawing.Point(236, 205);
+            this.Label_Proxy_Logging_Responses.Name = "Label_Proxy_Logging_Responses";
+            this.Label_Proxy_Logging_Responses.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_Responses.TabIndex = 199;
+            this.Label_Proxy_Logging_Responses.Text = "Saves Responses Only";
+            this.Label_Proxy_Logging_Responses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Screen_Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1501,12 +1679,12 @@
             this.TabPage_Launcher.ResumeLayout(false);
             this.TabControl_Launcher.ResumeLayout(false);
             this.TabPage_Downloader.ResumeLayout(false);
-            this.Panel_Game_Downloader.ResumeLayout(false);
+            this.Panel_GameFiles_Downloader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_WebClient_Timeout)).EndInit();
             this.TabPage_Proxy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).EndInit();
             this.TabPage_Launcher_Miscellaneous.ResumeLayout(false);
-            this.Panel_Launcher_Builds.ResumeLayout(false);
+            this.Panel_Launcher_Builds_Branch.ResumeLayout(false);
             this.TabPage_Game.ResumeLayout(false);
             this.Panel_Display_Timer.ResumeLayout(false);
             this.TabPage_API.ResumeLayout(false);
@@ -1515,6 +1693,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
+            this.Panel_Proxy_Logging.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1531,16 +1710,16 @@
         public System.Windows.Forms.Button Button_Exit;
         private System.Windows.Forms.TabPage TabPage_Launcher;
         private System.Windows.Forms.TabPage TabPage_Downloader;
-        public System.Windows.Forms.Label label13;
-        public System.Windows.Forms.Label label12;
-        public System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Panel Panel_Game_Downloader;
-        private System.Windows.Forms.RadioButton Radio_Button_LZMA;
-        private System.Windows.Forms.RadioButton Radio_Button_SBRW_Pack;
-        private System.Windows.Forms.RadioButton Radio_Button_Raw;
+        public System.Windows.Forms.Label Label_GameFiles_Downloader_Raw;
+        public System.Windows.Forms.Label Label_GameFiles_Downloader_Pack;
+        public System.Windows.Forms.Label Label_GameFiles_Downloader_LZMA;
+        private System.Windows.Forms.Panel Panel_GameFiles_Downloader;
+        private System.Windows.Forms.RadioButton Radio_Button_GameFiles_Downloader_LZMA;
+        private System.Windows.Forms.RadioButton Radio_Button_GameFiles_Downloader_SBRW_Pack;
+        private System.Windows.Forms.RadioButton Radio_Button_GameFiles_Downloader_Raw;
         public System.Windows.Forms.Label label10;
         public System.Windows.Forms.Label label9;
-        public System.Windows.Forms.Label label8;
+        public System.Windows.Forms.Label Label_GameFiles_Downloader_Details;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.Label Label_CDN_Current;
         public System.Windows.Forms.Button Button_CDN_List;
@@ -1557,15 +1736,15 @@
         public System.Windows.Forms.CheckBox CheckBox_Proxy_Domain;
         public System.Windows.Forms.CheckBox CheckBox_Host_to_IP;
         private System.Windows.Forms.TabPage TabPage_Launcher_Miscellaneous;
-        public System.Windows.Forms.Label label14;
-        public System.Windows.Forms.Label label15;
-        public System.Windows.Forms.Label label16;
-        private System.Windows.Forms.Panel Panel_Launcher_Builds;
-        private System.Windows.Forms.RadioButton Radio_Button_Stable;
-        private System.Windows.Forms.RadioButton Radio_Button_Beta;
-        private System.Windows.Forms.RadioButton Radio_Button_Developer;
-        public System.Windows.Forms.Label label17;
-        public System.Windows.Forms.Label label18;
+        public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Developer;
+        public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Beta;
+        public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Stable;
+        private System.Windows.Forms.Panel Panel_Launcher_Builds_Branch;
+        private System.Windows.Forms.RadioButton Radio_Button_Launcher_Builds_Branch_Stable;
+        private System.Windows.Forms.RadioButton Radio_Button_Launcher_Builds_Branch_Beta;
+        private System.Windows.Forms.RadioButton Radio_Button_Launcher_Builds_Branch_Developer;
+        public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Details;
+        public System.Windows.Forms.Label Label_Launcher_Builds_Branch;
         public System.Windows.Forms.CheckBox CheckBox_RPC;
         public System.Windows.Forms.LinkLabel LinkLabel_Launcher_Path;
         public System.Windows.Forms.CheckBox CheckBox_JSON_Update_Cache;
@@ -1630,5 +1809,18 @@
         public System.Windows.Forms.PictureBox Button_Close;
         public System.Windows.Forms.TabPage TabPage_Settings;
         public System.Windows.Forms.TabPage TabPage_Setup;
+        public System.Windows.Forms.Label Label_Proxy_Logging_Requests;
+        public System.Windows.Forms.Label Label_Proxy_Logging_Errors;
+        public System.Windows.Forms.Label Label_Proxy_Logging_All;
+        private System.Windows.Forms.Panel Panel_Proxy_Logging;
+        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_All;
+        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Errors;
+        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Requests;
+        public System.Windows.Forms.Label Label_Proxy_Logging_Details;
+        public System.Windows.Forms.Label Label_Proxy_Logging;
+        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Responses;
+        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_None;
+        public System.Windows.Forms.Label Label_Proxy_Logging_None;
+        public System.Windows.Forms.Label Label_Proxy_Logging_Responses;
     }
 }

@@ -209,11 +209,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
         private string GameDownloaderButtonSelection()
         {
-            if (Radio_Button_LZMA.Checked)
+            if (Radio_Button_GameFiles_Downloader_LZMA.Checked)
             {
                 return "0";
             }
-            else if (Radio_Button_SBRW_Pack.Checked)
+            else if (Radio_Button_GameFiles_Downloader_SBRW_Pack.Checked)
             {
                 return "1";
             }
@@ -261,26 +261,26 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             switch(Save_Settings.Downloader_Game())
             {
                 case 0:
-                    Radio_Button_LZMA.Checked = true;
+                    Radio_Button_GameFiles_Downloader_LZMA.Checked = true;
                     break;
                 case 1:
-                    Radio_Button_SBRW_Pack.Checked = true;
+                    Radio_Button_GameFiles_Downloader_SBRW_Pack.Checked = true;
                     break;
                 case 2:
-                    Radio_Button_Raw.Checked = true;
+                    Radio_Button_GameFiles_Downloader_Raw.Checked = true;
                     break;
             }
 
             switch (Save_Settings.Preview_Mode_Int())
             {
                 case 0:
-                    Radio_Button_Stable.Checked = true;
+                    Radio_Button_Launcher_Builds_Branch_Stable.Checked = true;
                     break;
                 case 1:
-                    Radio_Button_Beta.Checked = true;
+                    Radio_Button_Launcher_Builds_Branch_Beta.Checked = true;
                     break;
                 case 2:
-                    Radio_Button_Developer.Checked = true;
+                    Radio_Button_Launcher_Builds_Branch_Developer.Checked = true;
                     break;
             }
 
@@ -1543,9 +1543,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_GameFiles_Downloader_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -1570,6 +1570,19 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Theme_Author.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* Proxy Tab */
+            Label_Proxy_Logging.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Proxy_Logging_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_Logging_All.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_Logging_Errors.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_Logging_Requests.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_Logging_Responses.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_Logging_None.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Radio_Button_Proxy_Logging_All.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Proxy_Logging_Errors.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Proxy_Logging_Requests.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Proxy_Logging_Responses.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Radio_Button_Proxy_Logging_None.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
 
             /********************************/
             /* Set Theme Colors & Images     /
@@ -1633,9 +1646,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_Static_Timer.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_Dynamic_Timer.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_No_Timer.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_Raw.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_GameFiles_Downloader_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_GameFiles_Downloader_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_GameFiles_Downloader_Raw.ForeColor = Color_Winform.Text_Fore_Color;
 
             /* Bottom Left */
             Label_Version_Build_About.ForeColor = Color_Text.L_Five;
