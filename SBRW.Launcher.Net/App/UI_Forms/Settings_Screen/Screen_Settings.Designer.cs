@@ -74,6 +74,7 @@
             this.Label_WebClient_Timeout = new System.Windows.Forms.Label();
             this.NumericUpDown_WebClient_Timeout = new System.Windows.Forms.NumericUpDown();
             this.TabPage_Launcher_Proxy = new System.Windows.Forms.TabPage();
+            this.Button_Launcher_logs = new System.Windows.Forms.Button();
             this.Label_Proxy_Logging_None = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging_Responses = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging_Requests = new System.Windows.Forms.Label();
@@ -109,6 +110,67 @@
             this.CheckBox_Theme_Support = new System.Windows.Forms.CheckBox();
             this.CheckBox_Opt_Insider = new System.Windows.Forms.CheckBox();
             this.TabPage_Game = new System.Windows.Forms.TabPage();
+            this.TabControl_Game = new SBRW.Launcher.Core.Theme.Control_TabControl();
+            this.TabPage_Game_General = new System.Windows.Forms.TabPage();
+            this.Button_Clear_NFSWO_Logs = new System.Windows.Forms.Button();
+            this.Button_Clear_Server_Mods = new System.Windows.Forms.Button();
+            this.Button_Clear_Crash_Logs = new System.Windows.Forms.Button();
+            this.Label_Display_Timer = new System.Windows.Forms.Label();
+            this.Panel_Display_Timer = new System.Windows.Forms.Panel();
+            this.Radio_Button_Static_Timer = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_Dynamic_Timer = new System.Windows.Forms.RadioButton();
+            this.Radio_Button_No_Timer = new System.Windows.Forms.RadioButton();
+            this.CheckBox_Word_Filter_Check = new System.Windows.Forms.CheckBox();
+            this.LinkLabel_Game_Path = new System.Windows.Forms.LinkLabel();
+            this.Label_Game_Current_Path = new System.Windows.Forms.Label();
+            this.Button_Game_User_Settings = new System.Windows.Forms.Button();
+            this.Label_Game_Settings = new System.Windows.Forms.Label();
+            this.ComboBox_Language_List = new System.Windows.Forms.ComboBox();
+            this.Button_Game_Verify_Files = new System.Windows.Forms.Button();
+            this.Button_Change_Game_Path = new System.Windows.Forms.Button();
+            this.Label_Game_Files = new System.Windows.Forms.Label();
+            this.TabPage_Game_Verify_Hash = new System.Windows.Forms.TabPage();
+            this.VerifyHashWelcome = new System.Windows.Forms.Label();
+            this.DownloadProgressText_Alt = new System.Windows.Forms.Label();
+            this.DownloadProgressText = new System.Windows.Forms.Label();
+            this.VerifyHashText = new System.Windows.Forms.Label();
+            this.ScanProgressText = new System.Windows.Forms.Label();
+            this.ScanProgressBar = new System.Windows.Forms.ProgressBar();
+            this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();
+            this.StartScanner = new System.Windows.Forms.Button();
+            this.StopScanner = new System.Windows.Forms.Button();
+            this.TabPage_Game_Security_Center = new System.Windows.Forms.TabPage();
+            this.TabControl_Security_Center = new SBRW.Launcher.Core.Theme.Control_TabControl();
+            this.TabPage_Security_Center_Firewall = new System.Windows.Forms.TabPage();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.ButtonFirewallRulesAPI = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesCheck = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesAddAll = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesAddGame = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesAddLauncher = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesRemoveGame = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesRemoveLauncher = new System.Windows.Forms.Button();
+            this.ButtonFirewallRulesRemoveAll = new System.Windows.Forms.Button();
+            this.TextWindowsFirewall = new System.Windows.Forms.Label();
+            this.TabPage_Security_Center_Defender = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ButtonDefenderExclusionAPI = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionAddGame = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionAddLauncher = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionAddAll = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionCheck = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionRemoveGame = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionRemoveLauncher = new System.Windows.Forms.Button();
+            this.ButtonDefenderExclusionRemoveAll = new System.Windows.Forms.Button();
+            this.TextWindowsDefender = new System.Windows.Forms.Label();
+            this.TabPage_Security_Center_Permissons = new System.Windows.Forms.TabPage();
+            this.GroupBox_Launcherlog = new System.Windows.Forms.GroupBox();
+            this.TextBox_Live_Log = new System.Windows.Forms.TextBox();
+            this.ButtonFolderPermissonCheck = new System.Windows.Forms.Button();
+            this.ButtonFolderPermissonSet = new System.Windows.Forms.Button();
+            this.TextFolderPermissions = new System.Windows.Forms.Label();
             this.TabPage_API = new System.Windows.Forms.TabPage();
             this.Label_API_Status_Five = new System.Windows.Forms.Label();
             this.Label_API_Status_Four = new System.Windows.Forms.Label();
@@ -131,69 +193,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
-            this.TabControl_Game = new SBRW.Launcher.Core.Theme.Control_TabControl();
-            this.TabPage_Game_General = new System.Windows.Forms.TabPage();
-            this.Label_Display_Timer = new System.Windows.Forms.Label();
-            this.Panel_Display_Timer = new System.Windows.Forms.Panel();
-            this.Radio_Button_Static_Timer = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Dynamic_Timer = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_No_Timer = new System.Windows.Forms.RadioButton();
-            this.CheckBox_Word_Filter_Check = new System.Windows.Forms.CheckBox();
-            this.LinkLabel_Game_Path = new System.Windows.Forms.LinkLabel();
-            this.Label_Game_Current_Path = new System.Windows.Forms.Label();
-            this.Button_Game_User_Settings = new System.Windows.Forms.Button();
-            this.Label_Game_Settings = new System.Windows.Forms.Label();
-            this.ComboBox_Language_List = new System.Windows.Forms.ComboBox();
-            this.Button_Game_Verify_Files = new System.Windows.Forms.Button();
-            this.Button_Change_Game_Path = new System.Windows.Forms.Button();
-            this.Label_Game_Files = new System.Windows.Forms.Label();
-            this.TabPage_Game_Verify_Hash = new System.Windows.Forms.TabPage();
-            this.TabPage_Game_Security_Center = new System.Windows.Forms.TabPage();
-            this.Button_Launcher_logs = new System.Windows.Forms.Button();
-            this.Button_Clear_NFSWO_Logs = new System.Windows.Forms.Button();
-            this.Button_Clear_Server_Mods = new System.Windows.Forms.Button();
-            this.Button_Clear_Crash_Logs = new System.Windows.Forms.Button();
             this.Button_Security_Center = new System.Windows.Forms.Button();
-            this.VerifyHashText = new System.Windows.Forms.Label();
-            this.ScanProgressText = new System.Windows.Forms.Label();
-            this.ScanProgressBar = new System.Windows.Forms.ProgressBar();
-            this.DownloadProgressBar = new System.Windows.Forms.ProgressBar();
-            this.StartScanner = new System.Windows.Forms.Button();
-            this.StopScanner = new System.Windows.Forms.Button();
-            this.TabControl_Security_Center = new SBRW.Launcher.Core.Theme.Control_TabControl();
-            this.TabPage_Security_Center_Defender = new System.Windows.Forms.TabPage();
-            this.TabPage_Security_Center_Permissons = new System.Windows.Forms.TabPage();
-            this.TabPage_Security_Center_Firewall = new System.Windows.Forms.TabPage();
-            this.ButtonFirewallRulesAPI = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesCheck = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesAddAll = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesAddGame = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesAddLauncher = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesRemoveGame = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesRemoveLauncher = new System.Windows.Forms.Button();
-            this.ButtonFirewallRulesRemoveAll = new System.Windows.Forms.Button();
-            this.TextWindowsFirewall = new System.Windows.Forms.Label();
-            this.ButtonDefenderExclusionAPI = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionAddGame = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionAddLauncher = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionAddAll = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionCheck = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionRemoveGame = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionRemoveLauncher = new System.Windows.Forms.Button();
-            this.ButtonDefenderExclusionRemoveAll = new System.Windows.Forms.Button();
-            this.TextWindowsDefender = new System.Windows.Forms.Label();
-            this.GroupBox_Launcherlog = new System.Windows.Forms.GroupBox();
-            this.TextBox_Live_Log = new System.Windows.Forms.TextBox();
-            this.ButtonFolderPermissonCheck = new System.Windows.Forms.Button();
-            this.ButtonFolderPermissonSet = new System.Windows.Forms.Button();
-            this.TextFolderPermissions = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.DownloadProgressText = new System.Windows.Forms.Label();
-            this.VerifyHashWelcome = new System.Windows.Forms.Label();
-            this.DownloadProgressText_Alt = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -210,24 +210,24 @@
             this.TabPage_Launcher_Miscellaneous.SuspendLayout();
             this.Panel_Launcher_Builds_Branch.SuspendLayout();
             this.TabPage_Game.SuspendLayout();
-            this.TabPage_API.SuspendLayout();
-            this.TabPage_About.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
             this.TabControl_Game.SuspendLayout();
             this.TabPage_Game_General.SuspendLayout();
             this.Panel_Display_Timer.SuspendLayout();
             this.TabPage_Game_Verify_Hash.SuspendLayout();
             this.TabPage_Game_Security_Center.SuspendLayout();
             this.TabControl_Security_Center.SuspendLayout();
-            this.TabPage_Security_Center_Defender.SuspendLayout();
-            this.TabPage_Security_Center_Permissons.SuspendLayout();
             this.TabPage_Security_Center_Firewall.SuspendLayout();
-            this.GroupBox_Launcherlog.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.TabPage_Security_Center_Defender.SuspendLayout();
+            this.groupBox1.SuspendLayout();
+            this.TabPage_Security_Center_Permissons.SuspendLayout();
+            this.GroupBox_Launcherlog.SuspendLayout();
+            this.TabPage_API.SuspendLayout();
+            this.TabPage_About.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -239,7 +239,7 @@
             // 
             this.Panel_Form_Screens.BackColor = System.Drawing.Color.Transparent;
             this.Panel_Form_Screens.ForeColor = System.Drawing.Color.Transparent;
-            this.Panel_Form_Screens.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Form_Screens.Location = new System.Drawing.Point(871, 61);
             this.Panel_Form_Screens.Name = "Panel_Form_Screens";
             this.Panel_Form_Screens.Size = new System.Drawing.Size(891, 529);
             this.Panel_Form_Screens.TabIndex = 79;
@@ -776,13 +776,24 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Launcher_Proxy.Name = "TabPage_Launcher_Proxy";
             this.TabPage_Launcher_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(819, 328);
+            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(819, 327);
             this.TabPage_Launcher_Proxy.TabIndex = 1;
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
+            // 
+            // Button_Launcher_logs
+            // 
+            this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Launcher_logs.Location = new System.Drawing.Point(8, 261);
+            this.Button_Launcher_logs.Name = "Button_Launcher_logs";
+            this.Button_Launcher_logs.Size = new System.Drawing.Size(154, 25);
+            this.Button_Launcher_logs.TabIndex = 201;
+            this.Button_Launcher_logs.Text = "Clear Launcher Logs";
+            this.Button_Launcher_logs.UseVisualStyleBackColor = false;
             // 
             // Label_Proxy_Logging_None
             // 
@@ -1017,9 +1028,9 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Opt_Insider);
-            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
-            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(819, 328);
+            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(819, 327);
             this.TabPage_Launcher_Miscellaneous.TabIndex = 2;
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
@@ -1206,269 +1217,6 @@
             this.TabPage_Game.Text = "Game";
             this.TabPage_Game.UseVisualStyleBackColor = true;
             // 
-            // TabPage_API
-            // 
-            this.TabPage_API.Controls.Add(this.Label_API_Status_Five);
-            this.TabPage_API.Controls.Add(this.Label_API_Status_Four);
-            this.TabPage_API.Controls.Add(this.Label_API_Status_Three);
-            this.TabPage_API.Controls.Add(this.Label_API_Status_Two);
-            this.TabPage_API.Controls.Add(this.Label_API_Status_One);
-            this.TabPage_API.Controls.Add(this.Label_API_Status);
-            this.TabPage_API.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
-            this.TabPage_API.TabIndex = 4;
-            this.TabPage_API.Text = "API";
-            this.TabPage_API.UseVisualStyleBackColor = true;
-            // 
-            // Label_API_Status_Five
-            // 
-            this.Label_API_Status_Five.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_Five.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status_Five.Location = new System.Drawing.Point(14, 98);
-            this.Label_API_Status_Five.Name = "Label_API_Status_Five";
-            this.Label_API_Status_Five.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status_Five.TabIndex = 178;
-            this.Label_API_Status_Five.Text = "Backup CDN List API: PINGING";
-            this.Label_API_Status_Five.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Label_API_Status_Five.Visible = false;
-            // 
-            // Label_API_Status_Four
-            // 
-            this.Label_API_Status_Four.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_Four.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status_Four.Location = new System.Drawing.Point(14, 82);
-            this.Label_API_Status_Four.Name = "Label_API_Status_Four";
-            this.Label_API_Status_Four.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status_Four.TabIndex = 177;
-            this.Label_API_Status_Four.Text = "Backup CDN List API: PINGING";
-            this.Label_API_Status_Four.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Label_API_Status_Four.Visible = false;
-            // 
-            // Label_API_Status_Three
-            // 
-            this.Label_API_Status_Three.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_Three.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status_Three.Location = new System.Drawing.Point(14, 64);
-            this.Label_API_Status_Three.Name = "Label_API_Status_Three";
-            this.Label_API_Status_Three.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status_Three.TabIndex = 176;
-            this.Label_API_Status_Three.Text = "Backup Server List API: PINGING";
-            this.Label_API_Status_Three.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Label_API_Status_Three.Visible = false;
-            // 
-            // Label_API_Status_Two
-            // 
-            this.Label_API_Status_Two.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_Two.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status_Two.Location = new System.Drawing.Point(14, 46);
-            this.Label_API_Status_Two.Name = "Label_API_Status_Two";
-            this.Label_API_Status_Two.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status_Two.TabIndex = 175;
-            this.Label_API_Status_Two.Text = "Main CDN List API: PINGING";
-            this.Label_API_Status_Two.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.Label_API_Status_Two.Visible = false;
-            // 
-            // Label_API_Status_One
-            // 
-            this.Label_API_Status_One.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_One.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status_One.Location = new System.Drawing.Point(14, 28);
-            this.Label_API_Status_One.Name = "Label_API_Status_One";
-            this.Label_API_Status_One.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status_One.TabIndex = 174;
-            this.Label_API_Status_One.Text = "Main Server List API: PINGING";
-            this.Label_API_Status_One.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_API_Status
-            // 
-            this.Label_API_Status.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_API_Status.Location = new System.Drawing.Point(14, 13);
-            this.Label_API_Status.Name = "Label_API_Status";
-            this.Label_API_Status.Size = new System.Drawing.Size(360, 14);
-            this.Label_API_Status.TabIndex = 173;
-            this.Label_API_Status.Text = "API CONNECTION STATUS:";
-            this.Label_API_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // TabPage_About
-            // 
-            this.TabPage_About.Controls.Add(this.label5);
-            this.TabPage_About.Controls.Add(this.label6);
-            this.TabPage_About.Controls.Add(this.label3);
-            this.TabPage_About.Controls.Add(this.label4);
-            this.TabPage_About.Controls.Add(this.PatchText1);
-            this.TabPage_About.Controls.Add(this.label2);
-            this.TabPage_About.Controls.Add(this.label1);
-            this.TabPage_About.Controls.Add(this.Picture_Logo);
-            this.TabPage_About.Controls.Add(this.Label_Version_Build_About);
-            this.TabPage_About.Controls.Add(this.Label_Theme_Author);
-            this.TabPage_About.Controls.Add(this.Label_Theme_Name);
-            this.TabPage_About.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_About.Name = "TabPage_About";
-            this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_About.Size = new System.Drawing.Size(834, 354);
-            this.TabPage_About.TabIndex = 1;
-            this.TabPage_About.Text = "Version: XXX.XXX.XXX";
-            this.TabPage_About.UseVisualStyleBackColor = true;
-            // 
-            // label5
-            // 
-            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(506, 184);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(195, 165);
-            this.label5.TabIndex = 158;
-            // 
-            // label6
-            // 
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.ForeColor = System.Drawing.Color.DarkGray;
-            this.label6.Location = new System.Drawing.Point(506, 159);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(195, 25);
-            this.label6.TabIndex = 157;
-            this.label6.Text = "Speical Thanks:";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label3
-            // 
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(305, 184);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(195, 165);
-            this.label3.TabIndex = 156;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(305, 159);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(195, 25);
-            this.label4.TabIndex = 155;
-            this.label4.Text = "Contributors:";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // PatchText1
-            // 
-            this.PatchText1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
-            this.PatchText1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PatchText1.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.PatchText1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.PatchText1.Location = new System.Drawing.Point(104, 184);
-            this.PatchText1.Name = "PatchText1";
-            this.PatchText1.Size = new System.Drawing.Size(195, 165);
-            this.PatchText1.TabIndex = 154;
-            // 
-            // label2
-            // 
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.ForeColor = System.Drawing.Color.DarkGray;
-            this.label2.Location = new System.Drawing.Point(104, 159);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 25);
-            this.label2.TabIndex = 153;
-            this.label2.Text = "Support Core:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            // 
-            // label1
-            // 
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(235, 138);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(330, 14);
-            this.label1.TabIndex = 83;
-            this.label1.Text = "Build: 11-08-18";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Picture_Logo
-            // 
-            this.Picture_Logo.BackColor = System.Drawing.Color.Transparent;
-            this.Picture_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Picture_Logo.Location = new System.Drawing.Point(292, 6);
-            this.Picture_Logo.Name = "Picture_Logo";
-            this.Picture_Logo.Size = new System.Drawing.Size(215, 71);
-            this.Picture_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Picture_Logo.TabIndex = 82;
-            this.Picture_Logo.TabStop = false;
-            // 
-            // Label_Version_Build_About
-            // 
-            this.Label_Version_Build_About.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Version_Build_About.ForeColor = System.Drawing.Color.Black;
-            this.Label_Version_Build_About.Location = new System.Drawing.Point(235, 124);
-            this.Label_Version_Build_About.Name = "Label_Version_Build_About";
-            this.Label_Version_Build_About.Size = new System.Drawing.Size(330, 14);
-            this.Label_Version_Build_About.TabIndex = 81;
-            this.Label_Version_Build_About.Text = "Version: XX.XX.XX.XXXX";
-            this.Label_Version_Build_About.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Label_Theme_Author
-            // 
-            this.Label_Theme_Author.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Theme_Author.ForeColor = System.Drawing.Color.Black;
-            this.Label_Theme_Author.Location = new System.Drawing.Point(235, 106);
-            this.Label_Theme_Author.Name = "Label_Theme_Author";
-            this.Label_Theme_Author.Size = new System.Drawing.Size(330, 14);
-            this.Label_Theme_Author.TabIndex = 80;
-            this.Label_Theme_Author.Text = "Theme Author: What a Long Theme Name :0 Wow!";
-            this.Label_Theme_Author.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Label_Theme_Name
-            // 
-            this.Label_Theme_Name.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Theme_Name.ForeColor = System.Drawing.Color.Black;
-            this.Label_Theme_Name.Location = new System.Drawing.Point(235, 88);
-            this.Label_Theme_Name.Name = "Label_Theme_Name";
-            this.Label_Theme_Name.Size = new System.Drawing.Size(330, 14);
-            this.Label_Theme_Name.TabIndex = 79;
-            this.Label_Theme_Name.Text = "Theme Name: Soapbox Race World - Launcher Gen";
-            this.Label_Theme_Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(770, 15);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(25, 25);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 159;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
-            // 
-            // Button_Settings
-            // 
-            this.Button_Settings.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Settings.Location = new System.Drawing.Point(805, 15);
-            this.Button_Settings.Name = "Button_Settings";
-            this.Button_Settings.Size = new System.Drawing.Size(25, 25);
-            this.Button_Settings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Button_Settings.TabIndex = 158;
-            this.Button_Settings.TabStop = false;
-            this.Button_Settings.Visible = false;
-            // 
-            // Button_Close
-            // 
-            this.Button_Close.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Close.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Close.InitialImage = null;
-            this.Button_Close.Location = new System.Drawing.Point(840, 15);
-            this.Button_Close.Name = "Button_Close";
-            this.Button_Close.Size = new System.Drawing.Size(25, 25);
-            this.Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.Button_Close.TabIndex = 157;
-            this.Button_Close.TabStop = false;
-            // 
             // TabControl_Game
             // 
             this.TabControl_Game.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -1505,6 +1253,39 @@
             this.TabPage_Game_General.TabIndex = 0;
             this.TabPage_Game_General.Text = "General";
             this.TabPage_Game_General.UseVisualStyleBackColor = true;
+            // 
+            // Button_Clear_NFSWO_Logs
+            // 
+            this.Button_Clear_NFSWO_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_NFSWO_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_NFSWO_Logs.Location = new System.Drawing.Point(10, 249);
+            this.Button_Clear_NFSWO_Logs.Name = "Button_Clear_NFSWO_Logs";
+            this.Button_Clear_NFSWO_Logs.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_NFSWO_Logs.TabIndex = 186;
+            this.Button_Clear_NFSWO_Logs.Text = "Clear NFSWO Log";
+            this.Button_Clear_NFSWO_Logs.UseVisualStyleBackColor = false;
+            // 
+            // Button_Clear_Server_Mods
+            // 
+            this.Button_Clear_Server_Mods.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_Server_Mods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_Server_Mods.Location = new System.Drawing.Point(10, 284);
+            this.Button_Clear_Server_Mods.Name = "Button_Clear_Server_Mods";
+            this.Button_Clear_Server_Mods.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_Server_Mods.TabIndex = 185;
+            this.Button_Clear_Server_Mods.Text = "Clear Server Mods";
+            this.Button_Clear_Server_Mods.UseVisualStyleBackColor = false;
+            // 
+            // Button_Clear_Crash_Logs
+            // 
+            this.Button_Clear_Crash_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_Crash_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_Crash_Logs.Location = new System.Drawing.Point(10, 214);
+            this.Button_Clear_Crash_Logs.Name = "Button_Clear_Crash_Logs";
+            this.Button_Clear_Crash_Logs.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_Crash_Logs.TabIndex = 184;
+            this.Button_Clear_Crash_Logs.Text = "Clear Crash Logs";
+            this.Button_Clear_Crash_Logs.UseVisualStyleBackColor = false;
             // 
             // Label_Display_Timer
             // 
@@ -1688,70 +1469,44 @@
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
             // 
-            // TabPage_Game_Security_Center
+            // VerifyHashWelcome
             // 
-            this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
-            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
-            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(830, 322);
-            this.TabPage_Game_Security_Center.TabIndex = 4;
-            this.TabPage_Game_Security_Center.Text = "Security Center";
-            this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
+            this.VerifyHashWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.VerifyHashWelcome.Location = new System.Drawing.Point(21, 75);
+            this.VerifyHashWelcome.Name = "VerifyHashWelcome";
+            this.VerifyHashWelcome.Size = new System.Drawing.Size(384, 118);
+            this.VerifyHashWelcome.TabIndex = 20;
+            this.VerifyHashWelcome.Text = "Welcome!\r\n\r\nThe scanning process is pretty quick,\r\nbut may still take a while.\r\nD" +
+    "epending on your connection,\r\nre-downloading will take the longest.\r\nPlease allo" +
+    "w it to complete fully!";
+            this.VerifyHashWelcome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // Button_Launcher_logs
+            // DownloadProgressText_Alt
             // 
-            this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Launcher_logs.Location = new System.Drawing.Point(8, 261);
-            this.Button_Launcher_logs.Name = "Button_Launcher_logs";
-            this.Button_Launcher_logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Launcher_logs.TabIndex = 201;
-            this.Button_Launcher_logs.Text = "Clear Launcher Logs";
-            this.Button_Launcher_logs.UseVisualStyleBackColor = false;
+            this.DownloadProgressText_Alt.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadProgressText_Alt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.DownloadProgressText_Alt.Location = new System.Drawing.Point(421, 75);
+            this.DownloadProgressText_Alt.Margin = new System.Windows.Forms.Padding(0);
+            this.DownloadProgressText_Alt.Name = "DownloadProgressText_Alt";
+            this.DownloadProgressText_Alt.Size = new System.Drawing.Size(384, 118);
+            this.DownloadProgressText_Alt.TabIndex = 19;
+            this.DownloadProgressText_Alt.Text = "\r\nDownload Progress:";
+            this.DownloadProgressText_Alt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // Button_Clear_NFSWO_Logs
+            // DownloadProgressText
             // 
-            this.Button_Clear_NFSWO_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_NFSWO_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_NFSWO_Logs.Location = new System.Drawing.Point(10, 249);
-            this.Button_Clear_NFSWO_Logs.Name = "Button_Clear_NFSWO_Logs";
-            this.Button_Clear_NFSWO_Logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_NFSWO_Logs.TabIndex = 186;
-            this.Button_Clear_NFSWO_Logs.Text = "Clear NFSWO Log";
-            this.Button_Clear_NFSWO_Logs.UseVisualStyleBackColor = false;
-            // 
-            // Button_Clear_Server_Mods
-            // 
-            this.Button_Clear_Server_Mods.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_Server_Mods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_Server_Mods.Location = new System.Drawing.Point(10, 284);
-            this.Button_Clear_Server_Mods.Name = "Button_Clear_Server_Mods";
-            this.Button_Clear_Server_Mods.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_Server_Mods.TabIndex = 185;
-            this.Button_Clear_Server_Mods.Text = "Clear Server Mods";
-            this.Button_Clear_Server_Mods.UseVisualStyleBackColor = false;
-            // 
-            // Button_Clear_Crash_Logs
-            // 
-            this.Button_Clear_Crash_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_Crash_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_Crash_Logs.Location = new System.Drawing.Point(10, 214);
-            this.Button_Clear_Crash_Logs.Name = "Button_Clear_Crash_Logs";
-            this.Button_Clear_Crash_Logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_Crash_Logs.TabIndex = 184;
-            this.Button_Clear_Crash_Logs.Text = "Clear Crash Logs";
-            this.Button_Clear_Crash_Logs.UseVisualStyleBackColor = false;
-            // 
-            // Button_Security_Center
-            // 
-            this.Button_Security_Center.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Security_Center.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Security_Center.Location = new System.Drawing.Point(39, 12);
-            this.Button_Security_Center.Name = "Button_Security_Center";
-            this.Button_Security_Center.Size = new System.Drawing.Size(154, 25);
-            this.Button_Security_Center.TabIndex = 183;
-            this.Button_Security_Center.Text = "Security Center";
-            this.Button_Security_Center.UseVisualStyleBackColor = false;
+            this.DownloadProgressText.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DownloadProgressText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
+            this.DownloadProgressText.Location = new System.Drawing.Point(421, 12);
+            this.DownloadProgressText.Margin = new System.Windows.Forms.Padding(0);
+            this.DownloadProgressText.Name = "DownloadProgressText";
+            this.DownloadProgressText.Size = new System.Drawing.Size(384, 18);
+            this.DownloadProgressText.TabIndex = 18;
+            this.DownloadProgressText.Text = "Download Progress:";
+            this.DownloadProgressText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // VerifyHashText
             // 
@@ -1821,6 +1576,16 @@
             this.StopScanner.UseVisualStyleBackColor = true;
             this.StopScanner.Visible = false;
             // 
+            // TabPage_Game_Security_Center
+            // 
+            this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
+            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
+            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(830, 322);
+            this.TabPage_Game_Security_Center.TabIndex = 4;
+            this.TabPage_Game_Security_Center.Text = "Security Center";
+            this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
+            // 
             // TabControl_Security_Center
             // 
             this.TabControl_Security_Center.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
@@ -1833,38 +1598,6 @@
             this.TabControl_Security_Center.SelectedIndex = 0;
             this.TabControl_Security_Center.Size = new System.Drawing.Size(827, 319);
             this.TabControl_Security_Center.TabIndex = 187;
-            // 
-            // TabPage_Security_Center_Defender
-            // 
-            this.TabPage_Security_Center_Defender.Controls.Add(this.groupBox1);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAPI);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddGame);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddLauncher);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddAll);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionCheck);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveGame);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveLauncher);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveAll);
-            this.TabPage_Security_Center_Defender.Controls.Add(this.TextWindowsDefender);
-            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_Security_Center_Defender.Name = "TabPage_Security_Center_Defender";
-            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 293);
-            this.TabPage_Security_Center_Defender.TabIndex = 3;
-            this.TabPage_Security_Center_Defender.Text = "Defender";
-            this.TabPage_Security_Center_Defender.UseVisualStyleBackColor = true;
-            // 
-            // TabPage_Security_Center_Permissons
-            // 
-            this.TabPage_Security_Center_Permissons.Controls.Add(this.GroupBox_Launcherlog);
-            this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonCheck);
-            this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonSet);
-            this.TabPage_Security_Center_Permissons.Controls.Add(this.TextFolderPermissions);
-            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_Security_Center_Permissons.Name = "TabPage_Security_Center_Permissons";
-            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 293);
-            this.TabPage_Security_Center_Permissons.TabIndex = 4;
-            this.TabPage_Security_Center_Permissons.Text = "Permissons";
-            this.TabPage_Security_Center_Permissons.UseVisualStyleBackColor = true;
             // 
             // TabPage_Security_Center_Firewall
             // 
@@ -1885,6 +1618,30 @@
             this.TabPage_Security_Center_Firewall.TabIndex = 0;
             this.TabPage_Security_Center_Firewall.Text = "Firewall";
             this.TabPage_Security_Center_Firewall.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox2.Controls.Add(this.textBox2);
+            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox2.Location = new System.Drawing.Point(12, 150);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(805, 134);
+            this.groupBox2.TabIndex = 222;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Log:";
+            this.groupBox2.Visible = false;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Location = new System.Drawing.Point(6, 17);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.ReadOnly = true;
+            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox2.Size = new System.Drawing.Size(793, 111);
+            this.textBox2.TabIndex = 35;
             // 
             // ButtonFirewallRulesAPI
             // 
@@ -2026,6 +1783,49 @@
             this.TextWindowsFirewall.Text = "WINDOWS FIREWALL:";
             this.TextWindowsFirewall.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
+            // TabPage_Security_Center_Defender
+            // 
+            this.TabPage_Security_Center_Defender.Controls.Add(this.groupBox1);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAPI);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddGame);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddLauncher);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddAll);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionCheck);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveGame);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveLauncher);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveAll);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.TextWindowsDefender);
+            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Security_Center_Defender.Name = "TabPage_Security_Center_Defender";
+            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 292);
+            this.TabPage_Security_Center_Defender.TabIndex = 3;
+            this.TabPage_Security_Center_Defender.Text = "Defender";
+            this.TabPage_Security_Center_Defender.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Location = new System.Drawing.Point(12, 150);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(805, 134);
+            this.groupBox1.TabIndex = 221;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Log:";
+            this.groupBox1.Visible = false;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(6, 17);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.textBox1.Size = new System.Drawing.Size(793, 111);
+            this.textBox1.TabIndex = 35;
+            // 
             // ButtonDefenderExclusionAPI
             // 
             this.ButtonDefenderExclusionAPI.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
@@ -2159,6 +1959,19 @@
             this.TextWindowsDefender.Text = "WINDOWS DEFENDER:";
             this.TextWindowsDefender.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
+            // TabPage_Security_Center_Permissons
+            // 
+            this.TabPage_Security_Center_Permissons.Controls.Add(this.GroupBox_Launcherlog);
+            this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonCheck);
+            this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonSet);
+            this.TabPage_Security_Center_Permissons.Controls.Add(this.TextFolderPermissions);
+            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Security_Center_Permissons.Name = "TabPage_Security_Center_Permissons";
+            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 292);
+            this.TabPage_Security_Center_Permissons.TabIndex = 4;
+            this.TabPage_Security_Center_Permissons.Text = "Permissons";
+            this.TabPage_Security_Center_Permissons.UseVisualStyleBackColor = true;
+            // 
             // GroupBox_Launcherlog
             // 
             this.GroupBox_Launcherlog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
@@ -2226,92 +2039,279 @@
             this.TextFolderPermissions.Text = "FOLDER PERMISSONS:";
             this.TextFolderPermissions.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // groupBox1
+            // TabPage_API
             // 
-            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Location = new System.Drawing.Point(12, 150);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(805, 134);
-            this.groupBox1.TabIndex = 221;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Log:";
-            this.groupBox1.Visible = false;
+            this.TabPage_API.Controls.Add(this.Label_API_Status_Five);
+            this.TabPage_API.Controls.Add(this.Label_API_Status_Four);
+            this.TabPage_API.Controls.Add(this.Label_API_Status_Three);
+            this.TabPage_API.Controls.Add(this.Label_API_Status_Two);
+            this.TabPage_API.Controls.Add(this.Label_API_Status_One);
+            this.TabPage_API.Controls.Add(this.Label_API_Status);
+            this.TabPage_API.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_API.Name = "TabPage_API";
+            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_API.TabIndex = 4;
+            this.TabPage_API.Text = "API";
+            this.TabPage_API.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // Label_API_Status_Five
             // 
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Location = new System.Drawing.Point(6, 17);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(793, 111);
-            this.textBox1.TabIndex = 35;
+            this.Label_API_Status_Five.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_Five.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status_Five.Location = new System.Drawing.Point(14, 98);
+            this.Label_API_Status_Five.Name = "Label_API_Status_Five";
+            this.Label_API_Status_Five.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status_Five.TabIndex = 178;
+            this.Label_API_Status_Five.Text = "Backup CDN List API: PINGING";
+            this.Label_API_Status_Five.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_API_Status_Five.Visible = false;
             // 
-            // groupBox2
+            // Label_API_Status_Four
             // 
-            this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox2.Location = new System.Drawing.Point(12, 150);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(805, 134);
-            this.groupBox2.TabIndex = 222;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Log:";
-            this.groupBox2.Visible = false;
+            this.Label_API_Status_Four.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_Four.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status_Four.Location = new System.Drawing.Point(14, 82);
+            this.Label_API_Status_Four.Name = "Label_API_Status_Four";
+            this.Label_API_Status_Four.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status_Four.TabIndex = 177;
+            this.Label_API_Status_Four.Text = "Backup CDN List API: PINGING";
+            this.Label_API_Status_Four.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_API_Status_Four.Visible = false;
             // 
-            // textBox2
+            // Label_API_Status_Three
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(6, 17);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(793, 111);
-            this.textBox2.TabIndex = 35;
+            this.Label_API_Status_Three.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_Three.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status_Three.Location = new System.Drawing.Point(14, 64);
+            this.Label_API_Status_Three.Name = "Label_API_Status_Three";
+            this.Label_API_Status_Three.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status_Three.TabIndex = 176;
+            this.Label_API_Status_Three.Text = "Backup Server List API: PINGING";
+            this.Label_API_Status_Three.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_API_Status_Three.Visible = false;
             // 
-            // DownloadProgressText
+            // Label_API_Status_Two
             // 
-            this.DownloadProgressText.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DownloadProgressText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.DownloadProgressText.Location = new System.Drawing.Point(421, 12);
-            this.DownloadProgressText.Margin = new System.Windows.Forms.Padding(0);
-            this.DownloadProgressText.Name = "DownloadProgressText";
-            this.DownloadProgressText.Size = new System.Drawing.Size(384, 18);
-            this.DownloadProgressText.TabIndex = 18;
-            this.DownloadProgressText.Text = "Download Progress:";
-            this.DownloadProgressText.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Label_API_Status_Two.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_Two.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status_Two.Location = new System.Drawing.Point(14, 46);
+            this.Label_API_Status_Two.Name = "Label_API_Status_Two";
+            this.Label_API_Status_Two.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status_Two.TabIndex = 175;
+            this.Label_API_Status_Two.Text = "Main CDN List API: PINGING";
+            this.Label_API_Status_Two.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_API_Status_Two.Visible = false;
             // 
-            // VerifyHashWelcome
+            // Label_API_Status_One
             // 
-            this.VerifyHashWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.VerifyHashWelcome.Location = new System.Drawing.Point(21, 75);
-            this.VerifyHashWelcome.Name = "VerifyHashWelcome";
-            this.VerifyHashWelcome.Size = new System.Drawing.Size(384, 118);
-            this.VerifyHashWelcome.TabIndex = 20;
-            this.VerifyHashWelcome.Text = "Welcome!\r\n\r\nThe scanning process is pretty quick,\r\nbut may still take a while.\r\nD" +
-    "epending on your connection,\r\nre-downloading will take the longest.\r\nPlease allo" +
-    "w it to complete fully!";
-            this.VerifyHashWelcome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Label_API_Status_One.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_One.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status_One.Location = new System.Drawing.Point(14, 28);
+            this.Label_API_Status_One.Name = "Label_API_Status_One";
+            this.Label_API_Status_One.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status_One.TabIndex = 174;
+            this.Label_API_Status_One.Text = "Main Server List API: PINGING";
+            this.Label_API_Status_One.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // DownloadProgressText_Alt
+            // Label_API_Status
             // 
-            this.DownloadProgressText_Alt.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DownloadProgressText_Alt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
-            this.DownloadProgressText_Alt.Location = new System.Drawing.Point(421, 75);
-            this.DownloadProgressText_Alt.Margin = new System.Windows.Forms.Padding(0);
-            this.DownloadProgressText_Alt.Name = "DownloadProgressText_Alt";
-            this.DownloadProgressText_Alt.Size = new System.Drawing.Size(384, 118);
-            this.DownloadProgressText_Alt.TabIndex = 19;
-            this.DownloadProgressText_Alt.Text = "\r\nDownload Progress:";
-            this.DownloadProgressText_Alt.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.Label_API_Status.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_API_Status.Location = new System.Drawing.Point(14, 13);
+            this.Label_API_Status.Name = "Label_API_Status";
+            this.Label_API_Status.Size = new System.Drawing.Size(360, 14);
+            this.Label_API_Status.TabIndex = 173;
+            this.Label_API_Status.Text = "API CONNECTION STATUS:";
+            this.Label_API_Status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // TabPage_About
+            // 
+            this.TabPage_About.Controls.Add(this.label5);
+            this.TabPage_About.Controls.Add(this.label6);
+            this.TabPage_About.Controls.Add(this.label3);
+            this.TabPage_About.Controls.Add(this.label4);
+            this.TabPage_About.Controls.Add(this.PatchText1);
+            this.TabPage_About.Controls.Add(this.label2);
+            this.TabPage_About.Controls.Add(this.label1);
+            this.TabPage_About.Controls.Add(this.Picture_Logo);
+            this.TabPage_About.Controls.Add(this.Label_Version_Build_About);
+            this.TabPage_About.Controls.Add(this.Label_Theme_Author);
+            this.TabPage_About.Controls.Add(this.Label_Theme_Name);
+            this.TabPage_About.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_About.Name = "TabPage_About";
+            this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_About.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_About.TabIndex = 1;
+            this.TabPage_About.Text = "Version: XXX.XXX.XXX";
+            this.TabPage_About.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.label5.Location = new System.Drawing.Point(506, 184);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(195, 165);
+            this.label5.TabIndex = 158;
+            // 
+            // label6
+            // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
+            this.label6.ForeColor = System.Drawing.Color.DarkGray;
+            this.label6.Location = new System.Drawing.Point(506, 159);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(195, 25);
+            this.label6.TabIndex = 157;
+            this.label6.Text = "Speical Thanks:";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label3
+            // 
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label3.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.label3.Location = new System.Drawing.Point(305, 184);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(195, 165);
+            this.label3.TabIndex = 156;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.Color.DarkGray;
+            this.label4.Location = new System.Drawing.Point(305, 159);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(195, 25);
+            this.label4.TabIndex = 155;
+            this.label4.Text = "Contributors:";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // PatchText1
+            // 
+            this.PatchText1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
+            this.PatchText1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.PatchText1.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PatchText1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.PatchText1.Location = new System.Drawing.Point(104, 184);
+            this.PatchText1.Name = "PatchText1";
+            this.PatchText1.Size = new System.Drawing.Size(195, 165);
+            this.PatchText1.TabIndex = 154;
+            // 
+            // label2
+            // 
+            this.label2.BackColor = System.Drawing.Color.Transparent;
+            this.label2.ForeColor = System.Drawing.Color.DarkGray;
+            this.label2.Location = new System.Drawing.Point(104, 159);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(195, 25);
+            this.label2.TabIndex = 153;
+            this.label2.Text = "Support Core:";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // label1
+            // 
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(235, 138);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(330, 14);
+            this.label1.TabIndex = 83;
+            this.label1.Text = "Build: 11-08-18";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Picture_Logo
+            // 
+            this.Picture_Logo.BackColor = System.Drawing.Color.Transparent;
+            this.Picture_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Picture_Logo.Location = new System.Drawing.Point(292, 6);
+            this.Picture_Logo.Name = "Picture_Logo";
+            this.Picture_Logo.Size = new System.Drawing.Size(215, 71);
+            this.Picture_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picture_Logo.TabIndex = 82;
+            this.Picture_Logo.TabStop = false;
+            // 
+            // Label_Version_Build_About
+            // 
+            this.Label_Version_Build_About.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Version_Build_About.ForeColor = System.Drawing.Color.Black;
+            this.Label_Version_Build_About.Location = new System.Drawing.Point(235, 124);
+            this.Label_Version_Build_About.Name = "Label_Version_Build_About";
+            this.Label_Version_Build_About.Size = new System.Drawing.Size(330, 14);
+            this.Label_Version_Build_About.TabIndex = 81;
+            this.Label_Version_Build_About.Text = "Version: XX.XX.XX.XXXX";
+            this.Label_Version_Build_About.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Label_Theme_Author
+            // 
+            this.Label_Theme_Author.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Theme_Author.ForeColor = System.Drawing.Color.Black;
+            this.Label_Theme_Author.Location = new System.Drawing.Point(235, 106);
+            this.Label_Theme_Author.Name = "Label_Theme_Author";
+            this.Label_Theme_Author.Size = new System.Drawing.Size(330, 14);
+            this.Label_Theme_Author.TabIndex = 80;
+            this.Label_Theme_Author.Text = "Theme Author: What a Long Theme Name :0 Wow!";
+            this.Label_Theme_Author.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Label_Theme_Name
+            // 
+            this.Label_Theme_Name.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Theme_Name.ForeColor = System.Drawing.Color.Black;
+            this.Label_Theme_Name.Location = new System.Drawing.Point(235, 88);
+            this.Label_Theme_Name.Name = "Label_Theme_Name";
+            this.Label_Theme_Name.Size = new System.Drawing.Size(330, 14);
+            this.Label_Theme_Name.TabIndex = 79;
+            this.Label_Theme_Name.Text = "Theme Name: Soapbox Race World - Launcher Gen";
+            this.Label_Theme_Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pictureBox1.Location = new System.Drawing.Point(770, 15);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(25, 25);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 159;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Visible = false;
+            // 
+            // Button_Settings
+            // 
+            this.Button_Settings.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Settings.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Settings.Location = new System.Drawing.Point(805, 15);
+            this.Button_Settings.Name = "Button_Settings";
+            this.Button_Settings.Size = new System.Drawing.Size(25, 25);
+            this.Button_Settings.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Button_Settings.TabIndex = 158;
+            this.Button_Settings.TabStop = false;
+            this.Button_Settings.Visible = false;
+            // 
+            // Button_Close
+            // 
+            this.Button_Close.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Close.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Close.InitialImage = null;
+            this.Button_Close.Location = new System.Drawing.Point(840, 15);
+            this.Button_Close.Name = "Button_Close";
+            this.Button_Close.Size = new System.Drawing.Size(25, 25);
+            this.Button_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Button_Close.TabIndex = 157;
+            this.Button_Close.TabStop = false;
+            // 
+            // Button_Security_Center
+            // 
+            this.Button_Security_Center.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Security_Center.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Security_Center.Location = new System.Drawing.Point(39, 12);
+            this.Button_Security_Center.Name = "Button_Security_Center";
+            this.Button_Security_Center.Size = new System.Drawing.Size(154, 25);
+            this.Button_Security_Center.TabIndex = 183;
+            this.Button_Security_Center.Text = "Security Center";
+            this.Button_Security_Center.UseVisualStyleBackColor = false;
             // 
             // Screen_Settings
             // 
@@ -2351,27 +2351,27 @@
             this.TabPage_Launcher_Miscellaneous.ResumeLayout(false);
             this.Panel_Launcher_Builds_Branch.ResumeLayout(false);
             this.TabPage_Game.ResumeLayout(false);
-            this.TabPage_API.ResumeLayout(false);
-            this.TabPage_About.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
             this.TabControl_Game.ResumeLayout(false);
             this.TabPage_Game_General.ResumeLayout(false);
             this.Panel_Display_Timer.ResumeLayout(false);
             this.TabPage_Game_Verify_Hash.ResumeLayout(false);
             this.TabPage_Game_Security_Center.ResumeLayout(false);
             this.TabControl_Security_Center.ResumeLayout(false);
-            this.TabPage_Security_Center_Defender.ResumeLayout(false);
-            this.TabPage_Security_Center_Permissons.ResumeLayout(false);
             this.TabPage_Security_Center_Firewall.ResumeLayout(false);
-            this.GroupBox_Launcherlog.ResumeLayout(false);
-            this.GroupBox_Launcherlog.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.TabPage_Security_Center_Defender.ResumeLayout(false);
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            this.TabPage_Security_Center_Permissons.ResumeLayout(false);
+            this.GroupBox_Launcherlog.ResumeLayout(false);
+            this.GroupBox_Launcherlog.PerformLayout();
+            this.TabPage_API.ResumeLayout(false);
+            this.TabPage_About.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

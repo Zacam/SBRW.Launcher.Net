@@ -29,7 +29,6 @@ using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.Core.Extension.Hash_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
-using SBRW.Launcher.Core.Extension.Taskbar_;
 using SBRW.Launcher.Core.Extension.Time_;
 using SBRW.Launcher.Core.Extension.Validation_;
 using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
@@ -43,7 +42,6 @@ using SBRW.Launcher.Core.Required.Anti_Cheat;
 using SBRW.Launcher.Core.Theme;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -1229,12 +1227,15 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                     };
 
+                    /* Wait 60 Seconds */
+                    bool Game_Fully_Loaded = Process_Start_Game.Live_Process.WaitForInputIdle(60000);
+                    /*
                     while (Process_Start_Game.Live_Process.MainWindowHandle == IntPtr.Zero && !Process_Start_Game.Live_Process.HasExited)
                     {
                         /* Loop Here until the game Window Appears */
-                    }
+                    /*}*/
 
-                    if (!Process_Start_Game.Live_Process.HasExited)
+                    if (!Process_Start_Game.Live_Process.HasExited && Game_Fully_Loaded)
                     {
                         Presence_Launcher.Status(28, string.Empty);
 
@@ -1305,7 +1306,45 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         Process.Start("explorer.exe", "https://youtu.be/vq9-bmoI-RI");
 #endif
                     }));
-                    ContextMenu.MenuItems.Add("-");
+#if EXPERIMENTAL
+                        ContextMenu.MenuItems.Add(new MenuItem("Borderless", (b, n) =>
+                        {
+                            var hWnd = Process_Start_Game.Live_Process.MainWindowHandle;
+                            // Get the current window style
+                            int currentStyle = GetWindowLong(hWnd, GWL_STYLE);
+                            //int currentExStyle = GetWindowLong(hWnd, GWL_EXSTYLE);
+                            // Remove border and caption from the window style
+                            int newStyle = currentStyle & ~(WS_BORDER | WS_CAPTION | WS_SYSMENU | WS_EX_WINDOWEDGE);
+                            // Remove window edge from extended window style
+                            //int newExStyle = currentExStyle & ~WS_EX_WINDOWEDGE;
+                            // Add WS_EX_APPWINDOW to show the window in the taskbar (optional)
+                            //newExStyle |= WS_EX_APPWINDOW;
+                            // Set the new window style
+                            SetWindowLongPtr(hWnd, GWL_STYLE, (IntPtr)newStyle);
+                            //SetWindowLongPtr(hWnd, GWL_EXSTYLE, (IntPtr)newExStyle);
+
+                            if (DialogResult.Yes.Equals(MessageBox.Show("", "", MessageBoxButtons.YesNo)))
+                            {
+                                Rectangle screenInfo = System.Windows.Forms.Screen.FromHandle(hWnd).Bounds;
+                                Log.Debug(string.Format("Screen: Width -> {0} Height -> {1}", screenInfo.Width, screenInfo.Height));
+                                /* Set Screen Size of Window */
+                                SetWindowPos(hWnd, SpecialWindowHandles.HWND_TOP, 0, 0, screenInfo.Width, screenInfo.Height, SetWindowPosFlags.SWP_FRAMECHANGED | SetWindowPosFlags.SWP_NOMOVE);
+                                
+                                RECT rect;
+                                bool locationLookupSucceeded = GetWindowRect(hWnd, out rect);
+                                if (locationLookupSucceeded)
+                                {
+                                    Point pt = new Point(((screenInfo.Left + screenInfo.Width) / 2) - ((rect.Right - rect.Left) / 2), ((screenInfo.Top + screenInfo.Height) / 2) - ((rect.Bottom - rect.Top) / 2));
+                                    Log.Debug(string.Format("Center: X -> {0}, Y -> {1}", pt.X, pt.Y));
+                                    /* Set Window to Center of Whole Screen 
+                                    * Can not be combined with the Screen size otherwise its broken */
+                                    SetWindowPos(hWnd, SpecialWindowHandles.HWND_TOP, pt.X, pt.Y, 0, 0, SetWindowPosFlags.SWP_FRAMECHANGED | SetWindowPosFlags.SWP_NOZORDER | SetWindowPosFlags.SWP_NOSIZE | SetWindowPosFlags.SWP_SHOWWINDOW);
+                                    //MessageBox.Show(string.Format("  Position: {0},{1}", screenWidth, screenHeight));
+                                }
+                            }
+                        }));
+#endif
+                        ContextMenu.MenuItems.Add("-");
                     if (Parent_Screen.Screen_Instance != null)
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Close Game and Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
