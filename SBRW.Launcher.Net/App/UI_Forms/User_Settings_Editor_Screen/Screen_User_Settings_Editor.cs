@@ -289,26 +289,26 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
 
                 if (comboBoxPerformanceLevel.SelectedIndex == 5)
                 {
-                    Size = new Size(525, 695);
                     comboResolutions.Visible = false;
+                    ((Control)TabPage_Advanced).Enabled = true;
+                    ((Control)TabPage_Advanced).Visible = true;
 
                     if (AmountofCenterTimes == 0)
                     {
                         AmountofCenterTimes++;
+                        /* @Launcher Team TODO: Remove this check once implmented to child form */
                         CenterToScreen();
                     }
                 }
                 else
                 {
-                    if (Product_Version.GetWindowsNumber() >= 10)
-                    {
-                        Size = new Size(271, 695);
-                    }
-                    else
-                    {
-                        Size = new Size(262, 693);
-                    }
+                    ((Control)TabPage_Advanced).Enabled = false;
+                    ((Control)TabPage_Advanced).Visible = false;
 
+                    if (TabControl_USXE.SelectedTab.Equals(TabPage_Advanced))
+                    {
+                        TabControl_USXE.SelectedTab = TabPage_General;
+                    }
 
                     if (ResolutionsListLoaded == true)
                     {
@@ -802,7 +802,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             /********************************/
 
             labelLauncherVersion.Text = "Version: " + Application.ProductVersion;
-            labelOverRideAspect.Text = XML_File.XML_Settings_Data.PostProcessingEnable;
+            //labelOverRideAspect.Text = XML_File.XML_Settings_Data.PostProcessingEnable;
             AmountofCenterTimes = 0;
 
             /*******************************/
@@ -839,7 +839,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             labelEnableAero.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             labelVSync.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             labelPixelAspect.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            labelOverRideAspect.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            //labelOverRideAspect.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             labelAudioMode.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             labelAudioQuality.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             labelMasterVol.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -1097,6 +1097,15 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             comboBoxAnisotropicLevel.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
             comboBoxAnisotropicLevel.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
 
+            /* Tabs Global Background Color */
+            TabControl_USXE.BackColor = Color.FromArgb(22, 29, 38);
+            /* Tabs (Menu) Text Color */
+            TabControl_USXE.ForeColor = Color.FromArgb(192, 192, 192);
+            /* Tabs Current Selected & Hover Menu Tab */
+            TabControl_USXE.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
+            /* Tabs Other Menu Tab */
+            TabControl_USXE.TabColor = Color.FromArgb(44, 58, 76);
+
             /*******************************/
             /* Comboboxes                   /
             /*******************************/
@@ -1286,19 +1295,21 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             PresetButtonMax.CheckedChanged += new EventHandler(PresetButtonMax_CheckedChanged);
             PresetButtonCustom.CheckedChanged += new EventHandler(PresetButtonCustom_CheckedChanged);
 
+            TabControl_USXE.SelectedIndexChanged += (x, y) => 
+            {
+                if (TabControl_USXE.SelectedTab.Equals(TabPage_Advanced))
+                {
+                    LabelGraphicPreset.Visible = PresetPanel.Visible = true;
+                }
+                else
+                {
+                    LabelGraphicPreset.Visible = PresetPanel.Visible = false;
+                }
+            };
+
             /*********************************************************************/
             /* Set Drop Down, Radio, Input Boxes, and Set Window Size and Postion /
             /*********************************************************************/
-
-            /* Bugfix: Set the Size Ahead of Time and it will change after setting the PerformanceLevel Index */
-            if (Product_Version.GetWindowsNumber() >= 10)
-            {
-                Size = new Size(292, 726);
-            }
-            else
-            {
-                Size = new Size(282, 712);
-            }
 
             if (ResolutionsListLoaded == true)
             {
@@ -1307,6 +1318,19 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             else
             {
                 comboResolutions.Visible = false;
+            }
+
+            if (comboBoxPerformanceLevel.SelectedIndex == 5)
+            {
+                ((Control)TabPage_Advanced).Enabled = true;
+                ((Control)TabPage_Advanced).Visible = true;
+                LabelGraphicPreset.Visible = PresetPanel.Visible = true;
+            }
+            else
+            {
+                ((Control)TabPage_Advanced).Enabled = false;
+                ((Control)TabPage_Advanced).Visible = false;
+                LabelGraphicPreset.Visible = PresetPanel.Visible = false;
             }
 
             numericResWidth.Value = Convert.ToInt32(XML_File.XML_Settings_Data.ScreenWidth);

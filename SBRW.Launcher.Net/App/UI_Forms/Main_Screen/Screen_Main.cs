@@ -981,6 +981,14 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             {
                 Presence_Launcher.Start(false, Presence_Launcher.ApplicationID());
 
+                CurrentModFileCount = 0;
+                TotalModFileCount = 0;
+
+                if (ModFilesDownloadUrls != default)
+                {
+                    ModFilesDownloadUrls.Clear();
+                }
+
                 try
                 {
                     if (UI_MODE != 12)
@@ -1142,6 +1150,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     Presence_Launcher.Status(0, "Game Failed to Launch");
                     Log.Core("LAUNCHER: Game failed to Launch. Forcing User to Login again.");
+
+                    if (Screen_Instance != null)
+                    {
+                        Display_Color_Icons(3);
+                    }
                 }
 
                 if (MessageBox.Show(Screen_Instance, Error_Msg, "GameLauncher", MessageBoxButtons.OK, Icon_Box_Art) == DialogResult.OK)
