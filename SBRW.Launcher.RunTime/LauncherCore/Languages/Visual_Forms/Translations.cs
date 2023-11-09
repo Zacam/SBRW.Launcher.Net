@@ -19,7 +19,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Languages.Visual_Forms
 
         public static string Database(string Text_Request)
         {
-            if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+            if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
             {
                 Log.Function("DATABASE: Requested: " + Text_Request + " Lang: " + Application_Language);
             }

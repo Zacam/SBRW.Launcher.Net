@@ -91,7 +91,7 @@ namespace SBRW.Launcher.App.UI_Forms.Update_Popup_Screen
                         if (LauncherUpdateCheck.VersionJSON.Valid_Json())
                         {
 #pragma warning disable CS8602 // Null Safe Check Done Above
-                            if (EnableInsiderBetaTester.Allowed())
+                            if (BuildBeta.Allowed())
                             {
                                 TextBox_Changelog.Text = JsonConvert.DeserializeObject<List<GitHubRelease>>(LauncherUpdateCheck.VersionJSON)[LauncherUpdateCheck.Version_JSON_Index].Body.Replace("\r", Environment.NewLine);
                             }

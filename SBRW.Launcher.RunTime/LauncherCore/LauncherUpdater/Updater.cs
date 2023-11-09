@@ -34,7 +34,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
         public Label text { get; set; }
         public Label description { get; set; }
 
-        public static string CurrentLauncherBuild { get { return EnableInsiderDeveloper.Allowed() ? InsiderInfo.BuildNumberOnly().Replace('-', '.') : Application.ProductVersion; } }
+        public static string CurrentLauncherBuild { get { return BuildDevelopment.Allowed() ? BuildInformation.BuildNumberOnly().Replace('-', '.') : Application.ProductVersion; } }
         public static string LatestLauncherBuild { get; set; } = string.Empty;
         public static bool UpgradeAvailable { get; set; }
         private static bool SkipAvailableUpgrade { get; set; }
@@ -70,7 +70,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     {
                         if (!string.IsNullOrWhiteSpace(GH_Releases.TagName))
                         {
-                            if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                            if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                             {
                                 Log.Info("Github " + (GH_Releases.Pre_Release ? "Pre-" : "") + "Release Version Tag: " + GH_Releases.TagName);
                             }
@@ -115,7 +115,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
             {
                 try
                 {
-                    Uri URLCall = new Uri(EnableInsiderDeveloper.Allowed() ? URLs.GitHub_Launcher_Development : EnableInsiderBetaTester.Allowed() ?
+                    Uri URLCall = new Uri(BuildDevelopment.Allowed() ? URLs.GitHub_Launcher_Development : BuildBeta.Allowed() ?
                         URLs.GitHub_Launcher_Beta : URLs.GitHub_Launcher_Stable);
 #pragma warning disable SYSLIB0014 // Type or member is obsolete
                     ServicePointManager.FindServicePoint(URLCall).ConnectionLeaseTimeout = (int)TimeSpan.FromMinutes(1).TotalMilliseconds;
@@ -170,7 +170,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     if (VersionJSON.Valid_Json() && VisualsAPIChecker.GitHubAPI)
                     {
 #pragma warning disable CS8602 // Null Safe Check Done Above
-                        LatestLauncherBuild = (!EnableInsiderDeveloper.Allowed() && EnableInsiderBetaTester.Allowed()) ?
+                        LatestLauncherBuild = (!BuildDevelopment.Allowed() && BuildBeta.Allowed()) ?
                             Insider_Release_Tag(VersionJSON) : JsonConvert.DeserializeObject<GitHubRelease>(VersionJSON).TagName.Replace('-', '.');
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
                         LogToFileAddons.Parent_Log_Screen(1, "LAUNCHER UPDATE", "GitHub Latest Version -> " + LatestLauncherBuild);
@@ -252,19 +252,19 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                             if (File.Exists(UpdaterPath))
                             {
                                 LogToFileAddons.Parent_Log_Screen(2, "LAUNCHER POPUP", Process.GetCurrentProcess().Id.ToString() + " " +
-                                    (EnableInsiderDeveloper.Allowed() ? "Developer" + " \"" + CurrentLauncherBuild + "\"": EnableInsiderBetaTester.Allowed() ? "Preview" : "Stable"));
+                                    (BuildDevelopment.Allowed() ? "Developer" + " \"" + CurrentLauncherBuild + "\"": BuildBeta.Allowed() ? "Preview" : "Stable"));
                             
                                 Process.Start(UpdaterPath, Process.GetCurrentProcess().Id.ToString() + " " +
-                                    (EnableInsiderDeveloper.Allowed() ? "Developer" + " \"" + CurrentLauncherBuild + "\"": EnableInsiderBetaTester.Allowed() ? "Preview" : "Stable"));
+                                    (BuildDevelopment.Allowed() ? "Developer" + " \"" + CurrentLauncherBuild + "\"": BuildBeta.Allowed() ? "Preview" : "Stable"));
                             }
                             else
                             {
 #if NETFRAMEWORK
-                                if (EnableInsiderDeveloper.Allowed())
+                                if (BuildDevelopment.Allowed())
                                 {
                                     Process.Start(@"https://github.com/DavidCarbon-SBRW/SBRW.Launcher.Releases/releases/latest");
                                 }
-                                else if (EnableInsiderBetaTester.Allowed())
+                                else if (BuildBeta.Allowed())
                                 {
                                     Process.Start(@"https://github.com/SoapboxRaceWorld/GameLauncher_NFSW/releases");
                                 }
@@ -273,11 +273,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                                     Process.Start(@"https://github.com/SoapboxRaceWorld/GameLauncher_NFSW/releases/latest");
                                 }
 #else
-                                if (EnableInsiderDeveloper.Allowed())
+                                if (BuildDevelopment.Allowed())
                                 {
                                     Process.Start("explorer.exe", "https://github.com/DavidCarbon-SBRW/SBRW.Launcher.Releases/releases/latest");
                                 }
-                                else if (EnableInsiderBetaTester.Allowed())
+                                else if (BuildBeta.Allowed())
                                 {
                                     Process.Start("explorer.exe", "https://github.com/SoapboxRaceWorld/GameLauncher_NFSW/releases");
                                 }
@@ -325,11 +325,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                 if (CurrentLauncherBuild.Preview(LatestLauncherBuild))
                 {
                     string WhatBuildAmI;
-                    if (EnableInsiderDeveloper.Allowed())
+                    if (BuildDevelopment.Allowed())
                     {
                         WhatBuildAmI = Translations.Database("LauncherUpdateCheck_VS_Insider_Dev");
                     }
-                    else if (EnableInsiderBetaTester.Allowed())
+                    else if (BuildBeta.Allowed())
                     {
                         WhatBuildAmI = Translations.Database("LauncherUpdateCheck_VS_Insider_Beta");
                     }

@@ -404,11 +404,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         {
                             if (Screen_Settings.Screen_Instance != default)
                             {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, InsiderInfo.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show(Screen_Settings.Screen_Instance, BuildInformation.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                             else if (Screen_Main.Screen_Instance != default)
                             {
-                                MessageBox.Show(Screen_Main.Screen_Instance, InsiderInfo.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show(Screen_Main.Screen_Instance, BuildInformation.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                         }
                         break;
@@ -419,21 +419,21 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         {
                             Screen_Settings.Insider_Settings_Lock = true;
                             Save_Settings.Live_Data.Launcher_Insider = "1";
-                            EnableInsiderDeveloper.Allowed(false);
-                            EnableInsiderBetaTester.Allowed(true);
+                            BuildDevelopment.Allowed(false);
+                            BuildBeta.Allowed(true);
                         }
                         else if (Live_Commands.Contains("dev"))
                         {
                             Screen_Settings.Insider_Settings_Lock = true;
                             Save_Settings.Live_Data.Launcher_Insider = "2";
-                            EnableInsiderDeveloper.Allowed(true);
-                            EnableInsiderBetaTester.Allowed(false);
+                            BuildDevelopment.Allowed(true);
+                            BuildBeta.Allowed(false);
                         }
                         else
                         {
                             Save_Settings.Live_Data.Launcher_Insider = "0";
-                            EnableInsiderDeveloper.Allowed(false);
-                            EnableInsiderBetaTester.Allowed(false);
+                            BuildDevelopment.Allowed(false);
+                            BuildBeta.Allowed(false);
                         }
                         break;
                     case "help":

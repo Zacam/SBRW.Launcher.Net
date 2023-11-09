@@ -142,8 +142,8 @@
             this.TabPage_Game_Security_Center = new System.Windows.Forms.TabPage();
             this.TabControl_Security_Center = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Security_Center_Firewall = new System.Windows.Forms.TabPage();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.GroupBox_Firewall = new System.Windows.Forms.GroupBox();
+            this.TextBox_Console_Firewall = new System.Windows.Forms.TextBox();
             this.ButtonFirewallRulesAPI = new System.Windows.Forms.Button();
             this.ButtonFirewallRulesCheck = new System.Windows.Forms.Button();
             this.ButtonFirewallRulesAddAll = new System.Windows.Forms.Button();
@@ -154,7 +154,7 @@
             this.ButtonFirewallRulesRemoveAll = new System.Windows.Forms.Button();
             this.TextWindowsFirewall = new System.Windows.Forms.Label();
             this.TabPage_Security_Center_Defender = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.GroupBox_Defender = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.ButtonDefenderExclusionAPI = new System.Windows.Forms.Button();
             this.ButtonDefenderExclusionAddGame = new System.Windows.Forms.Button();
@@ -166,7 +166,7 @@
             this.ButtonDefenderExclusionRemoveAll = new System.Windows.Forms.Button();
             this.TextWindowsDefender = new System.Windows.Forms.Label();
             this.TabPage_Security_Center_Permissons = new System.Windows.Forms.TabPage();
-            this.GroupBox_Launcherlog = new System.Windows.Forms.GroupBox();
+            this.GroupBox_Permissons = new System.Windows.Forms.GroupBox();
             this.TextBox_Live_Log = new System.Windows.Forms.TextBox();
             this.ButtonFolderPermissonCheck = new System.Windows.Forms.Button();
             this.ButtonFolderPermissonSet = new System.Windows.Forms.Button();
@@ -194,6 +194,7 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Button_Security_Center = new System.Windows.Forms.Button();
+            this.Clock = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -217,11 +218,11 @@
             this.TabPage_Game_Security_Center.SuspendLayout();
             this.TabControl_Security_Center.SuspendLayout();
             this.TabPage_Security_Center_Firewall.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.GroupBox_Firewall.SuspendLayout();
             this.TabPage_Security_Center_Defender.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.GroupBox_Defender.SuspendLayout();
             this.TabPage_Security_Center_Permissons.SuspendLayout();
-            this.GroupBox_Launcherlog.SuspendLayout();
+            this.GroupBox_Permissons.SuspendLayout();
             this.TabPage_API.SuspendLayout();
             this.TabPage_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
@@ -1462,9 +1463,9 @@
             this.TabPage_Game_Verify_Hash.Controls.Add(this.DownloadProgressBar);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StartScanner);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StopScanner);
-            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Game_Verify_Hash.Name = "TabPage_Game_Verify_Hash";
-            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(830, 322);
+            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(830, 321);
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
@@ -1601,7 +1602,7 @@
             // 
             // TabPage_Security_Center_Firewall
             // 
-            this.TabPage_Security_Center_Firewall.Controls.Add(this.groupBox2);
+            this.TabPage_Security_Center_Firewall.Controls.Add(this.GroupBox_Firewall);
             this.TabPage_Security_Center_Firewall.Controls.Add(this.ButtonFirewallRulesAPI);
             this.TabPage_Security_Center_Firewall.Controls.Add(this.ButtonFirewallRulesCheck);
             this.TabPage_Security_Center_Firewall.Controls.Add(this.ButtonFirewallRulesAddAll);
@@ -1619,29 +1620,29 @@
             this.TabPage_Security_Center_Firewall.Text = "Firewall";
             this.TabPage_Security_Center_Firewall.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // GroupBox_Firewall
             // 
-            this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox2.Location = new System.Drawing.Point(12, 150);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(805, 134);
-            this.groupBox2.TabIndex = 222;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Log:";
-            this.groupBox2.Visible = false;
+            this.GroupBox_Firewall.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GroupBox_Firewall.Controls.Add(this.TextBox_Console_Firewall);
+            this.GroupBox_Firewall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupBox_Firewall.Location = new System.Drawing.Point(12, 150);
+            this.GroupBox_Firewall.Name = "GroupBox_Firewall";
+            this.GroupBox_Firewall.Size = new System.Drawing.Size(805, 134);
+            this.GroupBox_Firewall.TabIndex = 222;
+            this.GroupBox_Firewall.TabStop = false;
+            this.GroupBox_Firewall.Text = "Console:";
+            this.GroupBox_Firewall.Visible = false;
             // 
-            // textBox2
+            // TextBox_Console_Firewall
             // 
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Location = new System.Drawing.Point(6, 17);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(793, 111);
-            this.textBox2.TabIndex = 35;
+            this.TextBox_Console_Firewall.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextBox_Console_Firewall.Location = new System.Drawing.Point(6, 17);
+            this.TextBox_Console_Firewall.Multiline = true;
+            this.TextBox_Console_Firewall.Name = "TextBox_Console_Firewall";
+            this.TextBox_Console_Firewall.ReadOnly = true;
+            this.TextBox_Console_Firewall.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBox_Console_Firewall.Size = new System.Drawing.Size(793, 111);
+            this.TextBox_Console_Firewall.TabIndex = 35;
             // 
             // ButtonFirewallRulesAPI
             // 
@@ -1785,7 +1786,7 @@
             // 
             // TabPage_Security_Center_Defender
             // 
-            this.TabPage_Security_Center_Defender.Controls.Add(this.groupBox1);
+            this.TabPage_Security_Center_Defender.Controls.Add(this.GroupBox_Defender);
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAPI);
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddGame);
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionAddLauncher);
@@ -1795,25 +1796,25 @@
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveLauncher);
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveAll);
             this.TabPage_Security_Center_Defender.Controls.Add(this.TextWindowsDefender);
-            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Security_Center_Defender.Name = "TabPage_Security_Center_Defender";
-            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 292);
+            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 293);
             this.TabPage_Security_Center_Defender.TabIndex = 3;
             this.TabPage_Security_Center_Defender.Text = "Defender";
             this.TabPage_Security_Center_Defender.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
+            // GroupBox_Defender
             // 
-            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.groupBox1.Location = new System.Drawing.Point(12, 150);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(805, 134);
-            this.groupBox1.TabIndex = 221;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Log:";
-            this.groupBox1.Visible = false;
+            this.GroupBox_Defender.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GroupBox_Defender.Controls.Add(this.textBox1);
+            this.GroupBox_Defender.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupBox_Defender.Location = new System.Drawing.Point(12, 150);
+            this.GroupBox_Defender.Name = "GroupBox_Defender";
+            this.GroupBox_Defender.Size = new System.Drawing.Size(805, 134);
+            this.GroupBox_Defender.TabIndex = 221;
+            this.GroupBox_Defender.TabStop = false;
+            this.GroupBox_Defender.Text = "Console:";
+            this.GroupBox_Defender.Visible = false;
             // 
             // textBox1
             // 
@@ -1961,29 +1962,29 @@
             // 
             // TabPage_Security_Center_Permissons
             // 
-            this.TabPage_Security_Center_Permissons.Controls.Add(this.GroupBox_Launcherlog);
+            this.TabPage_Security_Center_Permissons.Controls.Add(this.GroupBox_Permissons);
             this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonCheck);
             this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonSet);
             this.TabPage_Security_Center_Permissons.Controls.Add(this.TextFolderPermissions);
-            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Security_Center_Permissons.Name = "TabPage_Security_Center_Permissons";
-            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 292);
+            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 293);
             this.TabPage_Security_Center_Permissons.TabIndex = 4;
             this.TabPage_Security_Center_Permissons.Text = "Permissons";
             this.TabPage_Security_Center_Permissons.UseVisualStyleBackColor = true;
             // 
-            // GroupBox_Launcherlog
+            // GroupBox_Permissons
             // 
-            this.GroupBox_Launcherlog.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.GroupBox_Launcherlog.Controls.Add(this.TextBox_Live_Log);
-            this.GroupBox_Launcherlog.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.GroupBox_Launcherlog.Location = new System.Drawing.Point(12, 150);
-            this.GroupBox_Launcherlog.Name = "GroupBox_Launcherlog";
-            this.GroupBox_Launcherlog.Size = new System.Drawing.Size(805, 134);
-            this.GroupBox_Launcherlog.TabIndex = 220;
-            this.GroupBox_Launcherlog.TabStop = false;
-            this.GroupBox_Launcherlog.Text = "Log:";
-            this.GroupBox_Launcherlog.Visible = false;
+            this.GroupBox_Permissons.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.GroupBox_Permissons.Controls.Add(this.TextBox_Live_Log);
+            this.GroupBox_Permissons.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.GroupBox_Permissons.Location = new System.Drawing.Point(12, 150);
+            this.GroupBox_Permissons.Name = "GroupBox_Permissons";
+            this.GroupBox_Permissons.Size = new System.Drawing.Size(805, 134);
+            this.GroupBox_Permissons.TabIndex = 220;
+            this.GroupBox_Permissons.TabStop = false;
+            this.GroupBox_Permissons.Text = "Console:";
+            this.GroupBox_Permissons.Visible = false;
             // 
             // TextBox_Live_Log
             // 
@@ -2049,7 +2050,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2313,6 +2314,11 @@
             this.Button_Security_Center.Text = "Security Center";
             this.Button_Security_Center.UseVisualStyleBackColor = false;
             // 
+            // Clock
+            // 
+            this.Clock.Enabled = true;
+            this.Clock.Interval = 1200;
+            // 
             // Screen_Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2358,14 +2364,14 @@
             this.TabPage_Game_Security_Center.ResumeLayout(false);
             this.TabControl_Security_Center.ResumeLayout(false);
             this.TabPage_Security_Center_Firewall.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            this.GroupBox_Firewall.ResumeLayout(false);
+            this.GroupBox_Firewall.PerformLayout();
             this.TabPage_Security_Center_Defender.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.GroupBox_Defender.ResumeLayout(false);
+            this.GroupBox_Defender.PerformLayout();
             this.TabPage_Security_Center_Permissons.ResumeLayout(false);
-            this.GroupBox_Launcherlog.ResumeLayout(false);
-            this.GroupBox_Launcherlog.PerformLayout();
+            this.GroupBox_Permissons.ResumeLayout(false);
+            this.GroupBox_Permissons.PerformLayout();
             this.TabPage_API.ResumeLayout(false);
             this.TabPage_About.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).EndInit();
@@ -2532,17 +2538,18 @@
         private System.Windows.Forms.Button ButtonDefenderExclusionRemoveLauncher;
         private System.Windows.Forms.Button ButtonDefenderExclusionRemoveAll;
         private System.Windows.Forms.Label TextWindowsDefender;
-        public System.Windows.Forms.GroupBox GroupBox_Launcherlog;
+        public System.Windows.Forms.GroupBox GroupBox_Permissons;
         public System.Windows.Forms.TextBox TextBox_Live_Log;
         private System.Windows.Forms.Button ButtonFolderPermissonCheck;
         private System.Windows.Forms.Button ButtonFolderPermissonSet;
         private System.Windows.Forms.Label TextFolderPermissions;
-        public System.Windows.Forms.GroupBox groupBox1;
+        public System.Windows.Forms.GroupBox GroupBox_Defender;
         public System.Windows.Forms.TextBox textBox1;
-        public System.Windows.Forms.GroupBox groupBox2;
-        public System.Windows.Forms.TextBox textBox2;
+        public System.Windows.Forms.GroupBox GroupBox_Firewall;
+        public System.Windows.Forms.TextBox TextBox_Console_Firewall;
         private System.Windows.Forms.Label DownloadProgressText;
         private System.Windows.Forms.Label VerifyHashWelcome;
         private System.Windows.Forms.Label DownloadProgressText_Alt;
+        public System.Windows.Forms.Timer Clock;
     }
 }

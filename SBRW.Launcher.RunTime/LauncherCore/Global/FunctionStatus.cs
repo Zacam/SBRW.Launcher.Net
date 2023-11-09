@@ -185,7 +185,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         /// <returns></returns>
         public static int HasWriteAccessToFolder(string path)
         {
-            if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+            if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
             {
                 Log.Info("WRITE TEST: Folder Path [" + path + "]");
             }

@@ -30,7 +30,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 {
                     JSONResolutions += "{\"resolution\": \"" + vDevMode.dmPelsWidth + "x" + vDevMode.dmPelsHeight + "\", \"dmPelsWidth\": \"" +
                         vDevMode.dmPelsWidth + "\", \"dmPelsHeight\": \"" + vDevMode.dmPelsHeight + "\"},";
-                    if (EnableInsiderDeveloper.Allowed())
+                    if (BuildDevelopment.Allowed())
                     {
                         Log.Debug("SCREENRESOLUTIONS: " + AmountOfRes + " Width: " + vDevMode.dmPelsWidth + " Height: " + vDevMode.dmPelsHeight +
                             " Color: " + (1 << vDevMode.dmBitsPerPel) + " Frequency: " + vDevMode.dmDisplayFrequency);
@@ -45,7 +45,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 }
                 JSONResolutions += "]";
 
-                if (EnableInsiderDeveloper.Allowed())
+                if (BuildDevelopment.Allowed())
                 {
                     Log.Debug("SCREENRESOLUTIONS: LIST -> " + JSONResolutions);
                 }

@@ -403,7 +403,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 {
                     if (Single_Rule != null)
                     {
-                        if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                        if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                         {
                             Log.Ignore("---Firewall---");
                             Log.Debug("Name: " + Single_Rule.Name);
@@ -1286,7 +1286,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 if (!DisableButtonDRAPI)
                 {
-                    if (EnableInsiderDeveloper.Allowed() || (Product_Version.GetWindowsNumber() >= 10 &&
+                    if (BuildDevelopment.Allowed() || (Product_Version.GetWindowsNumber() >= 10 &&
                         (MessageBox.Show(this, "There has been reports that some users are not able to run Windows Defender Checks." +
                         "\nThis ranges from the Built-In to Third-Party Anti-Virus Software." +
                         "\n\nIf this Window Closes or the Launcher Crashes with an Error Message" +

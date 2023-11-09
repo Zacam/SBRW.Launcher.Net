@@ -129,7 +129,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.ModNet
                             if (IsSymbolic(realLoc) && File.Exists(realLoc))
                             {
                                 File.Delete(realLoc);
-                                if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                                if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                                 {
                                     Log.Info("CLEANLINKS: Removed Symbolic File " + realLoc);
                                 }
@@ -187,7 +187,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.ModNet
                             if (IsSymbolic(realLoc) && Directory.Exists(realLoc))
                             {
                                 Directory.Delete(realLoc, true);
-                                if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                                if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                                 {
                                     Log.Info("CLEANLINKS: Removed Symbolic Folder " + realLoc);
                                 }

@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net.Cache;
 using System.Threading.Tasks;
+using SBRW.Launcher.RunTime.InsiderKit;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
 {
@@ -120,7 +121,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
         public static async void PingAPIStatus()
         {
             LogToFileAddons.Parent_Log_Screen(1, "API", "Checking Status");
-            if (!InsiderKit.EnableInsiderDeveloper.Allowed())
+            if (!BuildDevelopment.Allowed())
             {
                 LogToFileAddons.Parent_Log_Screen(2, "API", "Checking WorldUnited Status");
                 await Task.Run(() => 

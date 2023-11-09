@@ -2758,7 +2758,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                         catch (Exception Error)
                         {
-                            if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                            if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                             {
                                 try { Log.Error("JSON GSI (Received): " + e2.Result); }
                                 catch { Log.Error("JSON GSI (Received): Unable to Get Result"); }
@@ -2940,7 +2940,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             /* Check Selected Server Address for since nfsw currently requires being proxied for https */
                             if (Launcher_Value.Launcher_Select_Server_Data.IPAddress.StartsWith("https"))
                             {
-                                if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                                if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                                 {
                                     Log.Debug("Server is Https");
                                 }
@@ -2948,7 +2948,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 if ((!Launcher_Value.Launcher_Select_Server_JSON.Server_Proxy_Forced) || (Launcher_Value.Launcher_Select_Server_JSON.Server_Proxy_Forced != false))
                                 {   /* So we can force the Proxy On even if a User has Disabled it */
                                     InformationCache.SelectedServerEnforceProxy = true;
-                                    if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                                    if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                                     {
                                         Log.Debug("Server is Https: Case 1");
                                     }
@@ -2957,7 +2957,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 else if (Launcher_Value.Launcher_Select_Server_JSON.Server_Proxy_Forced == false)
                                 {   /* In which case, respect the GSI set value */
                                     InformationCache.SelectedServerEnforceProxy = false;
-                                    if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                                    if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                                     {
                                         Log.Debug("Server is Https: Case 2 (Never Gets Touched Because of First If Statement)");
                                     }
@@ -2968,7 +2968,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             {   /* This is set so that it doesn't try to enforce Proxy On if user switches
                                  * to a server that doesn't have enforceLauncherProxy set or true */
                                 InformationCache.SelectedServerEnforceProxy = false;
-                                if (EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed())
+                                if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                                 {
                                     Log.Debug("Server is not Https: Case 3");
                                 }
@@ -4185,12 +4185,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Log.Visuals("CORE: Loading Main Screen");
             Application.OpenForms[this.Name].Activate();
 
-            if (!string.IsNullOrWhiteSpace(InsiderInfo.BuildNumber()))
+            if (!string.IsNullOrWhiteSpace(BuildInformation.BuildNumber()))
             {
-                if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Label_Insider_Build_Number.Visible = true;
-                    Label_Insider_Build_Number.Text = InsiderInfo.BuildNumber();
+                    Label_Insider_Build_Number.Text = BuildInformation.BuildNumber();
                 }
                 else
                 {
@@ -4442,7 +4442,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     else if (DateTime.Now == new DateTime(DateTime.Now.Year, 6, 4))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem(
-                            ((EnableInsiderBetaTester.Allowed() || EnableInsiderDeveloper.Allowed()) ? 
+                            ((BuildBeta.Allowed() || BuildDevelopment.Allowed()) ? 
                             "": "2017/06/04 - ") + "Development Cycle", (_, E) =>
                         {
 #if NETFRAMEWORK
@@ -4769,7 +4769,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             /* Enable/Disable Visuals        /
             /********************************/
 
-            Button_Select_Server.Visible = EnableInsiderDeveloper.Allowed();
+            Button_Select_Server.Visible = BuildDevelopment.Allowed();
 
             /********************************/
             /* Set Hardcoded Text            /
@@ -4841,7 +4841,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                         if (!JsonGSI.Valid_Json())
                                         {
                                             GSIErrorFree = false;
-                                            if (EnableInsiderBetaTester.Allowed() || EnableInsiderBetaTester.Allowed())
+                                            if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                                             {
                                                 Log.Error("Pinging GSI (Received): " + JsonGSI);
                                             }

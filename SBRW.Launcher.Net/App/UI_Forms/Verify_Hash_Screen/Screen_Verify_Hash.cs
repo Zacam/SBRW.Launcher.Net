@@ -423,7 +423,7 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
 
                     String[] getFilesToCheck = { };
 
-                    if (File.Exists("checksums.dat") && EnableInsiderDeveloper.Allowed())
+                    if (File.Exists("checksums.dat") && BuildDevelopment.Allowed())
                     {
                         /* Read Local checksums.dat */
                         getFilesToCheck = File.ReadAllLines("checksums.dat");

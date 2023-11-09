@@ -303,9 +303,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
 
                 if ((Save_Settings.Live_Data.Launcher_Insider != (CheckBox_Opt_Insider.Checked ? "1" : "0")) &&
-    !Insider_Settings_Lock && !EnableInsiderDeveloper.Allowed())
+    !Insider_Settings_Lock && !BuildDevelopment.Allowed())
                 {
-                    EnableInsiderBetaTester.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
+                    BuildBeta.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
                     RestartRequired = true;
                 }
 
@@ -929,7 +929,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             try
             {
-                if (EnableInsiderDeveloper.Allowed())
+                if (BuildDevelopment.Allowed())
                 {
                     FunctionStatus.DoesCDNSupportVerifyHash = true;
                     ButtonsColorSet(Button_Game_Verify_Files, 4, true);

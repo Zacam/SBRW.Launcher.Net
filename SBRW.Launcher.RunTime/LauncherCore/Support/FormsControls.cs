@@ -55,13 +55,13 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
                             SafeInvokeAction(Control_Form, Action_Refresh);
                             Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form.Name + " was added to the Form: " + Window_Name.Name);
                         }
-                        else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                        else if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                         {
                             Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Handle hasn't been Created or has been Disposed | Action: " + Action_Refresh + " Form: " + Window_Name);
                         }
                     }
                 }
-                else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " Action: " + Action_Refresh + " Form: " + Window_Name + " <- Is Null");
                 }
@@ -115,12 +115,12 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
                         SafeInvokeAction(Control_Form, Action_Refresh);
                         Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form.Name + " was added to the Form: " + Control_Form.FindForm().Name);
                     }
-                    else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                    else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
                         Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Handle hasn't been Created or has been Disposed | Action: " + Action_Refresh);
                     }
                 }
-                else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Is Null | Action: " + Action_Refresh);
                 }
@@ -169,12 +169,12 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
                         SafeInvokeAction(@this, Action_Refresh);
                         Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + @this.Name + " was added to the Form: " + @this.FindForm().Name);
                     }
-                    else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                    else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
                         Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + @this + " <- Handle hasn't been Created or has been Disposed | Action: " + Action_Refresh);
                     }
                 }
-                else if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + @this + " <- Is Null | Action: " + Action_Refresh);
                 }

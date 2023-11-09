@@ -354,8 +354,8 @@ namespace SBRW.Launcher.App.UI_Forms
                     });
 
                     LogToFileAddons.Parent_Log_Screen(8,
-                        EnableInsiderDeveloper.Allowed() ? "DEV TEST " : (EnableInsiderBetaTester.Allowed() ? "BETA TEST " : ""),
-                        "SBRW.Launcher " + Application.ProductVersion + " - (" + InsiderInfo.BuildNumberOnly() + ")");
+                        BuildDevelopment.Allowed() ? "DEV TEST " : (BuildBeta.Allowed() ? "BETA TEST " : ""),
+                        "SBRW.Launcher " + Application.ProductVersion + " - (" + BuildInformation.BuildNumberOnly() + ")");
 
                     LogToFileAddons.Parent_Log_Screen(2, "OS", "Detecting");
                     Presence_Launcher.Status(0, "Checking Operating System");

@@ -153,14 +153,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 
                     try
                     {
-                        if (EnableInsiderDeveloper.Allowed())
+                        if (BuildDevelopment.Allowed())
                         {
                             Log.Info("Authentication: Received XML -> " + LoginResponse);
                         }
 
                         sbrwXml.LoadXml(LoginResponse);
 
-                        if (EnableInsiderDeveloper.Allowed())
+                        if (BuildDevelopment.Allowed())
                         {
                             Log.Info("Authentication: Loaded XML -> " + sbrwXml.OuterXml);
                         }
@@ -424,7 +424,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
         {
             try
             {
-                if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Log.Info("XMLSERVERCORE: Attmempting to Read XML [NodePath: '" + FullNodePath + "' Attribute: '" + AttributeName + "']");
                 }
@@ -434,7 +434,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                     if (string.IsNullOrWhiteSpace(LocationData.SelectSingleNode(FullNodePath) != null ?
                         LocationData.SelectSingleNode(FullNodePath).InnerText : string.Empty))
                     {
-                        if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                        if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                         {
                             Log.Info("XMLSERVERCORE: EMPTY VALUE - LAUNCHER");
                         }
@@ -450,7 +450,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                 {
                     if ((LocationData.SelectSingleNode(FullNodePath) ?? null) == null)
                     {
-                        if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                        if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                         {
                             Log.Info("XMLSERVERCORE: INVALID NODE - LAUNCHER");
                         }
@@ -466,7 +466,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
             }
             catch (Exception Error)
             {
-                if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Log.Error("XMLSERVERCORE: Unable to Read XML [NodePath: '" + FullNodePath + "' Attribute: '" + AttributeName + "']" + Error.Message);
                     Log.ErrorIC("XMLSERVERCORE: " + Error.HResult);
@@ -474,7 +474,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                 }
                 if (Type == "InnerText")
                 {
-                    if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                    if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
                         Log.Error("XMLSERVERCORE: ERROR VALUE - LAUNCHER");
                     }
@@ -482,7 +482,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                 }
                 else if (Type == "NodeOnly")
                 {
-                    if (EnableInsiderDeveloper.Allowed() || EnableInsiderBetaTester.Allowed())
+                    if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
                         Log.Error("XMLSERVERCORE: ERROR NODE - LAUNCHER");
                     }
