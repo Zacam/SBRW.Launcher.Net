@@ -58,17 +58,17 @@ try
 
     # Update the constant variable BUILD_DATE with the current date
     $currentDate = Get-Date -Format "MM-dd-yyyy"
-    $newBuildInfoContent = $buildInformationClassFileContent -replace 'const\s+string\s+DATE\s*=\s*".*"', "const string DATE = `"$currentDate`";"
+    $newBuildInfoContent = $buildInformationClassFileContent -replace 'const\s+string\s+DATE\s*=\s*".*";', "const string DATE = `"$currentDate`";"
 
     # Update the constant variable BUILD_TIME with the current UTC time
     $currentTime = Get-Date -Format "HHmmss"
-    $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME\s*=\s*".*"', "const string TIME = `"$currentTime`";"
+    $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME\s*=\s*".*";', "const string TIME = `"$currentTime`";"
 
     $currentTimeZone = Get-Date -Format "zzz"
-    $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME_ZONE\s*=\s*".*"', "const string TIME_ZONE = `"$currentTimeZone`";"
+    $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME_ZONE\s*=\s*".*";', "const string TIME_ZONE = `"$currentTimeZone`";"
 
     # Save the updated content back to the C# class file
-    $newBuildInfoContent | Set-Content $buildInformationClassFilePath -Force
+    $newBuildInfoContent | Set-Content $buildInformationClassFilePath -NoNewline
 
     echo ([string]::Format("========== DATE updated to: {0}  ==========", $currentDate))
 	echo ([string]::Format("========== TIME updated to: {0}  ==========", $currentTime))
@@ -77,7 +77,7 @@ try
 catch
 {
     throw $_
-    return
+    exit 1
 }
 
 try
@@ -110,8 +110,8 @@ try
 	$newBuildBetaContent = $buildBetaFileContent -replace 'private static bool Enabled = .*;', ([string]::Format('private static bool Enabled = {0};', $BuildBetaBoolean))
 
     # Save the updated content back to the C# class file
-    $newBuildDevContent | Set-Content $buildDevelopmentClassFilePath -Force
-	$newBuildBetaContent | Set-Content $buildBetaClassFilePath -Force
+    $newBuildDevContent | Set-Content $buildDevelopmentClassFilePath -NoNewline
+	$newBuildBetaContent | Set-Content $buildBetaClassFilePath -NoNewline
 
     echo ([string]::Format("========== Development Enabled: {0}  ==========", $BuildDevBoolean))
 	echo ([string]::Format("========== Beta Enabled: {0}  ==========", $BuildBetaBoolean))
@@ -119,7 +119,7 @@ try
 catch
 {
     throw $_
-    return
+    exit 1
 }
 
 try
@@ -229,14 +229,14 @@ try
 			$xmlWriter.Close()
 
 			#Save csproj (Formatted XML)
-			$stringWriter.ToString() | Out-File $path -Force
+			$stringWriter.ToString() | Out-File $path -NoNewline
 
 			echo ([string]::Format("========== New Version Number: {0}.{1}.{2} ==========",$xml.Project.PropertyGroup.VersionMajor,$xml.Project.PropertyGroup.VersionMinor,$xml.Project.PropertyGroup.VersionBuild))
 		}
 		catch
 		{
 			throw $_
-			return
+			exit 1
 		}
 	}
 	else
@@ -247,7 +247,7 @@ try
 catch
 {
 	throw $_
-	return
+	exit 1
 }
 
 try
@@ -270,5 +270,5 @@ try
 catch
 {
 	throw $_
-	return
+	exit 1
 }

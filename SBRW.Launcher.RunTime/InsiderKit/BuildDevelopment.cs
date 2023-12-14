@@ -1,4 +1,4 @@
-﻿namespace SBRW.Launcher.RunTime.InsiderKit
+namespace SBRW.Launcher.RunTime.InsiderKit
 {
     /// <summary>
     /// This is only used for Developers (Bypasses Most Checks)
@@ -8,7 +8,7 @@
         /// <summary>
         /// 
         /// </summary>
-        private static bool Enabled = true;
+        private static bool Enabled = false;
         /// <summary>
         /// If User is Opt-In to Use Beta Builds
         /// </summary>

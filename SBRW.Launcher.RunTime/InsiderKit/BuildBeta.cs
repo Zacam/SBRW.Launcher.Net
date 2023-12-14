@@ -1,4 +1,4 @@
-﻿namespace SBRW.Launcher.RunTime.InsiderKit
+namespace SBRW.Launcher.RunTime.InsiderKit
 {
     /// <summary>
     /// This is only used for Beta Testers (Treated like a Public Release)
