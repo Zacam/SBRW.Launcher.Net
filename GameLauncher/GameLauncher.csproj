@@ -4,8 +4,19 @@
     <OutputType>Exe</OutputType>
 	<TargetFrameworks>net6.0;net461</TargetFrameworks>
 	<Platforms>AnyCPU;x86</Platforms>
+	<IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
 	<Copyright>© Soapbox Race World</Copyright>
-	<GlobalVersion>2.2.3</GlobalVersion>
+	<VersionMajor>2</VersionMajor>
+	<!-- If Auto Increment Script should Handle this change -->
+	<VersionMajorUpgrade>false</VersionMajorUpgrade>
+	<VersionMinor>2</VersionMinor>
+	<!-- If Auto Increment Script should Handle this change -->
+	<VersionMinorUpgrade>false</VersionMinorUpgrade>
+	<VersionBuild>3</VersionBuild>
+	<!-- Need to Reset Build Number? Either Revent Changes in Git or Manually undo Changes in this file
+	Otherwise the Build Script will Auto Increment for us -->
+	<GlobalVersion>$(VersionMajor).$(VersionMinor).$(VersionBuild)</GlobalVersion>
+	<!-- Fail Safe Version String Check -->
 	<GlobalVersion Condition=" '$(GlobalVersion)' == '' ">2.2.1.$([System.DateTime]::UtcNow.ToString(mmff))</GlobalVersion>
 	<Version>$(GlobalVersion)</Version>
 	<AssemblyVersion>$(GlobalVersion)</AssemblyVersion>
