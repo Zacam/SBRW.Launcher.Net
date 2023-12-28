@@ -427,7 +427,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Label_Insider_Build_Number.Name = "Label_Insider_Build_Number";
             this.Label_Insider_Build_Number.Size = new System.Drawing.Size(200, 14);
             this.Label_Insider_Build_Number.TabIndex = 14;
-            this.Label_Insider_Build_Number.Text = "BETA Build Date: ##-##-##-X";
+            this.Label_Insider_Build_Number.Text = "BETA Build Date: ##-##-##-XXXX";
             this.Label_Insider_Build_Number.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // ComboBox_Server_List
@@ -547,7 +547,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Label_Status_Launcher_Version.Name = "Label_Status_Launcher_Version";
             this.Label_Status_Launcher_Version.Size = new System.Drawing.Size(152, 30);
             this.Label_Status_Launcher_Version.TabIndex = 27;
-            this.Label_Status_Launcher_Version.Text = "Version: XX.XX.XX.XXXX";
+            this.Label_Status_Launcher_Version.Text = "Version: XX.XX.XX.XXXXXX";
             // 
             // Label_Status_Game_Server_Data
             // 

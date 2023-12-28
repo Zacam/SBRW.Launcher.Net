@@ -3278,7 +3278,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
 
                     Log.Info("DOWNLOAD: Getting Tracks Folder");
-                    Download_Settings.Alternative_WebCalls = Launcher_Value.Launcher_Alternative_Webcalls();
+                    Download_Settings.Alternative_WebCalls(Launcher_Value.Launcher_Alternative_Webcalls());
                     LZMA_Downloader.StartDownload(Save_Settings.Live_Data.Launcher_CDN, "Tracks", Save_Settings.Live_Data.Game_Path, false, false, 615494528);
                 }
                 else
@@ -3406,7 +3406,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
 
                     Log.Info("DOWNLOAD: Getting Speech/Audio Files");
-                    Download_Settings.Alternative_WebCalls = Launcher_Value.Launcher_Alternative_Webcalls();
+                    Download_Settings.Alternative_WebCalls(Launcher_Value.Launcher_Alternative_Webcalls());
                     LZMA_Downloader.StartDownload(Save_Settings.Live_Data.Launcher_CDN, speechFile, Save_Settings.Live_Data.Game_Path, false, false, speechSize);
                 }
                 else
@@ -4051,7 +4051,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 #if (RELEASE_UNIX || DEBUG_UNIX)
                                 Download_LZMA_Settings.System_Unix = Download_Settings.System_Unix = true;
 #endif
-                                Download_LZMA_Settings.Alternative_WebCalls = Download_Settings.Alternative_WebCalls = Launcher_Value.Launcher_Alternative_Webcalls();
+                                Download_LZMA_Settings.Alternative_WebCalls = Download_Settings.Alternative_WebCalls(Launcher_Value.Launcher_Alternative_Webcalls());
                                 LZMA_Downloader.StartDownload(Save_Settings.Live_Data.Launcher_CDN, string.Empty, Save_Settings.Live_Data.Game_Path, false, false, 1130632198);
                             }
                             else
@@ -4185,12 +4185,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Log.Visuals("CORE: Loading Main Screen");
             Application.OpenForms[this.Name].Activate();
 
-            if (!string.IsNullOrWhiteSpace(BuildInformation.BuildNumber()))
+            if (!string.IsNullOrWhiteSpace(BuildInformation.SHORT_INFO_WITH_SECONDS))
             {
                 if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                 {
                     Label_Insider_Build_Number.Visible = true;
-                    Label_Insider_Build_Number.Text = BuildInformation.BuildNumber();
+                    Label_Insider_Build_Number.Text = BuildInformation.SHORT_INFO_WITH_SECONDS;
                 }
                 else
                 {

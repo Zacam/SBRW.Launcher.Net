@@ -1,20 +1,23 @@
 param(
-    [Parameter(Mandatory=$false)]
-    [ValidateSet("0", "1", "2")]
-    [string]$EnvironmentCode
+    [Parameter(Mandatory=$true)]
+    [ValidateSet("0", "1", "2", "3", "4", "5")]
+    [string]$CompileMode
 )
 
 try
 {
     # Map numeric values to corresponding environments
-    $EnvironmentMapping = @{
+    $CompileModeMapping = @{
         "0" = "Release"
         "1" = "Beta"
         "2" = "Development"
+        "3" = "Information (Release)"
+        "4" = "Information (Beta)"
+        "5" = "Information (Development)"
     }
 
     # Get the corresponding environment based on the provided code
-    $Environment = $EnvironmentMapping[$EnvironmentCode]
+    $Environment = $CompileModeMapping[$CompileMode]
     $EnvironmentInt = 0
 
     #if(!(-not $Environment))
@@ -31,6 +34,21 @@ try
     {
         echo "========== Development Build Mode =========="
         $EnvironmentInt = 2
+    }
+    elseif ($Environment -eq "Information (Release)") 
+    {
+        echo "========== Information (Release) Build Mode =========="
+        $EnvironmentInt = 3
+    }
+    elseif ($Environment -eq "Information (Beta)") 
+    {
+        echo "========== Information (Beta) Build Mode =========="
+        $EnvironmentInt = 4
+    }
+    elseif ($Environment -eq "Information (Development)") 
+    {
+        echo "========== Information (Development) Build Mode =========="
+        $EnvironmentInt = 5
     }
     else 
     {
@@ -60,9 +78,16 @@ try
     $currentDate = Get-Date -Format "MM-dd-yyyy"
     $newBuildInfoContent = $buildInformationClassFileContent -replace 'const\s+string\s+DATE\s*=\s*".*";', "const string DATE = `"$currentDate`";"
 
+	# Create a Short Version of Current Date
+	$currentDateShort = Get-Date -Format "MM-dd-yy"
+    $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+DATE_SHORT\s*=\s*".*";', "const string DATE_SHORT = `"$currentDateShort`";"
+
     # Update the constant variable BUILD_TIME with the current UTC time
-    $currentTime = Get-Date -Format "HHmmss"
+    $currentTime = Get-Date -Format "HHmm"
     $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME\s*=\s*".*";', "const string TIME = `"$currentTime`";"
+
+	$currentTimeSeconds = Get-Date -Format "ss"
+	$newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME_SECONDS\s*=\s*".*";', "const string TIME_SECONDS = `"$currentTimeSeconds`";"
 
     $currentTimeZone = Get-Date -Format "zzz"
     $newBuildInfoContent = $newBuildInfoContent -replace 'const\s+string\s+TIME_ZONE\s*=\s*".*";', "const string TIME_ZONE = `"$currentTimeZone`";"
@@ -71,7 +96,9 @@ try
     $newBuildInfoContent | Set-Content $buildInformationClassFilePath -NoNewline
 
     echo ([string]::Format("========== DATE updated to: {0}  ==========", $currentDate))
+	echo ([string]::Format("========== DATE_SHORT updated to: {0}  ==========", $currentDate))
 	echo ([string]::Format("========== TIME updated to: {0}  ==========", $currentTime))
+	echo ([string]::Format("========== TIME_SECONDS updated to: {0}  ==========", $currentTimeSeconds))
 	echo ([string]::Format("========== TIME_ZONE updated to: {0}  ==========", $currentTimeZone))
 }
 catch
@@ -94,12 +121,14 @@ try
 	$BuildDevBoolean = "false"
 	$BuildBetaBoolean = "false"
 
-	if ($EnvironmentInt -eq 1)
+	# Beta Builds
+	if (($EnvironmentInt -eq 1) -or ($EnvironmentInt -eq 4))
 	{
 		$BuildDevBoolean = "false"
 		$BuildBetaBoolean = "true"
 	}
-	elseif ($EnvironmentInt -eq 2)
+	# Development Builds
+	elseif (($EnvironmentInt -eq 2) -or ($EnvironmentInt -eq 5))
 	{
 		$BuildDevBoolean = "true"
 		$BuildBetaBoolean = "false"
@@ -245,7 +274,7 @@ function Update-Version
 
 try
 {
-	if (!($EnvironmentInt -eq 2))
+	if (!(($EnvironmentInt -eq 2) -or ($EnvironmentInt -eq 3) -or ($EnvironmentInt -eq 4) -or ($EnvironmentInt -eq 5)))
 	{
 		Update-Version -LiveEnvironmentStatus $EnvironmentInt -LiveFilePath "$PSScriptRoot\SBRW.Launcher.Net\SBRW.Launcher.csproj"
 		Update-Version -LiveEnvironmentStatus $EnvironmentInt -LiveFilePath "$PSScriptRoot\GameLauncher\GameLauncher.csproj"
@@ -263,8 +292,10 @@ catch
 
 try
 {
-	if ($EnvironmentInt -eq 2)
+	# Development Builds
+	if (($EnvironmentInt -eq 2) -or ($EnvironmentInt -eq 5))
 	{
+		# We need Debug Symbols so Lets Build in Debug Mode
 		echo "========== Building DEBUG Windows Build =========="
 		Invoke-Expression "dotnet build --configuration Debug"
 		echo "========== Building DEBUG Unix Build =========="

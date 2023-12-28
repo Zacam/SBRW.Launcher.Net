@@ -34,7 +34,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
         public Label text { get; set; }
         public Label description { get; set; }
 
-        public static string CurrentLauncherBuild { get { return BuildDevelopment.Allowed() ? BuildInformation.BuildNumberOnly().Replace('-', '.') : Application.ProductVersion; } }
+        public static string CurrentLauncherBuild { get { return BuildDevelopment.Allowed() ? BuildInformation.SHORT_INFO_WITH_SECONDS.Replace('-', '.') : Application.ProductVersion; } }
         public static string LatestLauncherBuild { get; set; } = string.Empty;
         public static bool UpgradeAvailable { get; set; }
         private static bool SkipAvailableUpgrade { get; set; }

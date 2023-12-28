@@ -362,7 +362,7 @@ namespace SBRW.Launcher.Net
                                         "SBRW.Launcher.Core.Discord.dll - 0.3.2",
                                         "SBRW.Launcher.Core.Proxy.dll - 0.3.3",
                                         "SBRW.Launcher.Core.Theme.dll - 0.2.2",
-                                        "SBRW.Launcher.Core.Downloader.dll - 0.3.8-preview001",
+                                        "SBRW.Launcher.Core.Downloader.dll - 0.3.8",
                                         "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.2"
                                 };
 

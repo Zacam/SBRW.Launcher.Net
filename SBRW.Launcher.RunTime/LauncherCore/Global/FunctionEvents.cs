@@ -404,11 +404,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         {
                             if (Screen_Settings.Screen_Instance != default)
                             {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, BuildInformation.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show(Screen_Settings.Screen_Instance, BuildInformation.NumberDisplayFull(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                             else if (Screen_Main.Screen_Instance != default)
                             {
-                                MessageBox.Show(Screen_Main.Screen_Instance, BuildInformation.BuildNumber(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                MessageBox.Show(Screen_Main.Screen_Instance, BuildInformation.NumberDisplayFull(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                         }
                         break;
