@@ -357,7 +357,7 @@ namespace SBRW.Launcher.Net
                                         "SBRW.Ini.Parser.dll - 3.0.2",
                                         "SBRW.Nancy.dll - 2.0.13",
                                         "SBRW.Nancy.Hosting.Self.dll - 2.0.11",
-                                        "SBRW.Launcher.Core.dll - 0.3.1",
+                                        "SBRW.Launcher.Core.dll - 0.3.2",
                                         "SBRW.Launcher.Core.Extra.dll - 0.3.11",
                                         "SBRW.Launcher.Core.Discord.dll - 0.3.2",
                                         "SBRW.Launcher.Core.Proxy.dll - 0.3.3",

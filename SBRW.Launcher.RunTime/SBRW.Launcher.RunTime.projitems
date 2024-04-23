@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)InsiderKit\BuildDevelopment.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\API\APIChecker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Client\Auth\Authentication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\client\auth\AuthenticationFormater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\client\auth\json\AuthenticationJSON.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Client\Auth\Tokens.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Client\NFSW.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\FileReadWrite\ExtractResource.cs" />
@@ -48,5 +50,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)SystemPlatform\Unix\UnixOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SystemPlatform\Windows\ManagementSearcher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SystemPlatform\Windows\RedistributablePackage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)LauncherCore\Client\Auth\JSON\" />
   </ItemGroup>
 </Project>

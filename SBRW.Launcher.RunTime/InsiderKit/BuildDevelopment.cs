@@ -8,7 +8,7 @@ namespace SBRW.Launcher.RunTime.InsiderKit
         /// <summary>
         /// 
         /// </summary>
-        private static bool Enabled = true;
+        private static bool Enabled = false;
         /// <summary>
         /// If User is Opt-In to Use Beta Builds
         /// </summary>
