@@ -168,7 +168,7 @@ public static class Authentication_Formater
                 }
                 else if (sbrwJSON.UserId == 0)
                 {
-                    if (sbrwJSON.Description.ToUpperInvariant() == "LOGIN ERROR")
+                    if (sbrwJSON.Description == "LOGIN ERROR")
                     {
                         Converted_Response.Invalid_Login = true;
                     }
@@ -229,7 +229,7 @@ public static class Authentication_Formater
                     if (NodeReader(sbrwXml, "NodeOnly", "LoginStatusVO/Description", "NodeOnly") != "ERROR NODE - LAUNCHER" &&
                         NodeReader(sbrwXml, "InnerText", "LoginStatusVO/Description", "InnerText") != "EMPTY VALUE - LAUNCHER")
                     {
-                        if (NodeReader(sbrwXml, "InnerText", "LoginStatusVO/Description", "InnerText").ToUpperInvariant() == "LOGIN ERROR")
+                        if (NodeReader(sbrwXml, "InnerText", "LoginStatusVO/Description", "InnerText") == "LOGIN ERROR")
                         {
                             Converted_Response.Invalid_Login = true;
                         }
@@ -283,7 +283,7 @@ public class C_Information_Login_Register
     /// <summary>
     /// 
     /// </summary>
-    public C_Information_Ban? Ban { get; set; }
+    public C_Information_Ban Ban { get; set; } = new C_Information_Ban();
     /// <summary>
     /// Information Response from Description Header Node
     /// </summary>
@@ -317,7 +317,7 @@ public class C_Information_Login_Register
     /// <summary>
     /// 
     /// </summary>
-    public string UserId { get; set; } = string.Empty;
+    public string UserId { get; set; } = "0";
 
 }
 /// <summary>

@@ -176,7 +176,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 
                     if (!TEMP_DATA.Invalid_Format)
                     {
-                        if (TEMP_DATA.Ban != default)
+                        if (TEMP_DATA.Ban.Active)
                         {
                             if (!string.IsNullOrWhiteSpace(TEMP_DATA.Description))
                             {
@@ -209,16 +209,13 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                         }
                         else if (TEMP_DATA.UserId == "0")
                         {
-                            if (!string.IsNullOrWhiteSpace(TEMP_DATA.Description))
+                            if (TEMP_DATA.Invalid_Login)
                             {
-                                if (TEMP_DATA.Description == "LOGIN ERROR")
-                                {
-                                    Tokens.Error = "Invalid E-mail or Password";
-                                }
-                                else
-                                {
-                                    Tokens.Error = TEMP_DATA.Description;
-                                }
+                                Tokens.Error = "Invalid E-mail or Password";
+                            }
+                            else if (!string.IsNullOrWhiteSpace(TEMP_DATA.Description))
+                            {
+                                Tokens.Error = TEMP_DATA.Description;
                             }
                             else
                             {
