@@ -11,6 +11,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         public static string NameOldServersJSON { get { return "servers.json"; } }
         public static string NameLZMA { get { return "LZMA.dll"; } }
         public static string NameModLinks { get { return ".links"; } }
+        public static string NameAccountsJSON { get { return "Accounts.json";  } }
 
         public static string LauncherFolder { get { return AppDomain.CurrentDomain.BaseDirectory; } }
         public static string LauncherThemeFolder { get { return Path.Combine(LauncherFolder, "Theme"); } }

@@ -19,56 +19,62 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(Window_Name.Name))
+                if (string.IsNullOrWhiteSpace(Window_Name?.Name) || Window_Name == default)
                 {
-                    if (!(Application.OpenForms[Window_Name.Name] != null ? Application.OpenForms[Window_Name.Name].Disposing : true) && !Application.OpenForms[Window_Name.Name].IsDisposed)
+                    if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
-                        if (!Control_Form.IsDisposed || (Control_Form.IsHandleCreated && Control_Form.FindForm().IsHandleCreated))
-                        {
-                            if (!Control_Form.Disposing)
-                            {
-                                if (Control_Form.InvokeRequired)
-                                {
-                                    Control_Form.Invoke(Action_Refresh);
+                        Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " Action: " + Action_Refresh + " Form: " + Window_Name + " <- Is Null");
+                    }
+                    return;
+                }
 
-                                    if (Force_Refresh)
-                                    {
-                                        Control_Form.SafeInvokeAction(() =>
-                                        {
-                                            Control_Form.Refresh();
-                                        }, Window_Name, false);
-                                    }
-                                }
-                                else
-                                {
-                                    Action_Refresh();
-                                }
-                            }
-                            else
-                            {
-                                Log.Function("SafeInvokeAction".ToUpper() + "Control: " + Control_Form.Name + " is being Disposed");
-                            }
-                        }
-                        else if (!Application.OpenForms[Window_Name.Name].IsDisposed)
+                Form Cached_Form = Application.OpenForms[Window_Name.Name];
+                bool Cached_Form_IsValid = Cached_Form is not null && !Cached_Form.IsDisposed && !Cached_Form.Disposing;
+
+                if (!Cached_Form_IsValid)
+                {
+                    return;
+                }
+
+                bool Control_IsValid = !Control_Form.IsDisposed || (Control_Form.IsHandleCreated && Control_Form.FindForm().IsHandleCreated);
+
+                if (!Control_IsValid)
+                {
+                    if (Cached_Form_IsValid)
+                    {
+                        Window_Name.Controls.Add(Control_Form);
+                        SafeInvokeAction(Control_Form, Action_Refresh);
+                        Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form.Name + " was added to the Form: " + Window_Name.Name);
+                    }
+                    return;
+                }
+
+                if (Control_Form.Disposing)
+                {
+                    Log.Function("SafeInvokeAction".ToUpper() + "Control: " + Control_Form.Name + " is being Disposed");
+                    return;
+                }
+
+                if (Control_Form.InvokeRequired)
+                {
+                    Control_Form.Invoke(Action_Refresh);
+
+                    if (Force_Refresh)
+                    {
+                        Control_Form.SafeInvokeAction(() =>
                         {
-                            Window_Name.Controls.Add(Control_Form);
-                            SafeInvokeAction(Control_Form, Action_Refresh);
-                            Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form.Name + " was added to the Form: " + Window_Name.Name);
-                        }
-                        else if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
-                        {
-                            Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Handle hasn't been Created or has been Disposed | Action: " + Action_Refresh + " Form: " + Window_Name);
-                        }
+                            Control_Form.Refresh();
+                        }, Window_Name, false);
                     }
                 }
-                else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
+                else
                 {
-                    Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " Action: " + Action_Refresh + " Form: " + Window_Name + " <- Is Null");
+                    Action_Refresh();
                 }
             }
-            catch (Exception Error)
+            catch (Exception ex)
             {
-                LogToFileAddons.OpenLog("Safe Invoker Action [Control Only]", string.Empty, Error, string.Empty, true);
+                LogToFileAddons.OpenLog("Safe Invoker Action [Base]", string.Empty, ex, string.Empty, true);
             }
         }
         /// <summary>
@@ -81,53 +87,50 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
         {
             try
             {
-                if (!string.IsNullOrWhiteSpace(Control_Form.Name))
+                if (string.IsNullOrWhiteSpace(Control_Form?.Name) || Control_Form == default)
                 {
-                    if (!Control_Form.IsDisposed || (Control_Form.IsHandleCreated && Control_Form.FindForm().IsHandleCreated))
+                    if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
                     {
-                        if (!Control_Form.Disposing)
-                        {
-                            if (Control_Form.InvokeRequired)
-                            {
-                                Control_Form.Invoke(Action_Refresh);
+                        Log.Function($"SAFEINVOKEACTION: Control is null | Control Name: {Control_Form?.Name}");
+                    }
 
-                                if (Force_Refresh)
-                                {
-                                    Control_Form.SafeInvokeAction(() =>
-                                    {
-                                        Control_Form.Refresh();
-                                    }, false);
-                                }
-                            }
-                            else
-                            {
-                                Action_Refresh();
-                            }
-                        }
-                        else
-                        {
-                            Log.Function("SafeInvokeAction".ToUpper() + "Control: " + Control_Form.Name + " is being Disposed");
-                        }
-                    }
-                    else if (!Control_Form.FindForm().IsDisposed || !Control_Form.FindForm().Disposing)
-                    {
-                        Control_Form.FindForm().Controls.Add(Control_Form);
-                        SafeInvokeAction(Control_Form, Action_Refresh);
-                        Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form.Name + " was added to the Form: " + Control_Form.FindForm().Name);
-                    }
-                    else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
-                    {
-                        Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Handle hasn't been Created or has been Disposed | Action: " + Action_Refresh);
-                    }
+                    return;
                 }
-                else if (BuildDevelopment.Allowed() || BuildBeta.Allowed())
+
+                if (Control_Form.IsDisposed || Control_Form.Disposing)
                 {
-                    Log.Function("SafeInvokeAction: ".ToUpper() + "Control: " + Control_Form + " <- Is Null | Action: " + Action_Refresh);
+                    Log.Function($"SAFEINVOKEACTION: Control '{Control_Form.Name}' is being disposed");
+                    return;
                 }
+
+                if (Control_Form.InvokeRequired)
+                {
+                    try
+                    {
+                        Control_Form.Invoke(Action_Refresh);
+                        if (Force_Refresh) Control_Form.BeginInvoke((Action)(() => Control_Form.Refresh()));
+                    }
+                    catch (Exception ex)
+                    {
+                        LogToFileAddons.OpenLog("SafeInvokeAction", "Invoke failed", ex, string.Empty, true);
+                    }
+                    return;
+                }
+
+                try
+                {
+                    Action_Refresh();
+                }
+                catch (Exception ex)
+                {
+                    LogToFileAddons.OpenLog("SafeInvokeAction", "Action execution failed", ex, string.Empty, true);
+                }
+
+                if (Force_Refresh) Control_Form.Refresh();
             }
-            catch (Exception Error)
+            catch (Exception ex)
             {
-                LogToFileAddons.OpenLog("Safe Invoker Action [Control Only]", string.Empty, Error, string.Empty, true);
+                LogToFileAddons.OpenLog("Safe Invoker Action [Delta]", string.Empty, ex, string.Empty, true);
             }
         }
         /// <summary>

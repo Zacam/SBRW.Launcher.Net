@@ -192,66 +192,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
             }
         }
 
-        public static void ServerList_Menu_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            try
-            {
-                string serverListText = string.Empty;
-                /* 0 = Offline | 1 = Online | 2 = Checking | 3 = GSI Error */
-                int onlineStatus = 2;
-
-                if (sender is ComboBox cb)
-                {
-                    if (e.Index != -1 && cb.Items != null)
-                    {
-                        if (cb.Items[e.Index] is Json_List_Server si)
-                        {
-                            serverListText = si.Name;
-                            onlineStatus = InformationCache.ServerStatusBook.ContainsKey(si.ID) ? InformationCache.ServerStatusBook[si.ID] : 2;
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrWhiteSpace(serverListText) && sender != null)
-                {
-                    Font font = ((ComboBox)sender).Font;
-                    Brush backgroundColor;
-                    Brush textColor;
-
-                    if (serverListText.StartsWith("<GROUP>"))
-                    {
-                        font = new Font(font, FontStyle.Bold);
-                        e.Graphics.FillRectangle(new SolidBrush(Color_Winform_Other.DropMenu_White), e.Bounds);
-                        e.Graphics.DrawString(serverListText.Replace("<GROUP>", string.Empty), font, new SolidBrush(Color_Winform_Other.DropMenu_Black), e.Bounds);
-                    }
-                    else
-                    {
-                        font = new Font(font, FontStyle.Regular);
-                        if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
-                        {
-                            backgroundColor = SystemBrushes.Highlight;
-                            textColor = SystemBrushes.HighlightText;
-                        }
-                        else
-                        {
-                            backgroundColor = onlineStatus switch
-                            {
-                                1 => new SolidBrush(Color_Winform_Other.DropMenu_Ping_Success),/* ONLINE */
-                                2 => new SolidBrush(Color_Winform_Other.DropMenu_Ping_Checking),/* CHECKING */
-                                3 => new SolidBrush(Color_Winform_Other.DropMenu_Ping_Warning),/* GSI ERROR */
-                                _ => new SolidBrush(Color_Winform_Other.DropMenu_Ping_Error),/* OFFLINE */
-                            };
-                            textColor = new SolidBrush(Color_Winform_Other.DropMenu_Black);
-                        }
-
-                        e.Graphics.FillRectangle(backgroundColor, e.Bounds);
-                        e.Graphics.DrawString("    " + serverListText, font, textColor, e.Bounds);
-                    }
-                }
-            }
-            catch { }
-        }
-
         public static void Console_Commands(string Live_Commands)
         {
             try

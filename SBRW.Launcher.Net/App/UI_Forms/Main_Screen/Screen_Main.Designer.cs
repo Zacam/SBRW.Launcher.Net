@@ -85,6 +85,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.UI_Timer = new System.Windows.Forms.Timer(this.components);
             this.Input_Console = new System.Windows.Forms.TextBox();
             this.Button_Console_Submit = new System.Windows.Forms.Button();
+            this.ComboBox_Accounts = new System.Windows.Forms.ComboBox();
+            this.Button_Account_Manager = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Server_Banner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Bar_Outline)).BeginInit();
@@ -714,6 +716,26 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Button_Console_Submit.UseVisualStyleBackColor = false;
             this.Button_Console_Submit.Visible = false;
             // 
+            // ComboBox_Accounts
+            // 
+            this.ComboBox_Accounts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Accounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Accounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Accounts.FormattingEnabled = true;
+            this.ComboBox_Accounts.Location = new System.Drawing.Point(607, 161);
+            this.ComboBox_Accounts.Name = "ComboBox_Accounts";
+            this.ComboBox_Accounts.Size = new System.Drawing.Size(230, 21);
+            this.ComboBox_Accounts.TabIndex = 152;
+            // 
+            // Button_Account_Manager
+            // 
+            this.Button_Account_Manager.Location = new System.Drawing.Point(606, 204);
+            this.Button_Account_Manager.Name = "Button_Account_Manager";
+            this.Button_Account_Manager.Size = new System.Drawing.Size(231, 30);
+            this.Button_Account_Manager.TabIndex = 153;
+            this.Button_Account_Manager.Text = "Account Manager";
+            this.Button_Account_Manager.UseVisualStyleBackColor = true;
+            // 
             // Screen_Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -736,6 +758,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Controls.Add(this.Label_Status_Launcher);
             this.Controls.Add(this.Label_Download_Information);
             this.Controls.Add(this.Button_Custom_Server);
+            this.Controls.Add(this.ComboBox_Accounts);
+            this.Controls.Add(this.Button_Account_Manager);
             this.Controls.Add(this.Input_Password);
             this.Controls.Add(this.Input_Email);
             this.Controls.Add(this.Label_Information_Window);
@@ -844,5 +868,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public Timer UI_Timer;
         public TextBox Input_Console;
         public Button Button_Console_Submit;
+        public ComboBox ComboBox_Accounts;
+        private Button Button_Account_Manager;
     }
 }
