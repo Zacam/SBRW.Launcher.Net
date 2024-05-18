@@ -4,6 +4,7 @@ using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using System.ComponentModel;
+using System.Drawing;
 using System.IO;
 using System.ServiceProcess;
 
@@ -165,6 +166,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                 {
                     Screen_Instance.DataGridView_Account_List.DataSource = Accounts_Cache;
                     Screen_Instance.DataGridView_Account_List.Refresh();
+                    Screen_Instance.DataGridView_Account_List.ClearSelection();
                 }
             }
 

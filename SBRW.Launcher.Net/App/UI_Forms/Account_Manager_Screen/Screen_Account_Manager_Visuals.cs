@@ -38,6 +38,58 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
         }
         /// <summary>
+        /// Sets the Color for Buttons
+        /// </summary>
+        /// <param name="Elements">Button Control Name</param>
+        /// <param name="Color">Range 0-3 Sets Colored Button.
+        /// <code>"0" Checking Blue</code><code>"1" Success Green</code><code>"2" Warning Orange</code><code>"3" Error Red</code></param>
+        /// <param name="EnabledORDisabled">Enables or Disables the Button</param>
+        /// <remarks>Range 0-3 Sets Colored Button.
+        /// <code>"0" Checking Blue</code><code>"1" Success Green</code><code>"2" Warning Orange</code><code>"3" Error Red</code></remarks>
+        public void ColorSet(Button Elements, int Color, bool EnabledORDisabled)
+        {
+            switch (Color)
+            {
+                /* Checking Blue */
+                case 0:
+                    Elements.ForeColor = Color_Winform_Buttons.Blue_Fore_Color;
+                    Elements.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+                    Elements.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+                    Elements.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+                    break;
+                /* Success Green */
+                case 1:
+                    Elements.ForeColor = Color_Winform_Buttons.Green_Fore_Color;
+                    Elements.BackColor = Color_Winform_Buttons.Green_Back_Color;
+                    Elements.FlatAppearance.BorderColor = Color_Winform_Buttons.Green_Border_Color;
+                    Elements.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Green_Mouse_Over_Back_Color;
+                    break;
+                /* Warning Orange */
+                case 2:
+                    Elements.ForeColor = Color_Winform_Buttons.Yellow_Fore_Color;
+                    Elements.BackColor = Color_Winform_Buttons.Yellow_Back_Color;
+                    Elements.FlatAppearance.BorderColor = Color_Winform_Buttons.Yellow_Border_Color;
+                    Elements.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Yellow_Mouse_Over_Back_Color;
+                    break;
+                /* Error Red */
+                case 3:
+                    Elements.ForeColor = Color_Winform_Buttons.Red_Fore_Color;
+                    Elements.BackColor = Color_Winform_Buttons.Red_Back_Color;
+                    Elements.FlatAppearance.BorderColor = Color_Winform_Buttons.Red_Border_Color;
+                    Elements.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Red_Mouse_Over_Back_Color;
+                    break;
+                /* Unknown Gray */
+                default:
+                    Elements.ForeColor = Color_Winform_Buttons.Gray_Fore_Color;
+                    Elements.BackColor = Color_Winform_Buttons.Gray_Back_Color;
+                    Elements.FlatAppearance.BorderColor = Color_Winform_Buttons.Gray_Border_Color;
+                    Elements.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Gray_Mouse_Over_Back_Color;
+                    break;
+            }
+
+            Elements.Enabled = EnabledORDisabled;
+        }
+        /// <summary>
         /// 
         /// </summary>
         private void Set_Visuals()
@@ -54,6 +106,9 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             /* Set Background Image         /
             /*******************************/
 
+            /* Set Background with Transparent Key */
+            BackgroundImage = Image_Background.Settings;
+            TransparencyKey = Color_Screen.BG_Settings;
 
             /*******************************/
             /* Set Font                     /
@@ -94,8 +149,14 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             /* Set Theme Colors & Images     /
             /********************************/
 
-            /* Buttons */
+            KeyPreview = true;
+            BackColor = Color_Winform_About.BG_Fore_Color;
+            ForeColor = Color_Winform_About.Text_Fore_Color;
 
+            /* Buttons */
+            ColorSet(Button_Add, 1, true);
+            ColorSet(Button_Update, 2, true);
+            ColorSet(Button_Delete, 3, true);
 
             /* Label Links */
             //Label_Email.ForeColor = Color_Winform.Text_Fore_Color;
@@ -104,17 +165,60 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             //Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
 
             /* Input Boxes */
-            TextBox_Email.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
-            TextBox_Email.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
+            TextBox_Email.BackColor = Color_Winform_Other.Input;
+            TextBox_Email.ForeColor = Color_Text.L_Five;
+            TextBox_Password.BackColor = Color_Winform_Other.Input;
+            TextBox_Password.ForeColor = Color_Text.L_Five;
+            TextBox_Nickname.BackColor = Color_Winform_Other.Input;
+            TextBox_Nickname.ForeColor = Color_Text.L_Five;
+            TextBox_ID.BackColor = Color_Winform_Other.Input;
+            TextBox_ID.ForeColor = Color_Text.L_Five;
+            TextBox_ID_Account.BackColor = Color_Winform_Other.Input;
+            TextBox_ID_Account.ForeColor = Color_Text.L_Five;
+            TextBox_Min.BackColor = Color_Winform_Other.Input;
+            TextBox_Min.ForeColor = Color_Text.L_Five;
+            TextBox_Max.BackColor = Color_Winform_Other.Input;
+            TextBox_Max.ForeColor = Color_Text.L_Five;
 
-            /* Check boxes */
+            /* Check Boxes */
             CheckBox_Password_Reveal.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
 
-            Label_Email.BackColor = Color_Winform_Other.Input;
+            /* Text Labels */
             Label_Email.ForeColor = Color_Text.L_Five;
+            Label_Password.ForeColor = Color_Text.L_Five;
+            Label_Nickname.ForeColor = Color_Text.L_Five;
+            Label_ID.ForeColor = Color_Text.L_Five;
+            Label_ID_Account.ForeColor = Color_Text.L_Five;
+            Label_Min.ForeColor = Color_Text.L_Five;
+            Label_Max.ForeColor = Color_Text.L_Five;
 
             /* Secondary Buttons */
             Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
+
+            /* DataGrid */
+            DataGridView_Account_List.BackgroundColor = Color.FromArgb(22, 29, 38);
+            DataGridView_Account_List.GridColor = Color.FromArgb(41, 54, 70);
+            DataGridView_Account_List.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            DataGridView_Account_List.ReadOnly = true;
+            DataGridView_Account_List.TabStop = false;
+            DataGridView_Account_List.RowHeadersVisible = false;
+            DataGridView_Account_List.AllowUserToAddRows = false;
+            DataGridView_Account_List.ClearSelection();
+            DataGridView_Account_List.BorderStyle = BorderStyle.None;
+
+            /* DataGridView Control Data Style Settings */
+            DataGridView_Account_List.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            DataGridView_Account_List.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
+            DataGridView_Account_List.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+
+            // Colors Text
+            DataGridView_Account_List.DefaultCellStyle.ForeColor = Color.FromArgb(178, 210, 255);
+            // Colors Row(s)
+            DataGridView_Account_List.DefaultCellStyle.BackColor = Color.FromArgb(31, 41, 54);
+            // Colors Selected Row
+            DataGridView_Account_List.DefaultCellStyle.SelectionBackColor = Color.FromArgb(41, 54, 70);
+            // Colors Selection Text
+            DataGridView_Account_List.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 219, 255);
 
             /********************************/
             /* Events                        /
@@ -122,6 +226,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
             /* DataGridView Control Events */
             DataGridView_Account_List.CellClick += new DataGridViewCellEventHandler(DataGridView_Account_List_CellClick);
+            DataGridView_Account_List.CellFormatting += new DataGridViewCellFormattingEventHandler(DataGridView_Account_List_CellFormatting);
             /* Buttons Control Events */
             Button_Add.Click += new EventHandler(Button_Add_Click);
             Button_Update.Click += new EventHandler(Button_Update_Click);
@@ -148,15 +253,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             Load += new EventHandler(Screen_Account_Manager_Load);
             Shown += new EventHandler(Screen_Account_Manager_Shown);
 
-            /* DataGridView Control Data Style Settings */
-            DataGridView_Account_List.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            DataGridView_Account_List.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCells;
-            DataGridView_Account_List.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-
-            KeyPreview = true;
-
-            BackColor = Color_Winform_About.BG_Fore_Color;
-            ForeColor = Color_Winform_About.Text_Fore_Color;
+            
 
             /* Tabs Global Background Color */
             //TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = TabControl_Game.BackColor = TabControl_Security_Center.BackColor = Color.FromArgb(22, 29, 38);

@@ -55,6 +55,7 @@
             // Label_Max
             // 
             this.Label_Max.AutoSize = true;
+            this.Label_Max.BackColor = System.Drawing.Color.Transparent;
             this.Label_Max.Location = new System.Drawing.Point(515, 129);
             this.Label_Max.Name = "Label_Max";
             this.Label_Max.Size = new System.Drawing.Size(30, 13);
@@ -64,6 +65,7 @@
             // Label_Min
             // 
             this.Label_Min.AutoSize = true;
+            this.Label_Min.BackColor = System.Drawing.Color.Transparent;
             this.Label_Min.Location = new System.Drawing.Point(388, 130);
             this.Label_Min.Name = "Label_Min";
             this.Label_Min.Size = new System.Drawing.Size(27, 13);
@@ -107,6 +109,7 @@
             // Label_Nickname
             // 
             this.Label_Nickname.AutoSize = true;
+            this.Label_Nickname.BackColor = System.Drawing.Color.Transparent;
             this.Label_Nickname.Location = new System.Drawing.Point(131, 129);
             this.Label_Nickname.Name = "Label_Nickname";
             this.Label_Nickname.Size = new System.Drawing.Size(58, 13);
@@ -124,6 +127,7 @@
             // Label_ID_Account
             // 
             this.Label_ID_Account.AutoSize = true;
+            this.Label_ID_Account.BackColor = System.Drawing.Color.Transparent;
             this.Label_ID_Account.Location = new System.Drawing.Point(636, 32);
             this.Label_ID_Account.Name = "Label_ID_Account";
             this.Label_ID_Account.Size = new System.Drawing.Size(64, 13);
@@ -132,7 +136,8 @@
             // 
             // Button_Update
             // 
-            this.Button_Update.Location = new System.Drawing.Point(515, 90);
+            this.Button_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Update.Location = new System.Drawing.Point(515, 89);
             this.Button_Update.Name = "Button_Update";
             this.Button_Update.Size = new System.Drawing.Size(118, 37);
             this.Button_Update.TabIndex = 31;
@@ -141,7 +146,8 @@
             // 
             // Button_Delete
             // 
-            this.Button_Delete.Location = new System.Drawing.Point(639, 90);
+            this.Button_Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Delete.Location = new System.Drawing.Point(639, 89);
             this.Button_Delete.Name = "Button_Delete";
             this.Button_Delete.Size = new System.Drawing.Size(118, 37);
             this.Button_Delete.TabIndex = 30;
@@ -150,7 +156,8 @@
             // 
             // Button_Add
             // 
-            this.Button_Add.Location = new System.Drawing.Point(391, 90);
+            this.Button_Add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Add.Location = new System.Drawing.Point(391, 89);
             this.Button_Add.Name = "Button_Add";
             this.Button_Add.Size = new System.Drawing.Size(118, 37);
             this.Button_Add.TabIndex = 29;
@@ -168,6 +175,7 @@
             // Label_Password
             // 
             this.Label_Password.AutoSize = true;
+            this.Label_Password.BackColor = System.Drawing.Color.Transparent;
             this.Label_Password.Location = new System.Drawing.Point(131, 81);
             this.Label_Password.Name = "Label_Password";
             this.Label_Password.Size = new System.Drawing.Size(56, 13);
@@ -184,6 +192,7 @@
             // Label_Email
             // 
             this.Label_Email.AutoSize = true;
+            this.Label_Email.BackColor = System.Drawing.Color.Transparent;
             this.Label_Email.Location = new System.Drawing.Point(131, 32);
             this.Label_Email.Name = "Label_Email";
             this.Label_Email.Size = new System.Drawing.Size(35, 13);
@@ -201,6 +210,7 @@
             // Label_ID
             // 
             this.Label_ID.AutoSize = true;
+            this.Label_ID.BackColor = System.Drawing.Color.Transparent;
             this.Label_ID.Location = new System.Drawing.Point(388, 32);
             this.Label_ID.Name = "Label_ID";
             this.Label_ID.Size = new System.Drawing.Size(21, 13);
@@ -211,7 +221,10 @@
             // 
             this.DataGridView_Account_List.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridView_Account_List.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
+            this.DataGridView_Account_List.BackgroundColor = System.Drawing.Color.Chartreuse;
+            this.DataGridView_Account_List.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DataGridView_Account_List.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridView_Account_List.GridColor = System.Drawing.Color.OrangeRed;
             this.DataGridView_Account_List.Location = new System.Drawing.Point(131, 187);
             this.DataGridView_Account_List.Name = "DataGridView_Account_List";
             this.DataGridView_Account_List.Size = new System.Drawing.Size(626, 308);
@@ -232,6 +245,7 @@
             // Screen_Account_Manager
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(891, 529);
             this.Controls.Add(this.Button_Close);
             this.Controls.Add(this.Label_Max);
@@ -253,6 +267,7 @@
             this.Controls.Add(this.TextBox_ID);
             this.Controls.Add(this.Label_ID);
             this.Controls.Add(this.DataGridView_Account_List);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

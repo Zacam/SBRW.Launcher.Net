@@ -2281,6 +2281,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ComboBox_Server_List.DrawItem += new DrawItemEventHandler(ServerList_Menu_DrawItem);
             ComboBox_Server_List.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
 
+            //TODO
             //ComboBox_Accounts.SelectedIndexChanged += new EventHandler(ComboBox_Server_List_SelectedIndexChanged);
             ComboBox_Accounts.DrawItem += new DrawItemEventHandler(ComboBox_Account_List_DrawItem);
             ComboBox_Accounts.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
