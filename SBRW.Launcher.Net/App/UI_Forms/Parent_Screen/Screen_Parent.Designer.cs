@@ -1,6 +1,6 @@
-﻿namespace SBRW.Launcher.App.UI_Forms
+﻿namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
 {
-    partial class Parent_Screen
+    partial class Screen_Parent
     {
         /// <summary>
         /// Required designer variable.

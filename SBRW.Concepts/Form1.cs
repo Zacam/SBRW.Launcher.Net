@@ -1,4 +1,6 @@
+using SBRW.Launcher.Core.Theme.Conversion_;
 using Svg;
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -24,29 +26,27 @@ namespace SBRW.Concepts
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
-            // Load SVG document
-            //Test_Cache_SVG = Test_Cache_SVG_2 = Test_Cache_SVG_3 = Test_Cache_SVG_4 = Test_Cache_SVG_5 = Test_Cache_SVG_6 = SvgDocument.Open(svgFilePath);
-            //Test_Cache_SVG = Test_Cache_SVG_2 = Test_Cache_SVG_3 = Test_Cache_SVG_4 = Test_Cache_SVG_5 = Test_Cache_SVG_6 = SvgDocument.Open<SvgDocument>(new MemoryStream(Extract_Resource.AsByte("SBRW.Concepts.Logo.svg")));
-            //Test_Cache_SVG = Test_Cache_SVG_2 = Test_Cache_SVG_3 = Test_Cache_SVG_4 = Test_Cache_SVG_5 = Test_Cache_SVG_6 = (SvgDocument)new SvgImage().GetImage("https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/AJ_Digital_Camera.svg");
-
-            Test_Cache_SVG = SvgDocument.Open(Folder_Icon_DEBUG_Path + "Icon_Check_Engine.svg");
-            Color Base_Colour = Color.FromArgb(66, 179, 189);
-            Color Error_Colour = Color.FromArgb(254, 0, 0);
-            Color Success_Colour = Color.FromArgb(159, 193, 32);
-            Color Unknown_Colour = Color.FromArgb(132, 132, 132);
-            Color Warning_Colour = Color.FromArgb(230, 159, 0);
-            Test_Cache_SVG.Fill = new SvgColourServer(Warning_Colour);
-
-            Test_Cache_SVG_4 = SvgDocument.Open(Folder_Icon_DEBUG_Path + "Input_Global.svg");
-            Test_Cache_SVG_3 = SvgDocument.Open(Folder_Icon_DEBUG_Path + "Input_Global.svg");
-            Test_Cache_SVG_2 = SvgDocument.Open(Folder_Icon_DEBUG_Path + "Input_Global.svg");
-            Test_Cache_SVG_3.GetElementById("Key").Display = "";
-            Test_Cache_SVG_4.GetElementById("Mail").Display = "";
             // Set the PictureBox image to the created bitmap
-            Picture_Input_Password.BackgroundImage = Test_Cache_SVG_3.Draw();
-            Picture_Input_Email.BackgroundImage = Test_Cache_SVG_4.Draw();
-            Picture_Logo.BackgroundImage = SvgDocument.Open((Folder_Icon_DEBUG_Path + "Logo.svg")).Draw();
-            Picture_Icon_Version.BackgroundImage = Test_Cache_SVG.Draw();
+            /*
+            var test = SvgDocument.Open((Folder_Icon_DEBUG_Path + "Input_Global.svg"));
+            test.GetElementById("Mail").Display = "";
+            test.GetElementById("Border").Stroke = test.GetElementById("Mail").Fill = new SvgColourServer(Color.FromArgb(230, 159, 0));
+            test.GetElementById("Border").Fill = new SvgColourServer(Color.FromArgb(0, 191, 255));
+            Picture_Input_Password.BackgroundImage = test.Draw();
+            */
+            Picture_Input_Password.BackgroundImage = Icon_Order(SVG_Icon.Input_Box_Password).Draw();
+            Picture_Input_Email.BackgroundImage = Icon_Order(SVG_Icon.Input_Box_Email).Draw();
+            //Picture_Logo.BackgroundImage = SvgDocument.Open((Folder_Icon_DEBUG_Path + "Logo.svg")).Draw();
+            Picture_Icon_Version.BackgroundImage = Icon_Order(SVG_Icon.Check_Engine, SVG_Color.Warning).Draw();
+            Picture_Icon_Server.BackgroundImage = Icon_Order(SVG_Icon.Globe, SVG_Color.Warning).Draw();
+            Picture_Icon_API.BackgroundImage = Icon_Order(SVG_Icon.Plug, SVG_Color.Warning).Draw();
+            Picture_Icon_Server_Discord.BackgroundImage = Icon_Order(SVG_Icon.Discord, SVG_Color.Warning).Draw();
+            Picture_Icon_Server_Facebook.BackgroundImage = Icon_Order(SVG_Icon.Facebook, SVG_Color.Warning).Draw();
+            Picture_Icon_Server_Home.BackgroundImage = Icon_Order(SVG_Icon.Home, SVG_Color.Warning).Draw();
+            Picture_Icon_Server_Twitter.BackgroundImage = Icon_Order(SVG_Icon.Twitter, SVG_Color.Warning).Draw();
+            Button_Close.BackgroundImage = Icon_Order(SVG_Icon.Cross, SVG_Color.Warning).Draw();
+            Button_Settings.BackgroundImage = Icon_Order(SVG_Icon.Gear, SVG_Color.Warning).Draw();
+            Button_Security_Center.BackgroundImage = Icon_Order(SVG_Icon.Shield, SVG_Color.Warning).Draw();
         }
 
         private void button1_Click(object sender, System.EventArgs e)

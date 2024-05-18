@@ -59,12 +59,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                             {
 
                             }
-                            finally
-                            {
-                                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                GC.Collect(); 
-                                #endif
-                            }
                         }
 
                         if ((Time_Check < DateTime.Now.Date) || !File.Exists(Time_Stamp))
@@ -95,10 +89,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     {
                         CachedJSONList = string.Empty;
                     }
-
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
             });
 
@@ -133,12 +123,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                         {
                             LogToFileAddons.Parent_Log_Screen(5, "SERVER LIST CORE", Error.InnerException.Message, false, true);
                         }
-                    }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
                 });
             }
@@ -241,12 +225,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     LogToFileAddons.Parent_Log_Screen(5, "SERVER LIST CORE", Error.InnerException.Message, false, true);
                 }
             }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
-            }
 
             LogToFileAddons.Parent_Log_Screen(1, "LAUNCHER UPDATER", "Moved to Function");
             /* (Start Process) Check If Updater Exists or Requires an Update */
@@ -277,12 +255,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 {
                     LogToFileAddons.Parent_Log_Screen(5, "COUNTRYNAME", Error.InnerException.Message, false, true);
                 }
-            }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             }
 
             return "Unknown";
@@ -339,12 +311,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
             {
                 LogToFileAddons.OpenLog("Server Name Provider", string.Empty, Error, string.Empty, true);
                 return "Unknown";
-            }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             }
         }
     }

@@ -33,6 +33,8 @@ using SBRW.Launcher.Core.Extension.Validation_;
 using System.Diagnostics;
 using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
 using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -46,7 +48,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseDown(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Click;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.Error_Select);
         }
         /// <summary>
         /// 
@@ -55,7 +57,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseEnter(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Hover;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.Error_Highlight);
         }
         /// <summary>
         /// 
@@ -64,7 +66,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
         }
         /// <summary>
         /// 
@@ -73,7 +75,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseDown(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = SecurityCenter.SecurityCenterIcon(1);
+            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
         }
         /// <summary>
         /// 
@@ -82,7 +84,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseEnter(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = SecurityCenter.SecurityCenterIcon(2);
+            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(2);
         }
         /// <summary>
         /// 
@@ -91,7 +93,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = SecurityCenter.SecurityCenterIcon(0);
+            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(0);
         }
         /// <summary>
         /// 
@@ -100,7 +102,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSettings_MouseDown(object sender, EventArgs e)
         {
-            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ? Image_Icon.Gear_Click : Image_Icon.Gear_Warning_Click;
+            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ?
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White_Select) :
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.Warning_Select);
         }
         /// <summary>
         /// 
@@ -109,7 +113,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSettings_MouseEnter(object sender, EventArgs e)
         {
-            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ? Image_Icon.Gear_Hover : Image_Icon.Gear_Warning_Hover;
+            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ?
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White_Highlight) :
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.Warning_Highlight);
         }
         /// <summary>
         /// 
@@ -118,7 +124,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSettings_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ? Image_Icon.Gear : Image_Icon.Gear_Warning;
+            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Good") ?
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White) :
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.Warning);
         }
         /// <summary>
         /// 
@@ -163,7 +171,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Email_TextChanged(object sender, EventArgs e)
         {
-            Picture_Input_Email.Image = Image_Other.Text_Border_Email;
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
         }
         /// <summary>
         /// 
@@ -172,11 +180,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Password_TextChanged(object sender, EventArgs e)
         {
-            if (Picture_Input_Password.Image != Image_Other.Text_Border_Password)
-            {
-                Picture_Input_Email.Image = Image_Other.Text_Border_Email;
-                Picture_Input_Password.Image = Image_Other.Text_Border_Password;
-            }
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
         }
         /// <summary>
         /// 
@@ -468,16 +473,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             /* Input Strokes */
             Picture_Input_Email.Visible = hideElements;
             Picture_Input_Password.Visible = hideElements;
-
-            if (Picture_Input_Email.Image != Image_Other.Text_Border_Email)
-            {
-                Picture_Input_Email.Image = Image_Other.Text_Border_Email;
-            }
-
-            if (Picture_Input_Password.Image != Image_Other.Text_Border_Password)
-            {
-                Picture_Input_Password.Image = Image_Other.Text_Border_Password;
-            }
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
 
             if (Picture_Information_Window.Image != Image_Other.Information_Window)
             {
@@ -492,28 +489,16 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             /* Hides Social Panel */
             Panel_Server_Information.Visible = false;
             /* Home */
-            if (Picture_Icon_Server_Home.BackgroundImage != Image_Icon.Home_Disabled)
-            {
-                Picture_Icon_Server_Home.BackgroundImage = Image_Icon.Home_Disabled;
-            }
+            Picture_Icon_Server_Home.BackgroundImage = Picture_Icon_Server_Home.Icon_Order(SVG_Icon.Home, SVG_Color.Unknown);
             LinkLabel_Server_Home.Enabled = false;
             /* Discord */
-            if (Picture_Icon_Server_Discord.BackgroundImage != Image_Icon.Discord_Disabled)
-            {
-                Picture_Icon_Server_Discord.BackgroundImage = Image_Icon.Discord_Disabled;
-            }
+            Picture_Icon_Server_Discord.BackgroundImage = Picture_Icon_Server_Discord.Icon_Order(SVG_Icon.Discord, SVG_Color.Unknown);
             LinkLabel_Server_Discord.Enabled = false;
             /* Facebook */
-            if (Picture_Icon_Server_Facebook.BackgroundImage != Image_Icon.Facebook_Disabled)
-            {
-                Picture_Icon_Server_Facebook.BackgroundImage = Image_Icon.Facebook_Disabled;
-            }
+            Picture_Icon_Server_Facebook.BackgroundImage = Picture_Icon_Server_Facebook.Icon_Order(SVG_Icon.Facebook, SVG_Color.Unknown);
             LinkLabel_Server_Facebook.Enabled = false;
             /* Twitter */
-            if (Picture_Icon_Server_Twitter.BackgroundImage != Image_Icon.Twitter_Disabled)
-            {
-                Picture_Icon_Server_Twitter.BackgroundImage = Image_Icon.Twitter_Disabled;
-            }
+            Picture_Icon_Server_Twitter.BackgroundImage = Picture_Icon_Server_Twitter.Icon_Order(SVG_Icon.Twitter, SVG_Color.Unknown);
             LinkLabel_Server_Twitter.Enabled = false;
             /* Scenery */
             Label_Server_Scenery.Text = "But It's Me!";
@@ -869,35 +854,35 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Label_Status_API.Text = "United API:\n - Online";
             Label_Status_API.ForeColor = Color_Text.S_Sucess;
             Label_Status_API_Details.Text = "Connected to API";
-            Picture_Icon_API.BackgroundImage = Image_Icon.Plug_Online;
+            Picture_Icon_API.BackgroundImage = Picture_Icon_API.Icon_Order(SVG_Icon.Globe, SVG_Color.Success);
 
             if (!VisualsAPIChecker.UnitedAPI())
             {
                 Label_Status_API.Text = "Carbon API:\n - Online";
                 Label_Status_API.ForeColor = Color_Text.S_Sucess;
                 Label_Status_API_Details.Text = "Connected to API";
-                Picture_Icon_API.BackgroundImage = Image_Icon.Plug_Online;
+                Picture_Icon_API.BackgroundImage = Picture_Icon_API.Icon_Order(SVG_Icon.Globe, SVG_Color.Success);
 
                 if (!VisualsAPIChecker.CarbonAPI())
                 {
                     Label_Status_API.Text = "Carbon 2nd API:\n - Online";
                     Label_Status_API.ForeColor = Color_Text.S_Sucess;
                     Label_Status_API_Details.Text = "Connected to API";
-                    Picture_Icon_API.BackgroundImage = Image_Icon.Plug_Online;
+                    Picture_Icon_API.BackgroundImage = Picture_Icon_API.Icon_Order(SVG_Icon.Globe, SVG_Color.Success);
 
                     if (!VisualsAPIChecker.CarbonAPITwo())
                     {
                         Label_Status_API.Text = "Cached API:\n - Local";
                         Label_Status_API.ForeColor = Color_Text.S_Warning;
                         Label_Status_API_Details.Text = "Using Local Cache";
-                        Picture_Icon_API.BackgroundImage = Image_Icon.Plug_Warning;
+                        Picture_Icon_API.BackgroundImage = Picture_Icon_API.Icon_Order(SVG_Icon.Plug, SVG_Color.Warning);
 
                         if (!VisualsAPIChecker.Local_Cached_API())
                         {
                             Label_Status_API.Text = "Connection API:\n - Error";
                             Label_Status_API.ForeColor = Color_Text.S_Error;
                             Label_Status_API_Details.Text = "Launcher is Offline";
-                            Picture_Icon_API.BackgroundImage = Image_Icon.Plug_Offline;
+                            Picture_Icon_API.BackgroundImage = Picture_Icon_API.Icon_Order(SVG_Icon.Offline, SVG_Color.Error);
                             Log.Api("PINGING API: Failed to Connect to APIs! Quick Hide and Bunker Down! (Ask for help)");
                         }
                         else
@@ -928,9 +913,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
             }
 
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                Parent_Screen.Screen_Instance.Text = "SBRW Launcher: " + Application.ProductVersion;
+                Screen_Parent.Screen_Instance.Text = "SBRW Launcher: " + Application.ProductVersion;
             }
         }
         #region Game Server Information Download
@@ -941,17 +926,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ComboBox_Server_List_SelectedIndexChanged(object sender, EventArgs e)
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-            GC.Collect();
-#endif
-            if (Picture_Input_Email.Image != Image_Other.Text_Border_Email)
-            {
-                Picture_Input_Email.Image = Image_Other.Text_Border_Email;
-            }
-            if (Picture_Input_Password.Image != Image_Other.Text_Border_Password)
-            {
-                Picture_Input_Password.Image = Image_Other.Text_Border_Password;
-            }
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
             /* Disable Certain Functions */
             LoginEnabled = ServerEnabled = FunctionStatus.AllowRegistration = false;
             Launcher_Value.Launcher_Select_Server_JSON = null;
@@ -965,10 +941,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 Label_Status_Game_Server.Text = "Launcher Offline:\n - Unknown";
                 Label_Status_Game_Server.ForeColor = Color_Text.L_Three;
                 Label_Status_Game_Server_Data.Text = string.Empty;
-                if (Picture_Icon_Server.BackgroundImage != Image_Icon.Server_Unknown)
-                {
-                    Picture_Icon_Server.BackgroundImage = Image_Icon.Server_Unknown;
-                }
+                Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Offline, SVG_Color.Unknown);
                 return;
             }
 
@@ -988,10 +961,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Label_Status_Game_Server.Text = "Server Status:\n - Pinging";
             Label_Status_Game_Server.ForeColor = Color_Text.L_Two;
             Label_Status_Game_Server_Data.Text = string.Empty;
-            if (Picture_Icon_Server.BackgroundImage != Image_Icon.Server_Checking)
-            {
-                Picture_Icon_Server.BackgroundImage = Image_Icon.Server_Checking;
-            }
+            Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Server, SVG_Color.Base);
 
             Button_Login.ForeColor = Color_Text.L_Six;
             string Banner_Cache_Folder = Path.Combine(Locations.LauncherDataFolder, "Bin", "Server", "Banner", "EyeCatcher");
@@ -1106,10 +1076,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 if (e2.Cancelled || e2.Error != null)
                 {
                     Launcher_Value.Launcher_Select_Server_JSON = null;
-                    if (Picture_Icon_Server.BackgroundImage != Image_Icon.Server_Offline)
-                    {
-                        Picture_Icon_Server.BackgroundImage = Image_Icon.Server_Offline;
-                    }
+                    Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Offline, SVG_Color.Error);
                     Label_Status_Game_Server.Text = "Server Status:\n - Offline ( OFF )";
                     Label_Status_Game_Server.ForeColor = Color_Text.S_Error;
                     Label_Status_Game_Server_Data.Text = (e2.Error != null) ?
@@ -1215,10 +1182,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 {
                                     ServerDiscordLink = false;
                                 }
-                                if (Picture_Icon_Server_Discord.BackgroundImage != (ServerDiscordLink ? Image_Icon.Discord : Image_Icon.Discord_Disabled))
-                                {
-                                    Picture_Icon_Server_Discord.BackgroundImage = ServerDiscordLink ? Image_Icon.Discord : Image_Icon.Discord_Disabled;
-                                }
+                                Picture_Icon_Server_Discord.BackgroundImage = ServerDiscordLink ? 
+                                Picture_Icon_Server_Discord.Icon_Order(SVG_Icon.Discord, SVG_Color.Base) : 
+                                Picture_Icon_Server_Discord.Icon_Order(SVG_Icon.Discord, SVG_Color.Unknown);
                                 LinkLabel_Server_Discord.Enabled = ServerDiscordLink;
                                 LinkLabel_Server_Discord.Text = ServerDiscordLink ? "Discord Invite" : string.Empty;
                             }
@@ -1240,10 +1206,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 {
                                     ServerWebsiteLink = false;
                                 }
-                                if (Picture_Icon_Server_Home.BackgroundImage != (ServerWebsiteLink ? Image_Icon.Home : Image_Icon.Home_Disabled))
-                                {
-                                    Picture_Icon_Server_Home.BackgroundImage = ServerWebsiteLink ? Image_Icon.Home : Image_Icon.Home_Disabled;
-                                }
+                                Picture_Icon_Server_Home.BackgroundImage = ServerWebsiteLink ? 
+                                Picture_Icon_Server_Home.Icon_Order(SVG_Icon.Home, SVG_Color.Base) :
+                                Picture_Icon_Server_Home.Icon_Order(SVG_Icon.Home, SVG_Color.Unknown);
                                 LinkLabel_Server_Home.Enabled = ServerWebsiteLink;
                                 LinkLabel_Server_Home.Text = ServerWebsiteLink ? "Home Page" : string.Empty;
                             }
@@ -1265,10 +1230,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 {
                                     ServerFacebookLink = false;
                                 }
-                                if (Picture_Icon_Server_Facebook.BackgroundImage != (ServerFacebookLink ? Image_Icon.Facebook : Image_Icon.Facebook_Disabled))
-                                {
-                                    Picture_Icon_Server_Facebook.BackgroundImage = ServerFacebookLink ? Image_Icon.Facebook : Image_Icon.Facebook_Disabled;
-                                }
+                                Picture_Icon_Server_Facebook.BackgroundImage = ServerFacebookLink ? 
+                                Picture_Icon_Server_Facebook.Icon_Order(SVG_Icon.Facebook, SVG_Color.Base) :
+                                Picture_Icon_Server_Facebook.Icon_Order(SVG_Icon.Facebook, SVG_Color.Unknown);
                                 LinkLabel_Server_Facebook.Enabled = ServerFacebookLink;
                                 LinkLabel_Server_Facebook.Text = ServerFacebookLink ? "Facebook Page" : string.Empty;
                             }
@@ -1282,10 +1246,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             {
                                 bool ServerTwitterLink = Uri.TryCreate(Launcher_Value.Launcher_Select_Server_JSON.Server_Social_Twitter, UriKind.Absolute, out Uri? uriResult) &&
                                                          (uriResult.Scheme == Uri.UriSchemeHttp || uriResult.Scheme == Uri.UriSchemeHttps);
-                                if (Picture_Icon_Server_Twitter.BackgroundImage != (ServerTwitterLink ? Image_Icon.Twitter : Image_Icon.Twitter_Disabled))
-                                {
-                                    Picture_Icon_Server_Twitter.BackgroundImage = ServerTwitterLink ? Image_Icon.Twitter : Image_Icon.Twitter_Disabled;
-                                }
+                                Picture_Icon_Server_Twitter.BackgroundImage = ServerTwitterLink ?
+                                Picture_Icon_Server_Twitter.Icon_Order(SVG_Icon.Twitter, SVG_Color.Base) :
+                                Picture_Icon_Server_Twitter.Icon_Order(SVG_Icon.Twitter, SVG_Color.Unknown);
                                 LinkLabel_Server_Twitter.Enabled = ServerTwitterLink;
                                 LinkLabel_Server_Twitter.Text = ServerTwitterLink ? "Twitter Feed" : string.Empty;
                             }
@@ -1391,10 +1354,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             Label_Status_Game_Server.Text = "Server Connection:\n - Unstable";
                             Label_Status_Game_Server.ForeColor = Color_Text.S_Warning;
                             Label_Status_Game_Server_Data.Text = "Received Invalid JSON Game Server Info.";
-                            if (Picture_Icon_Server.BackgroundImage != Image_Icon.Server_Warning)
-                            {
-                                Picture_Icon_Server.BackgroundImage = Image_Icon.Server_Warning;
-                            }
+                            Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Server, SVG_Color.Warning);
                         }
                         catch
                         {
@@ -1407,10 +1367,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             Label_Status_Game_Server.Text = "Server Status:\n - Online ( ON )";
                             Label_Status_Game_Server.ForeColor = Color_Text.S_Sucess;
-                            if (Picture_Icon_Server.BackgroundImage != Image_Icon.Server_Online)
-                            {
-                                Picture_Icon_Server.BackgroundImage = Image_Icon.Server_Online;
-                            }
+                            Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Server, SVG_Color.Success);
                             /* Enable Login & Register Button */
                             LoginEnabled = true;
                             Button_Login.ForeColor = Color_Text.L_Five;
@@ -1512,9 +1469,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                                     {
                                                         Picture_Server_Banner.Image = Image_Handler.Grayscale(Banner_Cache_File) ?? Image_Other.Server_Banner;
                                                     }
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                                    GC.Collect();
-#endif
                                                 }
 
                                                 Client_A?.Dispose();
@@ -1560,10 +1514,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                                 finally
                                                 {
                                                     Client_A?.Dispose();
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                                    GC.Collect();
-#endif
                                                 }
                                             }
                                         }
@@ -1576,16 +1526,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                     {
                                         Picture_Server_Banner.Image = Image_Handler.Grayscale(Banner_Cache_File) ?? Image_Other.Server_Banner;
                                     }
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect();
-#endif
                                 }
                                 else if (!Application.OpenForms[this.Name].IsDisposed)
                                 {
                                     Picture_Server_Banner.BackColor = Color_Winform_Other.Server_Banner_BackColor;
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect();
-#endif
                                 }
                             }
                             catch (Exception Error)
@@ -1599,18 +1543,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     /* Just ingore this. */
                 }
-
-                if (Application.OpenForms[this.Name] != null)
-                {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                    GC.Collect();
-#endif
-                }
             };
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-            GC.Collect();
-#endif
         }
         #endregion
         /// <summary>
@@ -1879,9 +1812,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             }));
 
                             ContextMenu.MenuItems.Add("-");
-                            if (Parent_Screen.Screen_Instance != null)
+                            if (Screen_Parent.Screen_Instance != null)
                             {
-                                ContextMenu.MenuItems.Add(new MenuItem("Close Game and Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
+                                ContextMenu.MenuItems.Add(new MenuItem("Close Game and Launcher", Screen_Parent.Screen_Instance.Button_Close_Click));
                             }
 #endif
 #if NETFRAMEWORK
@@ -1976,10 +1909,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             Button_Close.Visible = false;
 
-                            if (Parent_Screen.Screen_Instance != default)
+                            if (Screen_Parent.Screen_Instance != default)
                             {
-                                Parent_Screen.Screen_Instance.WindowState = FormWindowState.Minimized;
-                                Parent_Screen.Screen_Instance.ShowInTaskbar = false;
+                                Screen_Parent.Screen_Instance.WindowState = FormWindowState.Minimized;
+                                Screen_Parent.Screen_Instance.ShowInTaskbar = false;
                             }
                         }
                         break;
@@ -1993,10 +1926,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             Button_Close.Visible = Button_Logout.Visible = EnablePlayButton(true);
 
-                            if (Parent_Screen.Screen_Instance != default)
+                            if (Screen_Parent.Screen_Instance != default)
                             {
-                                Parent_Screen.Screen_Instance.WindowState = FormWindowState.Normal;
-                                Parent_Screen.Screen_Instance.ShowInTaskbar = true;
+                                Screen_Parent.Screen_Instance.WindowState = FormWindowState.Normal;
+                                Screen_Parent.Screen_Instance.ShowInTaskbar = true;
                             }
                         }
                         break;
@@ -2031,6 +1964,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                         break;
                 }
+
+                GarbageCollections.Cleanup();
             }
         }
         /// <summary>
@@ -2221,9 +2156,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             TransparencyKey = Color_Screen.BG_Main;
 
             Picture_Logo.BackgroundImage = Image_Other.Logo;
-            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Bad") ? Image_Icon.Gear_Warning : Image_Icon.Gear;
-            Button_Close.BackgroundImage = Image_Icon.Close;
-            Button_Security_Center.BackgroundImage = SecurityCenter.SecurityCenterIcon(1);
+            Button_Settings.BackgroundImage = (Save_Settings.Live_Data.Game_Integrity == "Bad") ?
+                Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.Warning) :
+                Button_Settings.Icon_Order(SVG_Icon.Gear);
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross);
+            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
 
             Picture_Bar_Outline.BackgroundImage = Image_ProgressBar.Preload_Outline;
             ProgressBar.BackColor = Color_Winform_Other.ProgressBar_Unknown_Top;
@@ -2233,8 +2170,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Label_Download_Information.ForeColor = Color_Text.L_Five;
             Label_Download_Information_Support.ForeColor = Color_Text.L_Five;
 
-            Picture_Input_Email.Image = Image_Other.Text_Border_Email;
-            Picture_Input_Password.Image = Image_Other.Text_Border_Password;
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
             Picture_Information_Window.Image = Image_Other.Information_Window;
 
             Label_Information_Window.ForeColor = Color_Text.L_Five;
@@ -2303,9 +2240,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
             Button_Close.MouseUp += new MouseEventHandler(ButtonClose_MouseLeaveANDMouseUp);
             Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                Button_Close.Click += new EventHandler(Parent_Screen.Screen_Instance.Button_Close_Click);
+                Button_Close.Click += new EventHandler(Screen_Parent.Screen_Instance.Button_Close_Click);
             }
 
             Button_Settings.MouseEnter += new EventHandler(ButtonSettings_MouseEnter);
@@ -2350,19 +2287,19 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             LinkLabel_Forgot_Password.LinkClicked += new LinkLabelLinkClickedEventHandler(FunctionEvents.ForgotPassword_LinkClicked);
 
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
 
-                Picture_Logo.MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                Picture_Logo.MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                Picture_Logo.MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                Picture_Logo.MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                Picture_Logo.MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                Picture_Logo.MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
 
-                Label_Debug_Language.MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                Label_Debug_Language.MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                Label_Debug_Language.MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                Label_Debug_Language.MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                Label_Debug_Language.MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                Label_Debug_Language.MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
             }
 
             Button_Play_OR_Update.MouseEnter += new EventHandler(PlayButton_MouseEnter);
@@ -2416,16 +2353,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     {
                         foreach (Json_List_Server Servers in ServerListUpdater.NoCategoryList)
                         {
-                            if (Nfswstarted != null || Parent_Screen.Screen_Instance == null || Screen_Instance == null)
+                            if (Nfswstarted != null || Screen_Parent.Screen_Instance == null || Screen_Instance == null)
                             {
                                 break;
                             }
                             else
                             {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                GC.Collect();
-#endif
-
                                 try
                                 {
                                     while (StillCheckingLastServer) { }
@@ -2502,10 +2435,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                     }
                 });
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
             };
         }
     }

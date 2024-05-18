@@ -134,7 +134,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                     }
 
                     /* MainScreen Icons */
-
+                    /* TODO
                     if (!string.IsNullOrWhiteSpace(ThemeFile.Key_Read("UpdateErrorIcon")))
                     {
                         if (File.Exists(ThemeFolder + "\\Icons\\" + ThemeFile.Key_Read("UpdateErrorIcon")))
@@ -248,7 +248,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                     }
 
                     /* Social Panel Icons */
-
+                    /* TODO
                     if (!string.IsNullOrWhiteSpace(ThemeFile.Key_Read("DiscordIcon")))
                     {
                         if (File.Exists(ThemeFolder + "\\Icons\\" + ThemeFile.Key_Read("DiscordIcon")))
@@ -362,7 +362,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                             Image_Button.Green_Hover = new Bitmap(ThemeFolder + "\\Buttons\\" + ThemeFile.Key_Read("GreenButtonHover"));
                         }
                     }
-
+                    /* TODO
                     if (!string.IsNullOrWhiteSpace(ThemeFile.Key_Read("CloseButton")))
                     {
                         if (File.Exists(ThemeFolder + "\\Buttons\\" + ThemeFile.Key_Read("CloseButton")))
@@ -434,7 +434,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                             Image_Icon.Gear_Warning_Hover = new Bitmap(ThemeFolder + "\\Buttons\\" + ThemeFile.Key_Read("GearButtonWarningHover"));
                         }
                     }
-
+                    /*
                     if (!string.IsNullOrWhiteSpace(ThemeFile.Key_Read("PlayButton")))
                     {
                         if (File.Exists(ThemeFolder + "\\Buttons\\" + ThemeFile.Key_Read("PlayButton")))
@@ -580,7 +580,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                     }
 
                     /* Custom Inputs Borders for MainScreen */
-
+                    /* TODO
                     if (!string.IsNullOrWhiteSpace(ThemeFile.Key_Read("BorderTicket")))
                     {
                         if (File.Exists(ThemeFolder + "\\Inputs\\" + ThemeFile.Key_Read("BorderTicket")))
@@ -1052,12 +1052,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
                     {
                         LogToFileAddons.Parent_Log_Screen(5, "THEMING", Error.InnerException.Message);
                     }
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
             }
         }

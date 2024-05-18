@@ -25,6 +25,8 @@ using System.Net.Cache;
 using SBRW.Launcher.App.UI_Forms;
 using System.Threading.Tasks;
 using SBRW.Launcher.Core.Extension.String_;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
 {
@@ -161,10 +163,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     finally
                     {
                         Client?.Dispose();
-
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
 
                     if (VersionJSON.Valid_Json() && VisualsAPIChecker.GitHubAPI)
@@ -190,12 +188,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                         LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATE [GITHUB]", Error.InnerException.Message, false, true);
                     }
                 }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
-                }
             });
             LogToFileAddons.Parent_Log_Screen(3, "LAUNCHER UPDATE", "Done" + (Start_Up_Function ? "" : " (Settings)"));
 
@@ -205,7 +197,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                 {
                     LogToFileAddons.Parent_Log_Screen(1, "FIRST TIME RUN", "Moved to Function");
                     /* Do First Time Run Checks */
-                    Parent_Screen.First_Time_Run();
+                    Screen_Parent.First_Time_Run();
                 }
             }
             else
@@ -340,7 +332,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
 
                     text.Text = Translations.Database("LauncherUpdateCheck_VS_Insider") + "\n - " + WhatBuildAmI +
                         " " + Translations.Database("LauncherUpdateCheck_VS_Insider_Text_Build");
-                    status.BackgroundImage = Image_Icon.Engine_Warning;
+                    status.BackgroundImage = SVG_Icon.Check_Engine.Icon_Order(SVG_Color.Warning).Draw(25, 19);
                     text.ForeColor = Color_Text.S_Warning;
                     description.Text = Translations.Database("LauncherUpdateCheck_VS_Insider_Text_Stable") + " " + LatestLauncherBuild +
                         "\n" + Translations.Database("LauncherUpdateCheck_VS_Insider_Text_Current") + " " + CurrentLauncherBuild;
@@ -356,7 +348,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                 else if (CurrentLauncherBuild.Current(LatestLauncherBuild))
                 {
                     text.Text = Translations.Database("LauncherUpdateCheck_VS_Text_No_Update");
-                    status.BackgroundImage = Image_Icon.Engine_Good;
+                    status.BackgroundImage = SVG_Icon.Check_Engine.Icon_Order(SVG_Color.Success).Draw(25, 19);
                     text.ForeColor = Color_Text.S_Sucess;
                     description.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Version") + " " + CurrentLauncherBuild;
 
@@ -370,7 +362,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                 else
                 {
                     text.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Update");
-                    status.BackgroundImage = Image_Icon.Engine_Warning;
+                    status.BackgroundImage = SVG_Icon.Check_Engine.Icon_Order(SVG_Color.Warning).Draw(25, 19);
                     text.ForeColor = Color_Text.S_Warning;
                     description.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Update_New") + " " + LatestLauncherBuild + "\n" +
                         Translations.Database("LauncherUpdateCheck_VS_Insider_Text_Current") + " " + CurrentLauncherBuild;
@@ -386,14 +378,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
             else if (VisualsAPIChecker.GitHubAPI && !ValidJSONDownload)
             {
                 text.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Invalid_JSON");
-                status.BackgroundImage = Image_Icon.Engine_Error;
+                status.BackgroundImage = SVG_Icon.Check_Engine.Icon_Order(SVG_Color.Error).Draw(25, 19);
                 text.ForeColor = Color_Text.S_Error;
                 description.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Version") + " " + CurrentLauncherBuild;
             }
             else
             {
                 text.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Invalid_Error");
-                status.BackgroundImage = Image_Icon.Engine_Unknown;
+                status.BackgroundImage = status.Icon_Order(SVG_Icon.Offline, SVG_Color.Unknown);
                 text.ForeColor = Color_Text.L_Three;
                 description.Text = Translations.Database("LauncherUpdateCheck_VS_Text_Version") + " " + CurrentLauncherBuild;
             }

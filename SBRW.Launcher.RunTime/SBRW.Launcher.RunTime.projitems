@@ -41,8 +41,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\FormsControls.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\FormsFont.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\FormsIcon.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\support\GarbageCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\SecurityCenter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\AboutNoteBlock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\EmbeddedSVGs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\Prompt.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\Theming.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemovedClasses.cs" />

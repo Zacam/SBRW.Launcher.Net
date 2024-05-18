@@ -1276,7 +1276,7 @@ namespace SBRW.Launcher.App.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have the 32-bit 2015-2019 VC++ Redistributable Package installed..
+        ///   Looks up a localized string similar to You do not have the 32-bit 2015-2019 (or newer) VC++ Redistributable Package installed..
         /// </summary>
         internal static string Redistributable_VC_32 {
             get {
@@ -1285,7 +1285,7 @@ namespace SBRW.Launcher.App.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You do not have the 64-bit 2015-2019 VC++ Redistributable Package installed..
+        ///   Looks up a localized string similar to You do not have the 64-bit 2015-2019 (or newer) VC++ Redistributable Package installed..
         /// </summary>
         internal static string Redistributable_VC_64 {
             get {

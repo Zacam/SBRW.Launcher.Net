@@ -1,4 +1,5 @@
-﻿using SBRW.Launcher.Core.Extension.Api_;
+﻿using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.Core.Extension.Api_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
 using SBRW.Launcher.Core.Extra.File_;
@@ -54,7 +55,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
 
             ButtonsColorSet(Button_Change_Game_Path, 1, true);
-            if (Parent_Screen.Launcher_Setup.Equals(1))
+            if (Screen_Parent.Launcher_Setup.Equals(1))
             {
                 ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
                 Setup_Save_Button_Check();

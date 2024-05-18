@@ -96,12 +96,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     DownloadSpeechFiles();
                 }
             }
-            else
-            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
-            }
         }
         /// <summary>
         /// 
@@ -239,12 +233,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     Log.Info("DOWNLOAD: Game Files Download is Complete!");
                 }
             }
-            else
-            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
-            }
         }
         /// <summary>
         /// 
@@ -328,12 +316,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     Button_Login.Enabled = LoginEnabled;
 
                     EnablePlayButton();
-                }
-                else
-                {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                    GC.Collect();
-#endif
                 }
             }
             catch (Exception Error_Live)

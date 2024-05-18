@@ -27,6 +27,8 @@ using WindowsFirewallHelper;
 using WindowsFirewallHelper.Exceptions;
 using WindowsFirewallHelper.FirewallRules;
 using System.Threading.Tasks;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 
 namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
 {
@@ -1826,17 +1828,17 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
 
         private void ButtonClose_MouseDown(object sender, EventArgs e)
         {
-            ButtonClose.BackgroundImage = Image_Icon.Close_Click;
+            ButtonClose.BackgroundImage = ButtonClose.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Select);
         }
 
         private void ButtonClose_MouseEnter(object sender, EventArgs e)
         {
-            ButtonClose.BackgroundImage = Image_Icon.Close_Hover;
+            ButtonClose.BackgroundImage = ButtonClose.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Highlight);
         }
 
         private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            ButtonClose.BackgroundImage = Image_Icon.Close;
+            ButtonClose.BackgroundImage = ButtonClose.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
         }
         ///<summary>Theming, Function, EventHandlers, Etc. Meant to load critial functions before the forms loads</summary>
         private void SetVisuals()
@@ -1860,7 +1862,7 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
 
             BackgroundImage = Image_Background.Security_Center;
             TransparencyKey = Color_Screen.BG_Security_Center;
-            ButtonClose.BackgroundImage = Image_Icon.Close;
+            ButtonClose.BackgroundImage = ButtonClose.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
 
             TextWindowsFirewall.ForeColor = Color_Text.L_Five;
             TextWindowsDefender.ForeColor = Color_Text.L_Five;
@@ -1965,11 +1967,11 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
             ButtonClose.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
             ButtonClose.Click += new EventHandler(ButtonClose_Click);
             /* Window */
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
             }
         }
         /// <summary>
@@ -1983,9 +1985,9 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
             {
                 
                 DisableButtonFRAPI = DisableButtonDRAPI = DisableButtonDRAPI = DisableButtonPRC = false;
-                if (!string.IsNullOrWhiteSpace(RPCStateCache) || Parent_Screen.Launcher_Setup.Equals(1))
+                if (!string.IsNullOrWhiteSpace(RPCStateCache) || Screen_Parent.Launcher_Setup.Equals(1))
                 {
-                    if (RPCStateCache.Contains("Settings") || Parent_Screen.Launcher_Setup.Equals(1))
+                    if (RPCStateCache.Contains("Settings") || Screen_Parent.Launcher_Setup.Equals(1))
                     {
                         Presence_Launcher.Status(22);
                         if (Screen_Settings.Screen_Instance != default)
@@ -1994,9 +1996,9 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
                             Screen_Settings.Screen_Instance.Panel_Form_Screens.Visible = false;
                         }
                         
-                        if (Parent_Screen.Screen_Instance != default)
+                        if (Screen_Parent.Screen_Instance != default)
                         {
-                            Parent_Screen.Screen_Instance.Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
+                            Screen_Parent.Screen_Instance.Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
                         }
                     }
                     else if (RPCStateCache.Contains("Ready") && Screen_Main.Screen_Instance != default)
@@ -2006,9 +2008,6 @@ namespace SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen
                     }
                 }
                 RPCStateCache = string.Empty;
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
 
             Presence_Launcher.Status(20);

@@ -1,5 +1,6 @@
 ﻿using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen;
 using SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen;
 using SBRW.Launcher.App.UI_Forms.USXEditor_Screen;
@@ -89,7 +90,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 ButtonsColorSet(Button_CDN_List, 4, true);
-                if (Parent_Screen.Launcher_Setup.Equals(1))
+                if (Screen_Parent.Launcher_Setup.Equals(1))
                 {
                     ButtonsColorSet(Button_CDN_List_Setup, 4, true);
                 }
@@ -111,9 +112,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
                 Screen_Security_Center.RPCStateCache = "Settings";
                 Custom_Instance_Settings.Show();
-                if (Parent_Screen.Screen_Instance != null)
+                if (Screen_Parent.Screen_Instance != null)
                 {
-                    Parent_Screen.Screen_Instance.Text = "Security Center - SBRW Launcher: v" + Application.ProductVersion;
+                    Screen_Parent.Screen_Instance.Text = "Security Center - SBRW Launcher: v" + Application.ProductVersion;
                 }
             }
             catch (Exception Error)
@@ -212,7 +213,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
 
                     ButtonsColorSet(Button_Change_Game_Path, 1, true);
-                    if (Parent_Screen.Launcher_Setup.Equals(1))
+                    if (Screen_Parent.Launcher_Setup.Equals(1))
                     {
                         ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
                         Setup_Save_Button_Check();
@@ -396,7 +397,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (Stop_and_Restart_Downloader && Parent_Screen.Launcher_Setup.Equals(0))
+            if (Stop_and_Restart_Downloader && Screen_Parent.Launcher_Setup.Equals(0))
             {
                 try
                 {
@@ -437,7 +438,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     });
                 }
             }
-            Parent_Screen.Launcher_Setup = 0;
+            Screen_Parent.Launcher_Setup = 0;
             Close();
         }
         #endregion
@@ -448,7 +449,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void SettingsCancel_Click(object sender, EventArgs e)
         {
-            if (Parent_Screen.Launcher_Setup.Equals(1))
+            if (Screen_Parent.Launcher_Setup.Equals(1))
             {
                 TabControl_Shared_Hub.SelectedTab = TabPage_Setup;
             }
@@ -636,7 +637,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = NewGameFilesPath;
             }
 #endif
-            if (Parent_Screen.Launcher_Setup.Equals(1) && (Status_Dialog_Result == DialogResult.OK))
+            if (Screen_Parent.Launcher_Setup.Equals(1) && (Status_Dialog_Result == DialogResult.OK))
             {
                 ButtonsColorSet(Button_Change_Game_Path, 1, true);
                 ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
@@ -984,9 +985,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ButtonClose_Click(object sender, EventArgs e)
         {
-            if (Parent_Screen.Launcher_Setup.Equals(1))
+            if (Screen_Parent.Launcher_Setup.Equals(1))
             {
-                Parent_Screen.Launcher_Setup = -1;
+                Screen_Parent.Launcher_Setup = -1;
             }
 
             Close();

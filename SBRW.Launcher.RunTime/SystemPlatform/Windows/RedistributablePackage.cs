@@ -169,10 +169,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                             finally
                             {
                                 Client?.Dispose();
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                GC.Collect(); 
-#endif
                             }
                         }
                         catch (Exception Error)
@@ -182,12 +178,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                             {
                                 LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE", Error.InnerException.Message, false, true);
                             }
-                        }
-                        finally
-                        {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                            GC.Collect(); 
-#endif
                         }
                     });
 
@@ -249,12 +239,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                 MessageBox.Show(Translations.Database("Redistributable_VC_P9"),
                                     Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
-                            }
-                            finally
-                            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                GC.Collect(); 
-#endif
                             }
                         });
                     }
@@ -340,10 +324,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                 finally
                                 {
                                     Client?.Dispose();
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect(); 
-#endif
                                 }
                             }
                             catch (Exception Error)
@@ -353,12 +333,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                 {
                                     LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE x64", Error.InnerException.Message, false, true);
                                 }
-                            }
-                            finally
-                            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                GC.Collect(); 
-#endif
                             }
                         });
 
@@ -420,12 +394,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                     MessageBox.Show(Translations.Database("Redistributable_VC_P9"),
                                         Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
                                         MessageBoxIcon.Error);
-                                }
-                                finally
-                                {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect(); 
-#endif
                                 }
                             });
                         }

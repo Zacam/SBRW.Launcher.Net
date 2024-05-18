@@ -3,14 +3,13 @@ using Newtonsoft.Json;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
-using SBRW.Launcher.RunTime.LauncherCore.Lists;
 using System.ComponentModel;
 using System.IO;
 using System.ServiceProcess;
-using System.Windows.Forms;
 
 namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     /// <summary>
     /// JSON Format for Reading an Account List
     /// </summary>
@@ -22,7 +21,9 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// Name of Service
         /// </summary>
         [JsonProperty("target")]
+
         public string Target { get; set; }
+
         /// <summary>
         /// Custom Nickname
         /// </summary>
@@ -53,6 +54,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         [JsonProperty("aid")]
         public int AID { get; set; }
     }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     partial class Screen_Account_Manager
     {
         public static BindingList<Json_List_Account> Read_Data_Base()
@@ -71,7 +73,9 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
                 if (!string.IsNullOrWhiteSpace(oldcontent))
                 {
+#pragma warning disable CS8603
                     return JsonConvert.DeserializeObject<BindingList<Json_List_Account>>(oldcontent);
+#pragma warning restore CS8603
                 }
             }
             finally { }

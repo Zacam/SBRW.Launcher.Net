@@ -19,7 +19,8 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="SBRW.CredentialManagement" Version="1.0.1" />
+    <PackageReference Include="SBRW.CredentialManagement" Version="1.0.2" />
+    <PackageReference Include="SBRW.Launcher.Core.Theme" Version="0.3.0" />
     <PackageReference Include="SBRW.Svg" Version="3.4.7" />
   </ItemGroup>
 

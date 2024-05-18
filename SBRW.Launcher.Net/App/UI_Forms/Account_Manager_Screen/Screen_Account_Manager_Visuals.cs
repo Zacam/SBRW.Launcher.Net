@@ -1,5 +1,7 @@
-﻿using SBRW.Launcher.Core.Theme;
+﻿using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -15,7 +17,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseDown(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Click;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Select);
         }
         /// <summary>
         /// 
@@ -24,7 +26,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseEnter(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Hover;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Highlight);
         }
         /// <summary>
         /// 
@@ -33,7 +35,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
         }
         /// <summary>
         /// 
@@ -112,7 +114,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             Label_Email.ForeColor = Color_Text.L_Five;
 
             /* Secondary Buttons */
-            Button_Close.BackgroundImage = Image_Icon.Close;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
 
             /********************************/
             /* Events                        /
@@ -136,11 +138,11 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
             Button_Close.Click += new EventHandler(ButtonClose_Click);
 
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
             }
 
             Load += new EventHandler(Screen_Account_Manager_Load);

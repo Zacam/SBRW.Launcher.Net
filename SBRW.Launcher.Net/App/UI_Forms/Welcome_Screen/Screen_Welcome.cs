@@ -38,10 +38,6 @@ namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
                     ToolTip_Hover.RemoveAll();
                     ToolTip_Hover.Dispose();
                 }
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
             };
         }
 

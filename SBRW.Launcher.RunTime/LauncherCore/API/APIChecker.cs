@@ -341,10 +341,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
                     finally
                     {
                         Client?.Dispose();
-
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
                 }
                 else
@@ -386,10 +382,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
                 {
                     OnlineListJson = string.Empty;
                 }
-
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             }
         }
     }

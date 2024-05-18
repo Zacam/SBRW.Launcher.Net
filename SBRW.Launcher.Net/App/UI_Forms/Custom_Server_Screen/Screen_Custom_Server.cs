@@ -101,12 +101,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                         ID++;
                     }
                     catch { }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
-                    }
                 }
 
                 while ((ServersToPing.Count != 0) && IsSelectServerOpen)
@@ -154,12 +148,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                                 {
 
                                 }
-                                finally
-                                {
-                                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                    GC.Collect(); 
-                                    #endif
-                                }
                             };
                             aTimer.AutoReset = false;
                             aTimer.Enabled = true;
@@ -173,12 +161,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                                 catch
                                 {
 
-                                }
-                                finally
-                                {
-                                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                    GC.Collect(); 
-                                    #endif
                                 }
 
                                 if (e2.Cancelled || e2.Error != null || !IsSelectServerOpen)
@@ -234,12 +216,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                                         catch
                                         {
                                             ServerJsonData = null;
-                                        }
-                                        finally
-                                        {
-                                            #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                            GC.Collect(); 
-                                            #endif
                                         }
 
                                         if (ServerJsonData != null)
@@ -305,10 +281,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                                             finally
                                             {
                                                 CheckMate?.Dispose();
-
-                                                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                                GC.Collect(); 
-                                                #endif
                                             }
                                         }
                                         else
@@ -356,12 +328,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                                 ListView_Server_List.Items[serverid].SubItems[5].Text = "I-E";
                             }, this);
                         }
-                    }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
 
                     Application.DoEvents();
@@ -525,9 +491,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                             ListView_Server_List.Items.Remove(ListView_Server_List.SelectedItems[0]);
                             File.WriteAllText(Locations.LauncherCustomServers, JsonConvert.SerializeObject(ServerListUpdater.NoCategoryList_CSO));
                             Application.DoEvents();
-                            #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                            GC.Collect();
-                            #endif
                         }
                     }
                 }
@@ -551,9 +514,6 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                 ServerListBook.Clear();
                 ServersToPing.Clear();
                 CustomServersOnly = IsSelectServerOpen = false;
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
     }

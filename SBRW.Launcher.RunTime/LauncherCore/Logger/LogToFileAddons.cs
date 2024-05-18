@@ -1,12 +1,11 @@
 ﻿using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
-using SBRW.Launcher.App.UI_Forms;
 using SBRW.Launcher.Core.Extension.Logging_;
 using System;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Logger
 {
@@ -17,6 +16,12 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
 
         public static void OpenLog(string From, string MessageDetails, Exception Error, string Icon, bool Suppress = true, IWin32Window? Window_Handle = default, bool Ignore_Log_Alert = false)
         {
+            if (Error != default)
+            {
+                /* Call Garbe Collection since it will release the Exception Bubble buildup */
+                GarbageCollections.Cleanup();
+            }
+
             bool Core_File = File.Exists(Path.Combine(Locations.LauncherFolder, "SBRW.Launcher.Core.dll"));
             if (Core_File)
             {
@@ -54,12 +59,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
                             Process.Start(Log_Location.LogLauncher);
                         }
                     }
-                    finally
-                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                            GC.Collect(); 
-#endif
-                    }
+                    catch { }
                 }
             }
         }
@@ -166,29 +166,23 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
                         break;
                 }
 
-                if (Parent_Screen.Screen_Instance != null && !FunctionStatus.LauncherForceClose)
+                if (Screen_Parent.Screen_Instance != null && !FunctionStatus.LauncherForceClose)
                 {
                     if (Log_Clear)
                     {
-                        Parent_Screen.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() => 
-                        Parent_Screen.Screen_Instance.TextBox_Live_Log.Clear());
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() => 
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.Clear());
                     }
                     else
                     {
-                        Parent_Screen.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() =>
-                        Parent_Screen.Screen_Instance.TextBox_Live_Log.AppendText(Environment.NewLine + "[" + Log_Type_String + "] " + Log_Full_String));
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() =>
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.AppendText(Environment.NewLine + "[" + Log_Type_String + "] " + Log_Full_String));
                     }
                 }
             }
             catch (Exception Error)
             {
                 OpenLog("Parent Live Log Setter", string.Empty, Error, string.Empty, true);
-            }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             }
         }
     }

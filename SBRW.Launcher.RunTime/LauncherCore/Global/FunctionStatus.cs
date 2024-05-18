@@ -18,6 +18,7 @@ using System.Net.Sockets;
 using SBRW.Launcher.App.UI_Forms;
 using SBRW.Launcher.Core.Extra.XML_;
 using System.Threading.Tasks;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Global
 {
@@ -340,12 +341,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
             {
                 LogToFileAddons.OpenLog("Host Name to IP", string.Empty, Error, string.Empty);
             }
-            finally
-            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect(); 
-#endif
-            }
 
             return hostname;
         }
@@ -384,10 +379,10 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                 }
             }
 
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                Parent_Screen.Launcher_Restart = Force_Restart;
-                Parent_Screen.Screen_Instance.Button_Close_Click(new object(), new EventArgs());
+                Screen_Parent.Launcher_Restart = Force_Restart;
+                Screen_Parent.Screen_Instance.Button_Close_Click(new object(), new EventArgs());
             }
             else if (Application.MessageLoop)
             {

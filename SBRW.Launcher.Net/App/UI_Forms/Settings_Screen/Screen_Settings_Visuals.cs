@@ -1,4 +1,5 @@
-﻿using SBRW.Launcher.Core.Extra.File_;
+﻿using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.Core.Extra.File_;
 using SBRW.Launcher.Core.Extra.XML_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.Core.Theme;
@@ -6,6 +7,7 @@ using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -69,12 +71,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
             }
             catch { }
-            finally
-            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
-            }
         }
         /// <summary>
         /// 
@@ -179,7 +175,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseDown(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Click;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Select);
         }
         /// <summary>
         /// 
@@ -188,7 +184,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseEnter(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close_Hover;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White_Highlight);
         }
         /// <summary>
         /// 
@@ -197,7 +193,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Close.BackgroundImage = Image_Icon.Close;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
         }
         /// <summary>
         /// Sets the Button, Image, Text, and Fonts. Enables/Disables Certain Elements of the Screen for Certain Platforms. Also contains functions that act as helper functions
@@ -346,8 +342,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /********************************/
 
             /* Buttons */
-            ButtonsColorSet(Button_Change_Game_Path, Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0, true);
-            ButtonsColorSet(Button_Change_Game_Path_Setup, Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0, true);
+            ButtonsColorSet(Button_Change_Game_Path, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
+            ButtonsColorSet(Button_Change_Game_Path_Setup, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_Game_Verify_Files, 0, false);
             ButtonsColorSet(Button_Game_User_Settings, 0, true);
             ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
@@ -355,8 +351,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
             ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
             ButtonsColorSet(Button_Security_Center, 0, true);
-            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
-            ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Parent_Screen.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
+            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
+            ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
             ButtonsColorSet(Button_Console_Submit, 1, true);
             ButtonsColorSet(Button_Save_Setup, 4, false);
             ButtonsColorSet(Button_Change_Tabs, 0, true);
@@ -422,7 +418,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Input_Console.ForeColor = Color_Text.L_Five;
 
             /* Secondary Buttons */
-            Button_Close.BackgroundImage = Image_Icon.Close;
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
 
             /*******************************/
             /* Load CDN List                /
@@ -485,11 +481,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_CDN_Current.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsCDNCurrent_LinkClicked);
             LinkLabel_Game_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsGameFilesCurrent_LinkClicked);
 
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                MouseMove += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Move);
-                MouseUp += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Up);
-                MouseDown += new MouseEventHandler(Parent_Screen.Screen_Instance.Move_Window_Mouse_Down);
+                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
             }
 
             Load += new EventHandler(Screen_Settings_Load);
@@ -581,7 +577,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Save.DialogResult = DialogResult.OK;
             Button_Exit.DialogResult = DialogResult.Cancel;
 
-            if (Parent_Screen.Launcher_Setup.Equals(1))
+            if (Screen_Parent.Launcher_Setup.Equals(1))
             {
                 Button_Exit.Text = "Basic";
             }

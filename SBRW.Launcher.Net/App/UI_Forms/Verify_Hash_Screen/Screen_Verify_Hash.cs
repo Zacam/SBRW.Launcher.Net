@@ -25,6 +25,7 @@ using System.Windows.Forms;
 using SBRW.Launcher.Core.Theme;
 using System.Net.Cache;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 
 namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
 {
@@ -97,10 +98,6 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                     Presence_Launcher.Status(22);
                     Log_Verify.Stop = true;
                 }
-
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
 
@@ -586,11 +583,14 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
             {
                 if (Screen_Main.Screen_Instance.Button_Settings.InvokeRequired)
                 {
-                    Screen_Main.Screen_Instance.Button_Settings.SafeInvokeAction(() => Screen_Main.Screen_Instance.Button_Settings.BackgroundImage = Image_Icon.Gear);
+                    Screen_Main.Screen_Instance.Button_Settings.SafeInvokeAction(() =>
+                    Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
+                    Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White));
                 }
                 else
                 {
-                    Screen_Main.Screen_Instance.Button_Settings.BackgroundImage = Image_Icon.Gear;
+                    Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
+                        Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White);
                 }
             }
         }
@@ -733,9 +733,6 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                             if (IsVerifyHashOpen)
                             {
                                 Application.DoEvents();
-                                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                GC.Collect(); 
-                                #endif
                             }
                         }
                     }

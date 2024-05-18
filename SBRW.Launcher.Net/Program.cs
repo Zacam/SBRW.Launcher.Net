@@ -25,6 +25,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 
 namespace SBRW.Launcher.Net
 {
@@ -150,7 +151,7 @@ namespace SBRW.Launcher.Net
             try
             {
                 Log.Info("MAINSCREEN: Program Started");
-                Application.Run(new Parent_Screen());
+                Application.Run(new Screen_Parent());
             }
             catch (COMException Error)
             {
@@ -361,7 +362,7 @@ namespace SBRW.Launcher.Net
                                         "SBRW.Launcher.Core.Extra.dll - 0.3.11",
                                         "SBRW.Launcher.Core.Discord.dll - 0.3.2",
                                         "SBRW.Launcher.Core.Proxy.dll - 0.3.3",
-                                        "SBRW.Launcher.Core.Theme.dll - 0.2.2",
+                                        "SBRW.Launcher.Core.Theme.dll - 0.3.1",
                                         "SBRW.Launcher.Core.Downloader.dll - 0.3.8",
                                         "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.2"
                                 };

@@ -426,7 +426,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                                         Save_Settings.Save();
                                         if (Screen_Main.Screen_Instance != null)
                                         {
-                                            Screen_Main.Screen_Instance.Button_Settings.BackgroundImage = Image_Icon.Gear;
+                                            Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
+                                                Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White);
                                         }
                                     }
                                 }

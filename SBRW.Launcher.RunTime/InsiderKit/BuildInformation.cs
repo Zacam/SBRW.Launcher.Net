@@ -9,10 +9,10 @@ namespace SBRW.Launcher.RunTime.InsiderKit
     {
         /* Current month, day, year (2 digits), and letter! Ex: 12-15-20-A */
         /* If a second build gets release within the same day bump letter version up (No R2 or D2)*/
-        const string DATE = "04-25-2024";
-        const string DATE_SHORT = "04-25-24";
-        const string TIME = "1725";
-        const string TIME_SECONDS = "53";
+        const string DATE = "05-17-2024";
+        const string DATE_SHORT = "05-17-24";
+        const string TIME = "1953";
+        const string TIME_SECONDS = "01";
         const string TIME_ZONE = "-07:00";
         /// <summary>
         /// Build Information <i>(Full Information)</i>

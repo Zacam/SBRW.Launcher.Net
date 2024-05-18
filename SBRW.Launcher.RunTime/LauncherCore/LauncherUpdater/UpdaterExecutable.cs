@@ -83,10 +83,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     finally
                     {
                         Client?.Dispose();
-
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
 
                     bool IsJsonValid = false;
@@ -122,12 +118,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                             LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATER", Error.InnerException.Message, false, true);
                         }
                     }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
-                    }
 
                     if (!IsGithubOnline || !IsJsonValid)
                     {
@@ -149,10 +139,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     {
                         VersionJSON = string.Empty;
                     }
-
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
             });
 
@@ -205,12 +191,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                                         LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATER [EXE DL #1]", Error.InnerException.Message, false, true);
                                     }
                                 }
-                                finally
-                                {
-                                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                    GC.Collect(); 
-                                    #endif
-                                }
                             }
                         };
 
@@ -238,10 +218,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                         finally
                         {
                             Client?.Dispose();
-
-                            #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                            GC.Collect(); 
-                            #endif
                         }
                     }
                     catch (Exception Error)
@@ -251,12 +227,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                         {
                             LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATER [!FileExists]", Error.InnerException.Message, false, true);
                         }
-                    }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
                     }
                 });
             }
@@ -323,12 +293,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                                         LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATER [EXE Error #2]", Error.InnerException.Message, false, true);
                                     }
                                 }
-                                finally
-                                {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect();
-#endif
-                                }
                             }
                         };
 
@@ -360,10 +324,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                         finally
                         {
                             Client?.Dispose();
-
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                            GC.Collect();
-#endif
                         }
                     }
                 }
@@ -375,12 +335,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                     {
                         LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER UPDATER [FileExists]", Error.InnerException.Message, false, true);
                     }
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
             }
             LogToFileAddons.Parent_Log_Screen(3, "LAUNCHER UPDATER", "Done");

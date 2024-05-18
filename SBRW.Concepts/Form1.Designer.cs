@@ -490,7 +490,6 @@
             this.Panel_Server_Information.Name = "Panel_Server_Information";
             this.Panel_Server_Information.Size = new System.Drawing.Size(525, 68);
             this.Panel_Server_Information.TabIndex = 163;
-            this.Panel_Server_Information.Visible = false;
             // 
             // LinkLabel_Server_Twitter
             // 

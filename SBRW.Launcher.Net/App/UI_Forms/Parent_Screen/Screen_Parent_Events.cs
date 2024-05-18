@@ -1,87 +1,77 @@
-﻿using SBRW.Launcher.RunTime.InsiderKit;
-using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
-using SBRW.Launcher.RunTime.LauncherCore.FileReadWrite;
-using SBRW.Launcher.RunTime.LauncherCore.Global;
-using SBRW.Launcher.RunTime.LauncherCore.Languages.Visual_Forms;
-using SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater;
-using SBRW.Launcher.RunTime.LauncherCore.Lists;
-using SBRW.Launcher.RunTime.LauncherCore.Logger;
-using SBRW.Launcher.RunTime.LauncherCore.ModNet;
-using SBRW.Launcher.RunTime.LauncherCore.Support;
-using SBRW.Launcher.RunTime.LauncherCore.Visuals;
-using SBRW.Launcher.RunTime.SystemPlatform.Components;
-using SBRW.Launcher.RunTime.SystemPlatform.Unix;
-using SBRW.Launcher.RunTime.SystemPlatform.Windows;
-using SBRW.Launcher.App.UI_Forms.Main_Screen;
-using SBRW.Launcher.App.UI_Forms.Welcome_Screen;
-using SBRW.Launcher.Core.Cache;
+﻿using SBRW.Launcher.Core.Cache;
 using SBRW.Launcher.Core.Discord.RPC_;
+using SBRW.Launcher.Core.Extension.Hash_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.Registry_;
 using SBRW.Launcher.Core.Extension.Time_;
 using SBRW.Launcher.Core.Extension.Web_;
 using SBRW.Launcher.Core.Extra.File_;
-using SBRW.Launcher.Core.Extra.Ini_;
-using SBRW.Launcher.Core.Extra.XML_;
-using SBRW.Launcher.Core.Proxy.Nancy_;
-using SBRW.Launcher.Core.Required.Certificate;
 using SBRW.Launcher.Core.Required.System.Windows_;
+using SBRW.Launcher.Core.Required.Certificate;
 using SBRW.Launcher.Core.Theme;
+using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.RunTime.LauncherCore.Global;
+using SBRW.Launcher.RunTime.LauncherCore.Languages.Visual_Forms;
+using SBRW.Launcher.RunTime.LauncherCore.Logger;
+using SBRW.Launcher.RunTime.LauncherCore.ModNet;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SBRW.Launcher.RunTime.SystemPlatform.Windows;
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+using SBRW.Launcher.RunTime.SystemPlatform.Components;
+using SBRW.Launcher.Core.Extra.Ini_;
+#else
 using SBRW.Launcher.Core.Required.DLL;
-using SBRW.Launcher.Core.Extension.Hash_;
-using SBRW.Launcher.App.UI_Forms.Settings_Screen;
-using System.Threading;
+using SBRW.Launcher.RunTime.SystemPlatform.Unix;
+#endif
 
-namespace SBRW.Launcher.App.UI_Forms
+namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
 {
-    public partial class Parent_Screen : Form
+    /// <summary>
+    /// 
+    /// </summary>
+    partial class Screen_Parent
     {
-        #region Screen Variables
-        private Point Mouse_Down_Point { get; set; } = Point.Empty;
-        public static Parent_Screen? Screen_Instance { get; set; }
-        private static bool Clock_Tick_Theme_Update { get; set; }
-        #endregion
-
-        #region Screen Variables
-        public static bool Launcher_Restart { get; set; }
-        /// <summary>
-        /// First time Run Is Active
-        /// </summary>
-        /// <remarks>-1 - Closing<br/>0 - Not Active<br/>1 - Active</remarks>
-        public static int Launcher_Setup { get; set; } = 0;
-        #endregion
-
         #region Dragable Form Window & Functions
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Move_Window_Mouse_Down(object sender, MouseEventArgs e)
         {
-            if (e.Y <= 90) 
-            { 
-                Mouse_Down_Point = new Point(e.X, e.Y); 
+            if (e.Y <= 90)
+            {
+                Mouse_Down_Point = new Point(e.X, e.Y);
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Move_Window_Mouse_Up(object sender, MouseEventArgs e)
         {
             Mouse_Down_Point = Point.Empty;
             Opacity = 1;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Move_Window_Mouse_Move(object sender, MouseEventArgs e)
         {
-            if (Mouse_Down_Point.IsEmpty) 
-            { 
-                return; 
+            if (Mouse_Down_Point.IsEmpty)
+            {
+                return;
             }
             else
             {
@@ -91,29 +81,13 @@ namespace SBRW.Launcher.App.UI_Forms
                 Opacity = 0.9;
             }
         }
-
-        public void Position_Window_Set()
-        {
-            FunctionStatus.CenterScreen(this);
-        }
-
-        private void ButtonClose_MouseDown(object sender, EventArgs e)
-        {
-            Button_Close.BackgroundImage = Image_Icon.Close_Click;
-        }
-
-        private void ButtonClose_MouseEnter(object sender, EventArgs e)
-        {
-            Button_Close.BackgroundImage = Image_Icon.Close_Hover;
-        }
-
-        private void ButtonClose_MouseLeaveANDMouseUp(object sender, EventArgs e)
-        {
-            Button_Close.BackgroundImage = Image_Icon.Close;
-        }
         #endregion
-
         #region Parent Screen Load and Shown
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Parent_Screen_Load(object sender, EventArgs e)
         {
             if (e != null)
@@ -121,10 +95,13 @@ namespace SBRW.Launcher.App.UI_Forms
                 LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "Set Parent Window location");
                 Position_Window_Set();
                 LogToFileAddons.Parent_Log_Screen(3, "LAUNCHER", "Set Parent Window location");
-            } 
+            }
         }
-
-        #region Application Start Process
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Parent_Screen_Shown(object sender, EventArgs e)
         {
             if (e == null)
@@ -190,12 +167,6 @@ namespace SBRW.Launcher.App.UI_Forms
                 catch
                 {
                     FunctionStatus.LauncherForceClose = true;
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
             });
 #endif
@@ -316,9 +287,6 @@ namespace SBRW.Launcher.App.UI_Forms
                         finally
                         {
                             LogToFileAddons.Parent_Log_Screen(3, "LAUNCHER MIGRATION", "Done");
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                            GC.Collect();
-#endif
                         }
                     });
 
@@ -341,12 +309,6 @@ namespace SBRW.Launcher.App.UI_Forms
                             catch (Exception Error)
                             {
                                 LogToFileAddons.OpenLog("LAUNCHER XML", string.Empty, Error, string.Empty, true);
-                            }
-                            finally
-                            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                GC.Collect();
-#endif
                             }
                         }
 
@@ -385,12 +347,6 @@ namespace SBRW.Launcher.App.UI_Forms
                             {
                                 LogToFileAddons.Parent_Log_Screen(5, "LAUNCHER XML", Error.InnerException.Message, false, true);
                             }
-                        }
-                        finally
-                        {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                            GC.Collect();
-#endif
                         }
                     });
 
@@ -435,12 +391,6 @@ namespace SBRW.Launcher.App.UI_Forms
                                         {
                                             LogToFileAddons.Parent_Log_Screen(5, "Account File Migration", Error.InnerException.Message, false, true);
                                         }
-                                    }
-                                    finally
-                                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
                                     }
                                 }
                                 else
@@ -560,12 +510,6 @@ namespace SBRW.Launcher.App.UI_Forms
                                             LogToFileAddons.Parent_Log_Screen(5, "SSL/TLS", Error.InnerException.Message, false, true);
                                         }
                                     }
-                                    finally
-                                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
-                                    }
                                 }
 
                                 /* Windows 7 HotFix Check */
@@ -618,12 +562,6 @@ namespace SBRW.Launcher.App.UI_Forms
                                             LogToFileAddons.Parent_Log_Screen(5, "HotFixes", Error.InnerException.Message, false, true);
                                         }
                                     }
-                                    finally
-                                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
-                                    }
                                 }
 
                                 try
@@ -649,9 +587,6 @@ namespace SBRW.Launcher.App.UI_Forms
                                 finally
                                 {
                                     LogToFileAddons.Parent_Log_Screen(3, "FOLDER", "Launcher Data Done");
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect();
-#endif
                                 }
 
                                 await Task.Run(() =>
@@ -702,9 +637,6 @@ namespace SBRW.Launcher.App.UI_Forms
                                     finally
                                     {
                                         LogToFileAddons.Parent_Log_Screen(3, "FOLDER", "Done");
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
                                     }
                                 });
 
@@ -745,350 +677,11 @@ namespace SBRW.Launcher.App.UI_Forms
             }
         }
         #endregion
-        #endregion
-
-        #region First Time Run
-        public static async void First_Time_Run()
-        {
-            if (!LauncherUpdateCheck.UpdatePopupStoppedSplashScreen)
-            {
-                FunctionStatus.LoadingComplete = true;
-            }
-
-            if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-            {
-                LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "Checking Installation Directory at " + Save_Settings.Live_Data.Game_Path);
-            }
-
-            LogToFileAddons.Parent_Log_Screen(2, "LAUNCHER", "Checking Game Installation");
-            if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path) ||
-                (Save_Settings.Live_Data.Launcher_CDN.Contains("http://localhost") && 
-                !Save_Settings.Live_Data.Launcher_CDN.Contains(".")))
-            {
-                Presence_Launcher.Status(0, "Doing First Time Run");
-                LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "First run!");
-
-                try
-                {
-                    if (Screen_Instance != default)
-                    {
-                        Launcher_Setup = 1;
-                        Screen_Instance.Text = "Setup - SBRW Launcher: " + Application.ProductVersion;
-                        Screen_Settings Custom_Instance_Settings = new Screen_Settings() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-                        Screen_Instance.Panel_Form_Screens.Visible = true;
-                        Screen_Instance.Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
-                        Custom_Instance_Settings.Show();
-                        Screen_Instance.Panel_Splash_Screen.Visible = false;
-
-                        await Task.Run(() =>
-                        {
-                            while (Launcher_Setup.Equals(1))
-                            {
-                                /* Just keep looping until the user completes the setup (Screen) */
-                                Thread.Sleep(1000);
-                            }
-                        });
-
-                        if (Launcher_Setup.Equals(0))
-                        {
-                            Screen_Instance.Text = "SBRW Launcher: " + Application.ProductVersion;
-                            Screen_Instance.Panel_Splash_Screen.Visible = true;
-                            Screen_Instance.Panel_Form_Screens.Visible = false;
-                        }
-                        else
-                        {
-                            FunctionStatus.LauncherForceClose = true;
-                        }
-                    }
-                    else
-                    {
-                        FunctionStatus.LauncherForceClose = true;
-                    }
-                }
-                catch (Exception Error)
-                {
-                    LogToFileAddons.OpenLog("FOLDER SELECT DIALOG", string.Empty, Error, string.Empty, true);
-
-                    if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_CDN))
-                    {
-                        LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "CDN Source URL was Empty! Setting a Null Safe URL 'http://localhost'");
-                        Save_Settings.Live_Data.Launcher_CDN = "http://localhost";
-                        Save_Settings.Save();
-                    }
-
-                    if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-                    {
-                        LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "Installation Directory was Empty! Creating and Setting Directory at " + Locations.GameFilesFailSafePath);
-                        Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
-                        Save_Settings.Save();
-                    }
-                }
-
-                if (FunctionStatus.LauncherForceClose)
-                {
-                    FunctionStatus.ErrorCloseLauncher("Closing From Setup Screen", false);
-                }
-                else
-                {
-                    if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-                    {
-                        Presence_Launcher.Status(0, "User Selecting/Inputting Game Files Folder");
-
-                        try
-                        {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-
-                            OpenFileDialog FolderDialog = new OpenFileDialog
-                            {
-                                InitialDirectory = "C:\\",
-                                ValidateNames = false,
-                                CheckFileExists = false,
-                                CheckPathExists = true,
-                                AutoUpgradeEnabled = false,
-                                Title = "Select the location to Find or Download nfsw.exe",
-                                FileName = "   Select Game Files Folder"
-                            };
-
-                            if (FolderDialog.ShowDialog() == DialogResult.OK)
-                            {
-                                if (!string.IsNullOrWhiteSpace(FolderDialog.FileName))
-                                {
-                                    Save_Settings.Live_Data.Game_Path = Path.GetDirectoryName(FolderDialog.FileName) ?? string.Empty;
-                                }
-                            }
-
-                            FolderDialog.Dispose();
-#endif
-                            if (string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-                            {
-                                await Task.Run(() =>
-                                {
-                                    try
-                                    {
-                                        Save_Settings.Live_Data.Game_Path = Path.GetFullPath("GameFiles");
-                                    }
-                                    catch
-                                    {
-                                        Save_Settings.Live_Data.Game_Path = "GameFiles";
-                                    }
-                                });
-                            }
-
-                            await Task.Run(() =>
-                            {
-                                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-                                {
-#pragma warning disable CS8604
-                                    Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(0, Screen_Instance??null);
-#pragma warning restore CS8604
-                                }
-                                else
-                                {
-                                    FunctionStatus.LauncherForceClose = true;
-                                }
-                            });
-
-                            if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-                            {
-                                LogToFileAddons.Parent_Log_Screen(2, "CLEANLINKS", "Game Path");
-                                await Task.Run(() =>
-                                {
-                                    if (File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, Locations.NameModLinks)))
-                                    {
-                                        ModNetHandler.CleanLinks(Save_Settings.Live_Data.Game_Path);
-                                        LogToFileAddons.Parent_Log_Screen(3, "CLEANLINKS", "Done");
-                                    }
-                                    else
-                                    {
-                                        LogToFileAddons.Parent_Log_Screen(3, "CLEANLINKS", "Not Present");
-                                    }
-                                });
-                            }
-                        }
-                        catch (Exception Error)
-                        {
-                            FunctionStatus.LauncherForceClose = true;
-                            FunctionStatus.LauncherForceCloseReason = Error.Message;
-                            LogToFileAddons.OpenLog("FOLDER SELECT DIALOG", string.Empty, Error, string.Empty, true);
-                            if (Error.InnerException != null && !string.IsNullOrWhiteSpace(Error.InnerException.Message))
-                            {
-                                LogToFileAddons.Parent_Log_Screen(5, "FOLDER SELECT DIALOG", Error.InnerException.Message, false, true);
-                            }
-                        }
-                        finally
-                        {
-                            #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                            GC.Collect(); 
-                            #endif
-                        }
-                    }
-#pragma warning disable CS8604 // Possible null reference argument.
-                    else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1, Screen_Instance??null))
-                    {
-                        LogToFileAddons.Parent_Log_Screen(12, "LAUNCHER", "Folder Check Trigger in 'FOLDER SELECT DIALOG'");
-                    }
-#pragma warning restore CS8604 // Possible null reference argument.
-                }
-            }
-#pragma warning disable CS8604 // Possible null reference argument.
-            else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1, Screen_Instance ?? null))
-            {
-                LogToFileAddons.Parent_Log_Screen(12, "LAUNCHER", "Folder Check Trigger");
-            }
-#pragma warning restore CS8604 // Possible null reference argument.
-
-            LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "Game Installation Path Done");
-
-            if (FunctionStatus.LauncherForceClose)
-            {
-                FunctionStatus.ErrorCloseLauncher("Closing From Folder Dialog", false);
-            }
-            else
-            {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                LogToFileAddons.Parent_Log_Screen(2, "LAUNCHER", "Checking Game Path Location");
-                Presence_Launcher.Status(0, "Checking Game Files Folder Location");
-
-                await Task.Run(() =>
-                {
-                    switch (FunctionStatus.CheckFolder(Save_Settings.Live_Data.Game_Path))
-                    {
-                        case FolderType.IsSameAsLauncherFolder:
-                            try
-                            {
-                                if (!Directory.Exists(Locations.GameFilesFailSafePath))
-                                {
-                                    Directory.CreateDirectory(Locations.GameFilesFailSafePath);
-                                    LogToFileAddons.Parent_Log_Screen(11, "FOLDER", "Created Game Files Directory at " + Locations.GameFilesFailSafePath);
-                                }
-                            }
-                            catch (Exception Error)
-                            {
-                                LogToFileAddons.OpenLog("FOLDER CREATE", string.Empty, Error, string.Empty, true);
-                                if (Error.InnerException != null && !string.IsNullOrWhiteSpace(Error.InnerException.Message))
-                                {
-                                    LogToFileAddons.Parent_Log_Screen(5, "FOLDER Create", Error.InnerException.Message, false, true);
-                                }
-                            }
-                            finally
-                            {
-                                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                GC.Collect(); 
-                                #endif
-                            }
-                            LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "Installing NFSW in same location where the GameLauncher resides is NOT allowed.", false, true);
-                            MessageBox.Show(null, string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed.\n" +
-                                "Instead, we will install it at {0}.", Locations.GameFilesFailSafePath),
-                                "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
-                            break;
-                        case FolderType.IsTempFolder:
-                        case FolderType.IsUsersFolders:
-                        case FolderType.IsProgramFilesFolder:
-                        case FolderType.IsWindowsFolder:
-                        case FolderType.IsRootFolder:
-                            string constructMsg = string.Empty;
-                            constructMsg += "Using this location for Game Files is not allowed.\n\n";
-                            constructMsg += "The following locations are also NOT allowed:\n";
-                            constructMsg += "• X:\\nfsw.exe (Root of Drive, such as C:\\ or D:\\, must be in a folder)\n";
-                            constructMsg += "• C:\\Program Files\n";
-                            constructMsg += "• C:\\Program Files (x86)\n";
-                            constructMsg += "• C:\\Users (Includes 'Desktop', 'Documents', 'Downloads')\n";
-                            constructMsg += "• C:\\Windows\n\n";
-                            constructMsg += "Instead, we will install the NFSW Game at " + Locations.GameFilesFailSafePath;
-                            try
-                            {
-                                if (!Directory.Exists(Locations.GameFilesFailSafePath))
-                                {
-                                    Directory.CreateDirectory(Locations.GameFilesFailSafePath);
-                                    LogToFileAddons.Parent_Log_Screen(11, "FOLDER", "Created Game Files Directory at " + Locations.GameFilesFailSafePath);
-                                }
-                            }
-                            catch (Exception Error)
-                            {
-                                LogToFileAddons.OpenLog("FOLDER CREATE", string.Empty, Error, string.Empty, true);
-                                if (Error.InnerException != null && !string.IsNullOrWhiteSpace(Error.InnerException.Message))
-                                {
-                                    LogToFileAddons.Parent_Log_Screen(5, "FOLDER Create", Error.InnerException.Message, false, true);
-                                }
-                            }
-                            finally
-                            {
-                                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                                GC.Collect(); 
-                                #endif
-                            }
-                            LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "Installing NFSW in a Restricted Location is not allowed.", false, true);
-                            MessageBox.Show(null, constructMsg, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
-                            break;
-                    }
-                    Save_Settings.Save();
-                });
-
-                LogToFileAddons.Parent_Log_Screen(11, "LAUNCHER", "Done Checking Game Path Location");
-#endif
-
-                /* Check If Launcher Failed to Connect to any APIs */
-                if (!VisualsAPIChecker.Local_Cached_API())
-                {
-                    Presence_Launcher.Status(0, "Launcher Encountered API Errors");
-
-                    DialogResult restartAppNoApis = MessageBox.Show(null, "There is no internet connection or local cache, Launcher might crash." +
-                        "\n\nClick Yes to Close GameLauncher" +
-                        "\nor" +
-                        "\nClick No Continue", "GameLauncher has Stopped, Failed To Connect To API", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                    if (restartAppNoApis == DialogResult.Yes)
-                    {
-                        FunctionStatus.LauncherForceClose = true;
-                    }
-                }
-
-                if (FunctionStatus.LauncherForceClose)
-                {
-                    FunctionStatus.ErrorCloseLauncher("Closing From API Error", false);
-                }
-                else
-                {
-                    try
-                    {
-                      
-                        if (Screen_Instance != null)
-                        {
-                            Screen_Instance.Text = "SBRW Launcher: " + Application.ProductVersion;
-                            Screen_Main Custom_Instance_Settings = new Screen_Main() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-                            Screen_Instance.Panel_Form_Screens.Visible = true;
-                            Screen_Instance.Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
-                            Custom_Instance_Settings.Show();
-                            Screen_Instance.Panel_Splash_Screen.Visible = false;
-                            Screen_Instance.Size = new Size(891, 529);
-                            Screen_Instance.Position_Window_Set();
-                            LogToFileAddons.Parent_Log_Screen(1, "MAINSCREEN", "Hello World!", true);
-                        }
-                    }
-                    catch (COMException Error)
-                    {
-                        LogToFileAddons.OpenLog("Main Screen", "Launcher Encounterd an Error.", Error, "Error", false);
-                        FunctionStatus.ErrorCloseLauncher("Main Screen [Application Run]", false);
-                    }
-                    catch (Exception Error)
-                    {
-                        LogToFileAddons.OpenLog("Main Screen", "Launcher Encounterd an Error.", Error, "Error", false);
-                        FunctionStatus.ErrorCloseLauncher("Main Screen [Application Run]", false);
-                    }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
-                    }
-                }
-            }
-        }
-#endregion
-
-#region Splash Screen
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Clock_Tick(object sender, EventArgs e)
         {
             if (e != null)
@@ -1103,115 +696,18 @@ namespace SBRW.Launcher.App.UI_Forms
                 else if ((PictureBox_Screen_Splash.BackgroundImage != Image_Other.Logo_Splash) && (Screen_Instance != null))
                 {
                     Clock_Tick_Theme_Update = true;
-                    Button_Close.SafeInvokeAction(() => Button_Close.BackgroundImage = Image_Icon.Close, this);
+                    Button_Close.SafeInvokeAction(() => Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White), this);
                     PictureBox_Screen_Splash.SafeInvokeAction(() => PictureBox_Screen_Splash.BackgroundImage = Image_Other.Logo_Splash, this);
                 }
-                else
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
-                }
+
+                GarbageCollections.Cleanup();
             }
         }
-#endregion
-
-#region App Close Functions
-        private void ClosingTasks()
-        {
-            Save_Settings.Save();
-            Save_Account.Save();
-
-            try
-            {
-                if (Screen_Main.LZMA_Downloader != null)
-                {
-                    if (Screen_Main.LZMA_Downloader.Downloading)
-                    {
-                        Screen_Main.LZMA_Downloader.Stop();
-                    }
-                }
-            }
-            catch (Exception Error)
-            {
-                LogToFileAddons.OpenLog("CDN DOWNLOADER [LZMA]", string.Empty, Error, string.Empty, true);
-            }
-
-            try
-            {
-                if (Screen_Main.Pack_SBRW_Unpacker != null)
-                {
-                    Screen_Main.Pack_SBRW_Unpacker.Cancel = true;
-                }
-
-                if (Screen_Main.Pack_SBRW_Downloader != null)
-                {
-                    Screen_Main.Pack_SBRW_Downloader.Cancel = true;
-                }
-            }
-            catch (Exception Error)
-            {
-                LogToFileAddons.OpenLog("CDN DOWNLOADER", string.Empty, Error, string.Empty, true);
-            }
-
-            try
-            {
-                if (FunctionStatus.LauncherBattlePass)
-                {
-                    Process.GetProcessById(Screen_Main.NfswPid).Kill();
-                }
-                else
-                {
-                    Process[] allOfThem = Process.GetProcessesByName("nfsw");
-
-                    if (allOfThem != null && allOfThem.Any())
-                    {
-                        foreach (var oneProcess in allOfThem)
-                        {
-                            Process.GetProcessById(oneProcess.Id).Kill();
-                        }
-                    }
-                }
-            }
-            catch { }
-
-            if (Presence_Launcher.Running())
-            {
-                Presence_Launcher.Stop("Close");
-            }
-
-            if (Proxy_Settings.Running())
-            {
-                Proxy_Server.Instance.Stop("Main Screen");
-            }
-
-            if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
-            {
-                if (File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, Locations.NameModLinks)) && !FunctionStatus.LauncherBattlePass)
-                {
-                    ModNetHandler.CleanLinks(Save_Settings.Live_Data.Game_Path);
-                }
-            }
-
-            try
-            {
-                if (Screen_Main.Screen_Instance != null)
-                {
-                    if (Screen_Main.Screen_Instance.NotifyIcon_Notification.Visible)
-                    {
-                        Screen_Main.Screen_Instance.NotifyIcon_Notification.Visible = false;
-                        Screen_Main.Screen_Instance.NotifyIcon_Notification.Dispose();
-                    }
-                }
-            }
-            catch (Exception Error)
-            {
-                LogToFileAddons.OpenLog("Notification Disposal", string.Empty, Error, string.Empty, true);
-            }
-
-            Log_Verify.Stop = Log.Stop = true;
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void Button_Close_Click(object sender, EventArgs e)
         {
             if (FunctionStatus.LoadingComplete)
@@ -1238,103 +734,6 @@ namespace SBRW.Launcher.App.UI_Forms
 
             // If in Console Mode or if Form is Hidden and/or for Background Threads
             Environment.Exit(Environment.ExitCode);
-        }
-#endregion
-
-        public Parent_Screen()
-        {
-            InitializeComponent();
-#region Custom EventHandlers
-            MouseMove += new MouseEventHandler(Move_Window_Mouse_Move);
-            MouseUp += new MouseEventHandler(Move_Window_Mouse_Up);
-            MouseDown += new MouseEventHandler(Move_Window_Mouse_Down);
-
-            Panel_Splash_Screen.MouseMove += new MouseEventHandler(Move_Window_Mouse_Move);
-            Panel_Splash_Screen.MouseUp += new MouseEventHandler(Move_Window_Mouse_Up);
-            Panel_Splash_Screen.MouseDown += new MouseEventHandler(Move_Window_Mouse_Down);
-
-            Panel_Form_Screens.MouseMove += new MouseEventHandler(Move_Window_Mouse_Move);
-            Panel_Form_Screens.MouseUp += new MouseEventHandler(Move_Window_Mouse_Up);
-            Panel_Form_Screens.MouseDown += new MouseEventHandler(Move_Window_Mouse_Down);
-
-            PictureBox_Screen_Splash.MouseMove += new MouseEventHandler(Move_Window_Mouse_Move);
-            PictureBox_Screen_Splash.MouseUp += new MouseEventHandler(Move_Window_Mouse_Up);
-            PictureBox_Screen_Splash.MouseDown += new MouseEventHandler(Move_Window_Mouse_Down);
-
-            Load += new EventHandler(Parent_Screen_Load);
-            Shown += new EventHandler(Parent_Screen_Shown);
-            Clock.Tick += new EventHandler(Clock_Tick);
-
-            Button_Close.MouseEnter += new EventHandler(ButtonClose_MouseEnter);
-            Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
-            Button_Close.MouseUp += new MouseEventHandler(ButtonClose_MouseLeaveANDMouseUp);
-            Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
-            Button_Close.Click += new EventHandler(Button_Close_Click);
-            #endregion
-
-            #region Custom Theme
-            /*******************************/
-            /* Set Font                     /
-            /*******************************/
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-            float MainFontSize = 9f * 96f / CreateGraphics().DpiY;
-#else
-            float MainFontSize = 9f;
-#endif
-
-            Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            TextBox_Live_Log.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            GroupBox_Launcherlog.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-
-            /********************************/
-            /* Set Theme Colors & Images     /
-            /********************************/
-
-            SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer | ControlStyles.OptimizedDoubleBuffer, true);
-
-            TransparencyKey = Color_Screen.BG_Splash;
-            BackgroundImage = Image_Background.Settings;
-
-            Button_Close.BackgroundImage = Image_Icon.Close;
-            PictureBox_Screen_Splash.BackgroundImage = Image_Other.Logo_Splash;
-
-            ForeColor = Color_Winform.Text_Fore_Color;
-            BackColor = Color_Winform.BG_Fore_Color;
-
-            GroupBox_Launcherlog.ForeColor = Color_Winform.Text_Fore_Color;
-            TextBox_Live_Log.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-            TextBox_Live_Log.BackColor = Color_Winform.BG_Darker_Fore_Color;
-
-            /*******************************/
-            /* Set Window Name              /
-            /*******************************/
-
-            Icon = FormsIcon.Retrive_Icon();
-            Text = "SBRW Launcher: " + Application.ProductVersion;
-
-            this.Closing += (x, y) =>
-            {
-                if (FunctionStatus.LoadingComplete)
-                {
-                    ClosingTasks();
-                }
-                else
-                {
-                    FunctionStatus.LauncherForceClose = true;
-                }
-
-                Screen_Instance = null;
-
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
-            };
-#endregion
-
-#region Update Variables
-            Screen_Instance = this;
-            //Button_One.Text = DialogResult.OK.ToString();
-#endregion
         }
     }
 }

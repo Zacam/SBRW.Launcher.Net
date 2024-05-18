@@ -50,12 +50,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     LogToFileAddons.Parent_Log_Screen(5, "LIST CORE", Error.InnerException.Message, false, true);
                 }
             }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
-            }
 
             if (json_language.Valid_Json())
             {
@@ -72,12 +66,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     {
                         LogToFileAddons.Parent_Log_Screen(5, "LIST CORE Deserialize", Error.InnerException.Message, false, true);
                     }
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
 
                 try
@@ -120,12 +108,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     {
                         LogToFileAddons.Parent_Log_Screen(5, "LIST CORE Compile", Error.InnerException.Message, false, true);
                     }
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
 
                 LogToFileAddons.Parent_Log_Screen(3, "LIST CORE", "Done");

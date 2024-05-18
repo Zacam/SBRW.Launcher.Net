@@ -5,6 +5,7 @@ using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
 
 #endif
 using SBRW.Launcher.App.UI_Forms.Custom_Server_Screen;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.App.UI_Forms.Register_Screen;
 using SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen;
 using SBRW.Launcher.App.UI_Forms.Settings_Screen;
@@ -26,6 +27,7 @@ using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.LauncherCore.ModNet;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -265,14 +267,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             else
             {
                 /* Main Screen Login */
-                if (Picture_Input_Email.Image != Image_Other.Text_Border_Email_Error)
-                {
-                    Picture_Input_Email.Image = Image_Other.Text_Border_Email_Error;
-                }
-                if (Picture_Input_Password.Image != Image_Other.Text_Border_Password_Error)
-                {
-                    Picture_Input_Password.Image = Image_Other.Text_Border_Password_Error;
-                }
+                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Error);
+                Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Error);
                 if (Picture_Information_Window.Image != Image_Other.Information_Window_Error)
                 {
                     Picture_Information_Window.Image = Image_Other.Information_Window_Error;
@@ -770,9 +766,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }));
                 }
                 ContextMenu.MenuItems.Add("-");
-                if (Parent_Screen.Screen_Instance != null)
+                if (Screen_Parent.Screen_Instance != null)
                 {
-                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
+                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Screen_Parent.Screen_Instance.Button_Close_Click));
                 }
 
                 NotifyIcon_Notification.ContextMenu = ContextMenu;

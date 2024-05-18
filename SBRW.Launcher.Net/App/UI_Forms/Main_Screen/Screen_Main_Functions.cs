@@ -36,6 +36,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SBRW.Launcher.Core.Extension.Web_;
 using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -434,9 +435,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 #endif
                                 }));
                                 ContextMenu.MenuItems.Add("-");
-                                if (Parent_Screen.Screen_Instance != null)
+                                if (Screen_Parent.Screen_Instance != null)
                                 {
-                                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
+                                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Screen_Parent.Screen_Instance.Button_Close_Click));
                                 }
 
                                 NotifyIcon_Notification.ContextMenu = ContextMenu;
@@ -456,9 +457,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 #endif
                                 }));
                                 ContextMenu.MenuItems.Add("-");
-                                if (Parent_Screen.Screen_Instance != null)
+                                if (Screen_Parent.Screen_Instance != null)
                                 {
-                                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
+                                    ContextMenu.MenuItems.Add(new MenuItem("Close Launcher", Screen_Parent.Screen_Instance.Button_Close_Click));
                                 }
 
                                 NotifyIcon_Notification.ContextMenu = ContextMenu;
@@ -467,7 +468,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                         if (exitCode == 0 && !Launcher_Value.Game_In_Event_Bug && AC_Core.Stop_Check())
                         {
-                            Parent_Screen.Screen_Instance?.Button_Close_Click(new object(), new EventArgs());
+                            Screen_Parent.Screen_Instance?.Button_Close_Click(new object(), new EventArgs());
                         }
                         else if (AC_Core.Stop_Check())
                         {
@@ -516,12 +517,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 catch (Exception Error)
                                 {
                                     LogToFileAddons.OpenLog("NotifyIcon_Notification Timer", string.Empty, Error, "Error", true);
-                                }
-                                finally
-                                {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                    GC.Collect();
-#endif
                                 }
                             }
                         };
@@ -593,9 +588,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }));
 #endif
                         ContextMenu.MenuItems.Add("-");
-                        if (Parent_Screen.Screen_Instance != null)
+                        if (Screen_Parent.Screen_Instance != null)
                         {
-                            ContextMenu.MenuItems.Add(new MenuItem("Close Game and Launcher", Parent_Screen.Screen_Instance.Button_Close_Click));
+                            ContextMenu.MenuItems.Add(new MenuItem("Close Game and Launcher", Screen_Parent.Screen_Instance.Button_Close_Click));
                         }
 
                         NotifyIcon_Notification.ContextMenu = ContextMenu;
@@ -835,12 +830,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                         }
                                     }
                                     catch { }
-                                    finally
-                                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
-                                    }
                                 });
                             }
 

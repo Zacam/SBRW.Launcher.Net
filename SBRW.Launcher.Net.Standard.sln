@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameLauncher", "GameLaunche
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SBRW.Launcher.RunTime", "SBRW.Launcher.RunTime\SBRW.Launcher.RunTime.shproj", "{0DAFB5DA-35F4-4FDB-8887-6C7980F6DD65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SBRW.Concepts", "SBRW.Concepts\SBRW.Concepts.csproj", "{406E25B8-A4AE-42CE-99EC-F7703CBC7886}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SBRW.Concepts", "SBRW.Concepts\SBRW.Concepts.csproj", "{406E25B8-A4AE-42CE-99EC-F7703CBC7886}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

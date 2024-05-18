@@ -26,12 +26,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Components
                 {
                     LogToFileAddons.OpenLog("Hardware Info", string.Empty, Error, string.Empty, true);
                 }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
-                }
 
                 return "Unknown";
             }
@@ -51,12 +45,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Components
                 catch (Exception Error)
                 {
                     LogToFileAddons.OpenLog("Hardware Info", string.Empty, Error, string.Empty, true);
-                }
-                finally
-                {
-                    #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                    GC.Collect(); 
-                    #endif
                 }
 
                 return "Unknown";
@@ -86,12 +74,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Components
             catch
             {
                 return false;
-            }
-            finally
-            {
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             }
         }
     }

@@ -78,10 +78,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     ToolTip_Hover.Dispose();
                 }
 
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                GC.Collect();
-#endif
-
                 if (Screen_Main.Screen_Instance != default)
                 {
                     Screen_Main.Clear_Hide_Screen_Form_Panel();

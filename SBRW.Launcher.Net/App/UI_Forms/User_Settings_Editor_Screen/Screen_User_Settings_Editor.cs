@@ -80,10 +80,6 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
                     Hover.RemoveAll();
                     Hover.Dispose();
                 }
-
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
 

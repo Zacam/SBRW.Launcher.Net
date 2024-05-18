@@ -22,6 +22,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 
 namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
 {
@@ -101,12 +102,6 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                         ID++;
                     }
                     catch { }
-                    finally
-                    {
-                        #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                        GC.Collect(); 
-                        #endif
-                    }
                 }
 
                 try
@@ -222,13 +217,6 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                                                 ListView_Server_List.Items[serverid].SubItems[5].Text = "?";
                                             }, this);
                                         }
-                                        finally
-                                        {
-                                            CheckMate?.Dispose();
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                            GC.Collect();
-#endif
-                                        }
                                     }
                                     catch
                                     {
@@ -243,12 +231,6 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                                                 ListView_Server_List.Items[serverid].SubItems[5].Text = "I-E";
                                             }, this);
                                         }
-                                    }
-                                    finally
-                                    {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-                                        GC.Collect();
-#endif
                                     }
 
                                     Application.DoEvents();
@@ -405,7 +387,7 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                     switch (Screen_Mode_Update)
                     {
                         case 2:
-                            if (Parent_Screen.Launcher_Setup.Equals(1))
+                            if (Screen_Parent.Launcher_Setup.Equals(1))
                             {
                                 LogToFileAddons.Parent_Log_Screen(0, "LAUNCHER", "Selected CDN: " + Selected_CDN.Name);
                             }
@@ -462,9 +444,6 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                             ListView_Server_List.Items.Remove(ListView_Server_List.SelectedItems[0]);
                             File.WriteAllText(Locations.LauncherCustomServers, JsonConvert.SerializeObject(ServerListUpdater.NoCategoryList_CSO));
                             Application.DoEvents();
-                            #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                            GC.Collect(); 
-                            #endif
                         }
                     }
                 }
@@ -488,9 +467,6 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                 ServerListBook.Clear();
                 ServersToPing.Clear();
                 IsSelectServerOpen = false;
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
     }

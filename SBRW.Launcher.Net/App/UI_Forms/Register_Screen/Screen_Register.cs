@@ -23,6 +23,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using System.Threading.Tasks;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 
 namespace SBRW.Launcher.App.UI_Forms.Register_Screen
 {
@@ -39,54 +41,36 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
             if (string.IsNullOrWhiteSpace(Input_Email.Text))
             {
                 registerErrors.Add("Please enter your e-mail.");
-                if (Picture_Input_Email.Image != Image_Other.Text_Border_Email_Error)
-                {
-                    Picture_Input_Email.Image = Image_Other.Text_Border_Email_Error;
-                }
+                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Error);
             }
             else if (!Input_Email.Text.Valid_Email())
             {
                 registerErrors.Add("Please enter a valid e-mail address.");
-                if (Picture_Input_Email.Image != Image_Other.Text_Border_Email_Error)
-                {
-                    Picture_Input_Email.Image = Image_Other.Text_Border_Email_Error;
-                }
+                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Error);
             }
 
             if (string.IsNullOrWhiteSpace(Input_Ticket.Text) && Ticket_Required)
             {
                 registerErrors.Add("Please enter your ticket.");
-                if (Picture_Input_Ticket.Image != Image_Other.Text_Border_Ticket_Error)
-                {
-                    Picture_Input_Ticket.Image = Image_Other.Text_Border_Ticket_Error;
-                }
+                Picture_Input_Ticket.Image = Picture_Input_Ticket.Icon_Order(SVG_Icon.Input_Box_Ticket, SVG_Color.Error);
             }
 
             if (string.IsNullOrWhiteSpace(Input_Password.Text))
             {
                 registerErrors.Add("Please enter your password.");
-                if (Picture_Input_Password.Image != Image_Other.Text_Border_Password_Error)
-                {
-                    Picture_Input_Password.Image = Image_Other.Text_Border_Password_Error;
-                }
+                Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Error);
             }
 
             if (string.IsNullOrWhiteSpace(Input_Password_Confirm.Text))
             {
                 registerErrors.Add("Please confirm your password.");
-                if (Picture_Input_Password_Confirm.Image != Image_Other.Text_Border_Password_Error)
-                {
-                    Picture_Input_Password_Confirm.Image = Image_Other.Text_Border_Password_Error;
-                }
+                Picture_Input_Password_Confirm.Image = Picture_Input_Password_Confirm.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Error);
             }
 
             if (Input_Password_Confirm.Text != Input_Password.Text)
             {
                 registerErrors.Add("Passwords don't match.");
-                if (Picture_Input_Password_Confirm.Image != Image_Other.Text_Border_Password_Error)
-                {
-                    Picture_Input_Password_Confirm.Image = Image_Other.Text_Border_Password_Error;
-                }
+                Picture_Input_Password_Confirm.Image = Picture_Input_Password_Confirm.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Error);
             }
 
             if (!CheckBox_Rules_Agreement.Checked)
@@ -341,38 +325,26 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
 
         private void Input_Email_TextChanged(object sender, EventArgs e)
         {
-            if (Picture_Input_Email.Image != Image_Other.Text_Border_Email)
-            {
-                Picture_Input_Email.Image = Image_Other.Text_Border_Email;
-                Default_Picture_Information_Window();
-            }
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+            Default_Picture_Information_Window();
         }
 
         private void Input_Ticket_TextChanged(object sender, EventArgs e)
         {
-            if (Picture_Input_Ticket.Image != Image_Other.Text_Border_Ticket)
-            {
-                Picture_Input_Ticket.Image = Image_Other.Text_Border_Ticket;
-                Default_Picture_Information_Window();
-            }
+            Picture_Input_Ticket.Image = Picture_Input_Ticket.Icon_Order(SVG_Icon.Input_Box_Ticket, SVG_Color.Base);
+            Default_Picture_Information_Window();
         }
 
         private void Input_Password_Confirm_TextChanged(object sender, EventArgs e)
         {
-            if (Picture_Input_Password_Confirm.Image != Image_Other.Text_Border_Password)
-            {
-                Picture_Input_Password_Confirm.Image = Image_Other.Text_Border_Password;
-                Default_Picture_Information_Window();
-            }
+            Picture_Input_Password_Confirm.Image = Picture_Input_Password_Confirm.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+            Default_Picture_Information_Window();
         }
 
         private void Input_Password_TextChanged(object sender, EventArgs e)
         {
-            if (Picture_Input_Password.Image != Image_Other.Text_Border_Password)
-            {
-                Picture_Input_Password.Image = Image_Other.Text_Border_Password;
-                Default_Picture_Information_Window();
-            }
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+            Default_Picture_Information_Window();
         }
 
         private void Graybutton_click_MouseDown(object sender, EventArgs e)
@@ -419,9 +391,9 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
             /*******************************/
 
             Icon = FormsIcon.Retrive_Icon();
-            if (Parent_Screen.Screen_Instance != null)
+            if (Screen_Parent.Screen_Instance != null)
             {
-                Parent_Screen.Screen_Instance.Text = "Register - SBRW Launcher: " + Application.ProductVersion;
+                Screen_Parent.Screen_Instance.Text = "Register - SBRW Launcher: " + Application.ProductVersion;
             }
 
             /*******************************/
@@ -465,17 +437,17 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
 
             Input_Email.BackColor = Color_Winform_Other.Input;
             Input_Email.ForeColor = Color_Text.L_Five;
-            Picture_Input_Email.Image = Image_Other.Text_Border_Email;
+            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
 
-            Picture_Input_Password.Image = Image_Other.Text_Border_Password;
+            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
             Input_Password.BackColor = Color_Winform_Other.Input;
             Input_Password.ForeColor = Color_Text.L_Five;
 
-            Picture_Input_Password_Confirm.Image = Image_Other.Text_Border_Password;
+            Picture_Input_Password_Confirm.Image = Picture_Input_Password_Confirm.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
             Input_Password_Confirm.BackColor = Color_Winform_Other.Input;
             Input_Password_Confirm.ForeColor = Color_Text.L_Five;
 
-            Picture_Input_Ticket.Image = Image_Other.Text_Border_Ticket;
+            Picture_Input_Ticket.Image = Picture_Input_Ticket.Icon_Order(SVG_Icon.Input_Box_Ticket, SVG_Color.Base);
             Input_Ticket.BackColor = Color_Winform_Other.Input;
             Input_Ticket.ForeColor = Color_Text.L_Five;
 
@@ -538,9 +510,6 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
                     Screen_Main.Clear_Hide_Screen_Form_Panel(true);
                     Screen_Main.Screen_Instance.Button_Custom_Server.Enabled = Screen_Main.Screen_Instance.ComboBox_Server_List.Enabled = true;
                 }
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
     }

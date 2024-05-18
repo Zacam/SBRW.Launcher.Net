@@ -47,9 +47,6 @@ namespace SBRW.Launcher.App.UI_Forms.About_Screen
             {
                 PatchNoteBlocks = new List<AboutNoteBlock>();
                 IsAboutOpen = false;
-                #if !(RELEASE_UNIX || DEBUG_UNIX) 
-                GC.Collect(); 
-                #endif
             };
         }
 
