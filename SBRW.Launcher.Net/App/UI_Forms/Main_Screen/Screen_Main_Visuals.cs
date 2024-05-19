@@ -965,7 +965,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             Button_Login.ForeColor = Color_Text.L_Six;
             string Banner_Cache_Folder = Path.Combine(Locations.LauncherDataFolder, "Bin", "Server", "Banner", "EyeCatcher");
-            string Banner_Cache_File = Path.Combine(Banner_Cache_Folder, Hashes.Hash_String(1, Launcher_Value.Launcher_Select_Server_Data.IPAddress) + ".bin");
+            string Banner_Cache_File = Path.Combine(Banner_Cache_Folder, Launcher_Value.Launcher_Select_Server_Data.IPAddress.Hash_String(1) + ".bin");
             Picture_Server_Banner.Image = Image_Handler.Grayscale(Banner_Cache_File) ?? Image_Other.Server_Banner;
             Picture_Server_Banner.BackColor = Color.Transparent;
             string ImageUrl = string.Empty;

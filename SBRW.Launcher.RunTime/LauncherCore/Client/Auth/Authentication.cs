@@ -12,6 +12,7 @@ using System.Net;
 using System.Text;
 using System.Net.Cache;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 {
@@ -138,8 +139,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 
                     if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                     {
-                        Log.Info("LOGIN ERROR RESPONSE:" + LoginResponse);
-                        Log.Info("LOGIN ERROR RESPONSE SERVER:" + ServerErrorResponse);
+                        Log.Debug("LOGIN ERROR RESPONSE:" + LoginResponse);
+                        Log.Debug("LOGIN ERROR RESPONSE SERVER:" + ServerErrorResponse);
                     }
                 }
             }
@@ -162,7 +163,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 
                     if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
                     {
-                        Log.Info("MERGED JSONS:" + LoginResponse);
+                        Log.Debug("MERGED JSONS:" + LoginResponse);
                     }
                 }
 
@@ -176,6 +177,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 
                     if (!TEMP_DATA.Invalid_Format)
                     {
+                        if (BuildBeta.Allowed() || BuildDevelopment.Allowed())
+                        {
+                            Log.Debug($"LOGIN: {JsonConvert.SerializeObject(TEMP_DATA)}");
+                        }
+                        
                         if (TEMP_DATA.Ban.Active)
                         {
                             if (!string.IsNullOrWhiteSpace(TEMP_DATA.Description))
@@ -207,7 +213,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                                 Tokens.Error = msgBoxInfo;
                             }
                         }
-                        else if (TEMP_DATA.UserId == "0")
+                        else if (TEMP_DATA.UserId.Equals("0"))
                         {
                             if (TEMP_DATA.Invalid_Login)
                             {
@@ -222,12 +228,15 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                                 Tokens.Error = "ERROR " + ServerErrorCode + ": " + TEMP_DATA.Error;
                             }
                         }
+                        else if (TEMP_DATA.Error.Equals("SERVER FULL"))
+                        {
+                            Tokens.Error = "SERVER FULL";
+                        }
                         else if (!string.IsNullOrWhiteSpace(TEMP_DATA.Error))
                         {
                             Tokens.Error = TEMP_DATA.Error;
                         }
-
-                        if (string.IsNullOrWhiteSpace(TEMP_DATA.Error) || TEMP_DATA.Error == "SERVER FULL")
+                        else
                         {
                             if (Method == "Login" && string.IsNullOrWhiteSpace(TEMP_DATA.Error))
                             {
@@ -273,15 +282,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                                 Tokens.Error = TEMP_DATA.Error;
                             }
                         }
-                        else
-                        {
-                            Tokens.Error = TEMP_DATA.Error;
-                        }
                     }
                     else
                     {
-                        Log.Error("Authentication: " + "Unable to Read " + (Modern_Auth ? "JSON" : "XML") + " File");
-                        Tokens.Error = "Unable to Read " + (Modern_Auth ? "JSON": "XML") +  " File";
+                        Log.Error("Authentication: " + "Unable to Read " + (Modern_Auth ? "JSON" : "XML") + " Response");
+                        Tokens.Error = "Unable to Read " + (Modern_Auth ? "JSON": "XML") +  " Response";
                     }
                 }
             }

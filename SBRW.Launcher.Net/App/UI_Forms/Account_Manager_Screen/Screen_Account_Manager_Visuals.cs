@@ -158,12 +158,6 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             ColorSet(Button_Update, 2, true);
             ColorSet(Button_Delete, 3, true);
 
-            /* Label Links */
-            //Label_Email.ForeColor = Color_Winform.Text_Fore_Color;
-
-            /* Labels */
-            //Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
-
             /* Input Boxes */
             TextBox_Email.BackColor = Color_Winform_Other.Input;
             TextBox_Email.ForeColor = Color_Text.L_Five;
@@ -226,7 +220,6 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
             /* DataGridView Control Events */
             DataGridView_Account_List.CellClick += new DataGridViewCellEventHandler(DataGridView_Account_List_CellClick);
-            DataGridView_Account_List.CellFormatting += new DataGridViewCellFormattingEventHandler(DataGridView_Account_List_CellFormatting);
             /* Buttons Control Events */
             Button_Add.Click += new EventHandler(Button_Add_Click);
             Button_Update.Click += new EventHandler(Button_Update_Click);
@@ -250,24 +243,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                 MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
             }
 
-            Load += new EventHandler(Screen_Account_Manager_Load);
             Shown += new EventHandler(Screen_Account_Manager_Shown);
-
-            
-
-            /* Tabs Global Background Color */
-            //TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = TabControl_Game.BackColor = TabControl_Security_Center.BackColor = Color.FromArgb(22, 29, 38);
-            /* Tabs (Menu) Text Color */
-            //TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = TabControl_Game.ForeColor = TabControl_Security_Center.ForeColor = Color.FromArgb(192, 192, 192);
-            /* Tabs Current Selected & Hover Menu Tab */
-            //TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = TabControl_Game.SelectedTabColor = TabControl_Security_Center.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
-            /* Tabs Other Menu Tab */
-            //TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = TabControl_Game.TabColor = TabControl_Security_Center.TabColor = Color.FromArgb(44, 58, 76);
-            /* */
-            //TabControl_Shared_Hub.TabsHide = true;
-            /* */
             #endregion
-            /* Theming, Function, EventHandlers, Etc. Meant to load critial functions before the forms loads */
         }
     }
 }

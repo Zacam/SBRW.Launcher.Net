@@ -507,7 +507,7 @@
             this.TabControl_Launcher.Location = new System.Drawing.Point(1, 3);
             this.TabControl_Launcher.Name = "TabControl_Launcher";
             this.TabControl_Launcher.SelectedIndex = 0;
-            this.TabControl_Launcher.Size = new System.Drawing.Size(819, 354);
+            this.TabControl_Launcher.Size = new System.Drawing.Size(832, 354);
             this.TabControl_Launcher.TabIndex = 185;
             // 
             // TabPage_Launcher_Downloader
@@ -531,7 +531,7 @@
             this.TabPage_Launcher_Downloader.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Downloader.Name = "TabPage_Launcher_Downloader";
             this.TabPage_Launcher_Downloader.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Downloader.Size = new System.Drawing.Size(819, 328);
+            this.TabPage_Launcher_Downloader.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Downloader.TabIndex = 0;
             this.TabPage_Launcher_Downloader.Text = "Downloader";
             this.TabPage_Launcher_Downloader.UseVisualStyleBackColor = true;
@@ -777,10 +777,10 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Proxy.Name = "TabPage_Launcher_Proxy";
             this.TabPage_Launcher_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(819, 327);
+            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Proxy.TabIndex = 1;
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
@@ -1029,9 +1029,9 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Opt_Insider);
-            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
-            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(819, 327);
+            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Miscellaneous.TabIndex = 2;
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
@@ -1228,7 +1228,7 @@
             this.TabControl_Game.Location = new System.Drawing.Point(1, 3);
             this.TabControl_Game.Name = "TabControl_Game";
             this.TabControl_Game.SelectedIndex = 0;
-            this.TabControl_Game.Size = new System.Drawing.Size(830, 348);
+            this.TabControl_Game.Size = new System.Drawing.Size(832, 354);
             this.TabControl_Game.TabIndex = 186;
             // 
             // TabPage_Game_General
@@ -1250,7 +1250,7 @@
             this.TabPage_Game_General.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_General.Name = "TabPage_Game_General";
             this.TabPage_Game_General.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Game_General.Size = new System.Drawing.Size(830, 322);
+            this.TabPage_Game_General.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_General.TabIndex = 0;
             this.TabPage_Game_General.Text = "General";
             this.TabPage_Game_General.UseVisualStyleBackColor = true;
@@ -1463,9 +1463,9 @@
             this.TabPage_Game_Verify_Hash.Controls.Add(this.DownloadProgressBar);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StartScanner);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StopScanner);
-            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Verify_Hash.Name = "TabPage_Game_Verify_Hash";
-            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(830, 321);
+            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
@@ -1476,7 +1476,7 @@
             this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.VerifyHashWelcome.Location = new System.Drawing.Point(21, 75);
+            this.VerifyHashWelcome.Location = new System.Drawing.Point(22, 75);
             this.VerifyHashWelcome.Name = "VerifyHashWelcome";
             this.VerifyHashWelcome.Size = new System.Drawing.Size(384, 118);
             this.VerifyHashWelcome.TabIndex = 20;
@@ -1515,7 +1515,7 @@
             this.VerifyHashText.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerifyHashText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.VerifyHashText.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.VerifyHashText.Location = new System.Drawing.Point(221, 210);
+            this.VerifyHashText.Location = new System.Drawing.Point(222, 210);
             this.VerifyHashText.Name = "VerifyHashText";
             this.VerifyHashText.Size = new System.Drawing.Size(384, 66);
             this.VerifyHashText.TabIndex = 17;
@@ -1582,7 +1582,7 @@
             this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
             this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
-            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(830, 322);
+            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Security_Center.TabIndex = 4;
             this.TabPage_Game_Security_Center.Text = "Security Center";
             this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
@@ -1597,7 +1597,7 @@
             this.TabControl_Security_Center.Location = new System.Drawing.Point(0, 3);
             this.TabControl_Security_Center.Name = "TabControl_Security_Center";
             this.TabControl_Security_Center.SelectedIndex = 0;
-            this.TabControl_Security_Center.Size = new System.Drawing.Size(827, 319);
+            this.TabControl_Security_Center.Size = new System.Drawing.Size(830, 319);
             this.TabControl_Security_Center.TabIndex = 187;
             // 
             // TabPage_Security_Center_Firewall
@@ -1615,7 +1615,7 @@
             this.TabPage_Security_Center_Firewall.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Security_Center_Firewall.Name = "TabPage_Security_Center_Firewall";
             this.TabPage_Security_Center_Firewall.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Security_Center_Firewall.Size = new System.Drawing.Size(827, 293);
+            this.TabPage_Security_Center_Firewall.Size = new System.Drawing.Size(830, 293);
             this.TabPage_Security_Center_Firewall.TabIndex = 0;
             this.TabPage_Security_Center_Firewall.Text = "Firewall";
             this.TabPage_Security_Center_Firewall.UseVisualStyleBackColor = true;
@@ -1796,9 +1796,9 @@
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveLauncher);
             this.TabPage_Security_Center_Defender.Controls.Add(this.ButtonDefenderExclusionRemoveAll);
             this.TabPage_Security_Center_Defender.Controls.Add(this.TextWindowsDefender);
-            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Security_Center_Defender.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Security_Center_Defender.Name = "TabPage_Security_Center_Defender";
-            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 293);
+            this.TabPage_Security_Center_Defender.Size = new System.Drawing.Size(827, 292);
             this.TabPage_Security_Center_Defender.TabIndex = 3;
             this.TabPage_Security_Center_Defender.Text = "Defender";
             this.TabPage_Security_Center_Defender.UseVisualStyleBackColor = true;
@@ -1966,9 +1966,9 @@
             this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonCheck);
             this.TabPage_Security_Center_Permissons.Controls.Add(this.ButtonFolderPermissonSet);
             this.TabPage_Security_Center_Permissons.Controls.Add(this.TextFolderPermissions);
-            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Security_Center_Permissons.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Security_Center_Permissons.Name = "TabPage_Security_Center_Permissons";
-            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 293);
+            this.TabPage_Security_Center_Permissons.Size = new System.Drawing.Size(827, 292);
             this.TabPage_Security_Center_Permissons.TabIndex = 4;
             this.TabPage_Security_Center_Permissons.Text = "Permissons";
             this.TabPage_Security_Center_Permissons.UseVisualStyleBackColor = true;
@@ -2050,7 +2050,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2141,7 +2141,7 @@
             this.TabPage_About.Location = new System.Drawing.Point(0, 26);
             this.TabPage_About.Name = "TabPage_About";
             this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_About.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_About.Size = new System.Drawing.Size(834, 354);
             this.TabPage_About.TabIndex = 1;
             this.TabPage_About.Text = "Version: XXX.XXX.XXX";
             this.TabPage_About.UseVisualStyleBackColor = true;

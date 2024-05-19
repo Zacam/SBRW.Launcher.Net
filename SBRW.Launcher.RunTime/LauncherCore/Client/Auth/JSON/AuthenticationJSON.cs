@@ -6,13 +6,13 @@ using Newtonsoft.Json;
 public class Authentication_JSON
 {
     /// <summary>
-    /// 
+    /// UserID upon a failed Login
     /// </summary>
     /// <value>Gets a UserID. Used to tell the Server which Account to use</value>
     [JsonProperty("userId")]
     public int UserId { get; set; } = 0;
     /// <summary>
-    /// 
+    /// Auth Token upon sucessful Login
     /// </summary>
     /// <value>Gets a Auth Token. Used to Login into the Server</value>
     [JsonProperty("token")]

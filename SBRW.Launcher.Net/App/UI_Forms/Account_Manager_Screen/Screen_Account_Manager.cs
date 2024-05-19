@@ -27,18 +27,6 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// 
         /// </summary>
         public bool Use_New_Max_Blob_Size => ((Product_Version.GetWindowsBuildNumber() > 17134) && Product_Version.ConvertWindowsNumberToName().Contains("Windows 1"));
-        /// <summary>
-        /// 
-        /// </summary>
-        public static ServiceControllerStatus? Store_Info_In_Vault { get; set; }
-        /// <summary>
-        /// 
-        /// </summary>
-        Color selectionBackColor;
-        /// <summary>
-        /// 
-        /// </summary>
-        Color selectionForeColor;
 
         public Screen_Account_Manager()
         {

@@ -4,7 +4,6 @@ using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.ServiceProcess;
 
@@ -89,25 +88,16 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// <returns></returns>
         public static bool WindowsCredentialRunning()
         {
-            ServiceController? sc = default;
-
             try
             {
-                sc = new ServiceController("VaultSvc");
-                Store_Info_In_Vault = sc.Status;
-                return Store_Info_In_Vault == ServiceControllerStatus.Running;
+                using (ServiceController sc = new ServiceController("VaultSvc"))
+                {
+                    return sc.Status.Equals(ServiceControllerStatus.Running);
+                }
             }
             catch
             {
 
-            }
-            finally
-            {
-                if (sc != default)
-                {
-                    sc.Close();
-                    sc.Dispose();
-                }
             }
 
             return false;

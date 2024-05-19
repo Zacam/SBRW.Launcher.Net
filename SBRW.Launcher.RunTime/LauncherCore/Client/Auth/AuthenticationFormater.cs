@@ -5,6 +5,7 @@ using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 /// <summary>
 /// 
 /// </summary>
@@ -166,7 +167,7 @@ public static class Authentication_Formater
 
                     Converted_Response.Ban = Converted_Ban_Response;
                 }
-                else if (sbrwJSON.UserId == 0)
+                else if (sbrwJSON.UserId.Equals(0))
                 {
                     if (sbrwJSON.Description == "LOGIN ERROR")
                     {
@@ -318,7 +319,6 @@ public class C_Information_Login_Register
     /// 
     /// </summary>
     public string UserId { get; set; } = "0";
-
 }
 /// <summary>
 /// 

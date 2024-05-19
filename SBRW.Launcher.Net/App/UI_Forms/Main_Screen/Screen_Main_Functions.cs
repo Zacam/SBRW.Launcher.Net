@@ -1117,7 +1117,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                     Label_Download_Information.Text = ("Server Mods: Folder & File Check").ToUpper();
                                     json3 = JsonConvert.DeserializeObject<ServerModList>(ServerModListJSON);
                                     ServerModListJSON = string.Empty;
-                                    string ModFolderCache = Path.Combine(Save_Settings.Live_Data.Game_Path, "MODS", Hashes.Hash_String(0, json2.serverID).ToLower());
+                                    string ModFolderCache = Path.Combine(Save_Settings.Live_Data.Game_Path, "MODS", json2.serverID.Hash_String(0).ToLower());
                                     if (!Directory.Exists(ModFolderCache))
                                     {
                                         Directory.CreateDirectory(ModFolderCache);
@@ -1182,11 +1182,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                             {
                                                 if (ExtractedServerFolderRunTime == 0)
                                                 {
-                                                    string ExtractedServerFolder = Path.Combine(Save_Settings.Live_Data.Game_Path, ".data", Hashes.Hash_String(0, json2.serverID).ToLower());
+                                                    string ExtractedServerFolder = Path.Combine(Save_Settings.Live_Data.Game_Path, ".data", json2.serverID.Hash_String(0).ToLower());
                                                     if (Directory.Exists(ExtractedServerFolder))
                                                     {
                                                         Directory.Delete(ExtractedServerFolder, true);
-                                                        Log.Core("LAUNCHER: Removed Extracted Server Mods Folder: .data/" + Hashes.Hash_String(0, json2.serverID).ToLower());
+                                                        Log.Core("LAUNCHER: Removed Extracted Server Mods Folder: .data/" + json2.serverID.Hash_String(0).ToLower());
                                                     }
 
                                                     ExtractedServerFolderRunTime++;

@@ -53,44 +53,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void DataGridView_Account_List_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            if (e.Value != default)
-            {
-                //DataGridView_Account_List.Rows[e.RowIndex].DefaultCellStyle.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-                //DataGridView_Account_List.Columns[e.RowIndex].DefaultCellStyle.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-                //DataGridView_Account_List.RowHeadersDefaultCellStyle.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Screen_Account_Manager_Load(object sender, EventArgs e)
-        {
-            // Does Nothing
-            //DataGridView_Account_List.DefaultCellStyle.SelectionForeColor = Color.FromArgb(230, 204, 230);
-            // Mixes Color with 'DefaultCellStyle.BackColor'
-            // Does Nothing by itself
-            //DataGridView_Account_List.DefaultCellStyle.SelectionBackColor = Color.FromArgb(230, 204, 230);
-            // Does Nothing
-            //DataGridView_Account_List.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(230, 204, 230);
-
-
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void DataGridView_Account_List_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            /*
-            DataGridView_Account_List.DefaultCellStyle.SelectionBackColor = Color.FromArgb(190, 245, 179);
-            DataGridView_Account_List.DefaultCellStyle.SelectionForeColor = Color.FromArgb(242, 255, 128);
-            */
-
             var selectedAccount = DataGridView_Account_List.SelectedRows[0].DataBoundItem as Json_List_Account;
 
             if (selectedAccount != default)

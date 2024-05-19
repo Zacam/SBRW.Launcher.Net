@@ -26,6 +26,7 @@ using System.Threading;
 using System.Windows.Forms;
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.InsiderKit;
 
 namespace SBRW.Launcher.Net
 {
@@ -369,45 +370,48 @@ namespace SBRW.Launcher.Net
 
                                 List<string> Missing_File_List = new List<string>();
 
-                                foreach (string File_String in File_List)
+                                if (!BuildDevelopment.Allowed())
                                 {
-                                    string[] Split_File_Version = File_String.Split(new string[] { " - " }, StringSplitOptions.None);
+                                    foreach (string File_String in File_List)
+                                    {
+                                        string[] Split_File_Version = File_String.Split(new string[] { " - " }, StringSplitOptions.None);
 
-                                    if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), Split_File_Version[0])))
-                                    {
-                                        Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_NotFound"));
-                                    }
-                                    else
-                                    {
-                                        try
+                                        if (!File.Exists(Path.Combine(Directory.GetCurrentDirectory(), Split_File_Version[0])))
                                         {
-                                            FileVersionInfo Version_Info = FileVersionInfo.GetVersionInfo(Split_File_Version[0]);
-                                            string[] Version_Split = (Version_Info.ProductVersion ?? string.Empty).Split('+');
-                                            string File_Version = Version_Split[0];
+                                            Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_NotFound"));
+                                        }
+                                        else
+                                        {
+                                            try
+                                            {
+                                                FileVersionInfo Version_Info = FileVersionInfo.GetVersionInfo(Split_File_Version[0]);
+                                                string[] Version_Split = (Version_Info.ProductVersion ?? string.Empty).Split('+');
+                                                string File_Version = Version_Split[0];
 
-                                            if (File_Version == "")
-                                            {
-                                                Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid"));
-                                            }
-                                            else
-                                            {
-                                                if (!HardwareInfo.CheckArchitectureFile(Split_File_Version[0]))
+                                                if (File_Version == "")
                                                 {
-                                                    Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid_CPU"));
+                                                    Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid"));
                                                 }
                                                 else
                                                 {
-                                                    if (File_Version != Split_File_Version[1])
+                                                    if (!HardwareInfo.CheckArchitectureFile(Split_File_Version[0]))
                                                     {
-                                                        Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid_Version") +
-                                                            "(" + Split_File_Version[1] + " != " + File_Version + ")");
+                                                        Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid_CPU"));
+                                                    }
+                                                    else
+                                                    {
+                                                        if (File_Version != Split_File_Version[1])
+                                                        {
+                                                            Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid_Version") +
+                                                                "(" + Split_File_Version[1] + " != " + File_Version + ")");
+                                                        }
                                                     }
                                                 }
                                             }
-                                        }
-                                        catch
-                                        {
-                                            Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid"));
+                                            catch
+                                            {
+                                                Missing_File_List.Add(Split_File_Version[0] + " - " + Translations.Database("Program_TextBox_File_Invalid"));
+                                            }
                                         }
                                     }
                                 }

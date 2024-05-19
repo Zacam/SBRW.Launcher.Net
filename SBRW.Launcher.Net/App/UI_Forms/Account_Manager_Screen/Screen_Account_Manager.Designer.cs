@@ -74,6 +74,7 @@
             // 
             // TextBox_Max
             // 
+            this.TextBox_Max.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_Max.Enabled = false;
             this.TextBox_Max.Location = new System.Drawing.Point(515, 146);
             this.TextBox_Max.Name = "TextBox_Max";
@@ -82,6 +83,7 @@
             // 
             // TextBox_Min
             // 
+            this.TextBox_Min.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_Min.Enabled = false;
             this.TextBox_Min.Location = new System.Drawing.Point(391, 146);
             this.TextBox_Min.Name = "TextBox_Min";
@@ -101,6 +103,7 @@
             // 
             // TextBox_Nickname
             // 
+            this.TextBox_Nickname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_Nickname.Location = new System.Drawing.Point(131, 146);
             this.TextBox_Nickname.Name = "TextBox_Nickname";
             this.TextBox_Nickname.Size = new System.Drawing.Size(231, 20);
@@ -118,6 +121,7 @@
             // 
             // TextBox_ID_Account
             // 
+            this.TextBox_ID_Account.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_ID_Account.Enabled = false;
             this.TextBox_ID_Account.Location = new System.Drawing.Point(639, 49);
             this.TextBox_ID_Account.Name = "TextBox_ID_Account";
@@ -166,6 +170,7 @@
             // 
             // TextBox_Password
             // 
+            this.TextBox_Password.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_Password.Location = new System.Drawing.Point(131, 98);
             this.TextBox_Password.Name = "TextBox_Password";
             this.TextBox_Password.Size = new System.Drawing.Size(231, 20);
@@ -184,6 +189,7 @@
             // 
             // TextBox_Email
             // 
+            this.TextBox_Email.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_Email.Location = new System.Drawing.Point(131, 49);
             this.TextBox_Email.Name = "TextBox_Email";
             this.TextBox_Email.Size = new System.Drawing.Size(231, 20);
@@ -201,6 +207,7 @@
             // 
             // TextBox_ID
             // 
+            this.TextBox_ID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBox_ID.Enabled = false;
             this.TextBox_ID.Location = new System.Drawing.Point(391, 49);
             this.TextBox_ID.Name = "TextBox_ID";

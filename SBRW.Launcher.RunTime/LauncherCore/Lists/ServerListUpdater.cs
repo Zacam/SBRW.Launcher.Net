@@ -105,7 +105,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                         {
                             fileItems.Select(si =>
                             {
-                                si.ID = string.IsNullOrWhiteSpace(si.ID) ? Hashes.Hash_String(1, $"{si.Name}:{si.ID}:{si.IPAddress}") : si.ID;
+                                si.ID = string.IsNullOrWhiteSpace(si.ID) ? $"{si.Name}:{si.ID}:{si.IPAddress}".Hash_String(1) : si.ID;
                                 si.IsSpecial = false;
                                 si.Category = string.IsNullOrWhiteSpace(si.Category) ? "CUSTOM" : si.Category;
 

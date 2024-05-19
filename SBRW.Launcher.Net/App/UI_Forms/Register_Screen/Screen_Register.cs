@@ -97,27 +97,27 @@ namespace SBRW.Launcher.App.UI_Forms.Register_Screen
                         break;
                     case AuthHash.H11:
                         Email = Input_Email.Text.ToString();
-                        Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                        Password = Input_Password.Text.Hash_String(0).ToLower();
                         break;
                     case AuthHash.H12:
                         Email = Input_Email.Text.ToString();
-                        Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                        Password = Input_Password.Text.Hash_String(1).ToLower();
                         break;
                     case AuthHash.H13:
                         Email = Input_Email.Text.ToString();
-                        Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                        Password = Input_Password.Text.Hash_String(2).ToLower();
                         break;
                     case AuthHash.H20:
-                        Email = Hashes.Hash_String(0, Input_Email.Text.ToString()).ToLower();
-                        Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                        Email = Input_Email.Text.Hash_String(0).ToLower();
+                        Password = Input_Password.Text.Hash_String(0).ToLower();
                         break;
                     case AuthHash.H21:
-                        Email = Hashes.Hash_String(1, Input_Email.Text.ToString()).ToLower();
-                        Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                        Email = Input_Email.Text.Hash_String(1).ToLower();
+                        Password = Input_Password.Text.Hash_String(1).ToLower();
                         break;
                     case AuthHash.H22:
-                        Email = Hashes.Hash_String(2, Input_Email.Text.ToString()).ToLower();
-                        Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                        Email = Input_Email.Text.Hash_String(2).ToLower();
+                        Password = Input_Password.Text.Hash_String(2).ToLower();
                         break;
                     default:
                         Log.Error("HASH TYPE: Unknown Hash Standard was Provided");

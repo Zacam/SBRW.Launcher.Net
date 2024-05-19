@@ -160,27 +160,27 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     break;
                 case AuthHash.H11:
                     Email = Input_Email.Text.ToString();
-                    Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                    Password = Input_Password.Text.Hash_String(0).ToLower();
                     break;
                 case AuthHash.H12:
                     Email = Input_Email.Text.ToString();
-                    Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                    Password = Input_Password.Text.Hash_String(1).ToLower();
                     break;
                 case AuthHash.H13:
                     Email = Input_Email.Text.ToString();
-                    Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                    Password = Input_Password.Text.Hash_String(2).ToLower();
                     break;
                 case AuthHash.H20:
-                    Email = Hashes.Hash_String(0, Input_Email.Text.ToString()).ToLower();
-                    Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                    Email = Input_Email.Text.Hash_String(0).ToLower();
+                    Password = Input_Password.Text.Hash_String(0).ToLower();
                     break;
                 case AuthHash.H21:
-                    Email = Hashes.Hash_String(1, Input_Email.Text.ToString()).ToLower();
-                    Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                    Email = Input_Email.Text.Hash_String(1).ToLower();
+                    Password = Input_Password.Text.Hash_String(1).ToLower();
                     break;
                 case AuthHash.H22:
-                    Email = Hashes.Hash_String(2, Input_Email.Text.ToString()).ToLower();
-                    Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                    Email = Input_Email.Text.Hash_String(2).ToLower();
+                    Password = Input_Password.Text.Hash_String(2).ToLower();
                     break;
                 default:
                     Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
@@ -217,32 +217,32 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     case AuthHash.H11:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "1.1";
                         Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
                         break;
                     case AuthHash.H12:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "1.2";
                         Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
                         break;
                     case AuthHash.H13:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "1.3";
                         Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
                         break;
                     case AuthHash.H20:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "2.0";
-                        Save_Account.Live_Data.User_Hashed_Email = Hashes.Hash_String(0, Input_Email.Text.ToString()).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(0, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(0).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
                         break;
                     case AuthHash.H21:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "2.1";
-                        Save_Account.Live_Data.User_Hashed_Email = Hashes.Hash_String(1, Input_Email.Text.ToString()).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(1, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(1).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
                         break;
                     case AuthHash.H22:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "2.2";
-                        Save_Account.Live_Data.User_Hashed_Email = Hashes.Hash_String(2, Input_Email.Text.ToString()).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Hashes.Hash_String(2, Input_Password.Text.ToString()).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(2).ToLower();
+                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
                         break;
                     default:
                         Save_Account.Live_Data.Saved_Server_Hash_Version = "Unknown";
