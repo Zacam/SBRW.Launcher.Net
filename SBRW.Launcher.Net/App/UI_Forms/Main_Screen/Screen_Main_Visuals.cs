@@ -1904,15 +1904,17 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             UI_MODE = 0;
                         }
-
-                        if ((!IsDisposed || !Disposing))
+                        if (!BuildDevelopment.Allowed())
                         {
-                            Button_Close.Visible = false;
-
-                            if (Screen_Parent.Screen_Instance != default)
+                            if ((!IsDisposed || !Disposing))
                             {
-                                Screen_Parent.Screen_Instance.WindowState = FormWindowState.Minimized;
-                                Screen_Parent.Screen_Instance.ShowInTaskbar = false;
+                                Button_Close.Visible = false;
+
+                                if (Screen_Parent.Screen_Instance != default)
+                                {
+                                    Screen_Parent.Screen_Instance.WindowState = FormWindowState.Minimized;
+                                    Screen_Parent.Screen_Instance.ShowInTaskbar = false;
+                                }
                             }
                         }
                         break;
@@ -1922,16 +1924,20 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             UI_MODE = 0;
                         }
 
-                        if (!IsDisposed || !Disposing)
+                        if (!BuildDevelopment.Allowed())
                         {
-                            Button_Close.Visible = Button_Logout.Visible = EnablePlayButton(true);
-
-                            if (Screen_Parent.Screen_Instance != default)
+                            if (!IsDisposed || !Disposing)
                             {
-                                Screen_Parent.Screen_Instance.WindowState = FormWindowState.Normal;
-                                Screen_Parent.Screen_Instance.ShowInTaskbar = true;
+                                Button_Close.Visible = Button_Logout.Visible = EnablePlayButton(true);
+
+                                if (Screen_Parent.Screen_Instance != default)
+                                {
+                                    Screen_Parent.Screen_Instance.WindowState = FormWindowState.Normal;
+                                    Screen_Parent.Screen_Instance.ShowInTaskbar = true;
+                                }
                             }
                         }
+                        
                         break;
                     /* LZMA Downloader Progress */
                     case 15:

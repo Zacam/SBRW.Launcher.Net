@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
+using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using System.ComponentModel;
 using System.IO;
 using System.ServiceProcess;
@@ -65,10 +66,11 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
                 if (File.Exists(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON)))
                 {
-                    StreamReader sr = new StreamReader(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON));
-                    oldcontent = sr.ReadToEnd();
-                    sr.Close();
-                    sr.Dispose();
+                    using (StreamReader sr = new StreamReader(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON))) 
+                    {
+                        oldcontent = sr.ReadToEnd();
+                        sr.Close();
+                    }
                 }
 
                 if (!string.IsNullOrWhiteSpace(oldcontent))
@@ -90,9 +92,12 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         {
             try
             {
-                using (ServiceController sc = new ServiceController("VaultSvc"))
+                if (!UnixOS.Detected())
                 {
-                    return sc.Status.Equals(ServiceControllerStatus.Running);
+                    using (ServiceController sc = new ServiceController("VaultSvc"))
+                    {
+                        return sc.Status.Equals(ServiceControllerStatus.Running);
+                    }
                 }
             }
             catch

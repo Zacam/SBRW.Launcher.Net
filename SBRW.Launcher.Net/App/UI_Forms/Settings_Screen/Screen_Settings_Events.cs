@@ -441,6 +441,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Screen_Parent.Launcher_Setup = 0;
             Close();
         }
+        private void Button_Experiments_Click(object sender, EventArgs e)
+        {
+            if (!Screen_Main.Game_Affinity.Equals(NumericUpDown_Game_Affinity.Value))
+            {
+                Screen_Main.Game_Affinity = (int)NumericUpDown_Game_Affinity.Value;
+            }
+
+            if(!Screen_Main.TEST_Game_Affinity.Equals(CheckBox_Enable_Game_Affinity.Checked))
+            {
+                Screen_Main.TEST_Game_Affinity = CheckBox_Enable_Game_Affinity.Checked;
+            }
+
+            if (Screen_Main.Screen_Instance != default)
+            {
+                Screen_Main.Screen_Instance.ComboBox_Accounts.Visible = CheckBox_Enable_ACM.Checked;
+                Screen_Main.Screen_Instance.Button_Account_Manager.Visible = CheckBox_Enable_ACM.Checked;
+            }
+        }
         #endregion
         /// <summary>
         /// Settings Cancel

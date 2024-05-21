@@ -404,7 +404,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         {
             if (!(Disposing || IsDisposed))
             {
-                if (new Process_Start_Game().Initialize(Save_Settings.Live_Data.Game_Path, ServerIP, LoginToken,
+                if (new Process_Start_Game() { Live_Process_Cores_Max = Game_Affinity }.Initialize(Save_Settings.Live_Data.Game_Path, ServerIP, LoginToken,
                 UserID, Launcher_Value.Launcher_Select_Server_Data.ID.ToUpper(), true, "nfsw.exe") != null)
                 {
                     /* Request a New Session */
@@ -478,6 +478,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                     /* Wait 60 Seconds */
                     bool Game_Fully_Loaded = Process_Start_Game.Live_Process.WaitForInputIdle(60000);
+                    /* Set Affinity For the Game */
+                    if (TEST_Game_Affinity)
+                    {
+                        Process_Start_Game.Live_Process.Affinity(Game_Affinity);
+                    }
                     /*
                     while (Process_Start_Game.Live_Process.MainWindowHandle == IntPtr.Zero && !Process_Start_Game.Live_Process.HasExited)
                     {

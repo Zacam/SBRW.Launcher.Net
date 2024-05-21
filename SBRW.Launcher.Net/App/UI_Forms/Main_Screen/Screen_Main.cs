@@ -53,6 +53,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public static int TotalModFileCount { get; set; }
         public static string Custom_SBRW_Pack { get { return Path.Combine(Locations.LauncherFolder, "GameFiles.sbrwpack"); } }
 
+        public static int Game_Affinity { get; set; } = 8;
+        public static bool TEST_Game_Affinity { get; set; }
+
         public Screen_Main()
         {
             InitializeComponent();

@@ -726,6 +726,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.ComboBox_Accounts.Name = "ComboBox_Accounts";
             this.ComboBox_Accounts.Size = new System.Drawing.Size(230, 21);
             this.ComboBox_Accounts.TabIndex = 152;
+            this.ComboBox_Accounts.Visible = false;
             // 
             // Button_Account_Manager
             // 
@@ -735,6 +736,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Button_Account_Manager.TabIndex = 153;
             this.Button_Account_Manager.Text = "Account Manager";
             this.Button_Account_Manager.UseVisualStyleBackColor = true;
+            this.Button_Account_Manager.Visible = false;
             // 
             // Screen_Main
             // 
@@ -869,6 +871,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public TextBox Input_Console;
         public Button Button_Console_Submit;
         public ComboBox ComboBox_Accounts;
-        private Button Button_Account_Manager;
+        public Button Button_Account_Manager;
     }
 }

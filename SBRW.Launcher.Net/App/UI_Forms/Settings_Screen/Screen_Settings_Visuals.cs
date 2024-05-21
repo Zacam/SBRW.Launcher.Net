@@ -459,6 +459,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Game_Verify_Files.Click += new EventHandler(Button_Game_Verify_Files_Click);
             Button_Save.Click += new EventHandler(SettingsSave_Click);
             Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
+            Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
             Button_Exit.Click += new EventHandler(SettingsCancel_Click);
             Button_Game_User_Settings.Click += new EventHandler(SettingsUEditorButton_Click);
             Button_Clear_Server_Mods.Click += new EventHandler(SettingsClearServerModCacheButton_Click);

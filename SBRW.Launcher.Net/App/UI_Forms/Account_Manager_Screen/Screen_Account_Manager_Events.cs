@@ -1,9 +1,8 @@
 ﻿using CredentialManagement;
 using Newtonsoft.Json;
-using SBRW.Launcher.Core.Theme;
+using SBRW.Launcher.Core.Extension.Hash_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -60,8 +59,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             if (selectedAccount != default)
             {
                 TextBox_ID.Text = selectedAccount.Target;
-                TextBox_Email.Text = selectedAccount.Email;
-                TextBox_Password.Text = selectedAccount.Password;
+                TextBox_Email.Text = selectedAccount.Email.Decrypt_AES();
+                TextBox_Password.Text = selectedAccount.Password.Decrypt_AES();
                 TextBox_Nickname.Text = selectedAccount.Nickname;
                 TextBox_ID_Account.Text = selectedAccount.AID.ToString();
             }
@@ -84,8 +83,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                 Credential New_Credential = new Credential()
                 {
                     Target = App_Name_Target,
-                    Username = TextBox_Email.Text,
-                    Password = TextBox_Password.Text,
+                    Username = TextBox_Email.Text.Encrypt_AES(),
+                    Password = TextBox_Password.Text.Encrypt_AES(),
                     Description = !Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text)
                     ? TextBox_Nickname.Text : string.Empty,
                     Type = CredentialType.Generic,
@@ -110,8 +109,11 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                         AID = Auto_ID
                     });
 
-                    File.WriteAllText(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON), JsonConvert.SerializeObject(Accounts_Cache));
-                    ListCredentials();
+                    if (!new FileInfo(Locations.UserSettingsXML).IsReadOnly)
+                    {
+                        File.WriteAllText(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON), JsonConvert.SerializeObject(Accounts_Cache));
+                        ListCredentials();
+                    }
                 }
             }
             else
@@ -173,8 +175,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                         Credential Updated_Credential = new Credential()
                         {
                             Target = Account_Information.Target,
-                            Username = TextBox_Email.Text,
-                            Password = TextBox_Password.Text,
+                            Username = TextBox_Email.Text.Encrypt_AES(),
+                            Password = TextBox_Password.Text.Encrypt_AES(),
                             Description = TextBox_Nickname.Text,
                             Type = CredentialType.Generic,
                             PersistanceType = PersistanceType.LocalComputer,
@@ -192,14 +194,14 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                                 .LastOrDefault(x => x.Item_Account.Target == Account_Information.Target);
                             if (Account_Index != default)
                             {
-                                if (!TextBox_Password.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Password))
+                                if (!TextBox_Password.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Password))
                                 {
-                                    Accounts_Cache[Account_Index.Item_Index].Password = TextBox_Password.Text;
+                                    Accounts_Cache[Account_Index.Item_Index].Password = TextBox_Password.Text.Encrypt_AES();
                                 }
 
-                                if (!TextBox_Email.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Email))
+                                if (!TextBox_Email.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Email))
                                 {
-                                    Accounts_Cache[Account_Index.Item_Index].Email = TextBox_Email.Text;
+                                    Accounts_Cache[Account_Index.Item_Index].Email = TextBox_Email.Text.Encrypt_AES();
                                 }
 
                                 if (!TextBox_Nickname.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Nickname))
