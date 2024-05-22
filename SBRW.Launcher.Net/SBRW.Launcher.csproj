@@ -73,7 +73,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
 		<PackageReference Include="SBRW.CredentialManagement" Version="1.0.2" />
-		<PackageReference Include="SBRW.Launcher.Core" Version="0.4.0-preview002" />
+		<PackageReference Include="SBRW.Launcher.Core" Version="0.4.0-preview004" />
 		<PackageReference Include="SBRW.Launcher.Core.Discord" Version="0.3.2" />
 		<PackageReference Include="SBRW.Launcher.Core.Downloader" Version="0.3.8" />
 		<PackageReference Include="SBRW.Launcher.Core.Downloader.LZMA" Version="0.3.2" />

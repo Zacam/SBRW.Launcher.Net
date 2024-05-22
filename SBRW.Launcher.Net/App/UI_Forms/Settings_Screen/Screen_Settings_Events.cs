@@ -448,9 +448,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Screen_Main.Game_Affinity = (int)NumericUpDown_Game_Affinity.Value;
             }
 
-            if(!Screen_Main.TEST_Game_Affinity.Equals(CheckBox_Enable_Game_Affinity.Checked))
+            if (!Screen_Main.Game_Affinity_Start.Equals(NumericUpDown_Game_Affinity_Start.Value))
+            {
+                Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Game_Affinity_Start.Value;
+            }
+
+            if (!Screen_Main.Game_Affinity_End.Equals(NumericUpDown_Game_Affinity_End.Value))
+            {
+                Screen_Main.Game_Affinity_End = (int)NumericUpDown_Game_Affinity_End.Value;
+            }
+
+            if (!Screen_Main.TEST_Game_Affinity.Equals(CheckBox_Enable_Game_Affinity.Checked))
             {
                 Screen_Main.TEST_Game_Affinity = CheckBox_Enable_Game_Affinity.Checked;
+            }
+
+            if (!Screen_Main.TEST_Classic_Affinity.Equals(CheckBox_Disable_Classic_Affinity.Checked))
+            {
+                Screen_Main.TEST_Classic_Affinity = CheckBox_Disable_Classic_Affinity.Checked;
             }
 
             if (Screen_Main.Screen_Instance != default)

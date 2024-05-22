@@ -225,6 +225,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
             TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
 
+            NumericUpDown_Game_Affinity_Start.Minimum = 0;
+            NumericUpDown_Game_Affinity_Start.Maximum = Environment.ProcessorCount / 2;
+            NumericUpDown_Game_Affinity_End.Minimum = NumericUpDown_Game_Affinity_Start.Maximum + 1;
+            NumericUpDown_Game_Affinity_End.Maximum = Environment.ProcessorCount - 1;
+
             /*******************************/
             /* Set Font                     /
             /*******************************/

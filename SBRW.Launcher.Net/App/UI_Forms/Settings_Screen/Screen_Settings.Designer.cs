@@ -109,6 +109,19 @@
             this.Label_Launcher_Path = new System.Windows.Forms.Label();
             this.CheckBox_Theme_Support = new System.Windows.Forms.CheckBox();
             this.CheckBox_Opt_Insider = new System.Windows.Forms.CheckBox();
+            this.TabPage_Experiments = new System.Windows.Forms.TabPage();
+            this.Label_Game_Affinity = new System.Windows.Forms.Label();
+            this.NumericUpDown_Game_Affinity = new System.Windows.Forms.NumericUpDown();
+            this.NumericUpDown_Game_Affinity_End = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.Button_Experiments = new System.Windows.Forms.Button();
+            this.Label_Process_Priority = new System.Windows.Forms.Label();
+            this.ComboBox_Process_Priority = new System.Windows.Forms.ComboBox();
+            this.Label_Game_Affinity_Range = new System.Windows.Forms.Label();
+            this.NumericUpDown_Game_Affinity_Start = new System.Windows.Forms.NumericUpDown();
+            this.CheckBox_Enable_Game_Affinity = new System.Windows.Forms.CheckBox();
+            this.CheckBox_Enable_ACM = new System.Windows.Forms.CheckBox();
+            this.CheckBox_Disable_Classic_Affinity = new System.Windows.Forms.CheckBox();
             this.TabPage_Game = new System.Windows.Forms.TabPage();
             this.TabControl_Game = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Game_General = new System.Windows.Forms.TabPage();
@@ -195,16 +208,6 @@
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Button_Security_Center = new System.Windows.Forms.Button();
             this.Clock = new System.Windows.Forms.Timer(this.components);
-            this.TabPage_Experiments = new System.Windows.Forms.TabPage();
-            this.CheckBox_Enable_Game_Affinity = new System.Windows.Forms.CheckBox();
-            this.CheckBox_Enable_ACM = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.Label_Game_Affinity = new System.Windows.Forms.Label();
-            this.NumericUpDown_Game_Affinity = new System.Windows.Forms.NumericUpDown();
-            this.Label_Process_Priority = new System.Windows.Forms.Label();
-            this.ComboBox_Process_Priority = new System.Windows.Forms.ComboBox();
-            this.Button_Experiments = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -220,6 +223,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).BeginInit();
             this.TabPage_Launcher_Miscellaneous.SuspendLayout();
             this.Panel_Launcher_Builds_Branch.SuspendLayout();
+            this.TabPage_Experiments.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity_End)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity_Start)).BeginInit();
             this.TabPage_Game.SuspendLayout();
             this.TabControl_Game.SuspendLayout();
             this.TabPage_Game_General.SuspendLayout();
@@ -239,8 +246,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
-            this.TabPage_Experiments.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity)).BeginInit();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -790,10 +795,10 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Launcher_Proxy.Name = "TabPage_Launcher_Proxy";
             this.TabPage_Launcher_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 327);
             this.TabPage_Launcher_Proxy.TabIndex = 1;
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
@@ -1042,9 +1047,9 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Opt_Insider);
-            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
-            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 327);
             this.TabPage_Launcher_Miscellaneous.TabIndex = 2;
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
@@ -1221,12 +1226,214 @@
             this.CheckBox_Opt_Insider.Text = "{PLACE HOLDER}";
             this.CheckBox_Opt_Insider.UseVisualStyleBackColor = false;
             // 
+            // TabPage_Experiments
+            // 
+            this.TabPage_Experiments.Controls.Add(this.Label_Game_Affinity);
+            this.TabPage_Experiments.Controls.Add(this.NumericUpDown_Game_Affinity);
+            this.TabPage_Experiments.Controls.Add(this.NumericUpDown_Game_Affinity_End);
+            this.TabPage_Experiments.Controls.Add(this.label7);
+            this.TabPage_Experiments.Controls.Add(this.Button_Experiments);
+            this.TabPage_Experiments.Controls.Add(this.Label_Process_Priority);
+            this.TabPage_Experiments.Controls.Add(this.ComboBox_Process_Priority);
+            this.TabPage_Experiments.Controls.Add(this.Label_Game_Affinity_Range);
+            this.TabPage_Experiments.Controls.Add(this.NumericUpDown_Game_Affinity_Start);
+            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_Game_Affinity);
+            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_ACM);
+            this.TabPage_Experiments.Controls.Add(this.CheckBox_Disable_Classic_Affinity);
+            this.TabPage_Experiments.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Experiments.Name = "TabPage_Experiments";
+            this.TabPage_Experiments.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Experiments.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Experiments.TabIndex = 3;
+            this.TabPage_Experiments.Text = "Experiments";
+            this.TabPage_Experiments.UseVisualStyleBackColor = true;
+            // 
+            // Label_Game_Affinity
+            // 
+            this.Label_Game_Affinity.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Game_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Game_Affinity.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Game_Affinity.Location = new System.Drawing.Point(221, 41);
+            this.Label_Game_Affinity.Name = "Label_Game_Affinity";
+            this.Label_Game_Affinity.Size = new System.Drawing.Size(154, 14);
+            this.Label_Game_Affinity.TabIndex = 215;
+            this.Label_Game_Affinity.Text = "Game Affinity Range:";
+            this.Label_Game_Affinity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // NumericUpDown_Game_Affinity
+            // 
+            this.NumericUpDown_Game_Affinity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.NumericUpDown_Game_Affinity.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericUpDown_Game_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Game_Affinity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.NumericUpDown_Game_Affinity.Increment = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity.Location = new System.Drawing.Point(387, 40);
+            this.NumericUpDown_Game_Affinity.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity.Name = "NumericUpDown_Game_Affinity";
+            this.NumericUpDown_Game_Affinity.Size = new System.Drawing.Size(61, 17);
+            this.NumericUpDown_Game_Affinity.TabIndex = 216;
+            this.NumericUpDown_Game_Affinity.Tag = "ProxypPortNumeric";
+            this.NumericUpDown_Game_Affinity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumericUpDown_Game_Affinity.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            // 
+            // NumericUpDown_Game_Affinity_End
+            // 
+            this.NumericUpDown_Game_Affinity_End.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.NumericUpDown_Game_Affinity_End.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericUpDown_Game_Affinity_End.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Game_Affinity_End.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.NumericUpDown_Game_Affinity_End.Location = new System.Drawing.Point(454, 13);
+            this.NumericUpDown_Game_Affinity_End.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity_End.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity_End.Name = "NumericUpDown_Game_Affinity_End";
+            this.NumericUpDown_Game_Affinity_End.Size = new System.Drawing.Size(61, 17);
+            this.NumericUpDown_Game_Affinity_End.TabIndex = 214;
+            this.NumericUpDown_Game_Affinity_End.Tag = "ProxypPortNumeric";
+            this.NumericUpDown_Game_Affinity_End.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumericUpDown_Game_Affinity_End.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label7
+            // 
+            this.label7.BackColor = System.Drawing.Color.Transparent;
+            this.label7.ForeColor = System.Drawing.Color.DarkGray;
+            this.label7.Location = new System.Drawing.Point(141, 273);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(576, 18);
+            this.label7.TabIndex = 213;
+            this.label7.Text = "THESE SETTINGS ARE NOT PERSISTENT!!!";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // Button_Experiments
+            // 
+            this.Button_Experiments.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Experiments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Experiments.Location = new System.Drawing.Point(672, 7);
+            this.Button_Experiments.Name = "Button_Experiments";
+            this.Button_Experiments.Size = new System.Drawing.Size(154, 25);
+            this.Button_Experiments.TabIndex = 212;
+            this.Button_Experiments.Text = "Set Changes";
+            this.Button_Experiments.UseVisualStyleBackColor = false;
+            // 
+            // Label_Process_Priority
+            // 
+            this.Label_Process_Priority.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Process_Priority.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Process_Priority.Location = new System.Drawing.Point(12, 89);
+            this.Label_Process_Priority.Name = "Label_Process_Priority";
+            this.Label_Process_Priority.Size = new System.Drawing.Size(320, 14);
+            this.Label_Process_Priority.TabIndex = 211;
+            this.Label_Process_Priority.Text = "Process Priority:";
+            this.Label_Process_Priority.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // ComboBox_Process_Priority
+            // 
+            this.ComboBox_Process_Priority.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Process_Priority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Process_Priority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Process_Priority.FormattingEnabled = true;
+            this.ComboBox_Process_Priority.Location = new System.Drawing.Point(14, 108);
+            this.ComboBox_Process_Priority.Name = "ComboBox_Process_Priority";
+            this.ComboBox_Process_Priority.Size = new System.Drawing.Size(164, 22);
+            this.ComboBox_Process_Priority.TabIndex = 210;
+            // 
+            // Label_Game_Affinity_Range
+            // 
+            this.Label_Game_Affinity_Range.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Game_Affinity_Range.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Game_Affinity_Range.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Game_Affinity_Range.Location = new System.Drawing.Point(221, 14);
+            this.Label_Game_Affinity_Range.Name = "Label_Game_Affinity_Range";
+            this.Label_Game_Affinity_Range.Size = new System.Drawing.Size(154, 14);
+            this.Label_Game_Affinity_Range.TabIndex = 208;
+            this.Label_Game_Affinity_Range.Text = "CPU Affinity Range:";
+            this.Label_Game_Affinity_Range.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // NumericUpDown_Game_Affinity_Start
+            // 
+            this.NumericUpDown_Game_Affinity_Start.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.NumericUpDown_Game_Affinity_Start.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericUpDown_Game_Affinity_Start.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Game_Affinity_Start.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.NumericUpDown_Game_Affinity_Start.Location = new System.Drawing.Point(387, 13);
+            this.NumericUpDown_Game_Affinity_Start.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Game_Affinity_Start.Name = "NumericUpDown_Game_Affinity_Start";
+            this.NumericUpDown_Game_Affinity_Start.Size = new System.Drawing.Size(61, 17);
+            this.NumericUpDown_Game_Affinity_Start.TabIndex = 209;
+            this.NumericUpDown_Game_Affinity_Start.Tag = "ProxypPortNumeric";
+            this.NumericUpDown_Game_Affinity_Start.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // CheckBox_Enable_Game_Affinity
+            // 
+            this.CheckBox_Enable_Game_Affinity.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Enable_Game_Affinity.ForeColor = System.Drawing.Color.DarkGray;
+            this.CheckBox_Enable_Game_Affinity.Location = new System.Drawing.Point(15, 10);
+            this.CheckBox_Enable_Game_Affinity.Name = "CheckBox_Enable_Game_Affinity";
+            this.CheckBox_Enable_Game_Affinity.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_Enable_Game_Affinity.TabIndex = 199;
+            this.CheckBox_Enable_Game_Affinity.Text = "Enable New Game Affinity";
+            this.CheckBox_Enable_Game_Affinity.UseVisualStyleBackColor = false;
+            // 
+            // CheckBox_Enable_ACM
+            // 
+            this.CheckBox_Enable_ACM.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Enable_ACM.ForeColor = System.Drawing.Color.DarkGray;
+            this.CheckBox_Enable_ACM.Location = new System.Drawing.Point(15, 58);
+            this.CheckBox_Enable_ACM.Name = "CheckBox_Enable_ACM";
+            this.CheckBox_Enable_ACM.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_Enable_ACM.TabIndex = 201;
+            this.CheckBox_Enable_ACM.Text = "Display Account Manager";
+            this.CheckBox_Enable_ACM.UseVisualStyleBackColor = false;
+            // 
+            // CheckBox_Disable_Classic_Affinity
+            // 
+            this.CheckBox_Disable_Classic_Affinity.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Disable_Classic_Affinity.ForeColor = System.Drawing.Color.DarkGray;
+            this.CheckBox_Disable_Classic_Affinity.Location = new System.Drawing.Point(15, 34);
+            this.CheckBox_Disable_Classic_Affinity.Name = "CheckBox_Disable_Classic_Affinity";
+            this.CheckBox_Disable_Classic_Affinity.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_Disable_Classic_Affinity.TabIndex = 200;
+            this.CheckBox_Disable_Classic_Affinity.Text = "Disable Classic Affinity";
+            this.CheckBox_Disable_Classic_Affinity.UseVisualStyleBackColor = false;
+            // 
             // TabPage_Game
             // 
             this.TabPage_Game.Controls.Add(this.TabControl_Game);
             this.TabPage_Game.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game.Name = "TabPage_Game";
-            this.TabPage_Game.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_Game.Size = new System.Drawing.Size(200, 74);
             this.TabPage_Game.TabIndex = 3;
             this.TabPage_Game.Text = "Game";
             this.TabPage_Game.UseVisualStyleBackColor = true;
@@ -2063,7 +2270,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2332,142 +2539,6 @@
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
             // 
-            // TabPage_Experiments
-            // 
-            this.TabPage_Experiments.Controls.Add(this.label7);
-            this.TabPage_Experiments.Controls.Add(this.Button_Experiments);
-            this.TabPage_Experiments.Controls.Add(this.Label_Process_Priority);
-            this.TabPage_Experiments.Controls.Add(this.ComboBox_Process_Priority);
-            this.TabPage_Experiments.Controls.Add(this.Label_Game_Affinity);
-            this.TabPage_Experiments.Controls.Add(this.NumericUpDown_Game_Affinity);
-            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_Game_Affinity);
-            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_ACM);
-            this.TabPage_Experiments.Controls.Add(this.checkBox3);
-            this.TabPage_Experiments.Location = new System.Drawing.Point(0, 26);
-            this.TabPage_Experiments.Name = "TabPage_Experiments";
-            this.TabPage_Experiments.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Experiments.Size = new System.Drawing.Size(832, 328);
-            this.TabPage_Experiments.TabIndex = 3;
-            this.TabPage_Experiments.Text = "Experiments";
-            this.TabPage_Experiments.UseVisualStyleBackColor = true;
-            // 
-            // CheckBox_Enable_Game_Affinity
-            // 
-            this.CheckBox_Enable_Game_Affinity.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Enable_Game_Affinity.ForeColor = System.Drawing.Color.DarkGray;
-            this.CheckBox_Enable_Game_Affinity.Location = new System.Drawing.Point(15, 10);
-            this.CheckBox_Enable_Game_Affinity.Name = "CheckBox_Enable_Game_Affinity";
-            this.CheckBox_Enable_Game_Affinity.Size = new System.Drawing.Size(222, 18);
-            this.CheckBox_Enable_Game_Affinity.TabIndex = 199;
-            this.CheckBox_Enable_Game_Affinity.Text = "Enable New Game Affinity";
-            this.CheckBox_Enable_Game_Affinity.UseVisualStyleBackColor = false;
-            // 
-            // CheckBox_Enable_ACM
-            // 
-            this.CheckBox_Enable_ACM.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Enable_ACM.ForeColor = System.Drawing.Color.DarkGray;
-            this.CheckBox_Enable_ACM.Location = new System.Drawing.Point(15, 34);
-            this.CheckBox_Enable_ACM.Name = "CheckBox_Enable_ACM";
-            this.CheckBox_Enable_ACM.Size = new System.Drawing.Size(222, 18);
-            this.CheckBox_Enable_ACM.TabIndex = 201;
-            this.CheckBox_Enable_ACM.Text = "Display Account Manager";
-            this.CheckBox_Enable_ACM.UseVisualStyleBackColor = false;
-            // 
-            // checkBox3
-            // 
-            this.checkBox3.BackColor = System.Drawing.Color.Transparent;
-            this.checkBox3.ForeColor = System.Drawing.Color.DarkGray;
-            this.checkBox3.Location = new System.Drawing.Point(15, 58);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(222, 18);
-            this.checkBox3.TabIndex = 200;
-            this.checkBox3.Text = "{PLACE HOLDER}";
-            this.checkBox3.UseVisualStyleBackColor = false;
-            // 
-            // Label_Game_Affinity
-            // 
-            this.Label_Game_Affinity.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Game_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.Label_Game_Affinity.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Game_Affinity.Location = new System.Drawing.Point(221, 14);
-            this.Label_Game_Affinity.Name = "Label_Game_Affinity";
-            this.Label_Game_Affinity.Size = new System.Drawing.Size(154, 14);
-            this.Label_Game_Affinity.TabIndex = 208;
-            this.Label_Game_Affinity.Text = "Game Affinity:";
-            this.Label_Game_Affinity.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // NumericUpDown_Game_Affinity
-            // 
-            this.NumericUpDown_Game_Affinity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.NumericUpDown_Game_Affinity.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumericUpDown_Game_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.NumericUpDown_Game_Affinity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.NumericUpDown_Game_Affinity.Location = new System.Drawing.Point(387, 13);
-            this.NumericUpDown_Game_Affinity.Maximum = new decimal(new int[] {
-            8,
-            0,
-            0,
-            0});
-            this.NumericUpDown_Game_Affinity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumericUpDown_Game_Affinity.Name = "NumericUpDown_Game_Affinity";
-            this.NumericUpDown_Game_Affinity.Size = new System.Drawing.Size(61, 17);
-            this.NumericUpDown_Game_Affinity.TabIndex = 209;
-            this.NumericUpDown_Game_Affinity.Tag = "ProxypPortNumeric";
-            this.NumericUpDown_Game_Affinity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumericUpDown_Game_Affinity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // Label_Process_Priority
-            // 
-            this.Label_Process_Priority.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Process_Priority.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Process_Priority.Location = new System.Drawing.Point(12, 89);
-            this.Label_Process_Priority.Name = "Label_Process_Priority";
-            this.Label_Process_Priority.Size = new System.Drawing.Size(320, 14);
-            this.Label_Process_Priority.TabIndex = 211;
-            this.Label_Process_Priority.Text = "Process Priority:";
-            this.Label_Process_Priority.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
-            // 
-            // ComboBox_Process_Priority
-            // 
-            this.ComboBox_Process_Priority.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Process_Priority.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Process_Priority.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Process_Priority.FormattingEnabled = true;
-            this.ComboBox_Process_Priority.Location = new System.Drawing.Point(14, 108);
-            this.ComboBox_Process_Priority.Name = "ComboBox_Process_Priority";
-            this.ComboBox_Process_Priority.Size = new System.Drawing.Size(164, 22);
-            this.ComboBox_Process_Priority.TabIndex = 210;
-            // 
-            // Button_Experiments
-            // 
-            this.Button_Experiments.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Experiments.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Experiments.Location = new System.Drawing.Point(672, 7);
-            this.Button_Experiments.Name = "Button_Experiments";
-            this.Button_Experiments.Size = new System.Drawing.Size(154, 25);
-            this.Button_Experiments.TabIndex = 212;
-            this.Button_Experiments.Text = "Set Changes";
-            this.Button_Experiments.UseVisualStyleBackColor = false;
-            // 
-            // label7
-            // 
-            this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.ForeColor = System.Drawing.Color.DarkGray;
-            this.label7.Location = new System.Drawing.Point(141, 273);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(576, 18);
-            this.label7.TabIndex = 213;
-            this.label7.Text = "THESE SETTINGS ARE NOT PERSISTENT!!!";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Screen_Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2505,6 +2576,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).EndInit();
             this.TabPage_Launcher_Miscellaneous.ResumeLayout(false);
             this.Panel_Launcher_Builds_Branch.ResumeLayout(false);
+            this.TabPage_Experiments.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity_End)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity_Start)).EndInit();
             this.TabPage_Game.ResumeLayout(false);
             this.TabControl_Game.ResumeLayout(false);
             this.TabPage_Game_General.ResumeLayout(false);
@@ -2527,8 +2602,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
-            this.TabPage_Experiments.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Game_Affinity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2705,12 +2778,15 @@
         private System.Windows.Forms.TabPage TabPage_Experiments;
         public System.Windows.Forms.CheckBox CheckBox_Enable_Game_Affinity;
         public System.Windows.Forms.CheckBox CheckBox_Enable_ACM;
-        public System.Windows.Forms.CheckBox checkBox3;
-        public System.Windows.Forms.Label Label_Game_Affinity;
-        public System.Windows.Forms.NumericUpDown NumericUpDown_Game_Affinity;
+        public System.Windows.Forms.CheckBox CheckBox_Disable_Classic_Affinity;
+        public System.Windows.Forms.Label Label_Game_Affinity_Range;
+        public System.Windows.Forms.NumericUpDown NumericUpDown_Game_Affinity_Start;
         public System.Windows.Forms.Label Label_Process_Priority;
         public System.Windows.Forms.ComboBox ComboBox_Process_Priority;
         public System.Windows.Forms.Button Button_Experiments;
         public System.Windows.Forms.Label label7;
+        public System.Windows.Forms.NumericUpDown NumericUpDown_Game_Affinity_End;
+        public System.Windows.Forms.Label Label_Game_Affinity;
+        public System.Windows.Forms.NumericUpDown NumericUpDown_Game_Affinity;
     }
 }

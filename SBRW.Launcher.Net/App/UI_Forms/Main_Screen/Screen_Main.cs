@@ -54,7 +54,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public static string Custom_SBRW_Pack { get { return Path.Combine(Locations.LauncherFolder, "GameFiles.sbrwpack"); } }
 
         public static int Game_Affinity { get; set; } = 8;
+        public static int Game_Affinity_Start { get; set; } = 0;
+        public static int Game_Affinity_End { get; set; } = 8;
         public static bool TEST_Game_Affinity { get; set; }
+        public static bool TEST_Classic_Affinity { get; set; }
 
         public Screen_Main()
         {
