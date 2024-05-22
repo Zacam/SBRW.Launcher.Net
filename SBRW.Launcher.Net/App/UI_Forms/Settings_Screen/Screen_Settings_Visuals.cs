@@ -225,10 +225,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
             TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
 
-            NumericUpDown_Game_Affinity_Start.Minimum = 0;
-            NumericUpDown_Game_Affinity_Start.Maximum = Environment.ProcessorCount / 2;
-            NumericUpDown_Game_Affinity_End.Minimum = NumericUpDown_Game_Affinity_Start.Maximum + 1;
-            NumericUpDown_Game_Affinity_End.Maximum = Environment.ProcessorCount - 1;
+            NumericUpDown_Range_Affinity.Minimum = 0;
+            NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount - 1;
+            NumericUpDown_Range_Affinity.Value = 3;
 
             /*******************************/
             /* Set Font                     /
@@ -497,6 +496,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Load += new EventHandler(Screen_Settings_Load);
 
             KeyPreview = true;
+
+            NumericUpDown_Range_Affinity.ValueChanged += new EventHandler(NumericUpDown_Range_Affinity_ValueChanged);
 
             /********************************/
             /* Load XML (Only one Section)   /

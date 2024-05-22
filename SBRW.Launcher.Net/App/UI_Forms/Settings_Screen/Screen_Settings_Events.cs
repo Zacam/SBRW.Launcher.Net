@@ -441,21 +441,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Screen_Parent.Launcher_Setup = 0;
             Close();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Experiments_Click(object sender, EventArgs e)
         {
             if (!Screen_Main.Game_Affinity.Equals(NumericUpDown_Game_Affinity.Value))
             {
                 Screen_Main.Game_Affinity = (int)NumericUpDown_Game_Affinity.Value;
-            }
-
-            if (!Screen_Main.Game_Affinity_Start.Equals(NumericUpDown_Game_Affinity_Start.Value))
-            {
-                Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Game_Affinity_Start.Value;
-            }
-
-            if (!Screen_Main.Game_Affinity_End.Equals(NumericUpDown_Game_Affinity_End.Value))
-            {
-                Screen_Main.Game_Affinity_End = (int)NumericUpDown_Game_Affinity_End.Value;
             }
 
             if (!Screen_Main.TEST_Game_Affinity.Equals(CheckBox_Enable_Game_Affinity.Checked))
@@ -472,6 +467,49 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 Screen_Main.Screen_Instance.ComboBox_Accounts.Visible = CheckBox_Enable_ACM.Checked;
                 Screen_Main.Screen_Instance.Button_Account_Manager.Visible = CheckBox_Enable_ACM.Checked;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NumericUpDown_Range_Affinity_ValueChanged(object sender, EventArgs e)
+        {
+            if (CheckBox_Enable_Game_Affinity.Checked)
+            {
+                if (RadioButton_Affinity_Add.Checked)
+                {
+                    if ((int)NumericUpDown_Range_Affinity.Value >= Environment.ProcessorCount - 1)
+                    {
+                        // Ensure we don't go above the max core count
+                        Screen_Main.Game_Affinity_Start = (int)Math.Max(0, NumericUpDown_Range_Affinity.Value - 3);
+                        Screen_Main.Game_Affinity_End = Environment.ProcessorCount - 1;
+                    }
+                    else
+                    {
+                        // Normal add mode range
+                        Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Range_Affinity.Value;
+                        Screen_Main.Game_Affinity_End = (int)Math.Min(Environment.ProcessorCount - 1, NumericUpDown_Range_Affinity.Value + 3);
+                    }
+                }
+                else if (RadioButton_Affinity_Subtract.Checked)
+                {
+                    // Ensure we don't go below zero
+                    if (NumericUpDown_Range_Affinity.Value <= 3)
+                    {
+                        // If Range_Affinity is less than 3, set default range of 0-3 (4 Cores)
+                        Screen_Main.Game_Affinity_Start = 0;
+                        Screen_Main.Game_Affinity_End = 3;
+                    }
+                    else
+                    {
+                        Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Range_Affinity.Value - 3;
+                        Screen_Main.Game_Affinity_End = (int)NumericUpDown_Range_Affinity.Value;
+                    }
+                }
+
+                Label_Affinity_Core_Range.Text = $"Range: {Screen_Main.Game_Affinity_Start}-{Screen_Main.Game_Affinity_End}";
             }
         }
         #endregion

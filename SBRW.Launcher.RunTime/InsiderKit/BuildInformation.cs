@@ -11,8 +11,8 @@ namespace SBRW.Launcher.RunTime.InsiderKit
         /* If a second build gets release within the same day bump letter version up (No R2 or D2)*/
         const string DATE = "05-21-2024";
         const string DATE_SHORT = "05-21-24";
-        const string TIME = "1744";
-        const string TIME_SECONDS = "46";
+        const string TIME = "2159";
+        const string TIME_SECONDS = "20";
         const string TIME_ZONE = "-07:00";
         /// <summary>
         /// Build Information <i>(Full Information)</i>
