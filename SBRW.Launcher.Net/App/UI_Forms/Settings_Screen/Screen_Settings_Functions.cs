@@ -4,6 +4,7 @@ using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
 using SBRW.Launcher.Core.Extra.File_;
 using SBRW.Launcher.Core.Theme;
+using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
@@ -42,7 +43,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Save_Settings.Live_Data.Game_Path_Old = Save_Settings.Live_Data.Game_Path;
             Save_Settings.Live_Data.Firewall_Game = "Not Excluded";
             Save_Settings.Live_Data.Defender_Game = "Not Excluded";
-            ButtonsColorSet(Button_Security_Center, 2, true);
 #endif
 
             Save_Settings.Live_Data.Game_Path = NewGameFilesPath;
@@ -428,7 +428,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
         }
         /// <summary>
-        /// On Button/Dropdown Functions
+        /// Translation for Game Display Timer
         /// </summary>
         /// <returns></returns>
         private string Display_Timer_Button_Selection()
@@ -444,6 +444,69 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else
             {
                 return "0";
+            }
+        }
+        /// <summary>
+        /// Translation for Log to File Selection
+        /// </summary>
+        /// <returns></returns>
+        private string Log_To_File_Selection()
+        {
+            if (Radio_Button_Proxy_Logging_All.Checked)
+            {
+                return "1";
+            }
+            else if (Radio_Button_Proxy_Logging_Errors.Checked)
+            {
+                return "2";
+            }
+            else if (Radio_Button_Proxy_Logging_Requests.Checked)
+            {
+                return "3";
+            }
+            else if (Radio_Button_Proxy_Logging_Responses.Checked)
+            {
+                return "4";
+            }
+            else
+            {
+                return "0";
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Enable_Affinity_Range"></param>
+        private void Enable_Affinity_Range(bool Enable_Affinity_Range)
+        {
+            /* NOTE: We start counting up from Core 0 !!! So for 4 Cores its range is 0-3 */
+            if (Enable_Affinity_Range)
+            {
+                if (BuildDevelopment.Allowed())
+                {
+                    NumericUpDown_Range_Affinity.Increment = 1;
+                    NumericUpDown_Range_Affinity.Minimum = 0;
+                    NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount - 1;
+                    NumericUpDown_Range_Affinity.Value = 3;
+                }
+
+                Label_Affinity_Core_Calculator.Visible = true;
+                Panel_Affinity_Range.Visible = true;
+            }
+            else if (BuildDevelopment.Allowed())
+            {
+                NumericUpDown_Range_Affinity.Increment = 2;
+                NumericUpDown_Range_Affinity.Minimum = 2;
+                NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount >= 8 ? 8 : Environment.ProcessorCount.Equals(6) ? 6 : 4;
+                NumericUpDown_Range_Affinity.Value = Environment.ProcessorCount >= 4 ? 4 : 2;
+                Label_Affinity_Core_Calculator.Visible = true;
+                Panel_Affinity_Range.Visible = true;
+                Label_Affinity_Core_Range.Text = $"{(int)NumericUpDown_Range_Affinity.Value} Cores";
+            }
+            else
+            {
+                Label_Affinity_Core_Calculator.Visible = false;
+                Panel_Affinity_Range.Visible = false;
             }
         }
     }

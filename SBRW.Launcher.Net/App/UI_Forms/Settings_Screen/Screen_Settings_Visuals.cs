@@ -225,9 +225,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
             TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
 
-            NumericUpDown_Range_Affinity.Minimum = 0;
-            NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount - 1;
-            NumericUpDown_Range_Affinity.Value = 3;
+            //TODO Add Implementation for Setting Range if User has Range Enabled
+            Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
 
             /*******************************/
             /* Set Font                     /
@@ -245,7 +244,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             /* */
-            Button_Security_Center.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -257,7 +255,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Launcher_logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_NFSWO_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            CheckBox_Opt_Insider.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             #region FONT: Setup Tab
             /* Setup Tab */
             Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -354,7 +351,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ButtonsColorSet(Button_Launcher_logs, 0, true);
             ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
             ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
-            ButtonsColorSet(Button_Security_Center, 0, true);
             ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
             ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
             ButtonsColorSet(Button_Console_Submit, 1, true);
@@ -392,9 +388,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Proxy.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_RPC.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Alt_WebCalls.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Opt_Insider.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Theme_Support.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_LZMA_Downloader.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_JSON_Update_Cache.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Host_to_IP.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Proxy_Domain.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
@@ -459,7 +453,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Console_Submit.Click += new EventHandler(Console_Enter);
             Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
-            Button_Security_Center.Click += new EventHandler(Button_Security_Center_Click);
             Button_Game_Verify_Files.Click += new EventHandler(Button_Game_Verify_Files_Click);
             Button_Save.Click += new EventHandler(SettingsSave_Click);
             Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
@@ -498,6 +491,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             KeyPreview = true;
 
             NumericUpDown_Range_Affinity.ValueChanged += new EventHandler(NumericUpDown_Range_Affinity_ValueChanged);
+            CheckBox_Enable_Affinity_Range.CheckedChanged += new EventHandler(CheckBox_Enable_Affinity_Range_CheckedChanged);
 
             /********************************/
             /* Load XML (Only one Section)   /
@@ -533,7 +527,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             ToolTip_Hover.SetToolTip(Button_Launcher_logs, "Removes all but current session \"LOGS\\\" folders");
             ToolTip_Hover.SetToolTip(Button_Clear_Server_Mods, "Erases all Server Mods from .data/MODS folders");
-            ToolTip_Hover.SetToolTip(Button_Security_Center, "Opens a new Panel to review Security Information and Settings");
 
             ToolTip_Hover.SetToolTip(CheckBox_Word_Filter_Check, "Disables the In-Game Chat \"censor\" or word filter.");
             ToolTip_Hover.SetToolTip(CheckBox_Proxy, "Disables the Launcher Proxy communications hook.\n" +
@@ -541,8 +534,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 "Will also impact/limit the DiscordRPC functions.");
             ToolTip_Hover.SetToolTip(CheckBox_RPC, "Prevents Launcher from sending Discord Presence information.");
 
-            ToolTip_Hover.SetToolTip(CheckBox_Opt_Insider, "Unchecked: Only Official \"Release\" Builds will prompt Updates\n" +
-                "Checked: Insider/Beta Build\'s will be available to the Updater");
             ToolTip_Hover.SetToolTip(CheckBox_Theme_Support, "Enables supporting External Themes for the Launcher");
             /* @Zacam: Update Text to reflect new options 
             ToolTip_Hover.SetToolTip(CheckBox_Legacy_Timer, "Setting for Legacy Timer:\n" +
@@ -551,9 +542,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ToolTip_Hover.SetToolTip(CheckBox_Alt_WebCalls, "Changes the internal method used by Launcher for Communications\n" +
                 "Unchecked: Uses \'standard\' WebClient calls\n" +
                 "Checked: Uses WebClientWithTimeout");
-            ToolTip_Hover.SetToolTip(CheckBox_LZMA_Downloader, "Setting for LZMA Downloader:\n" +
-                "If Checked, this enables the old LZMA Downloader\n" +
-                "If Unchecked, enables the new SBRW Pack Downloader");
             ToolTip_Hover.SetToolTip(CheckBox_JSON_Update_Cache, "Setting for JSON Update Cache Frequency:\n" +
                 "If Checked, this enables daily cache update for Launcher Related JSON Files\n" +
                 "If Unchecked, enables hourly cache update for Launcher Related JSON Files");

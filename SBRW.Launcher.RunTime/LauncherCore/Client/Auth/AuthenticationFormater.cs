@@ -255,6 +255,25 @@ public static class Authentication_Formater
                     }
                 }
             }
+            else if (NodeReader(sbrwXml, "NodeOnly", "EngineExceptionTrans", "NodeOnly") == "VAILD NODE - LAUNCHER")
+            {
+                if (NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/StackTrace", "InnerText") != "EMPTY VALUE - LAUNCHER")
+                {
+                    Converted_Response.Error = NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/StackTrace", "InnerText");
+                }
+                else if (NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/StackTrace/InnerException/StackTrace", "InnerText") != "EMPTY VALUE - LAUNCHER")
+                {
+                    Converted_Response.Error = NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/StackTrace/InnerException/StackTrace", "InnerText");
+                }
+                else if (NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/ErrorCode", "InnerText") != "EMPTY VALUE - LAUNCHER")
+                {
+                    Converted_Response.Error = $"Server Returned an Error: {NodeReader(sbrwXml, "InnerText", "EngineExceptionTrans/ErrorCode", "InnerText")}";
+                }
+                else
+                {
+                    Converted_Response.Error = $"Server Encountered an Error";
+                }
+            }
             else
             {
                 Converted_Response.Invalid_Format = true;

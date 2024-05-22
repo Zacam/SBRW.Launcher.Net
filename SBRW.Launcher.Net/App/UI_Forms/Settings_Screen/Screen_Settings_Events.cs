@@ -200,7 +200,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     /* Store Old Location for Security Panel to Use Later on */
                     Save_Settings.Live_Data.Game_Path_Old = Save_Settings.Live_Data.Game_Path;
                     Save_Settings.Live_Data.Firewall_Game = "Not Excluded";
-                    ButtonsColorSet(Button_Security_Center, 2, true);
 #endif
 
                     Save_Settings.Live_Data.Game_Path = NewGameFilesPath;
@@ -303,12 +302,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "1" : "0";
                 }
 
+                /*
                 if ((Save_Settings.Live_Data.Launcher_Insider != (CheckBox_Opt_Insider.Checked ? "1" : "0")) &&
     !Insider_Settings_Lock && !BuildDevelopment.Allowed())
                 {
                     BuildBeta.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
                     RestartRequired = true;
                 }
+                */
 
                 if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
                 {
@@ -448,19 +449,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void Button_Experiments_Click(object sender, EventArgs e)
         {
-            if (!Screen_Main.Game_Affinity.Equals(NumericUpDown_Game_Affinity.Value))
+            if (!Screen_Main.Game_Affinity.Equals(NumericUpDown_Range_Affinity.Value))
             {
-                Screen_Main.Game_Affinity = (int)NumericUpDown_Game_Affinity.Value;
-            }
-
-            if (!Screen_Main.TEST_Game_Affinity.Equals(CheckBox_Enable_Game_Affinity.Checked))
-            {
-                Screen_Main.TEST_Game_Affinity = CheckBox_Enable_Game_Affinity.Checked;
-            }
-
-            if (!Screen_Main.TEST_Classic_Affinity.Equals(CheckBox_Disable_Classic_Affinity.Checked))
-            {
-                Screen_Main.TEST_Classic_Affinity = CheckBox_Disable_Classic_Affinity.Checked;
+                Screen_Main.Game_Affinity = (int)NumericUpDown_Range_Affinity.Value;
             }
 
             if (Screen_Main.Screen_Instance != default)
@@ -469,6 +460,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Screen_Main.Screen_Instance.Button_Account_Manager.Visible = CheckBox_Enable_ACM.Checked;
             }
         }
+        #endregion
         /// <summary>
         /// 
         /// </summary>
@@ -476,21 +468,29 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void NumericUpDown_Range_Affinity_ValueChanged(object sender, EventArgs e)
         {
-            if (CheckBox_Enable_Game_Affinity.Checked)
+            if (CheckBox_Enable_Affinity_Range.Checked)
             {
                 if (RadioButton_Affinity_Add.Checked)
                 {
-                    if ((int)NumericUpDown_Range_Affinity.Value >= Environment.ProcessorCount - 1)
+                    int Max_Processor_Count = Environment.ProcessorCount - 1;
+
+                    if ((int)NumericUpDown_Range_Affinity.Value >= Max_Processor_Count)
                     {
                         // Ensure we don't go above the max core count
                         Screen_Main.Game_Affinity_Start = (int)Math.Max(0, NumericUpDown_Range_Affinity.Value - 3);
-                        Screen_Main.Game_Affinity_End = Environment.ProcessorCount - 1;
+                        Screen_Main.Game_Affinity_End = Max_Processor_Count;
+                    }
+                    else if ((Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) >= 0 &&
+                        (Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) <= 3)
+                    {
+                        Screen_Main.Game_Affinity_Start = Max_Processor_Count - 3;
+                        Screen_Main.Game_Affinity_End = Max_Processor_Count;
                     }
                     else
                     {
                         // Normal add mode range
                         Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Range_Affinity.Value;
-                        Screen_Main.Game_Affinity_End = (int)Math.Min(Environment.ProcessorCount - 1, NumericUpDown_Range_Affinity.Value + 3);
+                        Screen_Main.Game_Affinity_End = (int)Math.Min(Max_Processor_Count, NumericUpDown_Range_Affinity.Value + 3);
                     }
                 }
                 else if (RadioButton_Affinity_Subtract.Checked)
@@ -509,10 +509,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                 }
 
+                Screen_Main.Game_Affinity = -1;
                 Label_Affinity_Core_Range.Text = $"Range: {Screen_Main.Game_Affinity_Start}-{Screen_Main.Game_Affinity_End}";
             }
+            else
+            {
+                Screen_Main.Game_Affinity = BuildDevelopment.Allowed() ? (int)NumericUpDown_Range_Affinity.Value : 4;
+                Label_Affinity_Core_Range.Text = $"{(int)NumericUpDown_Range_Affinity.Value} Cores";
+            }
         }
-        #endregion
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Enable_Affinity_Range_CheckedChanged(object sender, EventArgs e)
+        {
+            Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
+        }
         /// <summary>
         /// Settings Cancel
         /// </summary>
@@ -832,7 +846,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Proxy.Checked = !Save_Settings.Proxy_RunTime();
             CheckBox_RPC.Checked = !Save_Settings.RPC_Discord();
             CheckBox_Alt_WebCalls.Checked = Save_Settings.WebCalls_Alt();
-            CheckBox_Opt_Insider.Checked = InformationCache.EnableInsiderPreview();
             CheckBox_Theme_Support.Checked = Save_Settings.Theme_Custom();
             CheckBox_JSON_Update_Cache.Checked = Save_Settings.Update_Frequency_JSON();
             CheckBox_Proxy_Domain.Checked = Save_Settings.Proxy_Domain();

@@ -33,7 +33,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         public static bool SelectedServerEnforceProxy { get; set; }
         /* Holds a collection of Server Status of Servers */
         public static Dictionary<string, int> ServerStatusBook { get; set; } = new Dictionary<string, int>();
-        public static bool EnableInsiderPreview() => (Save_Settings.Live_Data.Launcher_Insider == "1" || Save_Settings.Live_Data.Launcher_Insider == "2");
         /// <summary>
         /// Default Path Location for Game Files Archive File
         /// </summary>
