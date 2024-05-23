@@ -470,50 +470,36 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             if (CheckBox_Enable_Affinity_Range.Checked)
             {
-                if (RadioButton_Affinity_Add.Checked)
-                {
-                    int Max_Processor_Count = Environment.ProcessorCount - 1;
+                int Max_Processor_Count = Environment.ProcessorCount - 1;
+                int New_Start = 0;
+                int New_End = 0;
 
-                    if ((int)NumericUpDown_Range_Affinity.Value >= Max_Processor_Count)
-                    {
-                        // Ensure we don't go above the max core count
-                        Screen_Main.Game_Affinity_Start = (int)Math.Max(0, NumericUpDown_Range_Affinity.Value - 3);
-                        Screen_Main.Game_Affinity_End = Max_Processor_Count;
-                    }
-                    else if ((Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) >= 0 &&
-                        (Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) <= 3)
-                    {
-                        Screen_Main.Game_Affinity_Start = Max_Processor_Count - 3;
-                        Screen_Main.Game_Affinity_End = Max_Processor_Count;
-                    }
-                    else
-                    {
-                        // Normal add mode range
-                        Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Range_Affinity.Value;
-                        Screen_Main.Game_Affinity_End = (int)Math.Min(Max_Processor_Count, NumericUpDown_Range_Affinity.Value + 3);
-                    }
-                }
-                else if (RadioButton_Affinity_Subtract.Checked)
+                if ((int)NumericUpDown_Range_Affinity.Value >= Max_Processor_Count)
                 {
-                    // Ensure we don't go below zero
-                    if (NumericUpDown_Range_Affinity.Value <= 3)
-                    {
-                        // If Range_Affinity is less than 3, set default range of 0-3 (4 Cores)
-                        Screen_Main.Game_Affinity_Start = 0;
-                        Screen_Main.Game_Affinity_End = 3;
-                    }
-                    else
-                    {
-                        Screen_Main.Game_Affinity_Start = (int)NumericUpDown_Range_Affinity.Value - 3;
-                        Screen_Main.Game_Affinity_End = (int)NumericUpDown_Range_Affinity.Value;
-                    }
+                    // Ensure we don't go above the max core count
+                    New_Start = (int)Math.Max(0, NumericUpDown_Range_Affinity.Value - 3);
+                    New_End = Max_Processor_Count;
+                }
+                else if ((Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) >= 0 &&
+                    (Max_Processor_Count - (int)NumericUpDown_Range_Affinity.Value) <= 3)
+                {
+                    New_Start = Max_Processor_Count - 3;
+                    New_End = Max_Processor_Count;
+                }
+                else
+                {
+                    // Normal add mode range
+                    New_Start = (int)NumericUpDown_Range_Affinity.Value;
+                    New_End = (int)Math.Min(Max_Processor_Count, NumericUpDown_Range_Affinity.Value + 3);
                 }
 
-                Screen_Main.Game_Affinity = -1;
-                Label_Affinity_Core_Range.Text = $"Range: {Screen_Main.Game_Affinity_Start}-{Screen_Main.Game_Affinity_End}";
+                Screen_Main.Regular_Affinity = false;
+                Screen_Main.Game_Affinity_Range = new int[] { New_Start, New_End };
+                Label_Affinity_Core_Range.Text = $"Range: {Screen_Main.Game_Affinity_Range[0]}-{Screen_Main.Game_Affinity_Range[1]}";
             }
             else
             {
+                Screen_Main.Regular_Affinity = true;
                 Screen_Main.Game_Affinity = BuildDevelopment.Allowed() ? (int)NumericUpDown_Range_Affinity.Value : 4;
                 Label_Affinity_Core_Range.Text = $"{(int)NumericUpDown_Range_Affinity.Value} Cores";
             }

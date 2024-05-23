@@ -404,12 +404,14 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         {
             if (!(Disposing || IsDisposed))
             {
-                if (new Process_Start_Game() { Live_Process_Cores_Max = Game_Affinity }.Initialize(Save_Settings.Live_Data.Game_Path, ServerIP, LoginToken,
-                UserID, Launcher_Value.Launcher_Select_Server_Data.ID.ToUpper(), true, "nfsw.exe") != null)
+                if (new Process_Start_Game() { ProcessorAffinity = Regular_Affinity, Affinity = Game_Affinity, AffinityMask = Game_Affinity_Range}.Initialize(
+                    Save_Settings.Live_Data.Game_Path, ServerIP, LoginToken, UserID, 
+                    Launcher_Value.Launcher_Select_Server_Data.ID.ToUpper(), true, "nfsw.exe") != null)
                 {
                     /* Request a New Session */
                     Time_Window.Client_Session();
-                    Session_Timer.Remaining = Launcher_Value.Launcher_Select_Server_JSON.Server_Session_Timer != 0 ? Launcher_Value.Launcher_Select_Server_JSON.Server_Session_Timer : 2 * 60 * 60;
+                    Session_Timer.Remaining = Launcher_Value.Launcher_Select_Server_JSON.Server_Session_Timer != 0 ? 
+                        Launcher_Value.Launcher_Select_Server_JSON.Server_Session_Timer : 2 * 60 * 60;
                     FunctionStatus.LauncherBattlePass = Process_Start_Game.Live_Process.EnableRaisingEvents = true;
                     NfswPid = Process_Start_Game.Live_Process.Id;
                     Process_Start_Game.Live_Process.Exited += (Send, It) =>
@@ -478,16 +480,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                     /* Wait 60 Seconds */
                     bool Game_Fully_Loaded = Process_Start_Game.Live_Process.WaitForInputIdle(60000);
-                    /* Set Affinity For the Game */
-                    if (Game_Affinity.Equals(-1))
-                    {
-                        Process_Start_Game.Live_Process.Affinity(Game_Affinity_Start, Game_Affinity_End);
-                    }
-                    /*
+
                     while (Process_Start_Game.Live_Process.MainWindowHandle == IntPtr.Zero && !Process_Start_Game.Live_Process.HasExited)
                     {
                         /* Loop Here until the game Window Appears */
-                    /*}*/
+                    }
 
                     if (!Process_Start_Game.Live_Process.HasExited && Game_Fully_Loaded)
                     {

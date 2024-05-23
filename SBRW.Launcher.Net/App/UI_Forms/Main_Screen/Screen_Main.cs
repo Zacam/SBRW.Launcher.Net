@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Linq;
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 {
@@ -53,9 +54,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public static int TotalModFileCount { get; set; }
         public static string Custom_SBRW_Pack { get { return Path.Combine(Locations.LauncherFolder, "GameFiles.sbrwpack"); } }
 
+        public static bool Regular_Affinity { get; set; } = true;
         public static int Game_Affinity { get; set; } = 4;
-        public static int Game_Affinity_Start { get; set; } = 0;
-        public static int Game_Affinity_End { get; set; } = 3;
+        public static int[] Game_Affinity_Range { get; set; } = Enumerable.Range(0, 3).ToArray();
 
         public Screen_Main()
         {
