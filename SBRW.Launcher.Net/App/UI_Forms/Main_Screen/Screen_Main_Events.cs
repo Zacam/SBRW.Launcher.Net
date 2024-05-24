@@ -605,14 +605,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 catch
                 {
 #if RELEASE_UNIX || DEBUG_UNIX
-                        if (Picture_Icon_Version.BackgroundImage != Image_Icon.Engine_Good)
-                        {
-                            Picture_Icon_Version.BackgroundImage = Image_Icon.Engine_Good;
-                        }
-
-                        Label_Status_Launcher.ForeColor = Color_Text.S_Sucess;
-                        Label_Status_Launcher.Text = "Launcher Status:\n - Linux Build";
-                        Label_Status_Launcher_Version.Text = "Version: " + Application.ProductVersion;
+                    Picture_Icon_Version.BackgroundImage = Picture_Icon_Version.Icon_Order(SVG_Icon.Offline, SVG_Color.Unknown);
+                    Label_Status_Launcher.Text = "Launcher Status:\n - Linux Build";
+                    Label_Status_Launcher.ForeColor = Color_Text.L_Three;
+                    Label_Status_Launcher_Version.Text = "Version: " + Application.ProductVersion;
 #endif
                 }
 

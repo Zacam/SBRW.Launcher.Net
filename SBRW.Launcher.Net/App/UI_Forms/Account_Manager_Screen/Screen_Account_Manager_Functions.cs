@@ -1,5 +1,4 @@
-﻿using CredentialManagement;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
@@ -142,9 +141,10 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                     Auto_ID = Queried_Account.AID;
                 }
 
+#if !(RELEASE_UNIX || DEBUG_UNIX)
                 if (WindowsCredentialRunning())
                 {
-                    if (new Credential() { Target = Queried_Account.Target, Type = CredentialType.Generic }.Load())
+                    if (new CredentialManagement.Credential() { Target = Queried_Account.Target, Type = CredentialManagement.CredentialType.Generic }.Load())
                     {
                         Accounts_Cache.Add(Queried_Account);
                     }
@@ -153,6 +153,9 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                 {
                     Accounts_Cache.Add(Queried_Account);
                 }
+#else
+                Accounts_Cache.Add(Queried_Account);
+#endif
             }
 
             if (Screen_Instance != default)

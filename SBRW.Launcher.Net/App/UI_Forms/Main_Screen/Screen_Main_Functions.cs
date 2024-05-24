@@ -37,6 +37,7 @@ using System.Windows.Forms;
 using SBRW.Launcher.Core.Extension.Web_;
 using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -404,9 +405,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         {
             if (!(Disposing || IsDisposed))
             {
-                if (new Process_Start_Game() { ProcessorAffinity = Regular_Affinity, Affinity = Game_Affinity, AffinityMask = Game_Affinity_Range}.Initialize(
+                if (new Process_Start_Game() { AffinityMask = Game_Affinity_Range}.Initialize(
                     Save_Settings.Live_Data.Game_Path, ServerIP, LoginToken, UserID, 
-                    Launcher_Value.Launcher_Select_Server_Data.ID.ToUpper(), true, "nfsw.exe") != null)
+                    Launcher_Value.Launcher_Select_Server_Data.ID.ToUpper(), !UnixOS.Detected(), "nfsw.exe") != null)
                 {
                     /* Request a New Session */
                     Time_Window.Client_Session();
@@ -478,15 +479,23 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
                     };
 
+#if !(DEBUG_UNIX || RELEASE_UNIX)
                     /* Wait 60 Seconds */
                     bool Game_Fully_Loaded = Process_Start_Game.Live_Process.WaitForInputIdle(60000);
 
+                    if (!Process_Start_Game.Live_Process.HasExited && Game_Fully_Loaded)
+#else
+                    /* REASON: Wine/Mono seems to cause issues when using WaitForInputIdle Function,
+                     * so lets use the old method to check if the game started
+                     * Thanks Wine/Mono - DavidCarbon
+                     */
                     while (Process_Start_Game.Live_Process.MainWindowHandle == IntPtr.Zero && !Process_Start_Game.Live_Process.HasExited)
                     {
                         /* Loop Here until the game Window Appears */
                     }
 
-                    if (!Process_Start_Game.Live_Process.HasExited && Game_Fully_Loaded)
+                    if (!Process_Start_Game.Live_Process.HasExited)
+#endif
                     {
                         Presence_Launcher.Status(28, string.Empty);
 

@@ -4,6 +4,7 @@ using SBRW.Launcher.Core.Cache;
 using System;
 using System.IO;
 using SBRW.Launcher.Core.Required.DLL;
+using SBRW.Launcher.Core.Extension.Exception_;
 
 namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
 {
@@ -109,33 +110,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
 #if (RELEASE_UNIX || DEBUG_UNIX)
         private static string PlatformOSName()
         {
-            if (!File.Exists(@"/etc/os-release"))
-            {
-#if NETFRAMEWORK
-                if (ID(Platform()) == PlatformIDPort.MacOSX)
-                {
-                    return "MacOSX";
-                }
-#else
-                if (OperatingSystem.IsMacOS())
-                {
-                    return "MacOSX";
-                }
-                else if (OperatingSystem.IsFreeBSD())
-                {
-                    return "FreeBSD";
-                }
-                else if (OperatingSystem.IsLinux())
-                {
-                    return "Linux";
-                }
-#endif
-                else
-                {
-                    return "Unknown System OS";
-                }
-            }
-            else if (File.Exists(@"/etc/os-release"))
+            if (File.Exists(@"/etc/os-release"))
             {
                 try
                 {
@@ -205,11 +180,19 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
                         /* Note: Android falls into This Detection gets here too */
                         return "Linux";
                     }
+                    else
+                    {
+                        return "Unix";
+                    }
                 }
                 catch (Exception Error)
                 {
                     LogToFileAddons.OpenLog("Platform OS Type", string.Empty, Error, string.Empty, true);
                 }
+            }
+            else if (File.Exists(@"/System/Library/CoreServices/SystemVersion.plist") || (ID(Platform()) == PlatformIDPort.MacOSX))
+            {
+                return "MacOSX";
             }
 #if NET5_0_OR_GREATER
             else if (OperatingSystem.IsFreeBSD())
@@ -219,6 +202,10 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
             else if (OperatingSystem.IsLinux())
             {
                 return "Linux";
+            }
+            else if (OperatingSystem.IsMacOS())
+            {
+                return "MacOSX";
             }
 #endif
             return "Unknown System OS";

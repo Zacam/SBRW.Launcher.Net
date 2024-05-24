@@ -449,11 +449,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void Button_Experiments_Click(object sender, EventArgs e)
         {
-            if (!Screen_Main.Game_Affinity.Equals(NumericUpDown_Range_Affinity.Value))
-            {
-                Screen_Main.Game_Affinity = (int)NumericUpDown_Range_Affinity.Value;
-            }
-
             if (Screen_Main.Screen_Instance != default)
             {
                 Screen_Main.Screen_Instance.ComboBox_Accounts.Visible = CheckBox_Enable_ACM.Checked;
@@ -493,14 +488,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     New_End = (int)Math.Min(Max_Processor_Count, NumericUpDown_Range_Affinity.Value + 3);
                 }
 
-                Screen_Main.Regular_Affinity = false;
                 Screen_Main.Game_Affinity_Range = new int[] { New_Start, New_End };
                 Label_Affinity_Core_Range.Text = $"Range: {Screen_Main.Game_Affinity_Range[0]}-{Screen_Main.Game_Affinity_Range[1]}";
             }
             else
             {
-                Screen_Main.Regular_Affinity = true;
-                Screen_Main.Game_Affinity = BuildDevelopment.Allowed() ? (int)NumericUpDown_Range_Affinity.Value : 4;
+                Screen_Main.Game_Affinity_Range = new int[] { 0, BuildDevelopment.Allowed() ? (int)NumericUpDown_Range_Affinity.Value : 4 };
                 Label_Affinity_Core_Range.Text = $"{(int)NumericUpDown_Range_Affinity.Value} Cores";
             }
         }
