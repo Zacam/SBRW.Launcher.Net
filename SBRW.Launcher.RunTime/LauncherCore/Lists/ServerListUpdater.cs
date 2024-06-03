@@ -23,6 +23,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
         public static List<Json_List_Server> NoCategoryList { get; set; } = new List<Json_List_Server>();
         public static List<Json_List_Server> NoCategoryList_CSO { get; set; } = new List<Json_List_Server>();
         public static List<Json_List_Server> CleanList { get; set; } = new List<Json_List_Server>();
+        public static Json_List_Server SelectedServer { get; set; } = new Json_List_Server();
         public static string CachedJSONList { get; set; } = string.Empty;
 
         public static async void GetList()

@@ -1,15 +1,12 @@
-﻿using SBRW.Launcher.Core.Discord.RPC_;
+﻿#if !(RELEASE_UNIX || DEBUG_UNIX)
 using SBRW.Launcher.Core.Extension.Logging_;
-using SBRW.Launcher.Core.Extra.File_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Required.System.Windows_;
-using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
-using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
@@ -17,7 +14,6 @@ using System.Management;
 using System.Runtime.InteropServices;
 using System.Security.AccessControl;
 using System.Security.Principal;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using WindowsFirewallHelper.Exceptions;
@@ -33,7 +29,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns><code>True or False</code></returns>
         private bool GetDefenderStatus(string Query)
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             if (Product_Version.GetWindowsNumber() >= 10)
             {
                 ManagementObjectSearcher? ObjectPath = null;
@@ -74,7 +69,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     ObjectCollection?.Dispose();
                 }
             }
-#endif
+
             return false;
         }
         /// <summary>Checks Windows Defender on if it's Enabled or Disabled by the User or Third-Party Program</summary>
@@ -82,19 +77,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns><code>True or False</code></returns>
         public bool Defender()
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             return GetDefenderStatus("AntivirusEnabled") &&
                     GetDefenderStatus("AntispywareEnabled") &&
                     GetDefenderStatus("RealTimeProtectionEnabled");
-#else
-            return false;
-#endif
         }
         /// <summary>Windows Defender: Checks Defender's Current Exclusion List</summary>
         /// <returns>String-Array of Exclusions</returns>
         private string[] ExclusionCheck()
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             ManagementObjectSearcher? ObjectPath = null;
             ManagementObjectCollection? ObjectCollection = null;
 
@@ -129,7 +119,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ObjectPath?.Dispose();
                 ObjectCollection?.Dispose();
             }
-#endif
 
             return Array.Empty<string>();
         }
@@ -140,7 +129,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns><code>True or False</code></returns>
         private bool ExclusionExist(string FilePath)
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             if (ExclusionCheck() != null)
             {
                 return ExclusionCheck().Any(FilePath.Contains);
@@ -159,9 +147,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 return false;
             }
-#else
-            return true;
-#endif
         }
         /// <summary>Windows Defender: Add an Exclusion</summary>
         /// <param name="AppName">Enter the name of the Application</param>
@@ -237,7 +222,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns>Firewall API Version</returns>
         private FirewallAPIVersion FirewallAPI()
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             try
             {
                 return FirewallManager.Version;
@@ -246,9 +230,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 return FirewallAPIVersion.None;
             }
-#else
-            return FirewallAPIVersion.None;
-#endif
         }
         /// <summary>
         /// Checks the Firewall API Version against Versions that isn't supported
@@ -256,11 +237,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns><code>True or False</code></returns>
         private bool FirewallSupported()
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             return FirewallAPI() != FirewallAPIVersion.None;
-#else
-            return false;
-#endif
         }
         /// <summary>
         /// Checks Windows Firewall on if it's Enabled or Disabled by the User or Third-Party Program
@@ -271,7 +248,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             try
             {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
                 if (bool.TryParse(FirewallManager.IsServiceRunning.ToString(), out bool Service_Result) && Service_Result)
                 {
                     if (bool.TryParse(FirewallManager.Instance.GetActiveProfile().IsActive.ToString(), out bool Profile_Result))
@@ -288,7 +264,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                     */
                 }
-#endif
             }
             catch (COMException Error)
             {
@@ -396,7 +371,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <returns><code>True or False</code></returns>
         private bool RuleExist(string Mode, string AppName, string AppPath)
         {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
             if (FindRules(Mode, AppName, AppPath) != null)
             {
                 foreach (IFirewallRule Single_Rule in FindRules(Mode, AppName, AppPath))
@@ -428,9 +402,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 return false;
             }
-#else
-            return true;
-#endif
         }
         /// <summary>Windows Firewall: Adds an Exclusion</summary>
         /// <param name="AppName">Enter the name of the Application</param>
@@ -524,7 +495,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             try
             {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
                 if (ModeType >= 0 && ModeType <= 1 && !string.IsNullOrWhiteSpace(LocationPath))
                 {
                     SecurityIdentifier Everyone_Question_Mark = new SecurityIdentifier(WellKnownSidType.WorldSid, null);
@@ -575,9 +545,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                             break;
                     }
                 }
-#else
-                Completed = true;
-#endif
             }
             catch (Exception Error)
             {
@@ -603,7 +570,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             try
             {
-#if !(RELEASE_UNIX || DEBUG_UNIX)
                 if (ModeType >= 0 && ModeType <= 1 && !string.IsNullOrWhiteSpace(LocationPath))
                 {
                     bool IsPermissionAlreadySet = CheckPermissionAccess(ModeType, LocationPath);
@@ -652,9 +618,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                     else { Completed = true; }
                 }
-#else
-                Completed = true;
-#endif
             }
             catch (Exception Error)
             {
@@ -1720,3 +1683,4 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         }
     }
 }
+#endif

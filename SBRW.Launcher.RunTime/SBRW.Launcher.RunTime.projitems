@@ -30,8 +30,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\LauncherUpdater\UpdaterExecutable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\LauncherUpdater\UpdaterSchema.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\CDNListUpdater.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\JsonServerList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Proxy_GZip_Version.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Proxy_Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\LanguageListUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\ProxySettingsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ResolutionsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ServerListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Logger\LogToFileAddons.cs" />
@@ -42,7 +44,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\FormsFont.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\FormsIcon.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)launchercore\support\GarbageCollection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Support\SecurityCenter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\AboutNoteBlock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\EmbeddedSVGs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Visuals\Prompt.cs" />

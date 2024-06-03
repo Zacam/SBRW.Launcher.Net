@@ -73,18 +73,7 @@
             this.Label_WebClient_Timeout = new System.Windows.Forms.Label();
             this.NumericUpDown_WebClient_Timeout = new System.Windows.Forms.NumericUpDown();
             this.TabPage_Launcher_Proxy = new System.Windows.Forms.TabPage();
-            this.Button_Launcher_logs = new System.Windows.Forms.Button();
-            this.Label_Proxy_Logging_None = new System.Windows.Forms.Label();
-            this.Label_Proxy_Logging_Responses = new System.Windows.Forms.Label();
-            this.Label_Proxy_Logging_Requests = new System.Windows.Forms.Label();
-            this.Label_Proxy_Logging_Errors = new System.Windows.Forms.Label();
-            this.Label_Proxy_Logging_All = new System.Windows.Forms.Label();
-            this.Panel_Proxy_Logging = new System.Windows.Forms.Panel();
-            this.Radio_Button_Proxy_Logging_None = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Proxy_Logging_Responses = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Proxy_Logging_All = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Proxy_Logging_Errors = new System.Windows.Forms.RadioButton();
-            this.Radio_Button_Proxy_Logging_Requests = new System.Windows.Forms.RadioButton();
+            this.Label_Proxy_Logging_Selected_Details = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging_Details = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging = new System.Windows.Forms.Label();
             this.Label_Proxy_Port = new System.Windows.Forms.Label();
@@ -201,6 +190,12 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
+            this.Button_Launcher_logs = new System.Windows.Forms.Button();
+            this.ComboBox_Proxy_Logging = new System.Windows.Forms.ComboBox();
+            this.ComboBox_Proxy_GZip_Version = new System.Windows.Forms.ComboBox();
+            this.Label_Proxy_GZip_Version_Selected_Details = new System.Windows.Forms.Label();
+            this.Label_Proxy_GZip_Version_Details = new System.Windows.Forms.Label();
+            this.Label_Proxy_GZip_Version = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -212,7 +207,6 @@
             this.Panel_GameFiles_Downloader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_WebClient_Timeout)).BeginInit();
             this.TabPage_Launcher_Proxy.SuspendLayout();
-            this.Panel_Proxy_Logging.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).BeginInit();
             this.TabPage_Launcher_Miscellaneous.SuspendLayout();
             this.Panel_Launcher_Builds_Branch.SuspendLayout();
@@ -514,7 +508,7 @@
             this.TabControl_Launcher.Controls.Add(this.TabPage_Launcher_Miscellaneous);
             this.TabControl_Launcher.Controls.Add(this.TabPage_Experiments);
             this.TabControl_Launcher.HotTrack = true;
-            this.TabControl_Launcher.Location = new System.Drawing.Point(1, 3);
+            this.TabControl_Launcher.Location = new System.Drawing.Point(0, 3);
             this.TabControl_Launcher.Name = "TabControl_Launcher";
             this.TabControl_Launcher.SelectedIndex = 0;
             this.TabControl_Launcher.Size = new System.Drawing.Size(832, 354);
@@ -761,13 +755,13 @@
             // 
             // TabPage_Launcher_Proxy
             // 
+            this.TabPage_Launcher_Proxy.Controls.Add(this.ComboBox_Proxy_GZip_Version);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version_Selected_Details);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version_Details);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.ComboBox_Proxy_Logging);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Button_Launcher_logs);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_None);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Responses);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Requests);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Errors);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_All);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Panel_Proxy_Logging);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Selected_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Port);
@@ -775,164 +769,30 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Proxy.Name = "TabPage_Launcher_Proxy";
             this.TabPage_Launcher_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Proxy.TabIndex = 1;
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
             // 
-            // Button_Launcher_logs
+            // Label_Proxy_Logging_Selected_Details
             // 
-            this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Launcher_logs.Location = new System.Drawing.Point(8, 261);
-            this.Button_Launcher_logs.Name = "Button_Launcher_logs";
-            this.Button_Launcher_logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Launcher_logs.TabIndex = 201;
-            this.Button_Launcher_logs.Text = "Clear Launcher Logs";
-            this.Button_Launcher_logs.UseVisualStyleBackColor = false;
-            // 
-            // Label_Proxy_Logging_None
-            // 
-            this.Label_Proxy_Logging_None.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Logging_None.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_None.Location = new System.Drawing.Point(236, 229);
-            this.Label_Proxy_Logging_None.Name = "Label_Proxy_Logging_None";
-            this.Label_Proxy_Logging_None.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_Logging_None.TabIndex = 200;
-            this.Label_Proxy_Logging_None.Text = "Disables Logging and Improves Performance";
-            this.Label_Proxy_Logging_None.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Proxy_Logging_Responses
-            // 
-            this.Label_Proxy_Logging_Responses.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Logging_Responses.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Responses.Location = new System.Drawing.Point(236, 205);
-            this.Label_Proxy_Logging_Responses.Name = "Label_Proxy_Logging_Responses";
-            this.Label_Proxy_Logging_Responses.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_Logging_Responses.TabIndex = 199;
-            this.Label_Proxy_Logging_Responses.Text = "Saves Responses Only";
-            this.Label_Proxy_Logging_Responses.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Proxy_Logging_Requests
-            // 
-            this.Label_Proxy_Logging_Requests.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Logging_Requests.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Requests.Location = new System.Drawing.Point(236, 181);
-            this.Label_Proxy_Logging_Requests.Name = "Label_Proxy_Logging_Requests";
-            this.Label_Proxy_Logging_Requests.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_Logging_Requests.TabIndex = 198;
-            this.Label_Proxy_Logging_Requests.Text = "Saves Requests Only";
-            this.Label_Proxy_Logging_Requests.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Proxy_Logging_Errors
-            // 
-            this.Label_Proxy_Logging_Errors.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Logging_Errors.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Errors.Location = new System.Drawing.Point(236, 157);
-            this.Label_Proxy_Logging_Errors.Name = "Label_Proxy_Logging_Errors";
-            this.Label_Proxy_Logging_Errors.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_Logging_Errors.TabIndex = 197;
-            this.Label_Proxy_Logging_Errors.Text = "Saves Errors Only (Recommended)";
-            this.Label_Proxy_Logging_Errors.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Proxy_Logging_All
-            // 
-            this.Label_Proxy_Logging_All.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Logging_All.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_All.Location = new System.Drawing.Point(236, 133);
-            this.Label_Proxy_Logging_All.Name = "Label_Proxy_Logging_All";
-            this.Label_Proxy_Logging_All.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_Logging_All.TabIndex = 196;
-            this.Label_Proxy_Logging_All.Text = "Saves all Information";
-            this.Label_Proxy_Logging_All.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Panel_Proxy_Logging
-            // 
-            this.Panel_Proxy_Logging.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_None);
-            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Responses);
-            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_All);
-            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Errors);
-            this.Panel_Proxy_Logging.Controls.Add(this.Radio_Button_Proxy_Logging_Requests);
-            this.Panel_Proxy_Logging.Location = new System.Drawing.Point(8, 128);
-            this.Panel_Proxy_Logging.Name = "Panel_Proxy_Logging";
-            this.Panel_Proxy_Logging.Size = new System.Drawing.Size(153, 125);
-            this.Panel_Proxy_Logging.TabIndex = 195;
-            this.Panel_Proxy_Logging.Tag = "SkidMarks";
-            // 
-            // Radio_Button_Proxy_Logging_None
-            // 
-            this.Radio_Button_Proxy_Logging_None.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Proxy_Logging_None.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Proxy_Logging_None.Location = new System.Drawing.Point(6, 101);
-            this.Radio_Button_Proxy_Logging_None.Name = "Radio_Button_Proxy_Logging_None";
-            this.Radio_Button_Proxy_Logging_None.Size = new System.Drawing.Size(141, 18);
-            this.Radio_Button_Proxy_Logging_None.TabIndex = 99;
-            this.Radio_Button_Proxy_Logging_None.TabStop = true;
-            this.Radio_Button_Proxy_Logging_None.Tag = "2";
-            this.Radio_Button_Proxy_Logging_None.Text = "None";
-            this.Radio_Button_Proxy_Logging_None.UseVisualStyleBackColor = false;
-            // 
-            // Radio_Button_Proxy_Logging_Responses
-            // 
-            this.Radio_Button_Proxy_Logging_Responses.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Proxy_Logging_Responses.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Proxy_Logging_Responses.Location = new System.Drawing.Point(5, 77);
-            this.Radio_Button_Proxy_Logging_Responses.Name = "Radio_Button_Proxy_Logging_Responses";
-            this.Radio_Button_Proxy_Logging_Responses.Size = new System.Drawing.Size(141, 18);
-            this.Radio_Button_Proxy_Logging_Responses.TabIndex = 98;
-            this.Radio_Button_Proxy_Logging_Responses.TabStop = true;
-            this.Radio_Button_Proxy_Logging_Responses.Tag = "2";
-            this.Radio_Button_Proxy_Logging_Responses.Text = "Responses";
-            this.Radio_Button_Proxy_Logging_Responses.UseVisualStyleBackColor = false;
-            // 
-            // Radio_Button_Proxy_Logging_All
-            // 
-            this.Radio_Button_Proxy_Logging_All.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Proxy_Logging_All.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Proxy_Logging_All.Location = new System.Drawing.Point(5, 5);
-            this.Radio_Button_Proxy_Logging_All.Name = "Radio_Button_Proxy_Logging_All";
-            this.Radio_Button_Proxy_Logging_All.Size = new System.Drawing.Size(141, 18);
-            this.Radio_Button_Proxy_Logging_All.TabIndex = 95;
-            this.Radio_Button_Proxy_Logging_All.TabStop = true;
-            this.Radio_Button_Proxy_Logging_All.Tag = "0";
-            this.Radio_Button_Proxy_Logging_All.Text = "All";
-            this.Radio_Button_Proxy_Logging_All.UseVisualStyleBackColor = false;
-            // 
-            // Radio_Button_Proxy_Logging_Errors
-            // 
-            this.Radio_Button_Proxy_Logging_Errors.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Proxy_Logging_Errors.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Proxy_Logging_Errors.Location = new System.Drawing.Point(5, 29);
-            this.Radio_Button_Proxy_Logging_Errors.Name = "Radio_Button_Proxy_Logging_Errors";
-            this.Radio_Button_Proxy_Logging_Errors.Size = new System.Drawing.Size(141, 18);
-            this.Radio_Button_Proxy_Logging_Errors.TabIndex = 96;
-            this.Radio_Button_Proxy_Logging_Errors.TabStop = true;
-            this.Radio_Button_Proxy_Logging_Errors.Tag = "1";
-            this.Radio_Button_Proxy_Logging_Errors.Text = "Errors";
-            this.Radio_Button_Proxy_Logging_Errors.UseVisualStyleBackColor = false;
-            // 
-            // Radio_Button_Proxy_Logging_Requests
-            // 
-            this.Radio_Button_Proxy_Logging_Requests.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Proxy_Logging_Requests.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.Radio_Button_Proxy_Logging_Requests.Location = new System.Drawing.Point(5, 53);
-            this.Radio_Button_Proxy_Logging_Requests.Name = "Radio_Button_Proxy_Logging_Requests";
-            this.Radio_Button_Proxy_Logging_Requests.Size = new System.Drawing.Size(141, 18);
-            this.Radio_Button_Proxy_Logging_Requests.TabIndex = 97;
-            this.Radio_Button_Proxy_Logging_Requests.TabStop = true;
-            this.Radio_Button_Proxy_Logging_Requests.Tag = "2";
-            this.Radio_Button_Proxy_Logging_Requests.Text = "Requests";
-            this.Radio_Button_Proxy_Logging_Requests.UseVisualStyleBackColor = false;
+            this.Label_Proxy_Logging_Selected_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_Logging_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_Logging_Selected_Details.Location = new System.Drawing.Point(238, 165);
+            this.Label_Proxy_Logging_Selected_Details.Name = "Label_Proxy_Logging_Selected_Details";
+            this.Label_Proxy_Logging_Selected_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_Logging_Selected_Details.TabIndex = 196;
+            this.Label_Proxy_Logging_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.Label_Proxy_Logging_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Label_Proxy_Logging_Details
             // 
             this.Label_Proxy_Logging_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Logging_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Details.Location = new System.Drawing.Point(236, 108);
+            this.Label_Proxy_Logging_Details.Location = new System.Drawing.Point(238, 141);
             this.Label_Proxy_Logging_Details.Name = "Label_Proxy_Logging_Details";
             this.Label_Proxy_Logging_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Proxy_Logging_Details.TabIndex = 194;
@@ -943,7 +803,7 @@
             // 
             this.Label_Proxy_Logging.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Logging.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging.Location = new System.Drawing.Point(7, 108);
+            this.Label_Proxy_Logging.Location = new System.Drawing.Point(6, 141);
             this.Label_Proxy_Logging.Name = "Label_Proxy_Logging";
             this.Label_Proxy_Logging.Size = new System.Drawing.Size(223, 16);
             this.Label_Proxy_Logging.TabIndex = 193;
@@ -1026,9 +886,9 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_JSON_Update_Cache);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
-            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
-            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Miscellaneous.TabIndex = 2;
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
@@ -1156,7 +1016,7 @@
             this.LinkLabel_Launcher_Path.BackColor = System.Drawing.Color.Transparent;
             this.LinkLabel_Launcher_Path.Location = new System.Drawing.Point(5, 201);
             this.LinkLabel_Launcher_Path.Name = "LinkLabel_Launcher_Path";
-            this.LinkLabel_Launcher_Path.Size = new System.Drawing.Size(360, 32);
+            this.LinkLabel_Launcher_Path.Size = new System.Drawing.Size(823, 22);
             this.LinkLabel_Launcher_Path.TabIndex = 180;
             this.LinkLabel_Launcher_Path.TabStop = true;
             this.LinkLabel_Launcher_Path.Text = "ABC://Soapbox Race World";
@@ -1321,7 +1181,7 @@
             this.TabPage_Game.Controls.Add(this.TabControl_Game);
             this.TabPage_Game.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game.Name = "TabPage_Game";
-            this.TabPage_Game.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_Game.Size = new System.Drawing.Size(834, 354);
             this.TabPage_Game.TabIndex = 3;
             this.TabPage_Game.Text = "Game";
             this.TabPage_Game.UseVisualStyleBackColor = true;
@@ -1478,7 +1338,7 @@
             this.LinkLabel_Game_Path.BackColor = System.Drawing.Color.Transparent;
             this.LinkLabel_Game_Path.Location = new System.Drawing.Point(351, 28);
             this.LinkLabel_Game_Path.Name = "LinkLabel_Game_Path";
-            this.LinkLabel_Game_Path.Size = new System.Drawing.Size(360, 32);
+            this.LinkLabel_Game_Path.Size = new System.Drawing.Size(475, 29);
             this.LinkLabel_Game_Path.TabIndex = 180;
             this.LinkLabel_Game_Path.TabStop = true;
             this.LinkLabel_Game_Path.Text = "C:\\Soapbox Race World\\Game Files";
@@ -2158,7 +2018,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2249,7 +2109,7 @@
             this.TabPage_About.Location = new System.Drawing.Point(0, 26);
             this.TabPage_About.Name = "TabPage_About";
             this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_About.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_About.Size = new System.Drawing.Size(834, 354);
             this.TabPage_About.TabIndex = 1;
             this.TabPage_About.Text = "Version: XXX.XXX.XXX";
             this.TabPage_About.UseVisualStyleBackColor = true;
@@ -2416,6 +2276,72 @@
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
             // 
+            // Button_Launcher_logs
+            // 
+            this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Launcher_logs.Location = new System.Drawing.Point(9, 107);
+            this.Button_Launcher_logs.Name = "Button_Launcher_logs";
+            this.Button_Launcher_logs.Size = new System.Drawing.Size(159, 25);
+            this.Button_Launcher_logs.TabIndex = 202;
+            this.Button_Launcher_logs.Text = "Clear Launcher Logs";
+            this.Button_Launcher_logs.UseVisualStyleBackColor = false;
+            // 
+            // ComboBox_Proxy_Logging
+            // 
+            this.ComboBox_Proxy_Logging.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Proxy_Logging.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Proxy_Logging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Proxy_Logging.FormattingEnabled = true;
+            this.ComboBox_Proxy_Logging.Location = new System.Drawing.Point(9, 164);
+            this.ComboBox_Proxy_Logging.Name = "ComboBox_Proxy_Logging";
+            this.ComboBox_Proxy_Logging.Size = new System.Drawing.Size(189, 22);
+            this.ComboBox_Proxy_Logging.TabIndex = 203;
+            // 
+            // ComboBox_Proxy_GZip_Version
+            // 
+            this.ComboBox_Proxy_GZip_Version.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Proxy_GZip_Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Proxy_GZip_Version.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Proxy_GZip_Version.FormattingEnabled = true;
+            this.ComboBox_Proxy_GZip_Version.Location = new System.Drawing.Point(11, 219);
+            this.ComboBox_Proxy_GZip_Version.Name = "ComboBox_Proxy_GZip_Version";
+            this.ComboBox_Proxy_GZip_Version.Size = new System.Drawing.Size(189, 22);
+            this.ComboBox_Proxy_GZip_Version.TabIndex = 207;
+            // 
+            // Label_Proxy_GZip_Version_Selected_Details
+            // 
+            this.Label_Proxy_GZip_Version_Selected_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version_Selected_Details.Location = new System.Drawing.Point(240, 220);
+            this.Label_Proxy_GZip_Version_Selected_Details.Name = "Label_Proxy_GZip_Version_Selected_Details";
+            this.Label_Proxy_GZip_Version_Selected_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_GZip_Version_Selected_Details.TabIndex = 206;
+            this.Label_Proxy_GZip_Version_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.Label_Proxy_GZip_Version_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_GZip_Version_Details
+            // 
+            this.Label_Proxy_GZip_Version_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version_Details.Location = new System.Drawing.Point(240, 194);
+            this.Label_Proxy_GZip_Version_Details.Name = "Label_Proxy_GZip_Version_Details";
+            this.Label_Proxy_GZip_Version_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_GZip_Version_Details.TabIndex = 205;
+            this.Label_Proxy_GZip_Version_Details.Text = "Changes proxy Handling of Responses to the game";
+            this.Label_Proxy_GZip_Version_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_GZip_Version
+            // 
+            this.Label_Proxy_GZip_Version.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version.Location = new System.Drawing.Point(8, 194);
+            this.Label_Proxy_GZip_Version.Name = "Label_Proxy_GZip_Version";
+            this.Label_Proxy_GZip_Version.Size = new System.Drawing.Size(223, 16);
+            this.Label_Proxy_GZip_Version.TabIndex = 204;
+            this.Label_Proxy_GZip_Version.Text = "Proxy GZip Version:";
+            this.Label_Proxy_GZip_Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // Screen_Settings
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2448,7 +2374,6 @@
             this.Panel_GameFiles_Downloader.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_WebClient_Timeout)).EndInit();
             this.TabPage_Launcher_Proxy.ResumeLayout(false);
-            this.Panel_Proxy_Logging.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Proxy_Port)).EndInit();
             this.TabPage_Launcher_Miscellaneous.ResumeLayout(false);
             this.Panel_Launcher_Builds_Branch.ResumeLayout(false);
@@ -2571,19 +2496,9 @@
         public System.Windows.Forms.PictureBox Button_Close;
         public System.Windows.Forms.TabPage TabPage_Settings;
         public System.Windows.Forms.TabPage TabPage_Setup;
-        public System.Windows.Forms.Label Label_Proxy_Logging_Requests;
-        public System.Windows.Forms.Label Label_Proxy_Logging_Errors;
-        public System.Windows.Forms.Label Label_Proxy_Logging_All;
-        private System.Windows.Forms.Panel Panel_Proxy_Logging;
-        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_All;
-        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Errors;
-        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Requests;
+        public System.Windows.Forms.Label Label_Proxy_Logging_Selected_Details;
         public System.Windows.Forms.Label Label_Proxy_Logging_Details;
         public System.Windows.Forms.Label Label_Proxy_Logging;
-        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_Responses;
-        private System.Windows.Forms.RadioButton Radio_Button_Proxy_Logging_None;
-        public System.Windows.Forms.Label Label_Proxy_Logging_None;
-        public System.Windows.Forms.Label Label_Proxy_Logging_Responses;
         public Core.Theme.Control_TabControl TabControl_Game;
         private System.Windows.Forms.TabPage TabPage_Game_General;
         public System.Windows.Forms.Label Label_Display_Timer;
@@ -2602,7 +2517,6 @@
         public System.Windows.Forms.Label Label_Game_Files;
         private System.Windows.Forms.TabPage TabPage_Game_Verify_Hash;
         private System.Windows.Forms.TabPage TabPage_Game_Security_Center;
-        public System.Windows.Forms.Button Button_Launcher_logs;
         public System.Windows.Forms.Button Button_Clear_NFSWO_Logs;
         public System.Windows.Forms.Button Button_Clear_Server_Mods;
         public System.Windows.Forms.Button Button_Clear_Crash_Logs;
@@ -2656,5 +2570,11 @@
         public System.Windows.Forms.Label Label_Affinity_Core_Calculator;
         public System.Windows.Forms.Label Label_Affinity_Core_Range;
         public System.Windows.Forms.NumericUpDown NumericUpDown_Range_Affinity;
+        public System.Windows.Forms.Button Button_Launcher_logs;
+        public System.Windows.Forms.ComboBox ComboBox_Proxy_Logging;
+        public System.Windows.Forms.ComboBox ComboBox_Proxy_GZip_Version;
+        public System.Windows.Forms.Label Label_Proxy_GZip_Version_Selected_Details;
+        public System.Windows.Forms.Label Label_Proxy_GZip_Version_Details;
+        public System.Windows.Forms.Label Label_Proxy_GZip_Version;
     }
 }

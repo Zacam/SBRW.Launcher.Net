@@ -117,9 +117,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 LogToFileAddons.Parent_Log_Screen(5, "LIST CORE", "Invalid JSON String");
             }
 
-            LogToFileAddons.Parent_Log_Screen(1, "API", "Moved to Function");
-            /* Run the API Checks to Make Sure it Visually Displayed Correctly */
-            VisualsAPIChecker.PingAPIStatus();
+            LogToFileAddons.Parent_Log_Screen(1, "LIST SETTINGS CORE", "Moved to Function");
+            ProxySettingsListUpdater.GetList();
         }
     }
 }

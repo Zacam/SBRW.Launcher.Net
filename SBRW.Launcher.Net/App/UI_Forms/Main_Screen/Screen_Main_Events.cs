@@ -1,13 +1,9 @@
 ﻿#region Usings
-#if NETFRAMEWORK
 using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
-
-#endif
 using SBRW.Launcher.App.UI_Forms.Custom_Server_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.App.UI_Forms.Register_Screen;
-using SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen;
 using SBRW.Launcher.App.UI_Forms.Settings_Screen;
 using SBRW.Launcher.Core.Cache;
 using SBRW.Launcher.Core.Extension.Hash_;
@@ -23,11 +19,11 @@ using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Languages.Visual_Forms;
 using SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
-using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.LauncherCore.ModNet;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -374,28 +370,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             }
         }
         /// <summary>
-        /// Security Center PAGE LAYOUT
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonSecurityCenter_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Screen_Security_Center Custom_Instance_Settings = new Screen_Security_Center() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-                Panel_Form_Screens.Visible = true;
-                Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
-                Screen_Security_Center.RPCStateCache = "Idle Ready";
-                Custom_Instance_Settings.Show();
-                Text = "Security Center - SBRW Launcher: " + Application.ProductVersion;
-            }
-            catch (Exception Error)
-            {
-                string ErrorMessage = "Security Center Screen Encountered an Error";
-                LogToFileAddons.OpenLog("Security Center Panel", ErrorMessage, Error, "Exclamation", false);
-            }
-        }
-        /// <summary>
         /// 
         /// </summary>
         /// <param name="_"></param>
@@ -473,16 +447,16 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Log.Core("LAUNCHER: Setting server list");
             ComboBox_Server_List.DataSource = ServerListUpdater.CleanList;
             /* Accounts Display List */
-            Screen_Account_Manager.ListCredentials();
+            Screen_Account_Manager.Credentials_Load();
 
             /* Display Server List Dialog if Server IP Doesn't Exist */
             if (string.IsNullOrWhiteSpace(Save_Account.Live_Data.Saved_Server_Address))
             {
                 Screen_Custom_Server.OpenScreen(false);
 
-                if (SelectedServer.Data != null)
+                if (ServerListUpdater.SelectedServer != null)
                 {
-                    Save_Account.Live_Data.Saved_Server_Address = SelectedServer.Data.IPAddress;
+                    Save_Account.Live_Data.Saved_Server_Address = ServerListUpdater.SelectedServer.IPAddress;
                     Save_Account.Save();
                 }
                 else

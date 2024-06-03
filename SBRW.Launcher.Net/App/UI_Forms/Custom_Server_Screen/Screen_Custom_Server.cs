@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
-using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
@@ -471,7 +470,7 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
         {
             if (ListView_Server_List.SelectedItems.Count == 1)
             {
-                SelectedServer.Data = ServerListBook[ListView_Server_List.SelectedIndices[0] + 1];
+                ServerListUpdater.SelectedServer = ServerListBook[ListView_Server_List.SelectedIndices[0] + 1];
                 this.Close();
             }
         }

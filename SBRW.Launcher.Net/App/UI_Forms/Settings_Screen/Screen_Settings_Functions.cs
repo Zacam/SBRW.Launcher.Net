@@ -2,7 +2,7 @@
 using SBRW.Launcher.Core.Extension.Api_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
-using SBRW.Launcher.Core.Extra.File_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
@@ -440,33 +440,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             else if (Radio_Button_No_Timer.Checked)
             {
                 return "2";
-            }
-            else
-            {
-                return "0";
-            }
-        }
-        /// <summary>
-        /// Translation for Log to File Selection
-        /// </summary>
-        /// <returns></returns>
-        private string Log_To_File_Selection()
-        {
-            if (Radio_Button_Proxy_Logging_All.Checked)
-            {
-                return "1";
-            }
-            else if (Radio_Button_Proxy_Logging_Errors.Checked)
-            {
-                return "2";
-            }
-            else if (Radio_Button_Proxy_Logging_Requests.Checked)
-            {
-                return "3";
-            }
-            else if (Radio_Button_Proxy_Logging_Responses.Checked)
-            {
-                return "4";
             }
             else
             {

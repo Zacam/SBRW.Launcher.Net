@@ -1,9 +1,7 @@
-﻿using CredentialManagement;
-using Newtonsoft.Json;
-using SBRW.Launcher.Core.Extension.Hash_;
-using SBRW.Launcher.RunTime.LauncherCore.Global;
+﻿using SBRW.Launcher.Core.Extension.Hash_;
+using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
+using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using System;
-using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -42,10 +40,12 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
             /* Set Datasource so we can Hide Columns */
             DataGridView_Account_List.DataSource = Accounts_Cache;
             DataGridView_Account_List.Columns["Target"].Visible = false;
+            DataGridView_Account_List.Columns["Email"].Visible = false;
             DataGridView_Account_List.Columns["Password"].Visible = false;
+            DataGridView_Account_List.Columns["Played"].Visible = false;
             DataGridView_Account_List.Columns["AID"].Visible = false;
             /* Load Data for DataGridView */
-            ListCredentials();
+            Credentials_Load();
         }
         /// <summary>
         /// 
@@ -72,53 +72,33 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
         /// <param name="e"></param>
         private void Button_Add_Click(object sender, EventArgs e)
         {
-            string Email_Live = TextBox_Email.Text;
-            string Password_Live = TextBox_Password.Text;
-
-            if ((Email_Live.Length > 1) && (Password_Live.Length > 1))
+            try
             {
-                Auto_ID++;
-                string App_Name_Target = $"{Application.ProductName}.Account.{Auto_ID}";
+                if ((TextBox_Email.Text.Length > 1) && (TextBox_Password.Text.Length > 1))
+                {
+                    Auto_ID++;
 
-                Credential New_Credential = new Credential()
-                {
-                    Target = App_Name_Target,
-                    Username = TextBox_Email.Text.Encrypt_AES(),
-                    Password = TextBox_Password.Text.Encrypt_AES(),
-                    Description = !Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text)
-                    ? TextBox_Nickname.Text : string.Empty,
-                    Type = CredentialType.Generic,
-                    PersistanceType = PersistanceType.LocalComputer,
-                    MaxCredentialBlobSize = Use_New_Max_Blob_Size
-                };
-
-                /* If Windows Credential is Running, use the Credential() to provide the bool otherwise return true to save to JSON file */
-                if (!(WindowsCredentialRunning() ? New_Credential.Save() : true))
-                {
-                    MessageBox.Show($"Failed to save credential for {App_Name_Target}");
-                }
-                else
-                {
                     Accounts_Cache.Add(new Json_List_Account()
                     {
-                        Target = App_Name_Target,
-                        Email = New_Credential.Username,
-                        Password = New_Credential.Password,
-                        Nickname = New_Credential.Description,
-                        Created = New_Credential.LastWriteTime.ToString(),
+                        Target = $"{Application.ProductName}.Account.{Auto_ID}",
+                        Email = TextBox_Email.Text.Encrypt_AES(),
+                        Password = TextBox_Password.Text.Encrypt_AES(),
+                        Nickname = !Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text)
+                            ? TextBox_Nickname.Text : string.Empty,
+                        Created = DateTime.Now,
+                        Updated = DateTime.Now,
                         AID = Auto_ID
                     });
 
-                    if (!new FileInfo(Locations.UserSettingsXML).IsReadOnly)
+                    if (Credentials_DB_Save())
                     {
-                        File.WriteAllText(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON), JsonConvert.SerializeObject(Accounts_Cache));
-                        ListCredentials();
+                        Credentials_Load();
                     }
                 }
             }
-            else
+            catch (Exception Error)
             {
-                MessageBox.Show("Enter Account Info");
+                LogToFileAddons.OpenLog("Credentials Account Add", string.Empty, Error, string.Empty, true);
             }
         }
         /// <summary>
@@ -136,24 +116,17 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                     if (Account_Information != default)
                     {
                         /* Get "Target" entry for removal */
+                        Accounts_Cache.Remove(Account_Information);
 
-                        /* If Windows Credential is Running, use the Credential() to provide the bool otherwise return true to save to JSON file */
-                        if (!(WindowsCredentialRunning() ? new Credential() { Target = Account_Information.Target }.Delete() : true))
+                        if (Credentials_DB_Save())
                         {
-                            MessageBox.Show($"Failed to Remove credential: {Account_Information.Target}");
-                        }
-                        else
-                        {
-                            Accounts_Cache.Remove(Account_Information);
-
-                            File.WriteAllText(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON), JsonConvert.SerializeObject(Accounts_Cache));
-                            ListCredentials();
+                            Credentials_Load();
                         }
                     }
                 }
                 catch (Exception Error)
                 {
-                    MessageBox.Show(Error.ToString());
+                    LogToFileAddons.OpenLog("Credentials Account Remove", string.Empty, Error, string.Empty, true);
                 }
             }
         }
@@ -172,55 +145,49 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                     if (Account_Information != default)
                     {
                         /* Get "Target" entry for information update */
-                        Credential Updated_Credential = new Credential()
-                        {
-                            Target = Account_Information.Target,
-                            Username = TextBox_Email.Text.Encrypt_AES(),
-                            Password = TextBox_Password.Text.Encrypt_AES(),
-                            Description = TextBox_Nickname.Text,
-                            Type = CredentialType.Generic,
-                            PersistanceType = PersistanceType.LocalComputer,
-                            MaxCredentialBlobSize = Use_New_Max_Blob_Size
-                        };
-
-                        /* If Windows Credential is Running, use the Credential() to provide the bool otherwise return true to save to JSON file */
-                        if (!(WindowsCredentialRunning() ? Updated_Credential.Save() : true))
-                        {
-                            MessageBox.Show($"Failed to Update credential: {Account_Information.Target}");
-                        }
-                        else
-                        {
-                            var Account_Index = Accounts_Cache.Select((Item_Account, Item_Index) => new { Item_Account, Item_Index })
+                        var Account_Index = Accounts_Cache.Select((Item_Account, Item_Index) => new { Item_Account, Item_Index })
                                 .LastOrDefault(x => x.Item_Account.Target == Account_Information.Target);
-                            if (Account_Index != default)
+
+                        if (Account_Index != default)
+                        {
+                            bool Update_Info_Tag = false;
+
+                            if (!TextBox_Password.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Password))
                             {
-                                if (!TextBox_Password.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Password))
-                                {
-                                    Accounts_Cache[Account_Index.Item_Index].Password = TextBox_Password.Text.Encrypt_AES();
-                                }
+                                Accounts_Cache[Account_Index.Item_Index].Password = TextBox_Password.Text.Encrypt_AES();
+                                Update_Info_Tag = true;
+                            }
 
-                                if (!TextBox_Email.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Email))
-                                {
-                                    Accounts_Cache[Account_Index.Item_Index].Email = TextBox_Email.Text.Encrypt_AES();
-                                }
+                            if (!TextBox_Email.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Email))
+                            {
+                                Accounts_Cache[Account_Index.Item_Index].Email = TextBox_Email.Text.Encrypt_AES();
+                                Update_Info_Tag = true;
+                            }
 
-                                if (!TextBox_Nickname.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Nickname))
+                            if (!TextBox_Nickname.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Nickname))
+                            {
+                                if (!Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text))
                                 {
-                                    if (!Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text))
-                                    {
-                                        Accounts_Cache[Account_Index.Item_Index].Nickname = TextBox_Nickname.Text;
-                                    }
+                                    Accounts_Cache[Account_Index.Item_Index].Nickname = TextBox_Nickname.Text;
+                                    Update_Info_Tag = true;
                                 }
                             }
 
-                            File.WriteAllText(Path.Combine(Locations.RoamingAppDataFolder_Launcher, Locations.NameAccountsJSON), JsonConvert.SerializeObject(Accounts_Cache));
-                            ListCredentials();
+                            if (Update_Info_Tag)
+                            {
+                                Accounts_Cache[Account_Index.Item_Index].Updated = DateTime.Now;
+                            }
+                        }
+
+                        if (Credentials_DB_Save())
+                        {
+                            Credentials_Load();
                         }
                     }
                 }
                 catch (Exception Error)
                 {
-                    MessageBox.Show(Error.ToString());
+                    LogToFileAddons.OpenLog("Credentials Account Update", string.Empty, Error, string.Empty, true);
                 }
             }
         }

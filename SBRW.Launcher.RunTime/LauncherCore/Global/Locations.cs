@@ -27,6 +27,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
 #endif
         public static string UserSettingsFolder { get { return Path.Combine(RoamingAppDataFolder, "Need for Speed World", "Settings"); } }
         public static string UserSettingsXML { get { return Path.Combine(UserSettingsFolder, "UserSettings.xml"); } }
+        public static string UserAccountsJSON { get { return Path.Combine(RoamingAppDataFolder_Launcher, NameAccountsJSON); } }
 
         public static string GameFilesFailSafePath { get { return Path.Combine(LauncherFolder, "Game Files"); } }
     }

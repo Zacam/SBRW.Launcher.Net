@@ -1,7 +1,6 @@
 ﻿using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
-using SBRW.Launcher.App.UI_Forms.SecurityCenter_Screen;
 using SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen;
 using SBRW.Launcher.App.UI_Forms.USXEditor_Screen;
 using SBRW.Launcher.App.UI_Forms.VerifyHash_Screen;
@@ -9,11 +8,12 @@ using SBRW.Launcher.Core.Cache;
 using SBRW.Launcher.Core.Extension.Api_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
-using SBRW.Launcher.Core.Extra.File_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Extra.Ini_;
 using SBRW.Launcher.Core.Extra.XML_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.Core.Required.System.Windows_;
+using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
@@ -23,6 +23,7 @@ using SBRW.Launcher.RunTime.LauncherCore.ModNet;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -96,31 +97,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
                 MessageBox.Show(null, "Launcher failed to reach any APIs. CDN Selection Screen is not available.",
                     "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Security_Center_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Screen_Security_Center Custom_Instance_Settings = new Screen_Security_Center() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-                Panel_Form_Screens.Visible = true;
-                Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
-                Screen_Security_Center.RPCStateCache = "Settings";
-                Custom_Instance_Settings.Show();
-                if (Screen_Parent.Screen_Instance != null)
-                {
-                    Screen_Parent.Screen_Instance.Text = "Security Center - SBRW Launcher: v" + Application.ProductVersion;
-                }
-            }
-            catch (Exception Error)
-            {
-                string ErrorMessage = "Security Center Screen Encountered an Error";
-                LogToFileAddons.OpenLog("Security Center Panel", ErrorMessage, Error, "Exclamation", false);
             }
         }
         /// <summary>
@@ -789,6 +765,36 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
             }
             catch { }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Proxy_Logging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Screen_Instance != default)
+            {
+                if (!(Screen_Instance.Disposing || Screen_Instance.IsDisposed))
+                {
+                    Label_Proxy_Logging_Selected_Details.Text = ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Details;
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Proxy_GZip_Version_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Screen_Instance != default)
+            {
+                if (!(Screen_Instance.Disposing || Screen_Instance.IsDisposed))
+                {
+                    Label_Proxy_GZip_Version_Selected_Details.Text = ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Details;
+                }
+            }
         }
         #region Settings Load
         /// <summary>

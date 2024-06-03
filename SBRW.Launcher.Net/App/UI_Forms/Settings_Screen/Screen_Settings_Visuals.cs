@@ -1,5 +1,5 @@
 ﻿using SBRW.Launcher.App.UI_Forms.Parent_Screen;
-using SBRW.Launcher.Core.Extra.File_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Extra.XML_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.Core.Theme;
@@ -68,6 +68,96 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                         e.Graphics.FillRectangle(backgroundColor, e.Bounds);
                         e.Graphics.DrawString("    " + langListText, font, textColor, e.Bounds);
                     }
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// Sets the Colors for the Proxy Logging Drop Down Menu
+        /// </summary>
+        /// <remarks>Dropdown Menu Visual</remarks>
+        private void ComboBox_Proxy_Logging_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Log_Mode_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Proxy_Logging si)
+                        {
+                            Log_Mode_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Log_Mode_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Log_Mode_Name, font, textColor, e.Bounds);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// Sets the Colors for the Proxy Gzip Version Drop Down Menu
+        /// </summary>
+        /// <remarks>Dropdown Menu Visual</remarks>
+        private void ComboBox_Proxy_Gzip_Version_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Gzip_Version_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Proxy_GZip_Version si)
+                        {
+                            Gzip_Version_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Gzip_Version_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Gzip_Version_Name, font, textColor, e.Bounds);
                 }
             }
             catch { }
@@ -301,16 +391,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             NumericUpDown_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Logging.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Logging_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Proxy_Logging_All.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Proxy_Logging_Errors.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Proxy_Logging_Requests.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Proxy_Logging_Responses.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Proxy_Logging_None.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Radio_Button_Proxy_Logging_All.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Proxy_Logging_Errors.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Proxy_Logging_Requests.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Proxy_Logging_Responses.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Proxy_Logging_None.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Proxy_Logging_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             /* Miscellaneous */
             CheckBox_RPC.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_JSON_Update_Cache.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -429,6 +510,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             ComboBox_Language_List.DisplayMember = "Name";
             ComboBox_Language_List.DataSource = LanguageListUpdater.CleanList;
+            ComboBox_Proxy_Logging.DisplayMember = "Name";
+            ComboBox_Proxy_Logging.DataSource = ProxySettingsListUpdater.Proxy_Logging;
+            ComboBox_Proxy_GZip_Version.DisplayMember = "Name";
+            ComboBox_Proxy_GZip_Version.DataSource = ProxySettingsListUpdater.Proxy_GZip_Version;
 
 
             /********************************/
@@ -438,6 +523,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Language_List.DrawItem += new DrawItemEventHandler(ComboBox_Language_List_DrawItem);
             ComboBox_Language_List.SelectedIndexChanged += new EventHandler(ComboBox_Language_List_SelectedIndexChanged);
             ComboBox_Language_List.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
+            ComboBox_Proxy_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Logging_DrawItem);
+            ComboBox_Proxy_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_Logging_SelectedIndexChanged);
+            ComboBox_Proxy_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
+            ComboBox_Proxy_GZip_Version.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Gzip_Version_DrawItem);
+            ComboBox_Proxy_GZip_Version.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_GZip_Version_SelectedIndexChanged);
+            ComboBox_Proxy_GZip_Version.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
 
             Button_Save.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
             Button_Save.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
@@ -648,7 +741,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /*******************************/
             /* Set Event Handlers           /
             /*******************************/
-
+#if !(RELEASE_UNIX || DEBUG_UNIX)
             /* Firewall Checks */
             ButtonFirewallRulesAPI.Click += new EventHandler(ButtonFirewallRulesAPI_Click);
             ButtonFirewallRulesCheck.Click += new EventHandler(ButtonFirewallRulesCheck_Click);
@@ -674,6 +767,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Permission Checks */
             ButtonFolderPermissonCheck.Click += new EventHandler(ButtonFolderPermissonCheck_Click);
             ButtonFolderPermissonSet.Click += new EventHandler(ButtonFolderPermissonSet_Click);
+#endif
             #endregion
         }
         #endregion

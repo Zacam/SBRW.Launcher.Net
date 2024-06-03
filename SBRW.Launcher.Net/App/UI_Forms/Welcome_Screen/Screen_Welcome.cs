@@ -15,6 +15,7 @@ using System.IO;
 using System.Windows.Forms;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.Core.Cache;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 
 namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
 {
@@ -246,10 +247,12 @@ namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
                 XML_File.XML_Settings_Data.Language = ((Json_List_Language)ComboBox_Game_Language.SelectedItem).Value_XML;
             }
 
+            /* Not in use
             if (Save_Settings.Live_Data.Launcher_LZMA_Downloader != (CheckBox_LZMA_Downloader.Checked ? "1" : "0"))
             {
                 Save_Settings.Live_Data.Launcher_LZMA_Downloader = CheckBox_LZMA_Downloader.Checked ? "1" : "0";
             }
+            */
 
             if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
             {

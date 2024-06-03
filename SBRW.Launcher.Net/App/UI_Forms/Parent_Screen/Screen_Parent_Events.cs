@@ -24,6 +24,7 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SBRW.Launcher.RunTime.SystemPlatform.Windows;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 #if !(RELEASE_UNIX || DEBUG_UNIX)
 using SBRW.Launcher.RunTime.SystemPlatform.Components;
 using SBRW.Launcher.Core.Extra.Ini_;

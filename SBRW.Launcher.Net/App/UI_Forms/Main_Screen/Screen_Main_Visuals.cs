@@ -35,6 +35,7 @@ using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
 using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -75,7 +76,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseDown(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
+            //Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
         }
         /// <summary>
         /// 
@@ -84,7 +85,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseEnter(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(2);
+            //Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(2);
         }
         /// <summary>
         /// 
@@ -93,7 +94,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ButtonSecurityCenter_MouseLeaveANDMouseUp(object sender, EventArgs e)
         {
-            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(0);
+            //Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(0);
         }
         /// <summary>
         /// 
@@ -2166,7 +2167,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.Warning) :
                 Button_Settings.Icon_Order(SVG_Icon.Gear);
             Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross);
-            Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
+            //Button_Security_Center.BackgroundImage = Button_Security_Center.SecurityCenterIcon(1);
 
             Picture_Bar_Outline.BackgroundImage = Image_ProgressBar.Preload_Outline;
             ProgressBar.BackColor = Color_Winform_Other.ProgressBar_Unknown_Top;
@@ -2261,7 +2262,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Security_Center.MouseLeave += new EventHandler(ButtonSecurityCenter_MouseLeaveANDMouseUp);
             Button_Security_Center.MouseUp += new MouseEventHandler(ButtonSecurityCenter_MouseLeaveANDMouseUp);
             Button_Security_Center.MouseDown += new MouseEventHandler(ButtonSecurityCenter_MouseDown);
-            Button_Security_Center.Click += new EventHandler(ButtonSecurityCenter_Click);
 
             Button_Login.MouseEnter += new EventHandler(LoginButton_MouseEnter);
             Button_Login.MouseLeave += new EventHandler(LoginButton_MouseLeave);
