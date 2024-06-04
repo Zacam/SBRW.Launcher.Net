@@ -73,6 +73,11 @@
             this.Label_WebClient_Timeout = new System.Windows.Forms.Label();
             this.NumericUpDown_WebClient_Timeout = new System.Windows.Forms.NumericUpDown();
             this.TabPage_Launcher_Proxy = new System.Windows.Forms.TabPage();
+            this.ComboBox_Proxy_GZip_Version = new System.Windows.Forms.ComboBox();
+            this.Label_Proxy_GZip_Version_Selected_Details = new System.Windows.Forms.Label();
+            this.Label_Proxy_GZip_Version_Details = new System.Windows.Forms.Label();
+            this.Label_Proxy_GZip_Version = new System.Windows.Forms.Label();
+            this.ComboBox_Proxy_Logging = new System.Windows.Forms.ComboBox();
             this.Label_Proxy_Logging_Selected_Details = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging_Details = new System.Windows.Forms.Label();
             this.Label_Proxy_Logging = new System.Windows.Forms.Label();
@@ -92,37 +97,22 @@
             this.Label_Launcher_Builds_Branch_Details = new System.Windows.Forms.Label();
             this.Label_Launcher_Builds_Branch = new System.Windows.Forms.Label();
             this.CheckBox_RPC = new System.Windows.Forms.CheckBox();
-            this.LinkLabel_Launcher_Path = new System.Windows.Forms.LinkLabel();
             this.CheckBox_JSON_Update_Cache = new System.Windows.Forms.CheckBox();
-            this.Label_Launcher_Path = new System.Windows.Forms.Label();
             this.CheckBox_Theme_Support = new System.Windows.Forms.CheckBox();
             this.TabPage_Experiments = new System.Windows.Forms.TabPage();
-            this.Label_Affinity_Core_Calculator = new System.Windows.Forms.Label();
-            this.Panel_Affinity_Range = new System.Windows.Forms.Panel();
-            this.Label_Affinity_Core_Range = new System.Windows.Forms.Label();
-            this.NumericUpDown_Range_Affinity = new System.Windows.Forms.NumericUpDown();
             this.label7 = new System.Windows.Forms.Label();
             this.Button_Experiments = new System.Windows.Forms.Button();
-            this.CheckBox_Enable_Affinity_Range = new System.Windows.Forms.CheckBox();
-            this.CheckBox_Enable_ACM = new System.Windows.Forms.CheckBox();
             this.TabPage_Game = new System.Windows.Forms.TabPage();
             this.TabControl_Game = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Game_General = new System.Windows.Forms.TabPage();
-            this.Button_Clear_NFSWO_Logs = new System.Windows.Forms.Button();
-            this.Button_Clear_Server_Mods = new System.Windows.Forms.Button();
-            this.Button_Clear_Crash_Logs = new System.Windows.Forms.Button();
             this.Label_Display_Timer = new System.Windows.Forms.Label();
             this.Panel_Display_Timer = new System.Windows.Forms.Panel();
             this.Radio_Button_Static_Timer = new System.Windows.Forms.RadioButton();
             this.Radio_Button_Dynamic_Timer = new System.Windows.Forms.RadioButton();
             this.Radio_Button_No_Timer = new System.Windows.Forms.RadioButton();
             this.CheckBox_Word_Filter_Check = new System.Windows.Forms.CheckBox();
-            this.LinkLabel_Game_Path = new System.Windows.Forms.LinkLabel();
-            this.Label_Game_Current_Path = new System.Windows.Forms.Label();
             this.Button_Game_User_Settings = new System.Windows.Forms.Button();
             this.Label_Game_Settings = new System.Windows.Forms.Label();
-            this.ComboBox_Language_List = new System.Windows.Forms.ComboBox();
-            this.Button_Game_Verify_Files = new System.Windows.Forms.Button();
             this.Button_Change_Game_Path = new System.Windows.Forms.Button();
             this.Label_Game_Files = new System.Windows.Forms.Label();
             this.TabPage_Game_Verify_Hash = new System.Windows.Forms.TabPage();
@@ -167,6 +157,7 @@
             this.ButtonFolderPermissonCheck = new System.Windows.Forms.Button();
             this.ButtonFolderPermissonSet = new System.Windows.Forms.Button();
             this.TextFolderPermissions = new System.Windows.Forms.Label();
+            this.TabPage_Game_Miscellaneous = new System.Windows.Forms.TabPage();
             this.TabPage_API = new System.Windows.Forms.TabPage();
             this.Label_API_Status_Five = new System.Windows.Forms.Label();
             this.Label_API_Status_Four = new System.Windows.Forms.Label();
@@ -190,12 +181,21 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
+            this.Button_Clear_NFSWO_Logs = new System.Windows.Forms.Button();
+            this.Button_Clear_Server_Mods = new System.Windows.Forms.Button();
+            this.Button_Clear_Crash_Logs = new System.Windows.Forms.Button();
+            this.Button_Game_Verify_Files = new System.Windows.Forms.Button();
             this.Button_Launcher_logs = new System.Windows.Forms.Button();
-            this.ComboBox_Proxy_Logging = new System.Windows.Forms.ComboBox();
-            this.ComboBox_Proxy_GZip_Version = new System.Windows.Forms.ComboBox();
-            this.Label_Proxy_GZip_Version_Selected_Details = new System.Windows.Forms.Label();
-            this.Label_Proxy_GZip_Version_Details = new System.Windows.Forms.Label();
-            this.Label_Proxy_GZip_Version = new System.Windows.Forms.Label();
+            this.CheckBox_Enable_ACM = new System.Windows.Forms.CheckBox();
+            this.LinkLabel_Game_Path = new System.Windows.Forms.LinkLabel();
+            this.Label_Game_Current_Path = new System.Windows.Forms.Label();
+            this.LinkLabel_Launcher_Path = new System.Windows.Forms.LinkLabel();
+            this.Label_Launcher_Path = new System.Windows.Forms.Label();
+            this.Label_Affinity_Core_Calculator = new System.Windows.Forms.Label();
+            this.Panel_Affinity_Range = new System.Windows.Forms.Panel();
+            this.Label_Affinity_Core_Range = new System.Windows.Forms.Label();
+            this.NumericUpDown_Range_Affinity = new System.Windows.Forms.NumericUpDown();
+            this.CheckBox_Enable_Affinity_Range = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -211,8 +211,6 @@
             this.TabPage_Launcher_Miscellaneous.SuspendLayout();
             this.Panel_Launcher_Builds_Branch.SuspendLayout();
             this.TabPage_Experiments.SuspendLayout();
-            this.Panel_Affinity_Range.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Range_Affinity)).BeginInit();
             this.TabPage_Game.SuspendLayout();
             this.TabControl_Game.SuspendLayout();
             this.TabPage_Game_General.SuspendLayout();
@@ -226,12 +224,15 @@
             this.GroupBox_Defender.SuspendLayout();
             this.TabPage_Security_Center_Permissons.SuspendLayout();
             this.GroupBox_Permissons.SuspendLayout();
+            this.TabPage_Game_Miscellaneous.SuspendLayout();
             this.TabPage_API.SuspendLayout();
             this.TabPage_About.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
+            this.Panel_Affinity_Range.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Range_Affinity)).BeginInit();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -242,8 +243,9 @@
             // Panel_Form_Screens
             // 
             this.Panel_Form_Screens.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Form_Screens.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Form_Screens.ForeColor = System.Drawing.Color.Transparent;
-            this.Panel_Form_Screens.Location = new System.Drawing.Point(871, 61);
+            this.Panel_Form_Screens.Location = new System.Drawing.Point(0, 0);
             this.Panel_Form_Screens.Name = "Panel_Form_Screens";
             this.Panel_Form_Screens.Size = new System.Drawing.Size(891, 529);
             this.Panel_Form_Screens.TabIndex = 79;
@@ -720,7 +722,7 @@
             this.CheckBox_Alt_WebCalls.Name = "CheckBox_Alt_WebCalls";
             this.CheckBox_Alt_WebCalls.Size = new System.Drawing.Size(225, 18);
             this.CheckBox_Alt_WebCalls.TabIndex = 158;
-            this.CheckBox_Alt_WebCalls.Text = "Enable Alternative WebCalls";
+            this.CheckBox_Alt_WebCalls.Text = "Alternative WebCalls ( STATUS )";
             this.CheckBox_Alt_WebCalls.UseVisualStyleBackColor = false;
             // 
             // Label_WebClient_Timeout
@@ -760,7 +762,6 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version);
             this.TabPage_Launcher_Proxy.Controls.Add(this.ComboBox_Proxy_Logging);
-            this.TabPage_Launcher_Proxy.Controls.Add(this.Button_Launcher_logs);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Selected_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_Logging);
@@ -777,11 +778,66 @@
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
             // 
+            // ComboBox_Proxy_GZip_Version
+            // 
+            this.ComboBox_Proxy_GZip_Version.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Proxy_GZip_Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Proxy_GZip_Version.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Proxy_GZip_Version.FormattingEnabled = true;
+            this.ComboBox_Proxy_GZip_Version.Location = new System.Drawing.Point(11, 187);
+            this.ComboBox_Proxy_GZip_Version.Name = "ComboBox_Proxy_GZip_Version";
+            this.ComboBox_Proxy_GZip_Version.Size = new System.Drawing.Size(189, 22);
+            this.ComboBox_Proxy_GZip_Version.TabIndex = 207;
+            // 
+            // Label_Proxy_GZip_Version_Selected_Details
+            // 
+            this.Label_Proxy_GZip_Version_Selected_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version_Selected_Details.Location = new System.Drawing.Point(240, 188);
+            this.Label_Proxy_GZip_Version_Selected_Details.Name = "Label_Proxy_GZip_Version_Selected_Details";
+            this.Label_Proxy_GZip_Version_Selected_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_GZip_Version_Selected_Details.TabIndex = 206;
+            this.Label_Proxy_GZip_Version_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.Label_Proxy_GZip_Version_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_GZip_Version_Details
+            // 
+            this.Label_Proxy_GZip_Version_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version_Details.Location = new System.Drawing.Point(240, 162);
+            this.Label_Proxy_GZip_Version_Details.Name = "Label_Proxy_GZip_Version_Details";
+            this.Label_Proxy_GZip_Version_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Proxy_GZip_Version_Details.TabIndex = 205;
+            this.Label_Proxy_GZip_Version_Details.Text = "Changes proxy Handling of Responses to the game";
+            this.Label_Proxy_GZip_Version_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Proxy_GZip_Version
+            // 
+            this.Label_Proxy_GZip_Version.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Proxy_GZip_Version.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Proxy_GZip_Version.Location = new System.Drawing.Point(8, 162);
+            this.Label_Proxy_GZip_Version.Name = "Label_Proxy_GZip_Version";
+            this.Label_Proxy_GZip_Version.Size = new System.Drawing.Size(223, 16);
+            this.Label_Proxy_GZip_Version.TabIndex = 204;
+            this.Label_Proxy_GZip_Version.Text = "Proxy GZip Version:";
+            this.Label_Proxy_GZip_Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // ComboBox_Proxy_Logging
+            // 
+            this.ComboBox_Proxy_Logging.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Proxy_Logging.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Proxy_Logging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Proxy_Logging.FormattingEnabled = true;
+            this.ComboBox_Proxy_Logging.Location = new System.Drawing.Point(9, 132);
+            this.ComboBox_Proxy_Logging.Name = "ComboBox_Proxy_Logging";
+            this.ComboBox_Proxy_Logging.Size = new System.Drawing.Size(189, 22);
+            this.ComboBox_Proxy_Logging.TabIndex = 203;
+            // 
             // Label_Proxy_Logging_Selected_Details
             // 
             this.Label_Proxy_Logging_Selected_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Logging_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Selected_Details.Location = new System.Drawing.Point(238, 165);
+            this.Label_Proxy_Logging_Selected_Details.Location = new System.Drawing.Point(238, 133);
             this.Label_Proxy_Logging_Selected_Details.Name = "Label_Proxy_Logging_Selected_Details";
             this.Label_Proxy_Logging_Selected_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Proxy_Logging_Selected_Details.TabIndex = 196;
@@ -792,7 +848,7 @@
             // 
             this.Label_Proxy_Logging_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Logging_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging_Details.Location = new System.Drawing.Point(238, 141);
+            this.Label_Proxy_Logging_Details.Location = new System.Drawing.Point(238, 109);
             this.Label_Proxy_Logging_Details.Name = "Label_Proxy_Logging_Details";
             this.Label_Proxy_Logging_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Proxy_Logging_Details.TabIndex = 194;
@@ -803,7 +859,7 @@
             // 
             this.Label_Proxy_Logging.BackColor = System.Drawing.Color.Transparent;
             this.Label_Proxy_Logging.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_Logging.Location = new System.Drawing.Point(6, 141);
+            this.Label_Proxy_Logging.Location = new System.Drawing.Point(6, 109);
             this.Label_Proxy_Logging.Name = "Label_Proxy_Logging";
             this.Label_Proxy_Logging.Size = new System.Drawing.Size(223, 16);
             this.Label_Proxy_Logging.TabIndex = 193;
@@ -848,7 +904,7 @@
             this.CheckBox_Proxy.Name = "CheckBox_Proxy";
             this.CheckBox_Proxy.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Proxy.TabIndex = 177;
-            this.CheckBox_Proxy.Text = "Disable Proxy";
+            this.CheckBox_Proxy.Text = "Proxy ( STATUS )";
             this.CheckBox_Proxy.UseVisualStyleBackColor = false;
             // 
             // CheckBox_Proxy_Domain
@@ -859,7 +915,7 @@
             this.CheckBox_Proxy_Domain.Name = "CheckBox_Proxy_Domain";
             this.CheckBox_Proxy_Domain.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Proxy_Domain.TabIndex = 178;
-            this.CheckBox_Proxy_Domain.Text = "Enable Proxy Domain";
+            this.CheckBox_Proxy_Domain.Text = "Proxy Domain ( STATUS )";
             this.CheckBox_Proxy_Domain.UseVisualStyleBackColor = false;
             // 
             // CheckBox_Host_to_IP
@@ -870,11 +926,15 @@
             this.CheckBox_Host_to_IP.Name = "CheckBox_Host_to_IP";
             this.CheckBox_Host_to_IP.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Host_to_IP.TabIndex = 162;
-            this.CheckBox_Host_to_IP.Text = "Disable Legacy IP Converter";
+            this.CheckBox_Host_to_IP.Text = "IP Converter ( STATUS )";
             this.CheckBox_Host_to_IP.UseVisualStyleBackColor = false;
             // 
             // TabPage_Launcher_Miscellaneous
             // 
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.LinkLabel_Launcher_Path);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Enable_ACM);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Button_Launcher_logs);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Developer);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Beta);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Stable);
@@ -882,9 +942,7 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch_Details);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Builds_Branch);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_RPC);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.LinkLabel_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_JSON_Update_Cache);
-            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Path);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
             this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
@@ -897,7 +955,7 @@
             // 
             this.Label_Launcher_Builds_Branch_Developer.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Builds_Branch_Developer.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Builds_Branch_Developer.Location = new System.Drawing.Point(236, 155);
+            this.Label_Launcher_Builds_Branch_Developer.Location = new System.Drawing.Point(241, 230);
             this.Label_Launcher_Builds_Branch_Developer.Name = "Label_Launcher_Builds_Branch_Developer";
             this.Label_Launcher_Builds_Branch_Developer.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Builds_Branch_Developer.TabIndex = 198;
@@ -909,7 +967,7 @@
             // 
             this.Label_Launcher_Builds_Branch_Beta.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Builds_Branch_Beta.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Builds_Branch_Beta.Location = new System.Drawing.Point(236, 131);
+            this.Label_Launcher_Builds_Branch_Beta.Location = new System.Drawing.Point(241, 206);
             this.Label_Launcher_Builds_Branch_Beta.Name = "Label_Launcher_Builds_Branch_Beta";
             this.Label_Launcher_Builds_Branch_Beta.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Builds_Branch_Beta.TabIndex = 197;
@@ -920,7 +978,7 @@
             // 
             this.Label_Launcher_Builds_Branch_Stable.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Builds_Branch_Stable.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Builds_Branch_Stable.Location = new System.Drawing.Point(236, 107);
+            this.Label_Launcher_Builds_Branch_Stable.Location = new System.Drawing.Point(241, 182);
             this.Label_Launcher_Builds_Branch_Stable.Name = "Label_Launcher_Builds_Branch_Stable";
             this.Label_Launcher_Builds_Branch_Stable.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Builds_Branch_Stable.TabIndex = 196;
@@ -933,7 +991,7 @@
             this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Stable);
             this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Beta);
             this.Panel_Launcher_Builds_Branch.Controls.Add(this.Radio_Button_Launcher_Builds_Branch_Developer);
-            this.Panel_Launcher_Builds_Branch.Location = new System.Drawing.Point(8, 102);
+            this.Panel_Launcher_Builds_Branch.Location = new System.Drawing.Point(8, 177);
             this.Panel_Launcher_Builds_Branch.Name = "Panel_Launcher_Builds_Branch";
             this.Panel_Launcher_Builds_Branch.Size = new System.Drawing.Size(153, 77);
             this.Panel_Launcher_Builds_Branch.TabIndex = 195;
@@ -982,7 +1040,7 @@
             // 
             this.Label_Launcher_Builds_Branch_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Builds_Branch_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Builds_Branch_Details.Location = new System.Drawing.Point(236, 82);
+            this.Label_Launcher_Builds_Branch_Details.Location = new System.Drawing.Point(241, 154);
             this.Label_Launcher_Builds_Branch_Details.Name = "Label_Launcher_Builds_Branch_Details";
             this.Label_Launcher_Builds_Branch_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Builds_Branch_Details.TabIndex = 194;
@@ -993,7 +1051,7 @@
             // 
             this.Label_Launcher_Builds_Branch.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Builds_Branch.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Builds_Branch.Location = new System.Drawing.Point(7, 82);
+            this.Label_Launcher_Builds_Branch.Location = new System.Drawing.Point(7, 154);
             this.Label_Launcher_Builds_Branch.Name = "Label_Launcher_Builds_Branch";
             this.Label_Launcher_Builds_Branch.Size = new System.Drawing.Size(223, 16);
             this.Label_Launcher_Builds_Branch.TabIndex = 193;
@@ -1004,64 +1062,39 @@
             // 
             this.CheckBox_RPC.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_RPC.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_RPC.Location = new System.Drawing.Point(8, 8);
+            this.CheckBox_RPC.Location = new System.Drawing.Point(8, 57);
             this.CheckBox_RPC.Name = "CheckBox_RPC";
             this.CheckBox_RPC.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_RPC.TabIndex = 155;
-            this.CheckBox_RPC.Text = "Disable Discord RPC";
+            this.CheckBox_RPC.Text = "Discord RPC ( STATUS )";
             this.CheckBox_RPC.UseVisualStyleBackColor = false;
-            // 
-            // LinkLabel_Launcher_Path
-            // 
-            this.LinkLabel_Launcher_Path.BackColor = System.Drawing.Color.Transparent;
-            this.LinkLabel_Launcher_Path.Location = new System.Drawing.Point(5, 201);
-            this.LinkLabel_Launcher_Path.Name = "LinkLabel_Launcher_Path";
-            this.LinkLabel_Launcher_Path.Size = new System.Drawing.Size(823, 22);
-            this.LinkLabel_Launcher_Path.TabIndex = 180;
-            this.LinkLabel_Launcher_Path.TabStop = true;
-            this.LinkLabel_Launcher_Path.Text = "ABC://Soapbox Race World";
             // 
             // CheckBox_JSON_Update_Cache
             // 
             this.CheckBox_JSON_Update_Cache.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_JSON_Update_Cache.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_JSON_Update_Cache.Location = new System.Drawing.Point(8, 32);
+            this.CheckBox_JSON_Update_Cache.Location = new System.Drawing.Point(8, 81);
             this.CheckBox_JSON_Update_Cache.Name = "CheckBox_JSON_Update_Cache";
             this.CheckBox_JSON_Update_Cache.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_JSON_Update_Cache.TabIndex = 160;
-            this.CheckBox_JSON_Update_Cache.Text = "Disable Frequent JSON Cache";
+            this.CheckBox_JSON_Update_Cache.Text = "JSON Cache ( STATUS )";
             this.CheckBox_JSON_Update_Cache.UseVisualStyleBackColor = false;
-            // 
-            // Label_Launcher_Path
-            // 
-            this.Label_Launcher_Path.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Launcher_Path.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Path.Location = new System.Drawing.Point(5, 186);
-            this.Label_Launcher_Path.Name = "Label_Launcher_Path";
-            this.Label_Launcher_Path.Size = new System.Drawing.Size(360, 14);
-            this.Label_Launcher_Path.TabIndex = 179;
-            this.Label_Launcher_Path.Text = "LAUNCHER FOLDER:";
-            this.Label_Launcher_Path.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CheckBox_Theme_Support
             // 
             this.CheckBox_Theme_Support.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_Theme_Support.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Theme_Support.Location = new System.Drawing.Point(8, 56);
+            this.CheckBox_Theme_Support.Location = new System.Drawing.Point(8, 105);
             this.CheckBox_Theme_Support.Name = "CheckBox_Theme_Support";
             this.CheckBox_Theme_Support.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Theme_Support.TabIndex = 157;
-            this.CheckBox_Theme_Support.Text = "Enable Custom Theme Support";
+            this.CheckBox_Theme_Support.Text = "Custom Theme ( STATUS )";
             this.CheckBox_Theme_Support.UseVisualStyleBackColor = false;
             // 
             // TabPage_Experiments
             // 
-            this.TabPage_Experiments.Controls.Add(this.Label_Affinity_Core_Calculator);
-            this.TabPage_Experiments.Controls.Add(this.Panel_Affinity_Range);
             this.TabPage_Experiments.Controls.Add(this.label7);
             this.TabPage_Experiments.Controls.Add(this.Button_Experiments);
-            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_Affinity_Range);
-            this.TabPage_Experiments.Controls.Add(this.CheckBox_Enable_ACM);
             this.TabPage_Experiments.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Experiments.Name = "TabPage_Experiments";
             this.TabPage_Experiments.Padding = new System.Windows.Forms.Padding(3);
@@ -1069,68 +1102,6 @@
             this.TabPage_Experiments.TabIndex = 3;
             this.TabPage_Experiments.Text = "Experiments";
             this.TabPage_Experiments.UseVisualStyleBackColor = true;
-            // 
-            // Label_Affinity_Core_Calculator
-            // 
-            this.Label_Affinity_Core_Calculator.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Affinity_Core_Calculator.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.Label_Affinity_Core_Calculator.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Affinity_Core_Calculator.Location = new System.Drawing.Point(14, 64);
-            this.Label_Affinity_Core_Calculator.Name = "Label_Affinity_Core_Calculator";
-            this.Label_Affinity_Core_Calculator.Size = new System.Drawing.Size(223, 16);
-            this.Label_Affinity_Core_Calculator.TabIndex = 219;
-            this.Label_Affinity_Core_Calculator.Text = "Affinity Range Calculator:";
-            this.Label_Affinity_Core_Calculator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Panel_Affinity_Range
-            // 
-            this.Panel_Affinity_Range.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Affinity_Range.Controls.Add(this.Label_Affinity_Core_Range);
-            this.Panel_Affinity_Range.Controls.Add(this.NumericUpDown_Range_Affinity);
-            this.Panel_Affinity_Range.Location = new System.Drawing.Point(14, 87);
-            this.Panel_Affinity_Range.Name = "Panel_Affinity_Range";
-            this.Panel_Affinity_Range.Size = new System.Drawing.Size(232, 32);
-            this.Panel_Affinity_Range.TabIndex = 218;
-            this.Panel_Affinity_Range.Tag = "SkidMarks";
-            // 
-            // Label_Affinity_Core_Range
-            // 
-            this.Label_Affinity_Core_Range.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Affinity_Core_Range.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Affinity_Core_Range.Location = new System.Drawing.Point(9, 7);
-            this.Label_Affinity_Core_Range.Name = "Label_Affinity_Core_Range";
-            this.Label_Affinity_Core_Range.Size = new System.Drawing.Size(138, 18);
-            this.Label_Affinity_Core_Range.TabIndex = 220;
-            this.Label_Affinity_Core_Range.Text = "Range: 0-3";
-            this.Label_Affinity_Core_Range.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // NumericUpDown_Range_Affinity
-            // 
-            this.NumericUpDown_Range_Affinity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.NumericUpDown_Range_Affinity.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumericUpDown_Range_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.NumericUpDown_Range_Affinity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.NumericUpDown_Range_Affinity.Location = new System.Drawing.Point(163, 8);
-            this.NumericUpDown_Range_Affinity.Maximum = new decimal(new int[] {
-            64,
-            0,
-            0,
-            0});
-            this.NumericUpDown_Range_Affinity.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.NumericUpDown_Range_Affinity.Name = "NumericUpDown_Range_Affinity";
-            this.NumericUpDown_Range_Affinity.Size = new System.Drawing.Size(61, 17);
-            this.NumericUpDown_Range_Affinity.TabIndex = 219;
-            this.NumericUpDown_Range_Affinity.Tag = "ProxypPortNumeric";
-            this.NumericUpDown_Range_Affinity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NumericUpDown_Range_Affinity.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
             // 
             // label7
             // 
@@ -1140,7 +1111,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(576, 18);
             this.label7.TabIndex = 213;
-            this.label7.Text = "THESE SETTINGS ARE NOT PERSISTENT!!!";
+            this.label7.Text = "THESE SETTINGS ARE SUBJECT TO CHANGE";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Button_Experiments
@@ -1153,28 +1124,6 @@
             this.Button_Experiments.TabIndex = 212;
             this.Button_Experiments.Text = "Set Changes";
             this.Button_Experiments.UseVisualStyleBackColor = false;
-            // 
-            // CheckBox_Enable_Affinity_Range
-            // 
-            this.CheckBox_Enable_Affinity_Range.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Enable_Affinity_Range.ForeColor = System.Drawing.Color.DarkGray;
-            this.CheckBox_Enable_Affinity_Range.Location = new System.Drawing.Point(15, 10);
-            this.CheckBox_Enable_Affinity_Range.Name = "CheckBox_Enable_Affinity_Range";
-            this.CheckBox_Enable_Affinity_Range.Size = new System.Drawing.Size(222, 18);
-            this.CheckBox_Enable_Affinity_Range.TabIndex = 199;
-            this.CheckBox_Enable_Affinity_Range.Text = "Enable Affinity Range";
-            this.CheckBox_Enable_Affinity_Range.UseVisualStyleBackColor = false;
-            // 
-            // CheckBox_Enable_ACM
-            // 
-            this.CheckBox_Enable_ACM.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Enable_ACM.ForeColor = System.Drawing.Color.DarkGray;
-            this.CheckBox_Enable_ACM.Location = new System.Drawing.Point(15, 37);
-            this.CheckBox_Enable_ACM.Name = "CheckBox_Enable_ACM";
-            this.CheckBox_Enable_ACM.Size = new System.Drawing.Size(222, 18);
-            this.CheckBox_Enable_ACM.TabIndex = 201;
-            this.CheckBox_Enable_ACM.Text = "Display Account Manager";
-            this.CheckBox_Enable_ACM.UseVisualStyleBackColor = false;
             // 
             // TabPage_Game
             // 
@@ -1192,6 +1141,7 @@
             this.TabControl_Game.Controls.Add(this.TabPage_Game_General);
             this.TabControl_Game.Controls.Add(this.TabPage_Game_Verify_Hash);
             this.TabControl_Game.Controls.Add(this.TabPage_Game_Security_Center);
+            this.TabControl_Game.Controls.Add(this.TabPage_Game_Miscellaneous);
             this.TabControl_Game.HotTrack = true;
             this.TabControl_Game.Location = new System.Drawing.Point(1, 3);
             this.TabControl_Game.Name = "TabControl_Game";
@@ -1201,18 +1151,13 @@
             // 
             // TabPage_Game_General
             // 
-            this.TabPage_Game_General.Controls.Add(this.Button_Clear_NFSWO_Logs);
-            this.TabPage_Game_General.Controls.Add(this.Button_Clear_Server_Mods);
-            this.TabPage_Game_General.Controls.Add(this.Button_Clear_Crash_Logs);
+            this.TabPage_Game_General.Controls.Add(this.LinkLabel_Game_Path);
+            this.TabPage_Game_General.Controls.Add(this.Label_Game_Current_Path);
             this.TabPage_Game_General.Controls.Add(this.Label_Display_Timer);
             this.TabPage_Game_General.Controls.Add(this.Panel_Display_Timer);
             this.TabPage_Game_General.Controls.Add(this.CheckBox_Word_Filter_Check);
-            this.TabPage_Game_General.Controls.Add(this.LinkLabel_Game_Path);
-            this.TabPage_Game_General.Controls.Add(this.Label_Game_Current_Path);
             this.TabPage_Game_General.Controls.Add(this.Button_Game_User_Settings);
             this.TabPage_Game_General.Controls.Add(this.Label_Game_Settings);
-            this.TabPage_Game_General.Controls.Add(this.ComboBox_Language_List);
-            this.TabPage_Game_General.Controls.Add(this.Button_Game_Verify_Files);
             this.TabPage_Game_General.Controls.Add(this.Button_Change_Game_Path);
             this.TabPage_Game_General.Controls.Add(this.Label_Game_Files);
             this.TabPage_Game_General.Location = new System.Drawing.Point(0, 26);
@@ -1223,45 +1168,12 @@
             this.TabPage_Game_General.Text = "General";
             this.TabPage_Game_General.UseVisualStyleBackColor = true;
             // 
-            // Button_Clear_NFSWO_Logs
-            // 
-            this.Button_Clear_NFSWO_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_NFSWO_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_NFSWO_Logs.Location = new System.Drawing.Point(10, 249);
-            this.Button_Clear_NFSWO_Logs.Name = "Button_Clear_NFSWO_Logs";
-            this.Button_Clear_NFSWO_Logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_NFSWO_Logs.TabIndex = 186;
-            this.Button_Clear_NFSWO_Logs.Text = "Clear NFSWO Log";
-            this.Button_Clear_NFSWO_Logs.UseVisualStyleBackColor = false;
-            // 
-            // Button_Clear_Server_Mods
-            // 
-            this.Button_Clear_Server_Mods.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_Server_Mods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_Server_Mods.Location = new System.Drawing.Point(10, 284);
-            this.Button_Clear_Server_Mods.Name = "Button_Clear_Server_Mods";
-            this.Button_Clear_Server_Mods.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_Server_Mods.TabIndex = 185;
-            this.Button_Clear_Server_Mods.Text = "Clear Server Mods";
-            this.Button_Clear_Server_Mods.UseVisualStyleBackColor = false;
-            // 
-            // Button_Clear_Crash_Logs
-            // 
-            this.Button_Clear_Crash_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Clear_Crash_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Clear_Crash_Logs.Location = new System.Drawing.Point(10, 214);
-            this.Button_Clear_Crash_Logs.Name = "Button_Clear_Crash_Logs";
-            this.Button_Clear_Crash_Logs.Size = new System.Drawing.Size(154, 25);
-            this.Button_Clear_Crash_Logs.TabIndex = 184;
-            this.Button_Clear_Crash_Logs.Text = "Clear Crash Logs";
-            this.Button_Clear_Crash_Logs.UseVisualStyleBackColor = false;
-            // 
             // Label_Display_Timer
             // 
             this.Label_Display_Timer.BackColor = System.Drawing.Color.Transparent;
             this.Label_Display_Timer.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Display_Timer.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Display_Timer.Location = new System.Drawing.Point(10, 128);
+            this.Label_Display_Timer.Location = new System.Drawing.Point(10, 169);
             this.Label_Display_Timer.Name = "Label_Display_Timer";
             this.Label_Display_Timer.Size = new System.Drawing.Size(288, 18);
             this.Label_Display_Timer.TabIndex = 183;
@@ -1274,7 +1186,7 @@
             this.Panel_Display_Timer.Controls.Add(this.Radio_Button_Static_Timer);
             this.Panel_Display_Timer.Controls.Add(this.Radio_Button_Dynamic_Timer);
             this.Panel_Display_Timer.Controls.Add(this.Radio_Button_No_Timer);
-            this.Panel_Display_Timer.Location = new System.Drawing.Point(10, 148);
+            this.Panel_Display_Timer.Location = new System.Drawing.Point(10, 194);
             this.Panel_Display_Timer.Name = "Panel_Display_Timer";
             this.Panel_Display_Timer.Size = new System.Drawing.Size(288, 22);
             this.Panel_Display_Timer.TabIndex = 182;
@@ -1326,39 +1238,18 @@
             // 
             this.CheckBox_Word_Filter_Check.BackColor = System.Drawing.Color.Transparent;
             this.CheckBox_Word_Filter_Check.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Word_Filter_Check.Location = new System.Drawing.Point(10, 183);
+            this.CheckBox_Word_Filter_Check.Location = new System.Drawing.Point(11, 224);
             this.CheckBox_Word_Filter_Check.Name = "CheckBox_Word_Filter_Check";
             this.CheckBox_Word_Filter_Check.Size = new System.Drawing.Size(222, 18);
             this.CheckBox_Word_Filter_Check.TabIndex = 181;
-            this.CheckBox_Word_Filter_Check.Text = "Disable Chat Word Filtering";
+            this.CheckBox_Word_Filter_Check.Text = "Chat Filter ( STATUS )";
             this.CheckBox_Word_Filter_Check.UseVisualStyleBackColor = false;
-            // 
-            // LinkLabel_Game_Path
-            // 
-            this.LinkLabel_Game_Path.BackColor = System.Drawing.Color.Transparent;
-            this.LinkLabel_Game_Path.Location = new System.Drawing.Point(351, 28);
-            this.LinkLabel_Game_Path.Name = "LinkLabel_Game_Path";
-            this.LinkLabel_Game_Path.Size = new System.Drawing.Size(475, 29);
-            this.LinkLabel_Game_Path.TabIndex = 180;
-            this.LinkLabel_Game_Path.TabStop = true;
-            this.LinkLabel_Game_Path.Text = "C:\\Soapbox Race World\\Game Files";
-            // 
-            // Label_Game_Current_Path
-            // 
-            this.Label_Game_Current_Path.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Game_Current_Path.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Game_Current_Path.Location = new System.Drawing.Point(351, 13);
-            this.Label_Game_Current_Path.Name = "Label_Game_Current_Path";
-            this.Label_Game_Current_Path.Size = new System.Drawing.Size(359, 14);
-            this.Label_Game_Current_Path.TabIndex = 179;
-            this.Label_Game_Current_Path.Text = "CURRENT DIRECTORY:";
-            this.Label_Game_Current_Path.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Button_Game_User_Settings
             // 
             this.Button_Game_User_Settings.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Button_Game_User_Settings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Game_User_Settings.Location = new System.Drawing.Point(187, 89);
+            this.Button_Game_User_Settings.Location = new System.Drawing.Point(13, 131);
             this.Button_Game_User_Settings.Name = "Button_Game_User_Settings";
             this.Button_Game_User_Settings.Size = new System.Drawing.Size(143, 25);
             this.Button_Game_User_Settings.TabIndex = 176;
@@ -1369,40 +1260,18 @@
             // 
             this.Label_Game_Settings.BackColor = System.Drawing.Color.Transparent;
             this.Label_Game_Settings.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Game_Settings.Location = new System.Drawing.Point(10, 70);
+            this.Label_Game_Settings.Location = new System.Drawing.Point(10, 109);
             this.Label_Game_Settings.Name = "Label_Game_Settings";
             this.Label_Game_Settings.Size = new System.Drawing.Size(320, 14);
             this.Label_Game_Settings.TabIndex = 175;
             this.Label_Game_Settings.Text = "GAME SETTINGS:";
             this.Label_Game_Settings.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // ComboBox_Language_List
-            // 
-            this.ComboBox_Language_List.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Language_List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Language_List.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Language_List.FormattingEnabled = true;
-            this.ComboBox_Language_List.Location = new System.Drawing.Point(12, 89);
-            this.ComboBox_Language_List.Name = "ComboBox_Language_List";
-            this.ComboBox_Language_List.Size = new System.Drawing.Size(164, 22);
-            this.ComboBox_Language_List.TabIndex = 174;
-            // 
-            // Button_Game_Verify_Files
-            // 
-            this.Button_Game_Verify_Files.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Game_Verify_Files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Game_Verify_Files.Location = new System.Drawing.Point(208, 32);
-            this.Button_Game_Verify_Files.Name = "Button_Game_Verify_Files";
-            this.Button_Game_Verify_Files.Size = new System.Drawing.Size(122, 25);
-            this.Button_Game_Verify_Files.TabIndex = 173;
-            this.Button_Game_Verify_Files.Text = "Verify GameFiles";
-            this.Button_Game_Verify_Files.UseVisualStyleBackColor = false;
-            // 
             // Button_Change_Game_Path
             // 
             this.Button_Change_Game_Path.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Button_Change_Game_Path.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Change_Game_Path.Location = new System.Drawing.Point(12, 32);
+            this.Button_Change_Game_Path.Location = new System.Drawing.Point(12, 75);
             this.Button_Change_Game_Path.Name = "Button_Change_Game_Path";
             this.Button_Change_Game_Path.Size = new System.Drawing.Size(190, 25);
             this.Button_Change_Game_Path.TabIndex = 172;
@@ -1413,7 +1282,7 @@
             // 
             this.Label_Game_Files.BackColor = System.Drawing.Color.Transparent;
             this.Label_Game_Files.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Game_Files.Location = new System.Drawing.Point(10, 13);
+            this.Label_Game_Files.Location = new System.Drawing.Point(10, 54);
             this.Label_Game_Files.Name = "Label_Game_Files";
             this.Label_Game_Files.Size = new System.Drawing.Size(320, 14);
             this.Label_Game_Files.TabIndex = 171;
@@ -1422,6 +1291,7 @@
             // 
             // TabPage_Game_Verify_Hash
             // 
+            this.TabPage_Game_Verify_Hash.Controls.Add(this.Button_Game_Verify_Files);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.VerifyHashWelcome);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.DownloadProgressText_Alt);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.DownloadProgressText);
@@ -1431,9 +1301,9 @@
             this.TabPage_Game_Verify_Hash.Controls.Add(this.DownloadProgressBar);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StartScanner);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.StopScanner);
-            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Verify_Hash.Name = "TabPage_Game_Verify_Hash";
-            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
@@ -1548,9 +1418,9 @@
             // TabPage_Game_Security_Center
             // 
             this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
-            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
-            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Security_Center.TabIndex = 4;
             this.TabPage_Game_Security_Center.Text = "Security Center";
             this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
@@ -2008,6 +1878,22 @@
             this.TextFolderPermissions.Text = "FOLDER PERMISSONS:";
             this.TextFolderPermissions.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
+            // TabPage_Game_Miscellaneous
+            // 
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.Label_Affinity_Core_Calculator);
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.Panel_Affinity_Range);
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.CheckBox_Enable_Affinity_Range);
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_NFSWO_Logs);
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Server_Mods);
+            this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Crash_Logs);
+            this.TabPage_Game_Miscellaneous.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Miscellaneous.Name = "TabPage_Game_Miscellaneous";
+            this.TabPage_Game_Miscellaneous.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Game_Miscellaneous.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Game_Miscellaneous.TabIndex = 5;
+            this.TabPage_Game_Miscellaneous.Text = "Miscellaneous";
+            this.TabPage_Game_Miscellaneous.UseVisualStyleBackColor = true;
+            // 
             // TabPage_API
             // 
             this.TabPage_API.Controls.Add(this.Label_API_Status_Five);
@@ -2018,7 +1904,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2120,7 +2006,7 @@
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label5.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.label5.Location = new System.Drawing.Point(506, 184);
+            this.label5.Location = new System.Drawing.Point(506, 187);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(195, 165);
             this.label5.TabIndex = 158;
@@ -2129,7 +2015,7 @@
             // 
             this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.ForeColor = System.Drawing.Color.DarkGray;
-            this.label6.Location = new System.Drawing.Point(506, 159);
+            this.label6.Location = new System.Drawing.Point(506, 161);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(195, 25);
             this.label6.TabIndex = 157;
@@ -2142,7 +2028,7 @@
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.label3.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.label3.Location = new System.Drawing.Point(305, 184);
+            this.label3.Location = new System.Drawing.Point(305, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(195, 165);
             this.label3.TabIndex = 156;
@@ -2151,7 +2037,7 @@
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.ForeColor = System.Drawing.Color.DarkGray;
-            this.label4.Location = new System.Drawing.Point(305, 159);
+            this.label4.Location = new System.Drawing.Point(305, 161);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(195, 25);
             this.label4.TabIndex = 155;
@@ -2164,7 +2050,7 @@
             this.PatchText1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PatchText1.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PatchText1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.PatchText1.Location = new System.Drawing.Point(104, 184);
+            this.PatchText1.Location = new System.Drawing.Point(104, 187);
             this.PatchText1.Name = "PatchText1";
             this.PatchText1.Size = new System.Drawing.Size(195, 165);
             this.PatchText1.TabIndex = 154;
@@ -2173,7 +2059,7 @@
             // 
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.ForeColor = System.Drawing.Color.DarkGray;
-            this.label2.Location = new System.Drawing.Point(104, 159);
+            this.label2.Location = new System.Drawing.Point(104, 161);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(195, 25);
             this.label2.TabIndex = 153;
@@ -2184,9 +2070,9 @@
             // 
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(235, 138);
+            this.label1.Location = new System.Drawing.Point(107, 138);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(330, 14);
+            this.label1.Size = new System.Drawing.Size(594, 14);
             this.label1.TabIndex = 83;
             this.label1.Text = "Build: 11-08-18";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2206,9 +2092,9 @@
             // 
             this.Label_Version_Build_About.BackColor = System.Drawing.Color.Transparent;
             this.Label_Version_Build_About.ForeColor = System.Drawing.Color.Black;
-            this.Label_Version_Build_About.Location = new System.Drawing.Point(235, 124);
+            this.Label_Version_Build_About.Location = new System.Drawing.Point(107, 124);
             this.Label_Version_Build_About.Name = "Label_Version_Build_About";
-            this.Label_Version_Build_About.Size = new System.Drawing.Size(330, 14);
+            this.Label_Version_Build_About.Size = new System.Drawing.Size(594, 14);
             this.Label_Version_Build_About.TabIndex = 81;
             this.Label_Version_Build_About.Text = "Version: XX.XX.XX.XXXX";
             this.Label_Version_Build_About.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2217,9 +2103,9 @@
             // 
             this.Label_Theme_Author.BackColor = System.Drawing.Color.Transparent;
             this.Label_Theme_Author.ForeColor = System.Drawing.Color.Black;
-            this.Label_Theme_Author.Location = new System.Drawing.Point(235, 106);
+            this.Label_Theme_Author.Location = new System.Drawing.Point(107, 106);
             this.Label_Theme_Author.Name = "Label_Theme_Author";
-            this.Label_Theme_Author.Size = new System.Drawing.Size(330, 14);
+            this.Label_Theme_Author.Size = new System.Drawing.Size(594, 14);
             this.Label_Theme_Author.TabIndex = 80;
             this.Label_Theme_Author.Text = "Theme Author: What a Long Theme Name :0 Wow!";
             this.Label_Theme_Author.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2228,9 +2114,9 @@
             // 
             this.Label_Theme_Name.BackColor = System.Drawing.Color.Transparent;
             this.Label_Theme_Name.ForeColor = System.Drawing.Color.Black;
-            this.Label_Theme_Name.Location = new System.Drawing.Point(235, 88);
+            this.Label_Theme_Name.Location = new System.Drawing.Point(107, 88);
             this.Label_Theme_Name.Name = "Label_Theme_Name";
-            this.Label_Theme_Name.Size = new System.Drawing.Size(330, 14);
+            this.Label_Theme_Name.Size = new System.Drawing.Size(594, 14);
             this.Label_Theme_Name.TabIndex = 79;
             this.Label_Theme_Name.Text = "Theme Name: Soapbox Race World - Launcher Gen";
             this.Label_Theme_Name.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2276,71 +2162,186 @@
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
             // 
+            // Button_Clear_NFSWO_Logs
+            // 
+            this.Button_Clear_NFSWO_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_NFSWO_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_NFSWO_Logs.Location = new System.Drawing.Point(8, 130);
+            this.Button_Clear_NFSWO_Logs.Name = "Button_Clear_NFSWO_Logs";
+            this.Button_Clear_NFSWO_Logs.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_NFSWO_Logs.TabIndex = 189;
+            this.Button_Clear_NFSWO_Logs.Text = "Clear NFSWO Log";
+            this.Button_Clear_NFSWO_Logs.UseVisualStyleBackColor = false;
+            // 
+            // Button_Clear_Server_Mods
+            // 
+            this.Button_Clear_Server_Mods.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_Server_Mods.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_Server_Mods.Location = new System.Drawing.Point(8, 165);
+            this.Button_Clear_Server_Mods.Name = "Button_Clear_Server_Mods";
+            this.Button_Clear_Server_Mods.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_Server_Mods.TabIndex = 188;
+            this.Button_Clear_Server_Mods.Text = "Clear Server Mods";
+            this.Button_Clear_Server_Mods.UseVisualStyleBackColor = false;
+            // 
+            // Button_Clear_Crash_Logs
+            // 
+            this.Button_Clear_Crash_Logs.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Clear_Crash_Logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Clear_Crash_Logs.Location = new System.Drawing.Point(8, 95);
+            this.Button_Clear_Crash_Logs.Name = "Button_Clear_Crash_Logs";
+            this.Button_Clear_Crash_Logs.Size = new System.Drawing.Size(154, 25);
+            this.Button_Clear_Crash_Logs.TabIndex = 187;
+            this.Button_Clear_Crash_Logs.Text = "Clear Crash Logs";
+            this.Button_Clear_Crash_Logs.UseVisualStyleBackColor = false;
+            // 
+            // Button_Game_Verify_Files
+            // 
+            this.Button_Game_Verify_Files.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.Button_Game_Verify_Files.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Game_Verify_Files.Location = new System.Drawing.Point(707, 289);
+            this.Button_Game_Verify_Files.Name = "Button_Game_Verify_Files";
+            this.Button_Game_Verify_Files.Size = new System.Drawing.Size(122, 25);
+            this.Button_Game_Verify_Files.TabIndex = 174;
+            this.Button_Game_Verify_Files.Text = "Verify GameFiles";
+            this.Button_Game_Verify_Files.UseVisualStyleBackColor = false;
+            // 
             // Button_Launcher_logs
             // 
             this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Launcher_logs.Location = new System.Drawing.Point(9, 107);
+            this.Button_Launcher_logs.Location = new System.Drawing.Point(8, 262);
             this.Button_Launcher_logs.Name = "Button_Launcher_logs";
             this.Button_Launcher_logs.Size = new System.Drawing.Size(159, 25);
-            this.Button_Launcher_logs.TabIndex = 202;
+            this.Button_Launcher_logs.TabIndex = 203;
             this.Button_Launcher_logs.Text = "Clear Launcher Logs";
             this.Button_Launcher_logs.UseVisualStyleBackColor = false;
             // 
-            // ComboBox_Proxy_Logging
+            // CheckBox_Enable_ACM
             // 
-            this.ComboBox_Proxy_Logging.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Proxy_Logging.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Proxy_Logging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Proxy_Logging.FormattingEnabled = true;
-            this.ComboBox_Proxy_Logging.Location = new System.Drawing.Point(9, 164);
-            this.ComboBox_Proxy_Logging.Name = "ComboBox_Proxy_Logging";
-            this.ComboBox_Proxy_Logging.Size = new System.Drawing.Size(189, 22);
-            this.ComboBox_Proxy_Logging.TabIndex = 203;
+            this.CheckBox_Enable_ACM.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Enable_ACM.ForeColor = System.Drawing.Color.DarkGray;
+            this.CheckBox_Enable_ACM.Location = new System.Drawing.Point(8, 129);
+            this.CheckBox_Enable_ACM.Name = "CheckBox_Enable_ACM";
+            this.CheckBox_Enable_ACM.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_Enable_ACM.TabIndex = 204;
+            this.CheckBox_Enable_ACM.Text = "Account Manager ( STATUS )";
+            this.CheckBox_Enable_ACM.UseVisualStyleBackColor = false;
             // 
-            // ComboBox_Proxy_GZip_Version
+            // LinkLabel_Game_Path
             // 
-            this.ComboBox_Proxy_GZip_Version.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Proxy_GZip_Version.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Proxy_GZip_Version.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Proxy_GZip_Version.FormattingEnabled = true;
-            this.ComboBox_Proxy_GZip_Version.Location = new System.Drawing.Point(11, 219);
-            this.ComboBox_Proxy_GZip_Version.Name = "ComboBox_Proxy_GZip_Version";
-            this.ComboBox_Proxy_GZip_Version.Size = new System.Drawing.Size(189, 22);
-            this.ComboBox_Proxy_GZip_Version.TabIndex = 207;
+            this.LinkLabel_Game_Path.BackColor = System.Drawing.Color.Transparent;
+            this.LinkLabel_Game_Path.Location = new System.Drawing.Point(6, 28);
+            this.LinkLabel_Game_Path.Name = "LinkLabel_Game_Path";
+            this.LinkLabel_Game_Path.Size = new System.Drawing.Size(819, 20);
+            this.LinkLabel_Game_Path.TabIndex = 185;
+            this.LinkLabel_Game_Path.TabStop = true;
+            this.LinkLabel_Game_Path.Text = "C:\\Soapbox Race World\\Game Files";
             // 
-            // Label_Proxy_GZip_Version_Selected_Details
+            // Label_Game_Current_Path
             // 
-            this.Label_Proxy_GZip_Version_Selected_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_GZip_Version_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_GZip_Version_Selected_Details.Location = new System.Drawing.Point(240, 220);
-            this.Label_Proxy_GZip_Version_Selected_Details.Name = "Label_Proxy_GZip_Version_Selected_Details";
-            this.Label_Proxy_GZip_Version_Selected_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_GZip_Version_Selected_Details.TabIndex = 206;
-            this.Label_Proxy_GZip_Version_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
-            this.Label_Proxy_GZip_Version_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.Label_Game_Current_Path.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Game_Current_Path.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Game_Current_Path.Location = new System.Drawing.Point(6, 8);
+            this.Label_Game_Current_Path.Name = "Label_Game_Current_Path";
+            this.Label_Game_Current_Path.Size = new System.Drawing.Size(359, 14);
+            this.Label_Game_Current_Path.TabIndex = 184;
+            this.Label_Game_Current_Path.Text = "CURRENT DIRECTORY:";
+            this.Label_Game_Current_Path.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Label_Proxy_GZip_Version_Details
+            // LinkLabel_Launcher_Path
             // 
-            this.Label_Proxy_GZip_Version_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_GZip_Version_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_GZip_Version_Details.Location = new System.Drawing.Point(240, 194);
-            this.Label_Proxy_GZip_Version_Details.Name = "Label_Proxy_GZip_Version_Details";
-            this.Label_Proxy_GZip_Version_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Proxy_GZip_Version_Details.TabIndex = 205;
-            this.Label_Proxy_GZip_Version_Details.Text = "Changes proxy Handling of Responses to the game";
-            this.Label_Proxy_GZip_Version_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.LinkLabel_Launcher_Path.BackColor = System.Drawing.Color.Transparent;
+            this.LinkLabel_Launcher_Path.Location = new System.Drawing.Point(7, 28);
+            this.LinkLabel_Launcher_Path.Name = "LinkLabel_Launcher_Path";
+            this.LinkLabel_Launcher_Path.Size = new System.Drawing.Size(815, 22);
+            this.LinkLabel_Launcher_Path.TabIndex = 206;
+            this.LinkLabel_Launcher_Path.TabStop = true;
+            this.LinkLabel_Launcher_Path.Text = "ABC://Soapbox Race World";
             // 
-            // Label_Proxy_GZip_Version
+            // Label_Launcher_Path
             // 
-            this.Label_Proxy_GZip_Version.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_GZip_Version.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Proxy_GZip_Version.Location = new System.Drawing.Point(8, 194);
-            this.Label_Proxy_GZip_Version.Name = "Label_Proxy_GZip_Version";
-            this.Label_Proxy_GZip_Version.Size = new System.Drawing.Size(223, 16);
-            this.Label_Proxy_GZip_Version.TabIndex = 204;
-            this.Label_Proxy_GZip_Version.Text = "Proxy GZip Version:";
-            this.Label_Proxy_GZip_Version.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.Label_Launcher_Path.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Path.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Path.Location = new System.Drawing.Point(5, 8);
+            this.Label_Launcher_Path.Name = "Label_Launcher_Path";
+            this.Label_Launcher_Path.Size = new System.Drawing.Size(360, 14);
+            this.Label_Launcher_Path.TabIndex = 205;
+            this.Label_Launcher_Path.Text = "LAUNCHER FOLDER:";
+            this.Label_Launcher_Path.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Affinity_Core_Calculator
+            // 
+            this.Label_Affinity_Core_Calculator.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Affinity_Core_Calculator.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Affinity_Core_Calculator.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Affinity_Core_Calculator.Location = new System.Drawing.Point(8, 33);
+            this.Label_Affinity_Core_Calculator.Name = "Label_Affinity_Core_Calculator";
+            this.Label_Affinity_Core_Calculator.Size = new System.Drawing.Size(223, 16);
+            this.Label_Affinity_Core_Calculator.TabIndex = 222;
+            this.Label_Affinity_Core_Calculator.Text = "Affinity Range Calculator:";
+            this.Label_Affinity_Core_Calculator.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Panel_Affinity_Range
+            // 
+            this.Panel_Affinity_Range.BackColor = System.Drawing.Color.Transparent;
+            this.Panel_Affinity_Range.Controls.Add(this.Label_Affinity_Core_Range);
+            this.Panel_Affinity_Range.Controls.Add(this.NumericUpDown_Range_Affinity);
+            this.Panel_Affinity_Range.Location = new System.Drawing.Point(8, 56);
+            this.Panel_Affinity_Range.Name = "Panel_Affinity_Range";
+            this.Panel_Affinity_Range.Size = new System.Drawing.Size(232, 32);
+            this.Panel_Affinity_Range.TabIndex = 221;
+            this.Panel_Affinity_Range.Tag = "SkidMarks";
+            // 
+            // Label_Affinity_Core_Range
+            // 
+            this.Label_Affinity_Core_Range.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Affinity_Core_Range.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Affinity_Core_Range.Location = new System.Drawing.Point(3, 7);
+            this.Label_Affinity_Core_Range.Name = "Label_Affinity_Core_Range";
+            this.Label_Affinity_Core_Range.Size = new System.Drawing.Size(154, 18);
+            this.Label_Affinity_Core_Range.TabIndex = 220;
+            this.Label_Affinity_Core_Range.Text = "Range: 0-3";
+            this.Label_Affinity_Core_Range.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // NumericUpDown_Range_Affinity
+            // 
+            this.NumericUpDown_Range_Affinity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.NumericUpDown_Range_Affinity.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.NumericUpDown_Range_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Range_Affinity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.NumericUpDown_Range_Affinity.Location = new System.Drawing.Point(163, 8);
+            this.NumericUpDown_Range_Affinity.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Range_Affinity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.NumericUpDown_Range_Affinity.Name = "NumericUpDown_Range_Affinity";
+            this.NumericUpDown_Range_Affinity.Size = new System.Drawing.Size(61, 17);
+            this.NumericUpDown_Range_Affinity.TabIndex = 219;
+            this.NumericUpDown_Range_Affinity.Tag = "ProxypPortNumeric";
+            this.NumericUpDown_Range_Affinity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.NumericUpDown_Range_Affinity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // CheckBox_Enable_Affinity_Range
+            // 
+            this.CheckBox_Enable_Affinity_Range.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Enable_Affinity_Range.ForeColor = System.Drawing.Color.DarkGray;
+            this.CheckBox_Enable_Affinity_Range.Location = new System.Drawing.Point(11, 8);
+            this.CheckBox_Enable_Affinity_Range.Name = "CheckBox_Enable_Affinity_Range";
+            this.CheckBox_Enable_Affinity_Range.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_Enable_Affinity_Range.TabIndex = 220;
+            this.CheckBox_Enable_Affinity_Range.Text = "Enable Affinity Range";
+            this.CheckBox_Enable_Affinity_Range.UseVisualStyleBackColor = false;
             // 
             // Screen_Settings
             // 
@@ -2378,8 +2379,6 @@
             this.TabPage_Launcher_Miscellaneous.ResumeLayout(false);
             this.Panel_Launcher_Builds_Branch.ResumeLayout(false);
             this.TabPage_Experiments.ResumeLayout(false);
-            this.Panel_Affinity_Range.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Range_Affinity)).EndInit();
             this.TabPage_Game.ResumeLayout(false);
             this.TabControl_Game.ResumeLayout(false);
             this.TabPage_Game_General.ResumeLayout(false);
@@ -2396,12 +2395,15 @@
             this.TabPage_Security_Center_Permissons.ResumeLayout(false);
             this.GroupBox_Permissons.ResumeLayout(false);
             this.GroupBox_Permissons.PerformLayout();
+            this.TabPage_Game_Miscellaneous.ResumeLayout(false);
             this.TabPage_API.ResumeLayout(false);
             this.TabPage_About.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
+            this.Panel_Affinity_Range.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.NumericUpDown_Range_Affinity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2453,9 +2455,7 @@
         public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Details;
         public System.Windows.Forms.Label Label_Launcher_Builds_Branch;
         public System.Windows.Forms.CheckBox CheckBox_RPC;
-        public System.Windows.Forms.LinkLabel LinkLabel_Launcher_Path;
         public System.Windows.Forms.CheckBox CheckBox_JSON_Update_Cache;
-        public System.Windows.Forms.Label Label_Launcher_Path;
         public System.Windows.Forms.CheckBox CheckBox_Theme_Support;
         private System.Windows.Forms.TabPage TabPage_Game;
         private System.Windows.Forms.TabPage TabPage_API;
@@ -2507,19 +2507,12 @@
         public System.Windows.Forms.RadioButton Radio_Button_Dynamic_Timer;
         public System.Windows.Forms.RadioButton Radio_Button_No_Timer;
         public System.Windows.Forms.CheckBox CheckBox_Word_Filter_Check;
-        public System.Windows.Forms.LinkLabel LinkLabel_Game_Path;
-        public System.Windows.Forms.Label Label_Game_Current_Path;
         public System.Windows.Forms.Button Button_Game_User_Settings;
         public System.Windows.Forms.Label Label_Game_Settings;
-        public System.Windows.Forms.ComboBox ComboBox_Language_List;
-        public System.Windows.Forms.Button Button_Game_Verify_Files;
         public System.Windows.Forms.Button Button_Change_Game_Path;
         public System.Windows.Forms.Label Label_Game_Files;
         private System.Windows.Forms.TabPage TabPage_Game_Verify_Hash;
         private System.Windows.Forms.TabPage TabPage_Game_Security_Center;
-        public System.Windows.Forms.Button Button_Clear_NFSWO_Logs;
-        public System.Windows.Forms.Button Button_Clear_Server_Mods;
-        public System.Windows.Forms.Button Button_Clear_Crash_Logs;
         private System.Windows.Forms.Label VerifyHashText;
         private System.Windows.Forms.Label ScanProgressText;
         private System.Windows.Forms.ProgressBar ScanProgressBar;
@@ -2562,19 +2555,28 @@
         private System.Windows.Forms.Label DownloadProgressText_Alt;
         public System.Windows.Forms.Timer Clock;
         private System.Windows.Forms.TabPage TabPage_Experiments;
-        public System.Windows.Forms.CheckBox CheckBox_Enable_Affinity_Range;
-        public System.Windows.Forms.CheckBox CheckBox_Enable_ACM;
         public System.Windows.Forms.Button Button_Experiments;
         public System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Panel Panel_Affinity_Range;
-        public System.Windows.Forms.Label Label_Affinity_Core_Calculator;
-        public System.Windows.Forms.Label Label_Affinity_Core_Range;
-        public System.Windows.Forms.NumericUpDown NumericUpDown_Range_Affinity;
-        public System.Windows.Forms.Button Button_Launcher_logs;
         public System.Windows.Forms.ComboBox ComboBox_Proxy_Logging;
         public System.Windows.Forms.ComboBox ComboBox_Proxy_GZip_Version;
         public System.Windows.Forms.Label Label_Proxy_GZip_Version_Selected_Details;
         public System.Windows.Forms.Label Label_Proxy_GZip_Version_Details;
         public System.Windows.Forms.Label Label_Proxy_GZip_Version;
+        private System.Windows.Forms.TabPage TabPage_Game_Miscellaneous;
+        public System.Windows.Forms.Button Button_Clear_NFSWO_Logs;
+        public System.Windows.Forms.Button Button_Clear_Server_Mods;
+        public System.Windows.Forms.Button Button_Clear_Crash_Logs;
+        public System.Windows.Forms.Button Button_Game_Verify_Files;
+        public System.Windows.Forms.Button Button_Launcher_logs;
+        public System.Windows.Forms.CheckBox CheckBox_Enable_ACM;
+        public System.Windows.Forms.LinkLabel LinkLabel_Game_Path;
+        public System.Windows.Forms.Label Label_Game_Current_Path;
+        public System.Windows.Forms.LinkLabel LinkLabel_Launcher_Path;
+        public System.Windows.Forms.Label Label_Launcher_Path;
+        public System.Windows.Forms.Label Label_Affinity_Core_Calculator;
+        private System.Windows.Forms.Panel Panel_Affinity_Range;
+        public System.Windows.Forms.Label Label_Affinity_Core_Range;
+        public System.Windows.Forms.NumericUpDown NumericUpDown_Range_Affinity;
+        public System.Windows.Forms.CheckBox CheckBox_Enable_Affinity_Range;
     }
 }

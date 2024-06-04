@@ -1,5 +1,5 @@
 ﻿
-namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
+namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
 {
     partial class Screen_User_Settings_Editor
     {
@@ -36,6 +36,26 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.Hover = new System.Windows.Forms.ToolTip(this.components);
             this.TabControl_USXE = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_General = new System.Windows.Forms.TabPage();
+            this.panelAudioQuality = new System.Windows.Forms.Panel();
+            this.labelAudioQuality = new System.Windows.Forms.Label();
+            this.radioAQLow = new System.Windows.Forms.RadioButton();
+            this.radioAQHigh = new System.Windows.Forms.RadioButton();
+            this.comboAudioMode = new System.Windows.Forms.ComboBox();
+            this.numericFEMusic = new System.Windows.Forms.NumericUpDown();
+            this.numericGMusic = new System.Windows.Forms.NumericUpDown();
+            this.numericSpeech = new System.Windows.Forms.NumericUpDown();
+            this.numericCarVol = new System.Windows.Forms.NumericUpDown();
+            this.numericSFxVol = new System.Windows.Forms.NumericUpDown();
+            this.numericMVol = new System.Windows.Forms.NumericUpDown();
+            this.labelVolumeControl = new System.Windows.Forms.Label();
+            this.labelAudioOptions = new System.Windows.Forms.Label();
+            this.labelSpeechVol = new System.Windows.Forms.Label();
+            this.labelCarVol = new System.Windows.Forms.Label();
+            this.labelGameMusicVol = new System.Windows.Forms.Label();
+            this.labelFEMusicVol = new System.Windows.Forms.Label();
+            this.labelSFXVol = new System.Windows.Forms.Label();
+            this.labelMasterVol = new System.Windows.Forms.Label();
+            this.labelAudioMode = new System.Windows.Forms.Label();
             this.panelRain = new System.Windows.Forms.Panel();
             this.Label_Rain = new System.Windows.Forms.Label();
             this.radioButton_Rain_On = new System.Windows.Forms.RadioButton();
@@ -75,26 +95,6 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.labelResolution = new System.Windows.Forms.Label();
             this.labelBrightness = new System.Windows.Forms.Label();
             this.TabPage_Advanced = new System.Windows.Forms.TabPage();
-            this.panelAudioQuality = new System.Windows.Forms.Panel();
-            this.labelAudioQuality = new System.Windows.Forms.Label();
-            this.radioAQLow = new System.Windows.Forms.RadioButton();
-            this.radioAQHigh = new System.Windows.Forms.RadioButton();
-            this.comboAudioMode = new System.Windows.Forms.ComboBox();
-            this.numericFEMusic = new System.Windows.Forms.NumericUpDown();
-            this.numericGMusic = new System.Windows.Forms.NumericUpDown();
-            this.numericSpeech = new System.Windows.Forms.NumericUpDown();
-            this.numericCarVol = new System.Windows.Forms.NumericUpDown();
-            this.numericSFxVol = new System.Windows.Forms.NumericUpDown();
-            this.numericMVol = new System.Windows.Forms.NumericUpDown();
-            this.labelVolumeControl = new System.Windows.Forms.Label();
-            this.labelAudioOptions = new System.Windows.Forms.Label();
-            this.labelSpeechVol = new System.Windows.Forms.Label();
-            this.labelCarVol = new System.Windows.Forms.Label();
-            this.labelGameMusicVol = new System.Windows.Forms.Label();
-            this.labelFEMusicVol = new System.Windows.Forms.Label();
-            this.labelSFXVol = new System.Windows.Forms.Label();
-            this.labelMasterVol = new System.Windows.Forms.Label();
-            this.labelAudioMode = new System.Windows.Forms.Label();
             this.panelBTLODBias = new System.Windows.Forms.Panel();
             this.labelBTLODBias = new System.Windows.Forms.Label();
             this.radioBaseTextureLODOn = new System.Windows.Forms.RadioButton();
@@ -161,6 +161,8 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.labelWorldDetails = new System.Windows.Forms.Label();
             this.labelGlobalDetail = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.comboBoxPerformanceLevel = new System.Windows.Forms.ComboBox();
+            this.labelPerfLevel = new System.Windows.Forms.Label();
             this.PresetPanel = new System.Windows.Forms.Panel();
             this.PresetButtonCustom = new System.Windows.Forms.RadioButton();
             this.PresetButtonHigh = new System.Windows.Forms.RadioButton();
@@ -169,13 +171,20 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.PresetButtonLow = new System.Windows.Forms.RadioButton();
             this.PresetButtonMed = new System.Windows.Forms.RadioButton();
             this.LabelGraphicPreset = new System.Windows.Forms.Label();
-            this.comboBoxPerformanceLevel = new System.Windows.Forms.ComboBox();
-            this.labelPerfLevel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
+            this.ComboBox_Language_List = new System.Windows.Forms.ComboBox();
+            this.labelLanguage = new System.Windows.Forms.Label();
             this.TabControl_USXE.SuspendLayout();
             this.TabPage_General.SuspendLayout();
+            this.panelAudioQuality.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericFEMusic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericGMusic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSpeech)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCarVol)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSFxVol)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMVol)).BeginInit();
             this.panelRain.SuspendLayout();
             this.panelSpeedUnits.SuspendLayout();
             this.panelVisualDamage.SuspendLayout();
@@ -187,13 +196,6 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.panelWindowedControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericBrightness)).BeginInit();
             this.TabPage_Advanced.SuspendLayout();
-            this.panelAudioQuality.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericFEMusic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericGMusic)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSpeech)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCarVol)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSFxVol)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMVol)).BeginInit();
             this.panelBTLODBias.SuspendLayout();
             this.panelCDLODBias.SuspendLayout();
             this.panelWaterSim.SuspendLayout();
@@ -271,6 +273,8 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             // 
             // TabPage_General
             // 
+            this.TabPage_General.Controls.Add(this.labelLanguage);
+            this.TabPage_General.Controls.Add(this.ComboBox_Language_List);
             this.TabPage_General.Controls.Add(this.panelAudioQuality);
             this.TabPage_General.Controls.Add(this.comboAudioMode);
             this.TabPage_General.Controls.Add(this.numericFEMusic);
@@ -316,13 +320,298 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.TabPage_General.Text = "General";
             this.TabPage_General.UseVisualStyleBackColor = true;
             // 
+            // panelAudioQuality
+            // 
+            this.panelAudioQuality.BackColor = System.Drawing.Color.Transparent;
+            this.panelAudioQuality.Controls.Add(this.labelAudioQuality);
+            this.panelAudioQuality.Controls.Add(this.radioAQLow);
+            this.panelAudioQuality.Controls.Add(this.radioAQHigh);
+            this.panelAudioQuality.Location = new System.Drawing.Point(569, 210);
+            this.panelAudioQuality.Name = "panelAudioQuality";
+            this.panelAudioQuality.Size = new System.Drawing.Size(242, 22);
+            this.panelAudioQuality.TabIndex = 175;
+            this.panelAudioQuality.Tag = "AudioQuality";
+            // 
+            // labelAudioQuality
+            // 
+            this.labelAudioQuality.BackColor = System.Drawing.Color.Transparent;
+            this.labelAudioQuality.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelAudioQuality.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAudioQuality.Location = new System.Drawing.Point(3, 2);
+            this.labelAudioQuality.Name = "labelAudioQuality";
+            this.labelAudioQuality.Size = new System.Drawing.Size(110, 18);
+            this.labelAudioQuality.TabIndex = 2;
+            this.labelAudioQuality.Text = "Audio Filter:";
+            this.labelAudioQuality.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // radioAQLow
+            // 
+            this.radioAQLow.BackColor = System.Drawing.Color.Transparent;
+            this.radioAQLow.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.radioAQLow.Location = new System.Drawing.Point(181, 2);
+            this.radioAQLow.Name = "radioAQLow";
+            this.radioAQLow.Size = new System.Drawing.Size(44, 18);
+            this.radioAQLow.TabIndex = 16;
+            this.radioAQLow.TabStop = true;
+            this.radioAQLow.Tag = "AudioQualityLow";
+            this.radioAQLow.Text = "Off";
+            this.radioAQLow.UseVisualStyleBackColor = false;
+            // 
+            // radioAQHigh
+            // 
+            this.radioAQHigh.BackColor = System.Drawing.Color.Transparent;
+            this.radioAQHigh.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.radioAQHigh.Location = new System.Drawing.Point(123, 2);
+            this.radioAQHigh.Name = "radioAQHigh";
+            this.radioAQHigh.Size = new System.Drawing.Size(44, 18);
+            this.radioAQHigh.TabIndex = 17;
+            this.radioAQHigh.TabStop = true;
+            this.radioAQHigh.Tag = "AudioQualityHigh";
+            this.radioAQHigh.Text = "On";
+            this.radioAQHigh.UseVisualStyleBackColor = false;
+            // 
+            // comboAudioMode
+            // 
+            this.comboAudioMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.comboAudioMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboAudioMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboAudioMode.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.comboAudioMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.comboAudioMode.FormattingEnabled = true;
+            this.comboAudioMode.ItemHeight = 14;
+            this.comboAudioMode.Location = new System.Drawing.Point(691, 184);
+            this.comboAudioMode.MaxDropDownItems = 2;
+            this.comboAudioMode.Name = "comboAudioMode";
+            this.comboAudioMode.Size = new System.Drawing.Size(120, 22);
+            this.comboAudioMode.TabIndex = 174;
+            this.comboAudioMode.Tag = "Audio Mode";
+            // 
+            // numericFEMusic
+            // 
+            this.numericFEMusic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericFEMusic.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericFEMusic.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericFEMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericFEMusic.Location = new System.Drawing.Point(453, 164);
+            this.numericFEMusic.Name = "numericFEMusic";
+            this.numericFEMusic.Size = new System.Drawing.Size(61, 17);
+            this.numericFEMusic.TabIndex = 181;
+            this.numericFEMusic.Tag = "Freeroam Music";
+            this.numericFEMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericFEMusic.Value = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+            // 
+            // numericGMusic
+            // 
+            this.numericGMusic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericGMusic.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericGMusic.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericGMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericGMusic.Location = new System.Drawing.Point(453, 139);
+            this.numericGMusic.Name = "numericGMusic";
+            this.numericGMusic.Size = new System.Drawing.Size(61, 17);
+            this.numericGMusic.TabIndex = 180;
+            this.numericGMusic.Tag = "Game Music";
+            this.numericGMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericGMusic.Value = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+            // 
+            // numericSpeech
+            // 
+            this.numericSpeech.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericSpeech.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericSpeech.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericSpeech.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericSpeech.Location = new System.Drawing.Point(453, 114);
+            this.numericSpeech.Name = "numericSpeech";
+            this.numericSpeech.Size = new System.Drawing.Size(61, 17);
+            this.numericSpeech.TabIndex = 179;
+            this.numericSpeech.Tag = "Speech Volume";
+            this.numericSpeech.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericSpeech.Value = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+            // 
+            // numericCarVol
+            // 
+            this.numericCarVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericCarVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericCarVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericCarVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericCarVol.Location = new System.Drawing.Point(453, 89);
+            this.numericCarVol.Name = "numericCarVol";
+            this.numericCarVol.Size = new System.Drawing.Size(61, 17);
+            this.numericCarVol.TabIndex = 178;
+            this.numericCarVol.Tag = "Car Audio";
+            this.numericCarVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericCarVol.Value = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+            // 
+            // numericSFxVol
+            // 
+            this.numericSFxVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericSFxVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericSFxVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericSFxVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericSFxVol.Location = new System.Drawing.Point(453, 64);
+            this.numericSFxVol.Name = "numericSFxVol";
+            this.numericSFxVol.Size = new System.Drawing.Size(61, 17);
+            this.numericSFxVol.TabIndex = 177;
+            this.numericSFxVol.Tag = "SFx Volume";
+            this.numericSFxVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericSFxVol.Value = new decimal(new int[] {
+            52,
+            0,
+            0,
+            0});
+            // 
+            // numericMVol
+            // 
+            this.numericMVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.numericMVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.numericMVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.numericMVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.numericMVol.Location = new System.Drawing.Point(453, 39);
+            this.numericMVol.Name = "numericMVol";
+            this.numericMVol.Size = new System.Drawing.Size(61, 17);
+            this.numericMVol.TabIndex = 176;
+            this.numericMVol.Tag = "MasterVolume";
+            this.numericMVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericMVol.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // labelVolumeControl
+            // 
+            this.labelVolumeControl.BackColor = System.Drawing.Color.Transparent;
+            this.labelVolumeControl.Font = new System.Drawing.Font("DejaVu Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.labelVolumeControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(179)))), ((int)(((byte)(189)))));
+            this.labelVolumeControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelVolumeControl.Location = new System.Drawing.Point(296, 16);
+            this.labelVolumeControl.Name = "labelVolumeControl";
+            this.labelVolumeControl.Size = new System.Drawing.Size(242, 16);
+            this.labelVolumeControl.TabIndex = 183;
+            this.labelVolumeControl.Text = "Volume Control";
+            this.labelVolumeControl.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // labelAudioOptions
+            // 
+            this.labelAudioOptions.BackColor = System.Drawing.Color.Transparent;
+            this.labelAudioOptions.Font = new System.Drawing.Font("DejaVu Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.labelAudioOptions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(179)))), ((int)(((byte)(189)))));
+            this.labelAudioOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAudioOptions.Location = new System.Drawing.Point(569, 165);
+            this.labelAudioOptions.Name = "labelAudioOptions";
+            this.labelAudioOptions.Size = new System.Drawing.Size(242, 16);
+            this.labelAudioOptions.TabIndex = 182;
+            this.labelAudioOptions.Text = "Audio Options";
+            this.labelAudioOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelSpeechVol
+            // 
+            this.labelSpeechVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelSpeechVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelSpeechVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSpeechVol.Location = new System.Drawing.Point(333, 114);
+            this.labelSpeechVol.Name = "labelSpeechVol";
+            this.labelSpeechVol.Size = new System.Drawing.Size(110, 17);
+            this.labelSpeechVol.TabIndex = 173;
+            this.labelSpeechVol.Text = "Speech:";
+            this.labelSpeechVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelCarVol
+            // 
+            this.labelCarVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelCarVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelCarVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelCarVol.Location = new System.Drawing.Point(333, 89);
+            this.labelCarVol.Name = "labelCarVol";
+            this.labelCarVol.Size = new System.Drawing.Size(110, 17);
+            this.labelCarVol.TabIndex = 172;
+            this.labelCarVol.Text = "Car Audio:";
+            this.labelCarVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelGameMusicVol
+            // 
+            this.labelGameMusicVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelGameMusicVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelGameMusicVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelGameMusicVol.Location = new System.Drawing.Point(333, 139);
+            this.labelGameMusicVol.Name = "labelGameMusicVol";
+            this.labelGameMusicVol.Size = new System.Drawing.Size(110, 17);
+            this.labelGameMusicVol.TabIndex = 171;
+            this.labelGameMusicVol.Text = "Event Music:";
+            this.labelGameMusicVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelFEMusicVol
+            // 
+            this.labelFEMusicVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelFEMusicVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelFEMusicVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelFEMusicVol.Location = new System.Drawing.Point(333, 164);
+            this.labelFEMusicVol.Name = "labelFEMusicVol";
+            this.labelFEMusicVol.Size = new System.Drawing.Size(110, 17);
+            this.labelFEMusicVol.TabIndex = 170;
+            this.labelFEMusicVol.Text = "Freeroam:";
+            this.labelFEMusicVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelSFXVol
+            // 
+            this.labelSFXVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelSFXVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelSFXVol.ForeColor = System.Drawing.Color.Silver;
+            this.labelSFXVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelSFXVol.Location = new System.Drawing.Point(333, 64);
+            this.labelSFXVol.Name = "labelSFXVol";
+            this.labelSFXVol.Size = new System.Drawing.Size(110, 17);
+            this.labelSFXVol.TabIndex = 169;
+            this.labelSFXVol.Text = "SFX:";
+            this.labelSFXVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelMasterVol
+            // 
+            this.labelMasterVol.BackColor = System.Drawing.Color.Transparent;
+            this.labelMasterVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelMasterVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelMasterVol.Location = new System.Drawing.Point(333, 39);
+            this.labelMasterVol.Name = "labelMasterVol";
+            this.labelMasterVol.Size = new System.Drawing.Size(110, 17);
+            this.labelMasterVol.TabIndex = 168;
+            this.labelMasterVol.Text = "Master:";
+            this.labelMasterVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelAudioMode
+            // 
+            this.labelAudioMode.BackColor = System.Drawing.Color.Transparent;
+            this.labelAudioMode.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelAudioMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelAudioMode.Location = new System.Drawing.Point(572, 187);
+            this.labelAudioMode.Name = "labelAudioMode";
+            this.labelAudioMode.Size = new System.Drawing.Size(110, 17);
+            this.labelAudioMode.TabIndex = 167;
+            this.labelAudioMode.Text = "Audio Mode:";
+            this.labelAudioMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // panelRain
             // 
             this.panelRain.BackColor = System.Drawing.Color.Transparent;
             this.panelRain.Controls.Add(this.Label_Rain);
             this.panelRain.Controls.Add(this.radioButton_Rain_On);
             this.panelRain.Controls.Add(this.radioButton_Rain_Off);
-            this.panelRain.Location = new System.Drawing.Point(569, 137);
+            this.panelRain.Location = new System.Drawing.Point(569, 138);
             this.panelRain.Name = "panelRain";
             this.panelRain.Size = new System.Drawing.Size(242, 22);
             this.panelRain.TabIndex = 165;
@@ -373,7 +662,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.panelSpeedUnits.Controls.Add(this.labelGPOUnits);
             this.panelSpeedUnits.Controls.Add(this.radioKmH);
             this.panelSpeedUnits.Controls.Add(this.radioMpH);
-            this.panelSpeedUnits.Location = new System.Drawing.Point(569, 111);
+            this.panelSpeedUnits.Location = new System.Drawing.Point(569, 112);
             this.panelSpeedUnits.Name = "panelSpeedUnits";
             this.panelSpeedUnits.Size = new System.Drawing.Size(242, 22);
             this.panelSpeedUnits.TabIndex = 163;
@@ -423,7 +712,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.panelVisualDamage.Controls.Add(this.labelGPODamage);
             this.panelVisualDamage.Controls.Add(this.radioDamageOn);
             this.panelVisualDamage.Controls.Add(this.radioDamageOff);
-            this.panelVisualDamage.Location = new System.Drawing.Point(569, 85);
+            this.panelVisualDamage.Location = new System.Drawing.Point(569, 86);
             this.panelVisualDamage.Name = "panelVisualDamage";
             this.panelVisualDamage.Size = new System.Drawing.Size(242, 22);
             this.panelVisualDamage.TabIndex = 162;
@@ -475,7 +764,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.comboBoxTransmisson.Font = new System.Drawing.Font("DejaVu Sans", 9F);
             this.comboBoxTransmisson.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.comboBoxTransmisson.FormattingEnabled = true;
-            this.comboBoxTransmisson.Location = new System.Drawing.Point(691, 59);
+            this.comboBoxTransmisson.Location = new System.Drawing.Point(691, 60);
             this.comboBoxTransmisson.MaxDropDownItems = 2;
             this.comboBoxTransmisson.Name = "comboBoxTransmisson";
             this.comboBoxTransmisson.Size = new System.Drawing.Size(120, 22);
@@ -489,7 +778,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.comboBoxCamera.Font = new System.Drawing.Font("DejaVu Sans", 9F);
             this.comboBoxCamera.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.comboBoxCamera.FormattingEnabled = true;
-            this.comboBoxCamera.Location = new System.Drawing.Point(691, 33);
+            this.comboBoxCamera.Location = new System.Drawing.Point(691, 34);
             this.comboBoxCamera.MaxDropDownItems = 4;
             this.comboBoxCamera.Name = "comboBoxCamera";
             this.comboBoxCamera.Size = new System.Drawing.Size(120, 22);
@@ -513,7 +802,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.labelGPOTrans.BackColor = System.Drawing.Color.Transparent;
             this.labelGPOTrans.Font = new System.Drawing.Font("DejaVu Sans", 9F);
             this.labelGPOTrans.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelGPOTrans.Location = new System.Drawing.Point(572, 61);
+            this.labelGPOTrans.Location = new System.Drawing.Point(572, 62);
             this.labelGPOTrans.Name = "labelGPOTrans";
             this.labelGPOTrans.Size = new System.Drawing.Size(110, 18);
             this.labelGPOTrans.TabIndex = 159;
@@ -525,7 +814,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.labelGPOCamera.BackColor = System.Drawing.Color.Transparent;
             this.labelGPOCamera.Font = new System.Drawing.Font("DejaVu Sans", 9F);
             this.labelGPOCamera.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelGPOCamera.Location = new System.Drawing.Point(572, 35);
+            this.labelGPOCamera.Location = new System.Drawing.Point(572, 36);
             this.labelGPOCamera.Name = "labelGPOCamera";
             this.labelGPOCamera.Size = new System.Drawing.Size(110, 18);
             this.labelGPOCamera.TabIndex = 158;
@@ -859,297 +1148,12 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.TabPage_Advanced.Controls.Add(this.labelRoadReflection);
             this.TabPage_Advanced.Controls.Add(this.labelWorldDetails);
             this.TabPage_Advanced.Controls.Add(this.labelGlobalDetail);
-            this.TabPage_Advanced.Location = new System.Drawing.Point(0, 25);
+            this.TabPage_Advanced.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Advanced.Name = "TabPage_Advanced";
-            this.TabPage_Advanced.Size = new System.Drawing.Size(851, 265);
+            this.TabPage_Advanced.Size = new System.Drawing.Size(851, 263);
             this.TabPage_Advanced.TabIndex = 3;
             this.TabPage_Advanced.Text = "Advanced";
             this.TabPage_Advanced.UseVisualStyleBackColor = true;
-            // 
-            // panelAudioQuality
-            // 
-            this.panelAudioQuality.BackColor = System.Drawing.Color.Transparent;
-            this.panelAudioQuality.Controls.Add(this.labelAudioQuality);
-            this.panelAudioQuality.Controls.Add(this.radioAQLow);
-            this.panelAudioQuality.Controls.Add(this.radioAQHigh);
-            this.panelAudioQuality.Location = new System.Drawing.Point(307, 57);
-            this.panelAudioQuality.Name = "panelAudioQuality";
-            this.panelAudioQuality.Size = new System.Drawing.Size(242, 22);
-            this.panelAudioQuality.TabIndex = 175;
-            this.panelAudioQuality.Tag = "AudioQuality";
-            // 
-            // labelAudioQuality
-            // 
-            this.labelAudioQuality.BackColor = System.Drawing.Color.Transparent;
-            this.labelAudioQuality.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelAudioQuality.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelAudioQuality.Location = new System.Drawing.Point(3, 2);
-            this.labelAudioQuality.Name = "labelAudioQuality";
-            this.labelAudioQuality.Size = new System.Drawing.Size(110, 18);
-            this.labelAudioQuality.TabIndex = 2;
-            this.labelAudioQuality.Text = "Audio Filter:";
-            this.labelAudioQuality.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // radioAQLow
-            // 
-            this.radioAQLow.BackColor = System.Drawing.Color.Transparent;
-            this.radioAQLow.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.radioAQLow.Location = new System.Drawing.Point(181, 2);
-            this.radioAQLow.Name = "radioAQLow";
-            this.radioAQLow.Size = new System.Drawing.Size(44, 18);
-            this.radioAQLow.TabIndex = 16;
-            this.radioAQLow.TabStop = true;
-            this.radioAQLow.Tag = "AudioQualityLow";
-            this.radioAQLow.Text = "Off";
-            this.radioAQLow.UseVisualStyleBackColor = false;
-            // 
-            // radioAQHigh
-            // 
-            this.radioAQHigh.BackColor = System.Drawing.Color.Transparent;
-            this.radioAQHigh.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.radioAQHigh.Location = new System.Drawing.Point(123, 2);
-            this.radioAQHigh.Name = "radioAQHigh";
-            this.radioAQHigh.Size = new System.Drawing.Size(44, 18);
-            this.radioAQHigh.TabIndex = 17;
-            this.radioAQHigh.TabStop = true;
-            this.radioAQHigh.Tag = "AudioQualityHigh";
-            this.radioAQHigh.Text = "On";
-            this.radioAQHigh.UseVisualStyleBackColor = false;
-            // 
-            // comboAudioMode
-            // 
-            this.comboAudioMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.comboAudioMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboAudioMode.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboAudioMode.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.comboAudioMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.comboAudioMode.FormattingEnabled = true;
-            this.comboAudioMode.ItemHeight = 14;
-            this.comboAudioMode.Location = new System.Drawing.Point(429, 33);
-            this.comboAudioMode.MaxDropDownItems = 2;
-            this.comboAudioMode.Name = "comboAudioMode";
-            this.comboAudioMode.Size = new System.Drawing.Size(120, 22);
-            this.comboAudioMode.TabIndex = 174;
-            this.comboAudioMode.Tag = "Audio Mode";
-            // 
-            // numericFEMusic
-            // 
-            this.numericFEMusic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericFEMusic.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericFEMusic.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericFEMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericFEMusic.Location = new System.Drawing.Point(430, 232);
-            this.numericFEMusic.Name = "numericFEMusic";
-            this.numericFEMusic.Size = new System.Drawing.Size(61, 17);
-            this.numericFEMusic.TabIndex = 181;
-            this.numericFEMusic.Tag = "Freeroam Music";
-            this.numericFEMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericFEMusic.Value = new decimal(new int[] {
-            52,
-            0,
-            0,
-            0});
-            // 
-            // numericGMusic
-            // 
-            this.numericGMusic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericGMusic.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericGMusic.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericGMusic.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericGMusic.Location = new System.Drawing.Point(430, 207);
-            this.numericGMusic.Name = "numericGMusic";
-            this.numericGMusic.Size = new System.Drawing.Size(61, 17);
-            this.numericGMusic.TabIndex = 180;
-            this.numericGMusic.Tag = "Game Music";
-            this.numericGMusic.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericGMusic.Value = new decimal(new int[] {
-            52,
-            0,
-            0,
-            0});
-            // 
-            // numericSpeech
-            // 
-            this.numericSpeech.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericSpeech.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericSpeech.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericSpeech.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericSpeech.Location = new System.Drawing.Point(430, 182);
-            this.numericSpeech.Name = "numericSpeech";
-            this.numericSpeech.Size = new System.Drawing.Size(61, 17);
-            this.numericSpeech.TabIndex = 179;
-            this.numericSpeech.Tag = "Speech Volume";
-            this.numericSpeech.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericSpeech.Value = new decimal(new int[] {
-            52,
-            0,
-            0,
-            0});
-            // 
-            // numericCarVol
-            // 
-            this.numericCarVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericCarVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericCarVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericCarVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericCarVol.Location = new System.Drawing.Point(430, 157);
-            this.numericCarVol.Name = "numericCarVol";
-            this.numericCarVol.Size = new System.Drawing.Size(61, 17);
-            this.numericCarVol.TabIndex = 178;
-            this.numericCarVol.Tag = "Car Audio";
-            this.numericCarVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericCarVol.Value = new decimal(new int[] {
-            52,
-            0,
-            0,
-            0});
-            // 
-            // numericSFxVol
-            // 
-            this.numericSFxVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericSFxVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericSFxVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericSFxVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericSFxVol.Location = new System.Drawing.Point(430, 132);
-            this.numericSFxVol.Name = "numericSFxVol";
-            this.numericSFxVol.Size = new System.Drawing.Size(61, 17);
-            this.numericSFxVol.TabIndex = 177;
-            this.numericSFxVol.Tag = "SFx Volume";
-            this.numericSFxVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericSFxVol.Value = new decimal(new int[] {
-            52,
-            0,
-            0,
-            0});
-            // 
-            // numericMVol
-            // 
-            this.numericMVol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.numericMVol.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.numericMVol.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
-            this.numericMVol.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.numericMVol.Location = new System.Drawing.Point(430, 107);
-            this.numericMVol.Name = "numericMVol";
-            this.numericMVol.Size = new System.Drawing.Size(61, 17);
-            this.numericMVol.TabIndex = 176;
-            this.numericMVol.Tag = "MasterVolume";
-            this.numericMVol.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericMVol.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // labelVolumeControl
-            // 
-            this.labelVolumeControl.BackColor = System.Drawing.Color.Transparent;
-            this.labelVolumeControl.Font = new System.Drawing.Font("DejaVu Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.labelVolumeControl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(179)))), ((int)(((byte)(189)))));
-            this.labelVolumeControl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelVolumeControl.Location = new System.Drawing.Point(307, 85);
-            this.labelVolumeControl.Name = "labelVolumeControl";
-            this.labelVolumeControl.Size = new System.Drawing.Size(242, 16);
-            this.labelVolumeControl.TabIndex = 183;
-            this.labelVolumeControl.Text = "Volume Control";
-            this.labelVolumeControl.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelAudioOptions
-            // 
-            this.labelAudioOptions.BackColor = System.Drawing.Color.Transparent;
-            this.labelAudioOptions.Font = new System.Drawing.Font("DejaVu Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.labelAudioOptions.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(179)))), ((int)(((byte)(189)))));
-            this.labelAudioOptions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelAudioOptions.Location = new System.Drawing.Point(307, 14);
-            this.labelAudioOptions.Name = "labelAudioOptions";
-            this.labelAudioOptions.Size = new System.Drawing.Size(242, 16);
-            this.labelAudioOptions.TabIndex = 182;
-            this.labelAudioOptions.Text = "Audio Options";
-            this.labelAudioOptions.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelSpeechVol
-            // 
-            this.labelSpeechVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelSpeechVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelSpeechVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelSpeechVol.Location = new System.Drawing.Point(310, 182);
-            this.labelSpeechVol.Name = "labelSpeechVol";
-            this.labelSpeechVol.Size = new System.Drawing.Size(110, 17);
-            this.labelSpeechVol.TabIndex = 173;
-            this.labelSpeechVol.Text = "Speech:";
-            this.labelSpeechVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelCarVol
-            // 
-            this.labelCarVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelCarVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelCarVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelCarVol.Location = new System.Drawing.Point(310, 157);
-            this.labelCarVol.Name = "labelCarVol";
-            this.labelCarVol.Size = new System.Drawing.Size(110, 17);
-            this.labelCarVol.TabIndex = 172;
-            this.labelCarVol.Text = "Car Audio:";
-            this.labelCarVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelGameMusicVol
-            // 
-            this.labelGameMusicVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelGameMusicVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelGameMusicVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelGameMusicVol.Location = new System.Drawing.Point(310, 207);
-            this.labelGameMusicVol.Name = "labelGameMusicVol";
-            this.labelGameMusicVol.Size = new System.Drawing.Size(110, 17);
-            this.labelGameMusicVol.TabIndex = 171;
-            this.labelGameMusicVol.Text = "Event Music:";
-            this.labelGameMusicVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelFEMusicVol
-            // 
-            this.labelFEMusicVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelFEMusicVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelFEMusicVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelFEMusicVol.Location = new System.Drawing.Point(310, 232);
-            this.labelFEMusicVol.Name = "labelFEMusicVol";
-            this.labelFEMusicVol.Size = new System.Drawing.Size(110, 17);
-            this.labelFEMusicVol.TabIndex = 170;
-            this.labelFEMusicVol.Text = "Freeroam:";
-            this.labelFEMusicVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelSFXVol
-            // 
-            this.labelSFXVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelSFXVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelSFXVol.ForeColor = System.Drawing.Color.Silver;
-            this.labelSFXVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelSFXVol.Location = new System.Drawing.Point(310, 132);
-            this.labelSFXVol.Name = "labelSFXVol";
-            this.labelSFXVol.Size = new System.Drawing.Size(110, 17);
-            this.labelSFXVol.TabIndex = 169;
-            this.labelSFXVol.Text = "SFX:";
-            this.labelSFXVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelMasterVol
-            // 
-            this.labelMasterVol.BackColor = System.Drawing.Color.Transparent;
-            this.labelMasterVol.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelMasterVol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelMasterVol.Location = new System.Drawing.Point(310, 107);
-            this.labelMasterVol.Name = "labelMasterVol";
-            this.labelMasterVol.Size = new System.Drawing.Size(110, 17);
-            this.labelMasterVol.TabIndex = 168;
-            this.labelMasterVol.Text = "Master:";
-            this.labelMasterVol.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelAudioMode
-            // 
-            this.labelAudioMode.BackColor = System.Drawing.Color.Transparent;
-            this.labelAudioMode.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelAudioMode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelAudioMode.Location = new System.Drawing.Point(310, 36);
-            this.labelAudioMode.Name = "labelAudioMode";
-            this.labelAudioMode.Size = new System.Drawing.Size(110, 17);
-            this.labelAudioMode.TabIndex = 167;
-            this.labelAudioMode.Text = "Audio Mode:";
-            this.labelAudioMode.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // panelBTLODBias
             // 
@@ -1990,6 +1994,34 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.panel1.Size = new System.Drawing.Size(688, 34);
             this.panel1.TabIndex = 190;
             // 
+            // comboBoxPerformanceLevel
+            // 
+            this.comboBoxPerformanceLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.comboBoxPerformanceLevel.DisplayMember = "0";
+            this.comboBoxPerformanceLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPerformanceLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBoxPerformanceLevel.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.comboBoxPerformanceLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
+            this.comboBoxPerformanceLevel.FormattingEnabled = true;
+            this.comboBoxPerformanceLevel.Location = new System.Drawing.Point(144, 6);
+            this.comboBoxPerformanceLevel.Name = "comboBoxPerformanceLevel";
+            this.comboBoxPerformanceLevel.Size = new System.Drawing.Size(110, 22);
+            this.comboBoxPerformanceLevel.TabIndex = 190;
+            this.comboBoxPerformanceLevel.ValueMember = "0";
+            // 
+            // labelPerfLevel
+            // 
+            this.labelPerfLevel.BackColor = System.Drawing.Color.Transparent;
+            this.labelPerfLevel.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.labelPerfLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
+            this.labelPerfLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelPerfLevel.Location = new System.Drawing.Point(6, 6);
+            this.labelPerfLevel.Name = "labelPerfLevel";
+            this.labelPerfLevel.Size = new System.Drawing.Size(130, 22);
+            this.labelPerfLevel.TabIndex = 191;
+            this.labelPerfLevel.Text = "Performance Level:";
+            this.labelPerfLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // PresetPanel
             // 
             this.PresetPanel.BackColor = System.Drawing.Color.Transparent;
@@ -2092,34 +2124,6 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.LabelGraphicPreset.Text = "Graphic Presets:";
             this.LabelGraphicPreset.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // comboBoxPerformanceLevel
-            // 
-            this.comboBoxPerformanceLevel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.comboBoxPerformanceLevel.DisplayMember = "0";
-            this.comboBoxPerformanceLevel.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxPerformanceLevel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.comboBoxPerformanceLevel.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.comboBoxPerformanceLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
-            this.comboBoxPerformanceLevel.FormattingEnabled = true;
-            this.comboBoxPerformanceLevel.Location = new System.Drawing.Point(144, 6);
-            this.comboBoxPerformanceLevel.Name = "comboBoxPerformanceLevel";
-            this.comboBoxPerformanceLevel.Size = new System.Drawing.Size(110, 22);
-            this.comboBoxPerformanceLevel.TabIndex = 190;
-            this.comboBoxPerformanceLevel.ValueMember = "0";
-            // 
-            // labelPerfLevel
-            // 
-            this.labelPerfLevel.BackColor = System.Drawing.Color.Transparent;
-            this.labelPerfLevel.Font = new System.Drawing.Font("DejaVu Sans", 9F);
-            this.labelPerfLevel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
-            this.labelPerfLevel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.labelPerfLevel.Location = new System.Drawing.Point(6, 6);
-            this.labelPerfLevel.Name = "labelPerfLevel";
-            this.labelPerfLevel.Size = new System.Drawing.Size(130, 22);
-            this.labelPerfLevel.TabIndex = 191;
-            this.labelPerfLevel.Text = "Performance Level:";
-            this.labelPerfLevel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
@@ -2156,6 +2160,30 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.Button_Close.TabIndex = 191;
             this.Button_Close.TabStop = false;
             // 
+            // ComboBox_Language_List
+            // 
+            this.ComboBox_Language_List.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Language_List.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Language_List.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Language_List.FormattingEnabled = true;
+            this.ComboBox_Language_List.Location = new System.Drawing.Point(44, 207);
+            this.ComboBox_Language_List.Name = "ComboBox_Language_List";
+            this.ComboBox_Language_List.Size = new System.Drawing.Size(164, 22);
+            this.ComboBox_Language_List.TabIndex = 184;
+            // 
+            // labelLanguage
+            // 
+            this.labelLanguage.BackColor = System.Drawing.Color.Transparent;
+            this.labelLanguage.Font = new System.Drawing.Font("DejaVu Sans", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.labelLanguage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(66)))), ((int)(((byte)(179)))), ((int)(((byte)(189)))));
+            this.labelLanguage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelLanguage.Location = new System.Drawing.Point(41, 185);
+            this.labelLanguage.Name = "labelLanguage";
+            this.labelLanguage.Size = new System.Drawing.Size(242, 16);
+            this.labelLanguage.TabIndex = 185;
+            this.labelLanguage.Text = "Language";
+            this.labelLanguage.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Screen_User_Settings_Editor
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -2183,6 +2211,13 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.TransparencyKey = System.Drawing.Color.Fuchsia;
             this.TabControl_USXE.ResumeLayout(false);
             this.TabPage_General.ResumeLayout(false);
+            this.panelAudioQuality.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericFEMusic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericGMusic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSpeech)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericCarVol)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericSFxVol)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericMVol)).EndInit();
             this.panelRain.ResumeLayout(false);
             this.panelSpeedUnits.ResumeLayout(false);
             this.panelVisualDamage.ResumeLayout(false);
@@ -2194,13 +2229,6 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
             this.panelWindowedControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericBrightness)).EndInit();
             this.TabPage_Advanced.ResumeLayout(false);
-            this.panelAudioQuality.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericFEMusic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericGMusic)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSpeech)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericCarVol)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSFxVol)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericMVol)).EndInit();
             this.panelBTLODBias.ResumeLayout(false);
             this.panelCDLODBias.ResumeLayout(false);
             this.panelWaterSim.ResumeLayout(false);
@@ -2365,5 +2393,7 @@ namespace SBRW.Launcher.App.UI_Forms.USXEditor_Screen
         public System.Windows.Forms.PictureBox pictureBox1;
         public System.Windows.Forms.PictureBox Button_Settings;
         public System.Windows.Forms.PictureBox Button_Close;
+        private System.Windows.Forms.Label labelLanguage;
+        public System.Windows.Forms.ComboBox ComboBox_Language_List;
     }
 }

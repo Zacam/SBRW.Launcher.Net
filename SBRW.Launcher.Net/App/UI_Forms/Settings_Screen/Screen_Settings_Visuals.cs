@@ -16,62 +16,23 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 {
     partial class Screen_Settings
     {
-        #region Update Values and Visuals
-        /// <summary>
-        /// Sets the Category for the Language Drop Down Menu with its set of Colors
-        /// </summary>
-        /// <remarks>Dropdown Menu Visual</remarks>
-        private void ComboBox_Language_List_DrawItem(object sender, DrawItemEventArgs e)
+        public static void Clear_Hide_Screen_Form_Panel()
         {
-            try
+            if (Screen_Instance != null)
             {
-                string langListText = string.Empty;
-
-                if (sender is ComboBox cb)
+                if (Screen_Instance.Panel_Form_Screens.Visible)
                 {
-                    if (e.Index != -1 && cb.Items != null)
-                    {
-                        if (cb.Items[e.Index] is Json_List_Language si)
-                        {
-                            langListText = si.Name;
-                        }
-                    }
-                }
-
-                if (!string.IsNullOrWhiteSpace(langListText) && sender != null)
-                {
-                    Font font = ((ComboBox)sender).Font;
-                    Brush backgroundColor;
-                    Brush textColor;
-
-                    if (langListText.StartsWith("<GROUP>"))
-                    {
-                        font = new Font(font, FontStyle.Bold);
-                        e.Graphics.FillRectangle(new SolidBrush(Color_Winform_Other.DropMenu_Category_Background_ForeColor), e.Bounds);
-                        e.Graphics.DrawString(langListText.Replace("<GROUP>", string.Empty), font,
-                            new SolidBrush(Color_Winform_Other.DropMenu_Category_Text_ForeColor), e.Bounds);
-                    }
-                    else
-                    {
-                        font = new Font(font, FontStyle.Bold);
-                        if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
-                        {
-                            backgroundColor = SystemBrushes.Highlight;
-                            textColor = SystemBrushes.HighlightText;
-                        }
-                        else
-                        {
-                            backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
-                            textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
-                        }
-
-                        e.Graphics.FillRectangle(backgroundColor, e.Bounds);
-                        e.Graphics.DrawString("    " + langListText, font, textColor, e.Bounds);
-                    }
+                    Screen_Instance.Panel_Form_Screens.Controls.Clear();
+                    Screen_Instance.Panel_Form_Screens.Visible = false;
                 }
             }
-            catch { }
+
+            if (Screen_Instance != null)
+            {
+                Screen_Instance.Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
+            }
         }
+        #region Update Values and Visuals
         /// <summary>
         /// Sets the Colors for the Proxy Logging Drop Down Menu
         /// </summary>
@@ -339,7 +300,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_Verify_Files.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            ComboBox_Language_List.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Launcher_logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -507,22 +467,15 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 CDNListUpdater.GetList();
             }
-
-            ComboBox_Language_List.DisplayMember = "Name";
-            ComboBox_Language_List.DataSource = LanguageListUpdater.CleanList;
+            
             ComboBox_Proxy_Logging.DisplayMember = "Name";
             ComboBox_Proxy_Logging.DataSource = ProxySettingsListUpdater.Proxy_Logging;
             ComboBox_Proxy_GZip_Version.DisplayMember = "Name";
             ComboBox_Proxy_GZip_Version.DataSource = ProxySettingsListUpdater.Proxy_GZip_Version;
 
-
             /********************************/
             /* Events                        /
             /********************************/
-
-            ComboBox_Language_List.DrawItem += new DrawItemEventHandler(ComboBox_Language_List_DrawItem);
-            ComboBox_Language_List.SelectedIndexChanged += new EventHandler(ComboBox_Language_List_SelectedIndexChanged);
-            ComboBox_Language_List.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
 
             ComboBox_Proxy_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Logging_DrawItem);
             ComboBox_Proxy_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_Logging_SelectedIndexChanged);
@@ -585,12 +538,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             NumericUpDown_Range_Affinity.ValueChanged += new EventHandler(NumericUpDown_Range_Affinity_ValueChanged);
             CheckBox_Enable_Affinity_Range.CheckedChanged += new EventHandler(CheckBox_Enable_Affinity_Range_CheckedChanged);
-
-            /********************************/
-            /* Load XML (Only one Section)   /
-            /********************************/
-
-            XML_File.Read(1);
+            CheckBox_RPC.CheckedChanged += new EventHandler(CheckBox_RPC_CheckedChanged);
+            CheckBox_JSON_Update_Cache.CheckedChanged += new EventHandler(CheckBox_JSON_Update_Cache_CheckedChanged);
+            CheckBox_Theme_Support.CheckedChanged += new EventHandler(CheckBox_Theme_Support_CheckedChanged);
+            CheckBox_Enable_ACM.CheckedChanged += new EventHandler(CheckBox_Enable_ACM_CheckedChanged);
 
             /********************************/
             /* Sets Red Buttons/Disables     /
@@ -612,8 +563,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 "Can also be a Soruce for VerifyHash to get replacement files");
             ToolTip_Hover.SetToolTip(Button_CDN_List_Setup, "Download Location for Fetching the base GameFiles\n" +
                 "Can also be a Soruce for VerifyHash to get replacement files");
-            ToolTip_Hover.SetToolTip(ComboBox_Language_List, "Controls the In-Game Lanuguage setting\n" +
-                "This also includes setting the Default Chat joined In-Game");
             ToolTip_Hover.SetToolTip(Button_Game_User_Settings, "Opens a UserSettings.xml Editor\nAllows in-depth control over Game Settings");
 
             ToolTip_Hover.SetToolTip(Button_Clear_Crash_Logs, "Removes \"SBRCrashLogs_*\" DMP and TXT files from GameFiles Folder");
@@ -641,7 +590,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             Shown += (x, y) =>
             {
-                RememberLastLanguage();
+                RememberLastProxySettings();
                 PingSavedCDN();
                 PingAPIStatus();
             };

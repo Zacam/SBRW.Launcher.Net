@@ -13,7 +13,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 #pragma warning disable CS8618
         public static Screen_Settings? Screen_Instance { get; set; }
 #pragma warning restore CS8618
-        private int LastSelectedLanguage { get; set; }
         public static bool RestartRequired { get; set; }
         public static bool Insider_Settings_Lock { get; set; }
         private string NewLauncherPath { get; set; }

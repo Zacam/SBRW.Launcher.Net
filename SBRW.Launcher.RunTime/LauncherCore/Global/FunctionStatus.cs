@@ -137,7 +137,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         if (Check_Mode == 0)
                         {
                             Save_Settings.Save();
-                            XML_File.Save(1);
                         }
 
                         return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode, Form_Window_Handle);
@@ -150,7 +149,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         if (Check_Mode == 0)
                         {
                             Save_Settings.Save();
-                            XML_File.Save(1);
                         }
 
                         return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode, Form_Window_Handle);
@@ -161,7 +159,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         if (Check_Mode == 0)
                         {
                             Save_Settings.Save();
-                            XML_File.Save(1);
                         }
 
                         if (!Directory.Exists(Save_Settings.Live_Data.Game_Path))

@@ -1,8 +1,9 @@
-﻿using SBRW.Launcher.App.UI_Forms.About_Screen;
+﻿using Flurl.Util;
+using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen;
-using SBRW.Launcher.App.UI_Forms.USXEditor_Screen;
+using SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen;
 using SBRW.Launcher.App.UI_Forms.VerifyHash_Screen;
 using SBRW.Launcher.Core.Cache;
 using SBRW.Launcher.Core.Extension.Api_;
@@ -207,45 +208,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
             {
-                /* TODO null check */
-                if (ComboBox_Language_List.SelectedItem != null && !string.IsNullOrWhiteSpace(((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini))
-                {
-                    Save_Settings.Live_Data.Launcher_Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini;
-                    XML_File.XML_Settings_Data.Language = ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_XML;
-
-                    /* TODO: Inform player about custom languagepack used. */
-                    if (((Json_List_Language)ComboBox_Language_List.SelectedItem).Category == "Custom")
-                    {
-                        MessageBox.Show(null, "Please Note: If a Server does not provide a Language Pack, it will fallback to English Language Pack instead.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        if (!Directory.Exists(Save_Settings.Live_Data.Game_Path + "/scripts"))
-                        {
-                            try { Directory.CreateDirectory(Save_Settings.Live_Data.Game_Path + "/scripts"); }
-                            catch { }
-                        }
-
-                        if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
-                        {
-                            try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
-                            catch { }
-                        }
-
-                        try
-                        {
-                            Ini_File LanguagePickerFile = new Ini_File(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini");
-                            LanguagePickerFile.Key_Write("Language", ((Json_List_Language)ComboBox_Language_List.SelectedItem).Value_Ini);
-                        }
-                        catch { }
-                    }
-                    /* Delete Custom Settings.ini for LangPicker.asi module */
-                    else if (File.Exists(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"))
-                    {
-                        try { File.Delete(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini"); }
-                        catch { }
-                    }
-                }
-
                 if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "1" : "0"))
                 {
                     Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "1" : "0";
@@ -286,6 +248,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     RestartRequired = true;
                 }
                 */
+                /* Proxy Logging */
+                if (ComboBox_Proxy_Logging.SelectedItem != default)
+                {
+                    if (Save_Settings.Proxy_Log_Mode() != ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode)
+                    {
+                        Save_Settings.Live_Data.Launcher_Proxy_Log_Mode =
+                            ((int)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
+                    }
+                }
+                /* Proxy GZip Version */
+                if (ComboBox_Proxy_GZip_Version.SelectedItem != default)
+                {
+                    if (Save_Settings.Proxy_GZip_Version() != ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version)
+                    {
+                        Save_Settings.Live_Data.Launcher_Proxy_GZip_Version =
+                            ((int)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
+                    }
+                }
 
                 if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
                 {
@@ -361,7 +341,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             /* Save Settings */
             Save_Settings.Save();
-            XML_File.Save(1);
 
             if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
             {
@@ -478,8 +457,45 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void CheckBox_RPC_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_RPC.Text = $"Discord RPC {(CheckBox_RPC.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_JSON_Update_Cache_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_JSON_Update_Cache.Text = $"JSON Cache {(CheckBox_JSON_Update_Cache.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Theme_Support_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Theme_Support.Text = $"Custom Theme {(CheckBox_Theme_Support.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Enable_ACM_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Enable_ACM.Text = $"Account Manager {(CheckBox_Enable_ACM.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBox_Enable_Affinity_Range_CheckedChanged(object sender, EventArgs e)
         {
+            CheckBox_Enable_Affinity_Range.Text = $"Affinity Range {(CheckBox_Enable_Affinity_Range.Checked ? "(Enabled)" :"(Disabled)")}";
             Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
         }
         /// <summary>
@@ -505,7 +521,19 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void SettingsUEditorButton_Click(object sender, EventArgs e)
         {
-            Screen_User_Settings_Editor.OpenScreen();
+            try
+            {
+                Screen_User_Settings_Editor Custom_Instance_Settings = new Screen_User_Settings_Editor() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
+                Panel_Form_Screens.Controls.Add(Custom_Instance_Settings);
+                Panel_Form_Screens.Visible = true;
+                Custom_Instance_Settings.Show();
+                Text = "Game Settings Editor - SBRW Launcher: " + Application.ProductVersion;
+            }
+            catch (Exception Error)
+            {
+                string ErrorMessage = "Game Settings Editor Screen Encountered an Error";
+                LogToFileAddons.OpenLog("GAME SETTINGS SCREEN", ErrorMessage, Error, "Exclamation", false);
+            }
         }
         /// <summary>
         /// Settings Clear ModNet Cache
@@ -742,29 +770,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             FunctionEvents.Console_Commands(Input_Console.Text);
             Input_Console.Text = string.Empty;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ComboBox_Language_List_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            try
-            {
-                if (bool.TryParse(((Json_List_Language)ComboBox_Language_List.SelectedItem).IsSpecial.ToString(), out bool Result))
-                {
-                    if (((Json_List_Language)ComboBox_Language_List.SelectedItem).IsSpecial)
-                    {
-                        ComboBox_Language_List.SelectedIndex = LastSelectedLanguage;
-                    }
-                    else
-                    {
-                        LastSelectedLanguage = ComboBox_Language_List.SelectedIndex;
-                    }
-                }
-            }
-            catch { }
         }
         /// <summary>
         /// 

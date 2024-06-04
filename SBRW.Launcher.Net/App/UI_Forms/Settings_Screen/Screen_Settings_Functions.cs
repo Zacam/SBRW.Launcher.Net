@@ -118,58 +118,37 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         }
         #endregion
         #region ComboxList Setup
-        /// <summary>
-        /// 
-        /// </summary>
-        private void RememberLastLanguage()
+        private void RememberLastProxySettings()
         {
-            /* Last Selected CDN */
-            Log.Core("SETTINGS LANGLIST: Checking...");
-            Log.Core("SETTINGS LANGLIST: Setting first Language in list");
-            Log.Core("SETTINGS LANGLIST: Checking if Language is set on INI File");
-
             try
             {
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Language))
+                /* Proxy Logging */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_Log_Mode))
                 {
-                    string SavedLang = Save_Settings.Live_Data.Launcher_Language.Trim();
-
-                    Log.Core("SETTINGS LANGLIST: Found something!");
-                    Log.Core("SETTINGS LANGLIST: Checking if Language exists on our database");
-
-                    if (LanguageListUpdater.CleanList.FindIndex(i => string.Equals(i.Value_Ini, SavedLang)) != 0)
-                    {
-                        Log.Core("SETTINGS LANGLIST: Language found! Checking its Value");
-                        var index = LanguageListUpdater.CleanList.FindIndex(i => string.Equals(i.Value_Ini, SavedLang));
-
-                        Log.Core("SETTINGS LANGLIST: ID is " + index);
-                        if (index >= 0)
-                        {
-                            Log.Core("SETTINGS LANGLIST: ID set correctly");
-                            ComboBox_Language_List.SelectedIndex = index;
-                        }
-                        else if (index < 0)
-                        {
-                            ComboBox_Language_List.SelectedIndex = 1;
-                        }
-                    }
-                    else
-                    {
-                        Log.Warning("SETTINGS LANGLIST: Unable to find anything, assuming default");
-                        ComboBox_Language_List.SelectedIndex = 1;
-                        Log.Warning("SETTINGS LANGLIST: Unknown entry value is " + SavedLang);
-                    }
-                    Log.Core("SETTINGS LANGLIST: All done");
+                    ComboBox_Proxy_Logging.SelectedIndex = 
+                        ProxySettingsListUpdater.Proxy_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Proxy_Log_Mode()));
                 }
                 else
                 {
-                    Log.Warning("SETTINGS LANGLIST: Unable to find anything, assuming default");
-                    ComboBox_Language_List.SelectedIndex = 1;
+                    ComboBox_Proxy_Logging.SelectedIndex = 1;
                 }
+                /* Proxy GZip Version */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_GZip_Version))
+                {
+                    ComboBox_Proxy_GZip_Version.SelectedIndex =
+                        ProxySettingsListUpdater.Proxy_GZip_Version.FindIndex(i => Equals(i.Version, Save_Settings.Proxy_GZip_Version()));
+                }
+                else
+                {
+                    ComboBox_Proxy_GZip_Version.SelectedIndex = 1;
+                }
+                /* Manually Invoke Index Change to Set Selected Details Text */
+                ComboBox_Proxy_Logging_SelectedIndexChanged(default, default);
+                ComboBox_Proxy_GZip_Version_SelectedIndexChanged(default, default);
             }
             catch (Exception Error)
             {
-                LogToFileAddons.OpenLog("SETTINGS LANGLIST", string.Empty, Error, string.Empty, true);
+                LogToFileAddons.OpenLog("SETTINGS ProxySettingsLIST", string.Empty, Error, string.Empty, true);
             }
         }
         #endregion

@@ -4,6 +4,7 @@ using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.Core.Discord.RPC_;
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Lists
 {
@@ -12,8 +13,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
     /// </summary>
     public class ProxySettingsListUpdater
     {
-        public static BindingList<Json_List_Proxy_Logging> Proxy_Logging { get; set; } = new BindingList<Json_List_Proxy_Logging>();
-        public static BindingList<Json_List_Proxy_GZip_Version> Proxy_GZip_Version { get; set; } = new BindingList<Json_List_Proxy_GZip_Version>();
+        public static List<Json_List_Proxy_Logging> Proxy_Logging { get; set; } = new List<Json_List_Proxy_Logging>();
+        public static List<Json_List_Proxy_GZip_Version> Proxy_GZip_Version { get; set; } = new List<Json_List_Proxy_GZip_Version>();
 
         public static void GetList()
         {
