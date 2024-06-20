@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)launchercore\client\auth\json\AuthenticationJSON.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Client\Auth\Tokens.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Client\NFSW.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Downloader\Download_Raw.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\FileReadWrite\ExtractResource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\FileReadWrite\File_and_Folder_Extention.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Global\EnumTypes.cs" />
@@ -30,10 +31,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\LauncherUpdater\UpdaterExecutable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\LauncherUpdater\UpdaterSchema.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\CDNListUpdater.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Proxy_GZip_Version.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Proxy_Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Invalid_Game_Files.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Scanned_Game_Files.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_GZip_Version.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\LanguageListUpdater.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\ProxySettingsListUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ProxySettingsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ResolutionsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ServerListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Logger\LogToFileAddons.cs" />

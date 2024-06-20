@@ -9,6 +9,24 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
     static class FormsControls
     {
         /// <summary>
+        /// Checks if the Forms Screen has been Disposed
+        /// </summary>
+        /// <param name="Screen_Instance">Form Handle</param>
+        /// <returns>True if Form is Disposed. Otherwise, False.</returns>
+        /// <remarks><i>Mainly used when updating a handle from a seperate thread</i></remarks>
+        public static bool DisposedForm(this Form? Screen_Instance)
+        {
+            if (Screen_Instance != default)
+            {
+                if (!(Screen_Instance.Disposing || Screen_Instance.IsDisposed))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+        /// <summary>
         /// Executes the specified delegate on the thread that owns the control's underlying window handle.
         /// </summary>
         /// <returns>The delegate being invoked has no return value.</returns>

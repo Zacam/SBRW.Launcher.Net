@@ -718,6 +718,54 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ButtonFolderPermissonSet.Click += new EventHandler(ButtonFolderPermissonSet_Click);
 #endif
             #endregion
+            #region Verfy Hash
+            VerifyHashWelcome.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            DownloadProgressText.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            StartScanner.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            VerifyHashText.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+
+            /********************************/
+            /* Set Theme Colors              /
+            /********************************/
+
+            ForeColor = Color_Winform.Text_Fore_Color;
+            BackColor = Color_Winform.BG_Fore_Color;
+
+            DownloadProgressText.ForeColor = Color_Winform.Text_Fore_Color;
+            Label_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
+
+            VerifyHashWelcome.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
+
+            StartScanner.ForeColor = Color_Winform.Success_Text_Fore_Color;
+            StartScanner.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+            StartScanner.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+            StartScanner.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+
+            Button_Verify_Scan.ForeColor = Color_Winform.Warning_Text_Fore_Color;
+            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+
+            /********************************/
+            /* Events Handlers               /
+            /********************************/
+
+            StartScanner.Click += new EventHandler(StartScanner_Click);
+            Button_Verify_Scan.Click += new EventHandler(StopScanner_Click);
+
+            /********************************/
+            /* Hardcoded Text [Linux Fix]    /
+            /********************************/
+
+            VerifyHashWelcome.Text = "Welcome!\n\nThe scanning process is pretty quick,\nbut may still take a while." +
+                "\nDepending on your connection,\nre-downloading will take the longest\nPlease allow it to complete fully!";
+            Label_Verify_Scan.Text = "Scanning Progress:";
+            DownloadProgressText.Text = "Download Progress:";
+            VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";
+            #endregion
         }
         #endregion
     }

@@ -1,8 +1,6 @@
 ﻿using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.Core.Discord.RPC_;
-using SBRW.Launcher.Core.Extra.File_;
 using SBRW.Launcher.Core.Extra.File_.Save_;
-using System;
 using System.Windows.Forms;
 
 namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
@@ -57,6 +55,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private static bool DisableButtonPRC { get; set; }
         ///<summary>Disable Button: Permission Set</summary>
         private static bool DisableButtonPRAA { get; set; } = true;
+        #endregion
+        #region Verify Hash
         #endregion
         #endregion
 #pragma warning disable CS8618

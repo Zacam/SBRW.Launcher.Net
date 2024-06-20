@@ -25,4 +25,8 @@
     <PackageReference Include="SBRW.Svg" Version="3.4.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
 </Project>
