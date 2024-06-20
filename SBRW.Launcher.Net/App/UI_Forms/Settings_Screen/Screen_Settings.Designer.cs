@@ -1402,7 +1402,6 @@
             this.GroupBox_Verify_Scan.TabIndex = 223;
             this.GroupBox_Verify_Scan.TabStop = false;
             this.GroupBox_Verify_Scan.Text = "Console:";
-            this.GroupBox_Verify_Scan.Visible = false;
             // 
             // TextBox_Verify_Scan
             // 
@@ -1447,7 +1446,6 @@
             this.Button_Verify_Scan.TabIndex = 13;
             this.Button_Verify_Scan.Text = "Stop Scan";
             this.Button_Verify_Scan.UseVisualStyleBackColor = true;
-            this.Button_Verify_Scan.Visible = false;
             // 
             // TabPage_Game_Security_Center
             // 

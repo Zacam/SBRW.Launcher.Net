@@ -449,7 +449,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             {
                 NumericUpDown_Range_Affinity.Increment = 2;
                 NumericUpDown_Range_Affinity.Minimum = 2;
-                NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount >= 8 ? 8 : Environment.ProcessorCount.Equals(6) ? 6 : 4;
+                NumericUpDown_Range_Affinity.Maximum = Environment.ProcessorCount >= 8 ? 8 : Environment.ProcessorCount == 6 ? 6 : 4;
                 NumericUpDown_Range_Affinity.Value = Environment.ProcessorCount >= 4 ? 4 : 2;
                 Label_Affinity_Core_Calculator.Visible = true;
                 Panel_Affinity_Range.Visible = true;

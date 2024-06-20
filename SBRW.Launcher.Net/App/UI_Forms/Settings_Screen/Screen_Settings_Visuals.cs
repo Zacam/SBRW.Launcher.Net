@@ -499,7 +499,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Console_Submit.Click += new EventHandler(Console_Enter);
             Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
-            Button_Verify_Scan.Click += new EventHandler(Button_Game_Verify_Files_Click);
+            Button_Verify_Scan.Click += new EventHandler(Button_Verify_Scan_Click);
             Button_Save.Click += new EventHandler(SettingsSave_Click);
             Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
             Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
@@ -542,6 +542,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_JSON_Update_Cache.CheckedChanged += new EventHandler(CheckBox_JSON_Update_Cache_CheckedChanged);
             CheckBox_Theme_Support.CheckedChanged += new EventHandler(CheckBox_Theme_Support_CheckedChanged);
             CheckBox_Enable_ACM.CheckedChanged += new EventHandler(CheckBox_Enable_ACM_CheckedChanged);
+            CheckBox_Alt_WebCalls.CheckedChanged += new EventHandler(CheckBox_Alt_WebCalls_CheckedChanged);
+            CheckBox_Proxy.CheckedChanged += new EventHandler(CheckBox_Proxy_CheckedChanged);
+            CheckBox_Host_to_IP.CheckedChanged += new EventHandler(CheckBox_Host_to_IP_CheckedChanged);
+            CheckBox_Proxy_Domain.CheckedChanged += new EventHandler(CheckBox_Proxy_Domain_CheckedChanged);
 
             /********************************/
             /* Sets Red Buttons/Disables     /
@@ -745,6 +749,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
             Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
 
+            GroupBox_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
+            TextBox_Verify_Scan.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            TextBox_Verify_Scan.BackColor = Color_Winform.BG_Darker_Fore_Color;
+
             /********************************/
             /* Events Handlers               /
             /********************************/
@@ -755,8 +763,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Hardcoded Text [Linux Fix]    /
             /********************************/
 
-            VerifyHashWelcome.Text = "Welcome!\n\nThe scanning process is pretty quick,\nbut may still take a while." +
-                "\nDepending on your connection,\nre-downloading will take the longest\nPlease allow it to complete fully!";
+            TextBox_Verify_Scan.AppendText(
+                $"Welcome!{Environment.NewLine}The scanning process is pretty quick, but may still take a while." +
+                $"{Environment.NewLine}Depending on your connection, re-downloading will take the longest. " +
+                $"{Environment.NewLine}Please allow it to complete fully!");
             Label_Verify_Scan.Text = "Scanning Progress:";
             //DownloadProgressText.Text = "Download Progress:";
             //VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";

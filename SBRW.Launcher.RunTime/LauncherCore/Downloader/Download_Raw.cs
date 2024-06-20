@@ -18,6 +18,9 @@ using System.Text;
 using SBRW.Launcher.Core.Extension.Web_;
 using System.Windows.Forms;
 using System.Linq;
+using SBRW.Launcher.App.UI_Forms.Settings_Screen;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
+using System.Threading;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 {
@@ -44,7 +47,10 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
         {
             if (Thread != default)
             {
-                Thread.CancelAsync();
+                if (Thread.IsBusy)
+                {
+                    Thread.CancelAsync();
+                }
             }
 
             Thread = new BackgroundWorker()
@@ -54,6 +60,13 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
             };
             Thread.DoWork += Start_Worker;
             Thread.RunWorkerCompleted += Start_Worker_Completed;
+            Thread.RunWorkerAsync();
+
+            if (!Screen_Settings.Screen_Instance.DisposedForm())
+            {
+                Screen_Settings.Screen_Instance.Button_Verify_Scan.Text = "Starting Scan";
+                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}User Requested to Start Scan");
+            }
         }
         /// <summary>
         /// 
@@ -62,20 +75,84 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
         {
             if (Thread != default)
             {
-                Thread.CancelAsync();
+                if (Thread.IsBusy)
+                {
+                    Thread.CancelAsync();
+                    Thread.Dispose();
+                    Thread = default;
+                }
+            }
+
+            if (!Screen_Settings.Screen_Instance.DisposedForm())
+            {
+                Screen_Settings.Screen_Instance.Button_Verify_Scan.Text = "Stopping Scan";
+                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}User Requested to Stop Scan");
             }
         }
         /// <summary>
         /// 
         /// </summary>
-        /// TODO: UPDATE TEXT FOR TRANSLATIONS
-        public static void Start_Worker(object _, DoWorkEventArgs Live_Events)
+        /// <param name="Stage"></param>
+        private static void UI(int Stage)
         {
+            switch (Stage)
+            {
+                case -1:
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scanning Progress: Stop Requested";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"User has Requested to Stop Scan {Stage}");
+                    }
+                    break;
+                case 1:
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scan Progress: Complete";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"No Invalid Files Found {Stage}");
+                    }
+                    break;
+                case 2:
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Currently (re)downloading files. " +
+                            "This part may take awhile depending on your connection.";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"Preparing to Download Files {Stage}");
+                    }
+                    break;
+                case 3:
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "TODO: ADD NOT SUPPORTED CDN MESSAGE";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"TODO: ADD NOT SUPPORTED CDN MESSAGE {Stage}");
+                    }
+                    break;
+                default:
+                    break;
+            }
+            
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// TODO: UPDATE TEXT FOR TRANSLATIONS
+        public static void Start_Worker(object Live_Sender, DoWorkEventArgs Live_Worker)
+        {
+            BackgroundWorker Live_Events = (BackgroundWorker)Live_Sender;
+
             if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
             {
-                Presence_Launcher.Status(25);
                 Log.Info("VERIFY HASH: Checking and Deleting '.orig' Files and Symbolic Folders");
-                //Label_Verify_Scan.SafeInvokeAction(() => Label_Verify_Scan.Text = "Removing any '.orig' Files in Game Directory");
+                if (!Screen_Settings.Screen_Instance.DisposedForm())
+                {
+                    Presence_Launcher.Status(25);
+                    Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scanning Progress: Removing any '.orig' Files in Game Directory";
+                    Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                        $"VERIFY HASH: Checking and Deleting '.orig' Files and Symbolic Folders");
+                }
 
                 DirectoryInfo Game_Files_Directory = new DirectoryInfo(Save_Settings.Live_Data.Game_Path);
                 /* */
@@ -84,7 +161,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     /* */
                     foreach (FileInfo Matched_File in Game_Files_Directory.EnumerateFiles("*.orig", SearchOption.AllDirectories))
                     {
-                        if (!Live_Events.Cancel)
+                        if (!Live_Events.CancellationPending)
                         {
                             Generated_Scanned_List.Add(new Json_List_Scanned_Game_Files() { File_Info = Matched_File });
                         }
@@ -96,7 +173,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     /* */
                     foreach (DirectoryInfo Found_Directory in Game_Files_Directory.EnumerateDirectories())
                     {
-                        if (!Live_Events.Cancel)
+                        if (!Live_Events.CancellationPending)
                         {
                             if (ModNetHandler.IsSymbolic(Found_Directory.FullName))
                             {
@@ -118,11 +195,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     /* */
                     foreach (DirectoryInfo Found_Directory in Game_Files_Directory.GetDirectories())
                     {
-                        if (!Live_Events.Cancel)
+                        if (!Live_Events.CancellationPending)
                         {
                             foreach (FileInfo Matched_File in Found_Directory.EnumerateFiles("*.orig", SearchOption.AllDirectories))
                             {
-                                if (!Live_Events.Cancel)
+                                if (!Live_Events.CancellationPending)
                                 {
                                     Generated_Scanned_List.Add(new Json_List_Scanned_Game_Files() { File_Info = Matched_File });
                                 }
@@ -134,7 +211,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                             /* */
                             foreach (DirectoryInfo Found_Directories in Found_Directory.EnumerateDirectories())
                             {
-                                if (!Live_Events.Cancel)
+                                if (!Live_Events.CancellationPending)
                                 {
                                     if (ModNetHandler.IsSymbolic(Found_Directories.FullName))
                                     {
@@ -166,7 +243,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     {
                         foreach (FileInfo Scripts_files in Scripts_Folder.GetFiles())
                         {
-                            if (!Live_Events.Cancel)
+                            if (!Live_Events.CancellationPending)
                             {
                                 Generated_Scanned_List.Add(new Json_List_Scanned_Game_Files() { File_Info = Scripts_files, Skip = Skip_Scripts_Folder });
                             }
@@ -184,7 +261,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     Game_Files_Directory.Create();
                 }
 
-                if (!Live_Events.Cancel)
+                if (!Live_Events.CancellationPending)
                 {
                     foreach (Json_List_Scanned_Game_Files Bad_File_OR_Folder in Generated_Scanned_List)
                     {
@@ -201,11 +278,21 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                         {
                                             Directory.Delete(Bad_File_OR_Folder.File_System_Info.FullName, true);
                                             Log_Verify.Deleted("Folder - [FSI]: " + Bad_File_OR_Folder.File_System_Info.Name);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"Folder - [FSI]: {Bad_File_OR_Folder.File_System_Info.Name}");
+                                            }
                                         }
                                         else if (File.Exists(Bad_File_OR_Folder.File_System_Info.FullName))
                                         {
                                             File.Delete(Bad_File_OR_Folder.File_System_Info.FullName);
                                             Log_Verify.Deleted("File - [FSI]: " + Bad_File_OR_Folder.File_System_Info.Name);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"File - [FSI]: {Bad_File_OR_Folder.File_System_Info.Name}");
+                                            }
                                         }
                                     }
                                     catch (Exception Error)
@@ -223,6 +310,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                         {
                                             Bad_File_OR_Folder.File_Info.Delete();
                                             Log_Verify.Deleted("File: " + Bad_File_OR_Folder.File_Info.Name);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"File: {Bad_File_OR_Folder.File_Info.Name}");
+                                            }
                                         }
                                     }
                                     catch (Exception Error)
@@ -240,6 +332,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                         {
                                             Directory.Delete(Bad_File_OR_Folder.Directory_Info.FullName, true);
                                             Log_Verify.Deleted("Folder: " + Bad_File_OR_Folder.Directory_Info.Name);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"Folder: {Bad_File_OR_Folder.Directory_Info.Name}");
+                                            }
                                         }
                                     }
                                     catch (Exception Error)
@@ -257,25 +354,50 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 else
                 {
                     /* TODO: ADD FUNCTION FOR STOP */
+                    UI(-1);
+                    Live_Worker.Cancel = true;
                     return;
                 }
 
                 bool Supported_CDN = false;
 
-                if (!Live_Events.Cancel)
+                if (!Live_Events.CancellationPending)
                 {
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Scanning Progress: Checking Hash for checksums.dat";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"Generating Hash for checksums.dat. This may take awhile.");
+                    }
+
                     bool CheckSums_File_Found = "checksums.dat".Hash_SHA() == "80D272597981DABA49F5022BBF36FF302FC9D13E";
 
                     if (CheckSums_File_Found)
                     {
                         /* TODO: ADD CHECKSUMS FOUND MESSAGE */
                         /* Read Local checksums.dat */
+                        if (!Screen_Settings.Screen_Instance.DisposedForm())
+                        {
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Read Progress: Reading checksums.dat File";
+                            Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                $"Checksums File Hash Matched. Reading File. This may take awhile.");
+                        }
                         File_Checksum = File.ReadAllLines("checksums.dat");
+                        if (!Screen_Settings.Screen_Instance.DisposedForm())
+                        {
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Read Progress: Loaded checksums.dat File";
+                            Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                $"Checksums File has been Loaded");
+                        }
                     }
                     else
                     {
-                        /* TODO: ADD CHECKSUMS DOWNLOAD MESSAGE */
-                        //Label_Verify_Scan.SafeInvokeAction(() => Label_Verify_Scan.Text = "Downloading Checksums File");
+                        if (!Screen_Settings.Screen_Instance.DisposedForm())
+                        {
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Retriving Checksums File";
+                            Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                $"Downloading Checksums File from {Verify_CDN_URL + "/unpacked/checksums.dat"}");
+                        }
 
                         /* Fetch and Read Remote checksums.dat */
                         Uri URLCall = new Uri(Verify_CDN_URL + "/unpacked/checksums.dat");
@@ -301,6 +423,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                         try
                         {
                             File_Checksum = Client.DownloadString(URLCall).Split('\n');
+                            Supported_CDN = true;
                         }
                         catch (Exception Error)
                         {
@@ -318,7 +441,21 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                         if (ErrorFree)
                         {
+                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                            {
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Saving Checksums File";
+                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                    $"Saving Checksums File to drive. This may take awhile.");
+                            }
+
                             File.WriteAllLines("checksums.dat", File_Checksum);
+
+                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                            {
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Saved Checksums File";
+                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                    $"Sucessfully Saved Checksums File.");
+                            }
                         }
                         else
                         {
@@ -333,6 +470,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                         {
                             try
                             {
+                                if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                {
+                                    Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                        $"CHECKING CDN URL");
+                                }
                                 Alpha_Client.Timeout = TimeSpan.FromSeconds(Launcher_Value.Launcher_WebCall_Timeout_Enable ?
                                     Launcher_Value.Launcher_WebCall_Timeout() : 60);
                                 HttpRequestMessage Client_Request = new HttpRequestMessage(HttpMethod.Head, Verify_CDN_URL + "/unpacked/checksums.dat");
@@ -341,6 +483,11 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                             }
                             catch
                             {
+                                if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                {
+                                    Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                        $"FAILED CDN URL");
+                                }
                                 Supported_CDN = false;
                             }
                         }
@@ -349,12 +496,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 else
                 {
                     /* TODO: ADD FUNCTION FOR STOP */
+                    UI(-1);
+                    Live_Worker.Cancel = true;
                     return;
                 }
 
                 bool Invalid_Detected = false;
 
-                if (!Live_Events.Cancel)
+                if (!Live_Events.CancellationPending)
                 {
                     if (Supported_CDN)
                     {
@@ -365,7 +514,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                             for (var i = 0; i < Files_Total; i++)
                             {
-                                if (!Live_Events.Cancel)
+                                if (!Live_Events.CancellationPending)
                                 {
                                     Generated_Scanned_Invalid_List.Add(new Json_List_Invalid_Game_Files()
                                     {
@@ -381,24 +530,56 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                 }
                             }
 
-                            foreach (Json_List_Invalid_Game_Files Current_File_Scan in Generated_Scanned_Invalid_List)
+                            if (!Screen_Settings.Screen_Instance.DisposedForm())
                             {
-                                if (!Live_Events.Cancel)
+                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                    $"LIST: {Generated_Scanned_Invalid_List.Count}");
+                            }
+
+                            int FILE_COUNTS = 0;
+
+
+                            foreach (Json_List_Invalid_Game_Files Current_File_Scan in Generated_Scanned_Invalid_List.ToArray())
+                            {
+                                
+                                if (!Live_Events.CancellationPending)
                                 {
+                                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                    {
+                                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                            $"FILE: {FILE_COUNTS}");
+                                    }
+                                    FILE_COUNTS++;
+
                                     if (!File.Exists(Current_File_Scan.Path_Full))
                                     {
                                         Log_Verify.Missing("File: " + Current_File_Scan.Path_Truncated);
+                                        if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                        {
+                                            Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                $"MISSING File: {Current_File_Scan.Path_Truncated}");
+                                        }
                                     }
                                     else
                                     {
                                         if (Current_File_Scan.Hash != Current_File_Scan.Path_Full.Hash_SHA().Trim())
                                         {
                                             Log_Verify.Invalid("File: " + Current_File_Scan.Path_Truncated);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"INVALID File: {Current_File_Scan.Path_Truncated}");
+                                            }
                                         }
                                         else
                                         {
-                                            Generated_Scanned_Invalid_List.Remove(Current_File_Scan);
                                             Log_Verify.Valid("File: " + Current_File_Scan.Path_Truncated);
+                                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                                            {
+                                                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                                                    $"VALID File: {Current_File_Scan.Path_Truncated}");
+                                            }
+                                            Generated_Scanned_Invalid_List.Remove(Current_File_Scan);
                                         }
                                     }
 
@@ -432,51 +613,44 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     else
                     {
                         /* TODO: ADD NOT SUPPORTED CDN MESSAGE */
+                        UI(3);
                         return;
                     }
                 }
                 else
                 {
                     /* TODO: ADD FUNCTION FOR STOP */
+                    UI(-1);
+                    Live_Worker.Cancel = true;
                     return;
                 }
 
-                if (!Live_Events.Cancel)
+                if (!Live_Events.CancellationPending)
                 {
                     if (Invalid_Detected)
                     {
                         Presence_Launcher.Status(26);
-                        /* START Show Redownloader Progress
-                        StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                        StopScanner.SafeInvokeAction(() => StopScanner.Visible = true);
-
-
-                        if (!Screen_Instance.DisposedForm())
-                        {
-                            Screen_Instance.Label_Verify_Scan.Text = "Currently (re)downloading files. This part may take awhile depending on your connection.";
-                        }*/
+                        UI(2);
 
                         if (Generated_Scanned_Invalid_List.Any())
                         {
-                            //DownloadProgressText.SafeInvokeAction(() => DownloadProgressText.Text = "\nPreparing to Download Files");
-
                             Files_Total = Generated_Scanned_Invalid_List.Count;
 
-                            foreach (Json_List_Invalid_Game_Files Found_File_Invaild in Generated_Scanned_Invalid_List)
+                            foreach (Json_List_Invalid_Game_Files Found_File_Invaild in Generated_Scanned_Invalid_List.ToArray())
                             {
-                                if (!Live_Events.Cancel)
+                                if (!Live_Events.CancellationPending)
                                 {
                                     try
                                     {
                                         while (File_Downloading)
                                         {
-                                            if (Live_Events.Cancel)
+                                            if (Live_Events.CancellationPending)
                                             {
                                                 break;
                                             }
                                         }
 
-                                        if (!Live_Events.Cancel)
+                                        if (!Live_Events.CancellationPending)
                                         {
                                             Uri URLCall = new Uri(Found_File_Invaild.Download_Url);
                                             int Timeout = (int)TimeSpan.FromMinutes(5).TotalMilliseconds;
@@ -513,7 +687,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                                             Client.DownloadProgressChanged += (Systems, RecevingData) =>
                                             {
-                                                if (RecevingData.TotalBytesToReceive >= 1 && !Live_Events.Cancel)
+                                                if (RecevingData.TotalBytesToReceive >= 1 && !Live_Events.CancellationPending)
                                                 {
                                                     /*
                                                     if (Screen_Instance != default)
@@ -531,7 +705,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                                     " of " + Time_Conversion.FormatFileSize(RecevingData.TotalBytesToReceive));
                                                     */
                                                 }
-                                                else if (Live_Events.Cancel)
+                                                else if (Live_Events.CancellationPending)
                                                 {
                                                     Client.CancelAsync();
                                                 }
@@ -545,7 +719,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                             }
                                             catch (Exception Error)
                                             {
-                                                if (!Live_Events.Cancel)
+                                                if (!Live_Events.CancellationPending)
                                                 {
                                                     Files_Download_Error_Total++;
                                                     File_Downloading = false;
@@ -567,7 +741,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                     }
                                     catch (Exception Error)
                                     {
-                                        if (!Live_Events.Cancel)
+                                        if (!Live_Events.CancellationPending)
                                         {
                                             Files_Download_Error_Total++;
                                         }
@@ -585,12 +759,15 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     else
                     {
                         /* TODO: ADD CLEAN FILES MESSAGE (ALSO KNOWN AS VALID FILES) */
+                        UI(1);
                         return;
                     }
                 }
                 else
                 {
                     /* TODO: ADD FUNCTION FOR STOP */
+                    UI(-1);
+                    Live_Worker.Cancel = true;
                     return;
                 }
             }
@@ -604,11 +781,19 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
         {
             if (Live_Events.Cancelled)
             {
-
+                if (!Screen_Settings.Screen_Instance.DisposedForm())
+                {
+                    Screen_Settings.Screen_Instance.Button_Verify_Scan.Text = "Stopped Scan";
+                    Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}Successfully Stopped Scan");
+                }
             }
             else
             {
-
+                if (!Screen_Settings.Screen_Instance.DisposedForm())
+                {
+                    Screen_Settings.Screen_Instance.Button_Verify_Scan.Text = "Start Scan";
+                    Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}Successfully Completed Scan");
+                }
             }
         }
     }

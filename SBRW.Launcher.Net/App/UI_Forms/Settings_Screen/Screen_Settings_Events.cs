@@ -17,6 +17,7 @@ using SBRW.Launcher.Core.Required.System.Windows_;
 using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
+using SBRW.Launcher.RunTime.LauncherCore.Downloader;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
@@ -98,6 +99,27 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
                 MessageBox.Show(null, "Launcher failed to reach any APIs. CDN Selection Screen is not available.",
                     "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Verify_Scan_Click(object sender, EventArgs e)
+        {
+            if (Download_Raw.Thread != default)
+            {
+                Button_Verify_Scan.Text = "Stop Scan";
+                /* Downloader is Running */
+                Download_Raw.Stop();
+            }
+            else
+            {
+                Button_Verify_Scan.Text = "Start Scan";
+                /* Downloader is Running */
+                Download_Raw.Verify_CDN_URL = Save_Settings.Live_Data.Launcher_CDN;
+                Download_Raw.Start();
             }
         }
         /// <summary>
@@ -493,6 +515,42 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void CheckBox_Alt_WebCalls_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Alt_WebCalls.Text = $"Alternative WebCalls {(CheckBox_Alt_WebCalls.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Proxy_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Proxy.Text = $"Proxy {(CheckBox_Proxy.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Host_to_IP_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Host_to_IP.Text = $"IP Converter {(CheckBox_Host_to_IP.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Proxy_Domain_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Proxy_Domain.Text = $"Proxy Domain {(CheckBox_Proxy_Domain.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBox_Enable_Affinity_Range_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Enable_Affinity_Range.Text = $"Affinity Range {(CheckBox_Enable_Affinity_Range.Checked ? "(Enabled)" :"(Disabled)")}";
@@ -833,13 +891,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             NewGameFilesPath = Save_Settings.Live_Data.Game_Path;
             NewLauncherPath = Locations.LauncherFolder;
 
-            CheckBox_Proxy.Checked = !Save_Settings.Proxy_RunTime();
-            CheckBox_RPC.Checked = !Save_Settings.RPC_Discord();
+            CheckBox_Proxy.Checked = Save_Settings.Proxy_RunTime();
+            CheckBox_RPC.Checked = Save_Settings.RPC_Discord();
             CheckBox_Alt_WebCalls.Checked = Save_Settings.WebCalls_Alt();
             CheckBox_Theme_Support.Checked = Save_Settings.Theme_Custom();
             CheckBox_JSON_Update_Cache.Checked = Save_Settings.Update_Frequency_JSON();
             CheckBox_Proxy_Domain.Checked = Save_Settings.Proxy_Domain();
-            CheckBox_Host_to_IP.Checked = !Save_Settings.Legacy_Host_To_IP();
+            CheckBox_Host_to_IP.Checked = Save_Settings.Legacy_Host_To_IP();
+
+            /* Trigger Events for CheckBox Text */
+            CheckBox_Enable_Affinity_Range_CheckedChanged(default, default);
+            CheckBox_RPC_CheckedChanged(default, default);
+            CheckBox_JSON_Update_Cache_CheckedChanged(default, default);
+            CheckBox_Theme_Support_CheckedChanged(default, default);
+            CheckBox_Enable_ACM_CheckedChanged(default, default);
+            CheckBox_Alt_WebCalls_CheckedChanged(default, default);
+            CheckBox_Proxy_CheckedChanged(default, default);
+            CheckBox_Host_to_IP_CheckedChanged(default, default);
+            CheckBox_Proxy_Domain_CheckedChanged(default, default);
 
             switch (Save_Settings.Downloader_Game())
             {
