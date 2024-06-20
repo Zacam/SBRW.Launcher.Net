@@ -122,6 +122,7 @@
             this.Button_Change_Game_Path = new System.Windows.Forms.Button();
             this.Label_Game_Files = new System.Windows.Forms.Label();
             this.TabPage_Game_Verify_Hash = new System.Windows.Forms.TabPage();
+            this.VerifyHashWelcome = new System.Windows.Forms.Label();
             this.CheckBox_Verify_Scan_Scripts = new System.Windows.Forms.CheckBox();
             this.GroupBox_Verify_Scan = new System.Windows.Forms.GroupBox();
             this.TextBox_Verify_Scan = new System.Windows.Forms.TextBox();
@@ -192,7 +193,6 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
-            this.VerifyHashWelcome = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -1365,6 +1365,21 @@
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
             // 
+            // VerifyHashWelcome
+            // 
+            this.VerifyHashWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.VerifyHashWelcome.Location = new System.Drawing.Point(434, 13);
+            this.VerifyHashWelcome.Name = "VerifyHashWelcome";
+            this.VerifyHashWelcome.Size = new System.Drawing.Size(384, 101);
+            this.VerifyHashWelcome.TabIndex = 227;
+            this.VerifyHashWelcome.Text = "Welcome!\r\n\r\nThe scanning process is pretty quick,\r\nbut may still take a while.\r\nD" +
+    "epending on your connection,\r\nre-downloading will take the longest.\r\nPlease allo" +
+    "w it to complete fully!";
+            this.VerifyHashWelcome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // CheckBox_Verify_Scan_Scripts
             // 
             this.CheckBox_Verify_Scan_Scripts.BackColor = System.Drawing.Color.Transparent;
@@ -1428,7 +1443,7 @@
             this.Button_Verify_Scan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
             this.Button_Verify_Scan.Location = new System.Drawing.Point(13, 13);
             this.Button_Verify_Scan.Name = "Button_Verify_Scan";
-            this.Button_Verify_Scan.Size = new System.Drawing.Size(91, 24);
+            this.Button_Verify_Scan.Size = new System.Drawing.Size(222, 24);
             this.Button_Verify_Scan.TabIndex = 13;
             this.Button_Verify_Scan.Text = "Stop Scan";
             this.Button_Verify_Scan.UseVisualStyleBackColor = true;
@@ -2286,21 +2301,6 @@
             // 
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
-            // 
-            // VerifyHashWelcome
-            // 
-            this.VerifyHashWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.VerifyHashWelcome.Location = new System.Drawing.Point(434, 13);
-            this.VerifyHashWelcome.Name = "VerifyHashWelcome";
-            this.VerifyHashWelcome.Size = new System.Drawing.Size(384, 101);
-            this.VerifyHashWelcome.TabIndex = 227;
-            this.VerifyHashWelcome.Text = "Welcome!\r\n\r\nThe scanning process is pretty quick,\r\nbut may still take a while.\r\nD" +
-    "epending on your connection,\r\nre-downloading will take the longest.\r\nPlease allo" +
-    "w it to complete fully!";
-            this.VerifyHashWelcome.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Screen_Settings
             // 

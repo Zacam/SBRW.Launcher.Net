@@ -298,7 +298,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_Game_Verify_Files.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Button_Verify_Scan.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -386,7 +386,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Buttons */
             ButtonsColorSet(Button_Change_Game_Path, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_Change_Game_Path_Setup, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
-            ButtonsColorSet(Button_Game_Verify_Files, 0, false);
+            ButtonsColorSet(Button_Verify_Scan, 0, false);
             ButtonsColorSet(Button_Game_User_Settings, 0, true);
             ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
             ButtonsColorSet(Button_Launcher_logs, 0, true);
@@ -499,7 +499,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Console_Submit.Click += new EventHandler(Console_Enter);
             Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
-            Button_Game_Verify_Files.Click += new EventHandler(Button_Game_Verify_Files_Click);
+            Button_Verify_Scan.Click += new EventHandler(Button_Game_Verify_Files_Click);
             Button_Save.Click += new EventHandler(SettingsSave_Click);
             Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
             Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
@@ -549,7 +549,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             if (FunctionStatus.IsVerifyHashDisabled)
             {
-                ButtonsColorSet(Button_Game_Verify_Files, 3, true);
+                ButtonsColorSet(Button_Verify_Scan, 3, true);
             }
 
             /*******************************/
@@ -558,7 +558,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             ToolTip_Hover.SetToolTip(Button_Change_Game_Path, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
             ToolTip_Hover.SetToolTip(Button_Change_Game_Path_Setup, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
-            ToolTip_Hover.SetToolTip(Button_Game_Verify_Files, "Checks and Restores GameFiles back to \"Stock\"");
+            ToolTip_Hover.SetToolTip(Button_Verify_Scan, "Checks and Restores GameFiles back to \"Stock\"");
             ToolTip_Hover.SetToolTip(Button_CDN_List, "Download Location for Fetching the base GameFiles\n" +
                 "Can also be a Soruce for VerifyHash to get replacement files");
             ToolTip_Hover.SetToolTip(Button_CDN_List_Setup, "Download Location for Fetching the base GameFiles\n" +
@@ -721,10 +721,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             #region Verfy Hash
             VerifyHashWelcome.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            DownloadProgressText.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            StartScanner.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            VerifyHashText.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
 
             /********************************/
             /* Set Theme Colors              /
@@ -733,16 +731,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ForeColor = Color_Winform.Text_Fore_Color;
             BackColor = Color_Winform.BG_Fore_Color;
 
-            DownloadProgressText.ForeColor = Color_Winform.Text_Fore_Color;
             Label_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
 
             VerifyHashWelcome.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-            VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
 
-            StartScanner.ForeColor = Color_Winform.Success_Text_Fore_Color;
-            StartScanner.BackColor = Color_Winform_Buttons.Blue_Back_Color;
-            StartScanner.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
-            StartScanner.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+            Button_Verify_Scan.ForeColor = Color_Winform.Success_Text_Fore_Color;
+            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
 
             Button_Verify_Scan.ForeColor = Color_Winform.Warning_Text_Fore_Color;
             Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
@@ -753,8 +749,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Events Handlers               /
             /********************************/
 
-            StartScanner.Click += new EventHandler(StartScanner_Click);
-            Button_Verify_Scan.Click += new EventHandler(StopScanner_Click);
+            //Button_Verify_Scan.Click += new EventHandler(StopScanner_Click);
 
             /********************************/
             /* Hardcoded Text [Linux Fix]    /
@@ -763,8 +758,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             VerifyHashWelcome.Text = "Welcome!\n\nThe scanning process is pretty quick,\nbut may still take a while." +
                 "\nDepending on your connection,\nre-downloading will take the longest\nPlease allow it to complete fully!";
             Label_Verify_Scan.Text = "Scanning Progress:";
-            DownloadProgressText.Text = "Download Progress:";
-            VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";
+            //DownloadProgressText.Text = "Download Progress:";
+            //VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";
             #endregion
         }
         #endregion

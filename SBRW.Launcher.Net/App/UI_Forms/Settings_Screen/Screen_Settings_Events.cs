@@ -109,7 +109,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             if (FunctionStatus.IsVerifyHashDisabled)
             {
-                ButtonsColorSet(Button_Game_Verify_Files, 3, true);
+                ButtonsColorSet(Button_Verify_Scan, 3, true);
                 if (!File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, "nfsw.exe")))
                 {
                     MessageBox.Show(null, "You need to Download the Game Files first before you can have access to run Verify Hash",
@@ -123,13 +123,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
             else if (!FunctionStatus.DoesCDNSupportVerifyHash)
             {
-                ButtonsColorSet(Button_Game_Verify_Files, 3, true);
+                ButtonsColorSet(Button_Verify_Scan, 3, true);
                 MessageBox.Show(null, "The current saved CDN does not support 'Verify GameFiles' Scan" +
                     "\nPlease Choose Another CDN from the list", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                ButtonsColorSet(Button_Game_Verify_Files, (Save_Settings.Live_Data.Game_Integrity != "Good") ? 2 : 0, true);
+                ButtonsColorSet(Button_Verify_Scan, (Save_Settings.Live_Data.Game_Integrity != "Good") ? 2 : 0, true);
                 Screen_Verify_Hash.OpenScreen();
             }
         }
@@ -203,7 +203,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Save_Settings.Live_Data.Launcher_CDN = New_Choosen_CDN;
                 Label_CDN_Current.Text = "CHANGED CDN:";
                 CDN_Changed_Button_Update = Stop_and_Restart_Downloader = RestartRequired = true;
-                ButtonsColorSet(Button_Game_Verify_Files, 0, false);
+                ButtonsColorSet(Button_Verify_Scan, 0, false);
             }
 
             if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
@@ -379,14 +379,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                                     if (Screen_Instance != null)
                                     {
                                         FunctionStatus.DoesCDNSupportVerifyHash = true;
-                                        ButtonsColorSet(Button_Game_Verify_Files, (Save_Settings.Live_Data.Game_Integrity != "Good" ? 2 : 0), true);
+                                        ButtonsColorSet(Button_Verify_Scan, (Save_Settings.Live_Data.Game_Integrity != "Good" ? 2 : 0), true);
                                     }
                                     break;
                                 default:
                                     if (Screen_Instance != null)
                                     {
                                         FunctionStatus.DoesCDNSupportVerifyHash = false;
-                                        ButtonsColorSet(Button_Game_Verify_Files, 3, true);
+                                        ButtonsColorSet(Button_Verify_Scan, 3, true);
                                     }
                                     break;
                             }
@@ -1007,11 +1007,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 if (BuildDevelopment.Allowed())
                 {
                     FunctionStatus.DoesCDNSupportVerifyHash = true;
-                    ButtonsColorSet(Button_Game_Verify_Files, 4, true);
+                    ButtonsColorSet(Button_Verify_Scan, 4, true);
                 }
                 else
                 {
-                    ButtonsColorSet(Button_Game_Verify_Files, 0, false);
+                    ButtonsColorSet(Button_Verify_Scan, 0, false);
                     await Task.Run(() =>
                     {
                         if (!Application.OpenForms[this.Name].IsDisposed)
@@ -1022,11 +1022,11 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                                 {
                                     case APIStatus.Online:
                                         FunctionStatus.DoesCDNSupportVerifyHash = true;
-                                        ButtonsColorSet(Button_Game_Verify_Files, (Save_Settings.Live_Data.Game_Integrity != "Good") ? 2 : 0, true);
+                                        ButtonsColorSet(Button_Verify_Scan, (Save_Settings.Live_Data.Game_Integrity != "Good") ? 2 : 0, true);
                                         break;
                                     default:
                                         FunctionStatus.DoesCDNSupportVerifyHash = false;
-                                        ButtonsColorSet(Button_Game_Verify_Files, 3, true);
+                                        ButtonsColorSet(Button_Verify_Scan, 3, true);
                                         break;
                                 }
                             }
