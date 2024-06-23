@@ -1,5 +1,4 @@
-﻿using Flurl.Util;
-using SBRW.Launcher.App.UI_Forms.About_Screen;
+﻿using SBRW.Launcher.App.UI_Forms.About_Screen;
 using SBRW.Launcher.App.UI_Forms.Main_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen;
@@ -10,22 +9,19 @@ using SBRW.Launcher.Core.Extension.Api_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.String_;
 using SBRW.Launcher.Core.Extra.File_.Save_;
-using SBRW.Launcher.Core.Extra.Ini_;
-using SBRW.Launcher.Core.Extra.XML_;
-using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.Core.Required.System.Windows_;
-using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.InsiderKit;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using SBRW.Launcher.RunTime.LauncherCore.Downloader;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
+using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.LauncherCore.ModNet;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -97,8 +93,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 {
                     ButtonsColorSet(Button_CDN_List_Setup, 4, true);
                 }
-                MessageBox.Show(null, "Launcher failed to reach any APIs. CDN Selection Screen is not available.",
-                    "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Launcher failed to reach any APIs. CDN Selection Screen is not available.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         /// <summary>
@@ -134,20 +129,20 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ButtonsColorSet(Button_Verify_Scan, 3, true);
                 if (!File.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, "nfsw.exe")))
                 {
-                    MessageBox.Show(null, "You need to Download the Game Files first before you can have access to run Verify Hash",
-                        "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ("You need to Download the Game Files first " +
+                        "before you can have access to run Verify Hash").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
-                    MessageBox.Show(null, "You have already done a 'Verify GameFiles' Scan" +
-                    "\nPlease Restart Launcher to do a new Verify GameFiles Scan", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    ("You have already done a 'Verify GameFiles' Scan" +
+                    "\nPlease Restart Launcher to do a new Verify GameFiles Scan").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
             else if (!FunctionStatus.DoesCDNSupportVerifyHash)
             {
                 ButtonsColorSet(Button_Verify_Scan, 3, true);
-                MessageBox.Show(null, "The current saved CDN does not support 'Verify GameFiles' Scan" +
-                    "\nPlease Choose Another CDN from the list", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ("The current saved CDN does not support 'Verify GameFiles' Scan" +
+                    "\nPlease Choose Another CDN from the list").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
@@ -177,7 +172,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             bool Stop_and_Restart_Downloader = false;
             bool CDN_Changed_Button_Update = false;
 
-            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
+            if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
             {
                 Button_Save.Text = "SAVING";
             }
@@ -228,17 +223,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ButtonsColorSet(Button_Verify_Scan, 0, false);
             }
 
-            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
+            if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
             {
-                if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "1" : "0"))
+                if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "0" : "1"))
                 {
-                    Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "0" : "1";
 
                     if (Save_Settings.Live_Data.Launcher_Proxy == "1" && InformationCache.SelectedServerEnforceProxy)
                     {
-                        MessageBox.Show(null, ServerListUpdater.ServerName("Settings") + " requires Proxy to be Enabled." +
-                                "\nThe launcher will turn on Proxy, even if you have chosen to Disable it",
-                                "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        (ServerListUpdater.ServerName("Settings") + " requires Proxy to be Enabled.\nThe launcher will turn on Proxy, " +
+                        "even if you have chosen to Disable it").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
@@ -257,36 +251,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     Save_Settings.Live_Data.Launcher_Proxy_Domain = CheckBox_Proxy_Domain.Checked ? "1" : "0";
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Discord_Presence != (CheckBox_RPC.Checked ? "1" : "0"))
+                if (Save_Settings.Live_Data.Launcher_Discord_Presence != (CheckBox_RPC.Checked ? "0" : "1"))
                 {
-                    Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "1" : "0";
-                }
-
-                /*
-                if ((Save_Settings.Live_Data.Launcher_Insider != (CheckBox_Opt_Insider.Checked ? "1" : "0")) &&
-    !Insider_Settings_Lock && !BuildDevelopment.Allowed())
-                {
-                    BuildBeta.Allowed((Save_Settings.Live_Data.Launcher_Insider = CheckBox_Opt_Insider.Checked ? "1" : "0") == "1");
-                    RestartRequired = true;
-                }
-                */
-                /* Proxy Logging */
-                if (ComboBox_Proxy_Logging.SelectedItem != default)
-                {
-                    if (Save_Settings.Proxy_Log_Mode() != ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode)
-                    {
-                        Save_Settings.Live_Data.Launcher_Proxy_Log_Mode =
-                            ((int)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
-                    }
-                }
-                /* Proxy GZip Version */
-                if (ComboBox_Proxy_GZip_Version.SelectedItem != default)
-                {
-                    if (Save_Settings.Proxy_GZip_Version() != ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version)
-                    {
-                        Save_Settings.Live_Data.Launcher_Proxy_GZip_Version =
-                            ((int)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
-                    }
+                    Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "0" : "1";
                 }
 
                 if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
@@ -331,6 +298,66 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache = CheckBox_JSON_Update_Cache.Checked ? "1" : "0";
                 }
 
+                if (Save_Settings.Live_Data.Launcher_Certificate_Mode != (CheckBox_Custom_Certificate.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Certificate_Mode = CheckBox_Custom_Certificate.Checked ? "1" : "0";
+                }
+
+                if (Save_Settings.Live_Data.Launcher_Account_Manager != (CheckBox_Account_Manager.Checked ? "1" : "0"))
+                {
+                    Save_Settings.Live_Data.Launcher_Account_Manager = CheckBox_Account_Manager.Checked ? "1" : "0";
+
+                    if (!Screen_Main.Screen_Instance.DisposedForm())
+                    {
+                        /* Account Manager Controls */
+                        Screen_Main.Screen_Instance.ComboBox_Accounts.Visible = CheckBox_Account_Manager.Checked;
+                        Screen_Main.Screen_Instance.Button_Account_Manager.Visible = CheckBox_Account_Manager.Checked;
+                        /* Regular Login Controls */
+                        Screen_Main.Screen_Instance.Input_Email.Visible = !CheckBox_Account_Manager.Checked;
+                        Screen_Main.Screen_Instance.Input_Password.Visible = !CheckBox_Account_Manager.Checked;
+                        Screen_Main.Screen_Instance.Picture_Input_Email.Visible = !CheckBox_Account_Manager.Checked;
+                        Screen_Main.Screen_Instance.Picture_Input_Password.Visible = !CheckBox_Account_Manager.Checked;
+                    }
+                }
+
+                /* Proxy Logging */
+                if (ComboBox_Proxy_Logging.SelectedItem != default)
+                {
+                    if (Save_Settings.Proxy_Log_Mode() != ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode)
+                    {
+                        Save_Settings.Live_Data.Launcher_Proxy_Log_Mode =
+                            ((int)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
+                    }
+                }
+                /* Proxy GZip Version */
+                if (ComboBox_Proxy_GZip_Version.SelectedItem != default)
+                {
+                    if (Save_Settings.Proxy_GZip_Version() != ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version)
+                    {
+                        Save_Settings.Live_Data.Launcher_Proxy_GZip_Version =
+                            ((int)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
+                    }
+                }
+                /* Launcher Logging */
+                if (ComboBox_Launcher_Logging.SelectedItem != default)
+                {
+                    if (Save_Settings.Log_Mode() != ((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode)
+                    {
+                        Save_Settings.Live_Data.Launcher_Log_Mode =
+                            ((int)((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode).ToString();
+                    }
+                }
+                /* Launcher Builds */
+                if (ComboBox_Launcher_Builds_Branch.SelectedItem != default)
+                {
+                    if (Save_Settings.Preview_Mode_Int() != ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value)
+                    {
+                        Save_Settings.Live_Data.Launcher_Insider =
+                            ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value.ToString();
+                        RestartRequired = true;
+                    }
+                }
+
                 try
                 {
                     /* Actually lets check those 2 files */
@@ -364,18 +391,17 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Save Settings */
             Save_Settings.Save();
 
-            if (TabControl_Shared_Hub.SelectedTab.Equals(TabPage_Settings))
+            if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
             {
                 Button_Save.Text = "SAVED";
             }
 
             if (RestartRequired)
             {
-                MessageBox.Show(null, "In order to see settings changes, you need to restart the Launcher manually.", "GameLauncher",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "In order to see settings changes, you need to restart the Launcher manually.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            if (Stop_and_Restart_Downloader && Screen_Parent.Launcher_Setup.Equals(0))
+            if (Stop_and_Restart_Downloader && Screen_Parent.Launcher_Setup == 0)
             {
                 try
                 {
@@ -416,21 +442,25 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     });
                 }
             }
-            Screen_Parent.Launcher_Setup = 0;
-            Close();
+
+            if (Screen_Parent.Launcher_Setup == 1)
+            {
+                Screen_Parent.Launcher_Setup = 0;
+                Close();
+            }
+            else
+            {
+                Screen_Parent.Launcher_Setup = 0;
+            }
         }
         /// <summary>
-        /// 
+        /// DEBUG FEATURES GOES HERE!!!
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Button_Experiments_Click(object sender, EventArgs e)
         {
-            if (Screen_Main.Screen_Instance != default)
-            {
-                Screen_Main.Screen_Instance.ComboBox_Accounts.Visible = CheckBox_Enable_ACM.Checked;
-                Screen_Main.Screen_Instance.Button_Account_Manager.Visible = CheckBox_Enable_ACM.Checked;
-            }
+            
         }
         #endregion
         /// <summary>
@@ -506,9 +536,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckBox_Enable_ACM_CheckedChanged(object sender, EventArgs e)
+        private void CheckBox_Account_Manager_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox_Enable_ACM.Text = $"Account Manager {(CheckBox_Enable_ACM.Checked ? "(Enabled)" : "(Disabled)")}";
+            CheckBox_Account_Manager.Text = $"Account_Manager {(CheckBox_Account_Manager.Checked ? "(Enabled)" : "(Disabled)")}";
         }
         /// <summary>
         /// 
@@ -545,6 +575,15 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Proxy_Domain_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Proxy_Domain.Text = $"Proxy Domain {(CheckBox_Proxy_Domain.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Custom_Certificate_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Custom_Certificate.Text = $"Custom Certificate {(CheckBox_Custom_Certificate.Checked ? "(Enabled)" : "(Disabled)")}";
         }
         /// <summary>
         /// 
@@ -600,10 +639,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void SettingsClearServerModCacheButton_Click(object sender, EventArgs e)
         {
-            DialogResult SettingsClearServerModCacheConfirmation = MessageBox.Show(null, "Warning: you are about the Delete Server Mods Cache" +
+            DialogResult SettingsClearServerModCacheConfirmation = 
+                ("Warning: you are about the Delete Server Mods Cache" +
             "\nBy Deleting the Cache, you will have to re-download the Server Mods Again." +
-            "\n\nClick Yes to Delete Mods Cache \nor \nClick No to Keep Mods Cache", "GameLauncher",
-            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            "\n\nClick Yes to Delete Mods Cache \nor \nClick No to Keep Mods Cache").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
             if (SettingsClearServerModCacheConfirmation == DialogResult.Yes)
             {
@@ -619,7 +658,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                     Log.Warning("LAUNCHER: User Confirmed to Delete Server Mods Cache");
                     ButtonsColorSet(Button_Clear_Server_Mods, 1, false);
-                    MessageBox.Show(null, "Deleted Server Mods Cache", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "Deleted Server Mods Cache".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception Error)
                 {
@@ -642,7 +681,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     File.Delete(Save_Settings.Live_Data.Game_Path + "/NFSWO_COMMUNICATION_LOG.txt");
                 }
                 ButtonsColorSet(Button_Clear_NFSWO_Logs, 1, false);
-                MessageBox.Show(null, "Deleted NFSWO Communication Log", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Deleted NFSWO Communication Log".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception Error)
             {
@@ -677,7 +716,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
 
                 ButtonsColorSet(Button_Clear_Crash_Logs, 1, false);
-                MessageBox.Show(null, "Deleted Crash Logs", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Deleted Crash Logs".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception Error)
             {
@@ -717,7 +756,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 }
 
                 ButtonsColorSet(Button_Launcher_logs, 1, false);
-                MessageBox.Show(null, "Deleted Old Launcher Logs", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "Deleted Old Launcher Logs".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception Error)
             {
@@ -745,7 +784,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 FileName = "   Select Game Files Folder"
             };
 
-            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog()) == DialogResult.OK)
+            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog(Screen_Parent.Screen_Instance)) == DialogResult.OK)
             {
                 NewGameFilesPath = Path.GetDirectoryName(changeGameFilesPath.FileName) ?? "Invalid Folder Path";
                 Label_Game_Current_Path_Setup.Text = Label_Game_Current_Path.Text = "NEW DIRECTORY";
@@ -756,14 +795,14 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 #else
             FolderBrowserDialog changeGameFilesPath = new FolderBrowserDialog();
 
-            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog()) == DialogResult.OK)
+            if ((Status_Dialog_Result = changeGameFilesPath.ShowDialog(Screen_Parent.Screen_Instance)) == DialogResult.OK)
             {
                 NewGameFilesPath = Path.GetFullPath(changeGameFilesPath.SelectedPath);
                 Label_Game_Current_Path_Setup.Text = Label_Game_Current_Path.Text = "NEW DIRECTORY";
                 LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = NewGameFilesPath;
             }
 #endif
-            if (Screen_Parent.Launcher_Setup.Equals(1) && (Status_Dialog_Result == DialogResult.OK))
+            if (Screen_Parent.Launcher_Setup ==1 && (Status_Dialog_Result == DialogResult.OK))
             {
                 ButtonsColorSet(Button_Change_Game_Path, 1, true);
                 ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
@@ -836,12 +875,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ComboBox_Proxy_Logging_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Screen_Instance != default)
+            if (!Screen_Instance.DisposedForm())
             {
-                if (!(Screen_Instance.Disposing || Screen_Instance.IsDisposed))
-                {
-                    Label_Proxy_Logging_Selected_Details.Text = ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Details;
-                }
+                Label_Proxy_Logging_Selected_Details.Text = ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Details;
             }
         }
         /// <summary>
@@ -851,12 +887,33 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void ComboBox_Proxy_GZip_Version_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (Screen_Instance != default)
+            if (!Screen_Instance.DisposedForm())
             {
-                if (!(Screen_Instance.Disposing || Screen_Instance.IsDisposed))
-                {
-                    Label_Proxy_GZip_Version_Selected_Details.Text = ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Details;
-                }
+                Label_Proxy_GZip_Version_Selected_Details.Text = ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Details;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Launcher_Logging_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Screen_Instance.DisposedForm())
+            {
+                Label_Launcher_Logging_Selected_Details.Text = ((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Details;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Launcher_Builds_Branch_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Screen_Instance.DisposedForm())
+            {
+                Label_Launcher_Builds_Branch_Selected_Details.Text = ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Details;
             }
         }
         #region Settings Load
@@ -898,17 +955,20 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_JSON_Update_Cache.Checked = Save_Settings.Update_Frequency_JSON();
             CheckBox_Proxy_Domain.Checked = Save_Settings.Proxy_Domain();
             CheckBox_Host_to_IP.Checked = Save_Settings.Legacy_Host_To_IP();
+            CheckBox_Account_Manager.Checked = Save_Settings.Account_Manager();
+            CheckBox_Custom_Certificate.Checked = Save_Settings.Certificate_Mode();
 
             /* Trigger Events for CheckBox Text */
             CheckBox_Enable_Affinity_Range_CheckedChanged(default, default);
             CheckBox_RPC_CheckedChanged(default, default);
             CheckBox_JSON_Update_Cache_CheckedChanged(default, default);
             CheckBox_Theme_Support_CheckedChanged(default, default);
-            CheckBox_Enable_ACM_CheckedChanged(default, default);
             CheckBox_Alt_WebCalls_CheckedChanged(default, default);
             CheckBox_Proxy_CheckedChanged(default, default);
             CheckBox_Host_to_IP_CheckedChanged(default, default);
             CheckBox_Proxy_Domain_CheckedChanged(default, default);
+            CheckBox_Account_Manager_CheckedChanged(default, default);
+            CheckBox_Custom_Certificate_CheckedChanged(default, default);
 
             switch (Save_Settings.Downloader_Game())
             {
@@ -920,19 +980,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     break;
                 case 2:
                     Radio_Button_GameFiles_Downloader_Raw.Checked = true;
-                    break;
-            }
-
-            switch (Save_Settings.Preview_Mode_Int())
-            {
-                case 0:
-                    Radio_Button_Launcher_Builds_Branch_Stable.Checked = true;
-                    break;
-                case 1:
-                    Radio_Button_Launcher_Builds_Branch_Beta.Checked = true;
-                    break;
-                case 2:
-                    Radio_Button_Launcher_Builds_Branch_Developer.Checked = true;
                     break;
             }
 
@@ -1066,9 +1113,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Check If Launcher Failed to Connect to any APIs */
             if (!VisualsAPIChecker.Local_Cached_API())
             {
-                MessageBox.Show(null, "Unable to Connect to any CDN List API. Please check your connection." +
-                "\nCDN Dropdown List will not be available on Settings Screen",
-                "GameLauncher has Paused, Failed To Connect to any CDN List API", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ("Unable to Connect to any CDN List API. Please check your connection." +
+                "\nCDN Dropdown List will not be available on Settings Screen").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             try

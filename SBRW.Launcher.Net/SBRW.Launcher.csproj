@@ -42,6 +42,9 @@
 		<ApplicationManifest Condition=" '$(TargetFramework)' == 'net461' ">app.manifest</ApplicationManifest>
 		<ApplicationManifest Condition=" '$(TargetFramework)' == 'net6.0-windows' ">net.app.manifest</ApplicationManifest>
 	</PropertyGroup>
+  <ItemGroup>
+    <None Remove="App\UI_Forms\Settings_Screen\gfuwsiis.ywh~" />
+  </ItemGroup>
 	<ItemGroup>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>

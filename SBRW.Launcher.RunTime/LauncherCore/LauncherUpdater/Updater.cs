@@ -28,6 +28,7 @@ using SBRW.Launcher.Core.Extension.String_;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
 {
@@ -279,7 +280,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
                                     Process.Start("explorer.exe", "https://github.com/SoapboxRaceWorld/GameLauncher_NFSW/releases/latest");
                                 }
 #endif
-                                MessageBox.Show(null, Translations.Database("LauncherUpdateCheck_FS"), "GameLauncher", MessageBoxButtons.OK);
+                                Translations.Database("LauncherUpdateCheck_FS").Message_Box(MessageBoxButtons.OK);
                             }
                         }
                         else if (UserResult == DialogResult.Ignore)

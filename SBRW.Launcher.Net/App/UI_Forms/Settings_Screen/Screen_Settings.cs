@@ -1,6 +1,11 @@
 ﻿using SBRW.Launcher.App.UI_Forms.Main_Screen;
+using SBRW.Launcher.App.UI_Forms.MessageBox_Screen;
+using SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen;
 using SBRW.Launcher.Core.Discord.RPC_;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.RunTime.LauncherCore.Logger;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
+using System;
 using System.Windows.Forms;
 
 namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
@@ -88,6 +93,19 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Screen_Instance = this;
 
             Presence_Launcher.Status(22);
+        }
+
+        private void button1_Click(object sender, System.EventArgs e)
+        {
+            try
+            {
+                "Test".Message_Box_Details("Some Debug Information TEXT", MessageBoxButtons.OKCancel, MessageBoxIcon.None);
+            }
+            catch (Exception Error)
+            {
+                string ErrorMessage = "Game Settings Editor Screen Encountered an Error";
+                LogToFileAddons.OpenLog("GAME SETTINGS SCREEN", ErrorMessage, Error, "Exclamation", false);
+            }
         }
     }
 }

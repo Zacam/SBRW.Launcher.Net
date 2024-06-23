@@ -6,6 +6,7 @@ using SBRW.Launcher.Core.Theme;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
+using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using System;
@@ -93,6 +94,98 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (e.Index != -1 && cb.Items != null)
                     {
                         if (cb.Items[e.Index] is Json_List_Proxy_GZip_Version si)
+                        {
+                            Gzip_Version_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Gzip_Version_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Gzip_Version_Name, font, textColor, e.Bounds);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Launcher_Logging_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Gzip_Version_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Launcher_Logging si)
+                        {
+                            Gzip_Version_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Gzip_Version_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Gzip_Version_Name, font, textColor, e.Bounds);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Launcher_Builds_Branch_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Gzip_Version_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Launcher_Builds si)
                         {
                             Gzip_Version_Name = si.Name;
                         }
@@ -358,12 +451,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Theme_Support.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Launcher_Builds_Branch.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Launcher_Builds_Branch_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Launcher_Builds_Branch_Stable.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Launcher_Builds_Branch_Beta.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Label_Launcher_Builds_Branch_Developer.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Radio_Button_Launcher_Builds_Branch_Stable.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Launcher_Builds_Branch_Beta.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Launcher_Builds_Branch_Developer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Launcher_Builds_Branch_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Launcher_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             LinkLabel_Launcher_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             #endregion
@@ -469,9 +557,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
             
             ComboBox_Proxy_Logging.DisplayMember = "Name";
-            ComboBox_Proxy_Logging.DataSource = ProxySettingsListUpdater.Proxy_Logging;
+            ComboBox_Proxy_Logging.DataSource = SettingsListUpdater.Proxy_Logging;
             ComboBox_Proxy_GZip_Version.DisplayMember = "Name";
-            ComboBox_Proxy_GZip_Version.DataSource = ProxySettingsListUpdater.Proxy_GZip_Version;
+            ComboBox_Proxy_GZip_Version.DataSource = SettingsListUpdater.Proxy_GZip_Version;
+            ComboBox_Launcher_Logging.DisplayMember = "Name";
+            ComboBox_Launcher_Logging.DataSource = SettingsListUpdater.Launcher_Logging;
+            ComboBox_Launcher_Builds_Branch.DisplayMember = "Name";
+            ComboBox_Launcher_Builds_Branch.DataSource = SettingsListUpdater.Launcher_Builds;
 
             /********************************/
             /* Events                        /
@@ -485,25 +577,35 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Proxy_GZip_Version.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_GZip_Version_SelectedIndexChanged);
             ComboBox_Proxy_GZip_Version.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
 
+            ComboBox_Launcher_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_DrawItem);
+            ComboBox_Launcher_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_SelectedIndexChanged);
+            ComboBox_Launcher_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
+            ComboBox_Launcher_Builds_Branch.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Builds_Branch_DrawItem);
+            ComboBox_Launcher_Builds_Branch.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Builds_Branch_SelectedIndexChanged);
+            ComboBox_Launcher_Builds_Branch.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
             Button_Save.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
             Button_Save.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
             Button_Save.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
             Button_Save.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
+            Button_Save.Click += new EventHandler(SettingsSave_Click);
+            Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
 
             Button_Exit.MouseEnter += new EventHandler(Graybutton_hover_MouseEnter);
             Button_Exit.MouseLeave += new EventHandler(Graybutton_MouseLeave);
             Button_Exit.MouseUp += new MouseEventHandler(Graybutton_hover_MouseUp);
             Button_Exit.MouseDown += new MouseEventHandler(Graybutton_click_MouseDown);
+            Button_Exit.Click += new EventHandler(SettingsCancel_Click);
 
             Input_Console.KeyDown += new KeyEventHandler(Console_Quick_Send);
             Button_Console_Submit.Click += new EventHandler(Console_Enter);
             Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
             Button_Verify_Scan.Click += new EventHandler(Button_Verify_Scan_Click);
-            Button_Save.Click += new EventHandler(SettingsSave_Click);
-            Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
+            
             Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
-            Button_Exit.Click += new EventHandler(SettingsCancel_Click);
+            
             Button_Game_User_Settings.Click += new EventHandler(SettingsUEditorButton_Click);
             Button_Clear_Server_Mods.Click += new EventHandler(SettingsClearServerModCacheButton_Click);
             Button_Clear_NFSWO_Logs.Click += new EventHandler(SettingsClearCommunicationLogButton_Click);
@@ -541,11 +643,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_RPC.CheckedChanged += new EventHandler(CheckBox_RPC_CheckedChanged);
             CheckBox_JSON_Update_Cache.CheckedChanged += new EventHandler(CheckBox_JSON_Update_Cache_CheckedChanged);
             CheckBox_Theme_Support.CheckedChanged += new EventHandler(CheckBox_Theme_Support_CheckedChanged);
-            CheckBox_Enable_ACM.CheckedChanged += new EventHandler(CheckBox_Enable_ACM_CheckedChanged);
             CheckBox_Alt_WebCalls.CheckedChanged += new EventHandler(CheckBox_Alt_WebCalls_CheckedChanged);
             CheckBox_Proxy.CheckedChanged += new EventHandler(CheckBox_Proxy_CheckedChanged);
             CheckBox_Host_to_IP.CheckedChanged += new EventHandler(CheckBox_Host_to_IP_CheckedChanged);
             CheckBox_Proxy_Domain.CheckedChanged += new EventHandler(CheckBox_Proxy_Domain_CheckedChanged);
+            CheckBox_Account_Manager.CheckedChanged += new EventHandler(CheckBox_Account_Manager_CheckedChanged);
+            CheckBox_Custom_Certificate.CheckedChanged += new EventHandler(CheckBox_Custom_Certificate_CheckedChanged);
 
             /********************************/
             /* Sets Red Buttons/Disables     /
@@ -594,7 +697,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             Shown += (x, y) =>
             {
-                RememberLastProxySettings();
+                RememberLastSettingsLists();
                 PingSavedCDN();
                 PingAPIStatus();
             };

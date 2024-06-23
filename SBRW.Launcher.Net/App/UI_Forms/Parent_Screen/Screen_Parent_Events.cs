@@ -124,10 +124,9 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                         /* For now, allow edge case of Windows 8.0 to run .NET 4.6.1 where upgrading to 8.1 is not possible */
                         if (Product_Version.GetWindowsNumber() == 6.2 && NetFrame_Version <= 394254)
                         {
-                            if (MessageBox.Show(null, Translations.Database("Program_TextBox_NetFrame_P1") +
-                            " .NETFramework, Version=v4.6.1 \n\n" + Translations.Database("Program_TextBox_NetFrame_P2"),
-                            "GameLauncher.exe - " + Translations.Database("Program_TextBox_NetFrame_P3"),
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                            if ((Translations.Database("Program_TextBox_NetFrame_P1") +
+                            " .NETFramework, Version=v4.6.1 \n\n" + Translations.Database("Program_TextBox_NetFrame_P2"))
+                                .Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                             {
 #if NETFRAMEWORK
                                 Process.Start("https://dotnet.microsoft.com/download/dotnet-framework/net461");
@@ -141,10 +140,9 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                         /* Otherwise, all other OS Versions should have 4.6.2 as a Minimum Version */
                         else if (NetFrame_Version <= 394802)
                         {
-                            if (MessageBox.Show(null, Translations.Database("Program_TextBox_NetFrame_P1") +
-                            " .NETFramework, Version=v4.6.2 \n\n" + Translations.Database("Program_TextBox_NetFrame_P2"),
-                            "GameLauncher.exe - " + Translations.Database("Program_TextBox_NetFrame_P3"),
-                            MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+                            if ((Translations.Database("Program_TextBox_NetFrame_P1") +
+                            " .NETFramework, Version=v4.6.2 \n\n" + Translations.Database("Program_TextBox_NetFrame_P2"))
+                            .Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
                             {
 #if NETFRAMEWORK
                                 Process.Start("https://dotnet.microsoft.com/download/dotnet-framework");
@@ -174,7 +172,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
 
             if (FunctionStatus.LauncherForceClose)
             {
-                FunctionStatus.ErrorCloseLauncher("Closing From .NET Framework Check", false, this);
+                FunctionStatus.ErrorCloseLauncher("Closing From .NET Framework Check", false);
             }
             else
             {
@@ -209,7 +207,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                             Constructed_Msg += "• 'C:\\Soapbox Race World' " + Translations.Database("Program_TextBox_Folder_Check_Launcher_P6") + " 'C:\\SBRW'\n";
                             Constructed_Msg += Translations.Database("Program_TextBox_Folder_Check_Launcher_P7") + "\n\n";
 
-                            MessageBox.Show(this, Constructed_Msg, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            Constructed_Msg.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                             FunctionStatus.LauncherForceClose = true;
                             break;
                     }
@@ -407,7 +405,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                             {
                                 ///@DavidCarbon or @Zacam - Remember to Translate This!
                                 FunctionStatus.LauncherForceCloseReason = "Failed to Successfully Migrate Ini File(s)";
-                                FunctionStatus.ErrorCloseLauncher("Closing Ini Migration", false, this);
+                                FunctionStatus.ErrorCloseLauncher("Closing Ini Migration", false);
                             }
                             else
                             {
@@ -486,13 +484,11 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                                 MessageBoxPopupTLS += Translations.Database("Program_TextBox_W7_TLS_P3");
 
                                                 /* There is only 'OK' Available because this IS Required */
-                                                if (MessageBox.Show(null, MessageBoxPopupTLS, "SBRW Launcher",
-                                                    MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
+                                                if (MessageBoxPopupTLS.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning) == DialogResult.OK)
                                                 {
                                                     Registry_Core.Write("DisabledByDefault", 0x0,
                                                         @"SYSTEM\CurrentControlSet\Control\SecurityProviders\SCHANNEL\Protocols\TLS 1.2\Client");
-                                                    MessageBox.Show(null, Translations.Database("Program_TextBox_W7_TLS_P4"),
-                                                        "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                    Translations.Database("Program_TextBox_W7_TLS_P4").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                                                 }
 
                                                 LogToFileAddons.Parent_Log_Screen(3, "SSL/TLS", "Added Registry Key");
@@ -538,8 +534,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                             }
                                             MessageBoxPopupKB += "\n" + Translations.Database("Program_TextBox_W7_KB_P4") + "\n";
 
-                                            if (MessageBox.Show(null, MessageBoxPopupKB, "SBRW Launcher",
-                                                MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
+                                            if (MessageBoxPopupKB.Message_Box(MessageBoxButtons.OKCancel, MessageBoxIcon.Information) == DialogResult.OK)
                                             {
                                                 /* Since it's Informational we just need to know if they clicked 'OK' */
                                                 Save_Settings.Live_Data.Win_7_Patches = "1";

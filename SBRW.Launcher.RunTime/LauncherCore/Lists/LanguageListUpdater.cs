@@ -118,7 +118,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
             }
 
             LogToFileAddons.Parent_Log_Screen(1, "LIST SETTINGS CORE", "Moved to Function");
-            ProxySettingsListUpdater.GetList();
+            SettingsListUpdater.GetList();
         }
     }
 }

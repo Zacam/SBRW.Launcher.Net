@@ -32,11 +32,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\LauncherUpdater\UpdaterSchema.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\CDNListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Invalid_Game_Files.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Launcher_Builds.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Launcher_Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Scanned_Game_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_GZip_Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_Logging.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\LanguageListUpdater.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ProxySettingsListUpdater.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\SettingsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ResolutionsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ServerListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Logger\LogToFileAddons.cs" />

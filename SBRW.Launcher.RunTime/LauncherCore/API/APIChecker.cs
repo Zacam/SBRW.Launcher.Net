@@ -15,6 +15,7 @@ using System.IO;
 using System.Net.Cache;
 using System.Threading.Tasks;
 using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
 {
@@ -247,9 +248,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
             {
                 Presence_Launcher.Status(0, "Launcher Encountered API Errors");
 
-                if (MessageBox.Show(null, Translations.Database("VisualsAPIChecker_TextBox_No_API"),
-                    Translations.Database("VisualsAPIChecker_TextBox_No_API_P2"),
-                    MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (Translations.Database("VisualsAPIChecker_TextBox_No_API").
+                    Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     FunctionStatus.LauncherForceClose = true;
                 }
@@ -257,8 +257,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.APICheckers
                 {
                     LogToFileAddons.Parent_Log_Screen(4, "API PROMPT CHECK", 
                         "User has Bypassed 'No Internet Connection' Check and will Continue");
-                    MessageBox.Show(Translations.Database("VisualsAPIChecker_TextBox_No_API_P3"),
-                        Translations.Database("VisualsAPIChecker_TextBox_No_API_P4"));
+                    Translations.Database("VisualsAPIChecker_TextBox_No_API_P3").Message_Box();
                 }
             }
             LogToFileAddons.Parent_Log_Screen(3, "API", "Done Checking API Results");

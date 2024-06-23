@@ -131,7 +131,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     TempEmailCache = Input_Email.Text;
                     Input_Email.Text = "EMAIL IS HIDDEN";
                 }
-                MessageBox.Show(this, "Please wait while the GameLauncher is still downloading the game files.", "GameLauncher", MessageBoxButtons.OK);
+                "Please wait while the GameLauncher is still downloading the game files.".Message_Box(MessageBoxButtons.OK);
                 if (!string.IsNullOrWhiteSpace(TempEmailCache))
                 {
                     Input_Email.Text = TempEmailCache;
@@ -148,42 +148,60 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Tokens.IPAddress = Launcher_Value.Launcher_Select_Server_Data.IPAddress;
             Tokens.ServerName = ServerListUpdater.ServerName("Login");
 
-            switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
+            if (Save_Settings.Account_Manager())
             {
-                case AuthHash.H10:
-                    Email = Input_Email.Text.ToString();
-                    Password = Input_Password.Text.ToString();
-                    break;
-                case AuthHash.H11:
-                    Email = Input_Email.Text.ToString();
-                    Password = Input_Password.Text.Hash_String(0).ToLower();
-                    break;
-                case AuthHash.H12:
-                    Email = Input_Email.Text.ToString();
-                    Password = Input_Password.Text.Hash_String(1).ToLower();
-                    break;
-                case AuthHash.H13:
-                    Email = Input_Email.Text.ToString();
-                    Password = Input_Password.Text.Hash_String(2).ToLower();
-                    break;
-                case AuthHash.H20:
-                    Email = Input_Email.Text.Hash_String(0).ToLower();
-                    Password = Input_Password.Text.Hash_String(0).ToLower();
-                    break;
-                case AuthHash.H21:
-                    Email = Input_Email.Text.Hash_String(1).ToLower();
-                    Password = Input_Password.Text.Hash_String(1).ToLower();
-                    break;
-                case AuthHash.H22:
-                    Email = Input_Email.Text.Hash_String(2).ToLower();
-                    Password = Input_Password.Text.Hash_String(2).ToLower();
-                    break;
-                default:
-                    Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
+                if (ComboBox_Accounts.SelectedItem != default)
+                {
+                    Button_Login.Text = "Decrypting".ToUpper();
+                    Email = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Email.Decrypt_AES();
+                    Password = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Password.Decrypt_AES();
+                    Button_Login.Text = "Login".ToUpper();
+                }
+                else
+                {
+                    "Add Account Information through the Manager before login.".Message_Box();
                     return;
+                }
+            }
+            else
+            {
+                switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
+                {
+                    case AuthHash.H10:
+                        Email = Input_Email.Text.ToString();
+                        Password = Input_Password.Text.ToString();
+                        break;
+                    case AuthHash.H11:
+                        Email = Input_Email.Text.ToString();
+                        Password = Input_Password.Text.Hash_String(0).ToLower();
+                        break;
+                    case AuthHash.H12:
+                        Email = Input_Email.Text.ToString();
+                        Password = Input_Password.Text.Hash_String(1).ToLower();
+                        break;
+                    case AuthHash.H13:
+                        Email = Input_Email.Text.ToString();
+                        Password = Input_Password.Text.Hash_String(2).ToLower();
+                        break;
+                    case AuthHash.H20:
+                        Email = Input_Email.Text.Hash_String(0).ToLower();
+                        Password = Input_Password.Text.Hash_String(0).ToLower();
+                        break;
+                    case AuthHash.H21:
+                        Email = Input_Email.Text.Hash_String(1).ToLower();
+                        Password = Input_Password.Text.Hash_String(1).ToLower();
+                        break;
+                    case AuthHash.H22:
+                        Email = Input_Email.Text.Hash_String(2).ToLower();
+                        Password = Input_Password.Text.Hash_String(2).ToLower();
+                        break;
+                    default:
+                        Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
+                        return;
+                }
             }
 
-            Authentication.Client("Login", Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Post, Email, Password, String.Empty);
+            Authentication.Client("Login", Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Post, Email, Password, string.Empty);
 
             if (string.IsNullOrWhiteSpace(Tokens.Error))
             {
@@ -200,52 +218,59 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 /* Tells the FileAccountSave to Actually Save the Information or Not */
                 Save_Account.SaveLoginInformation = CheckBox_Remember_Us.Checked;
-                Save_Account.Live_Data.User_Raw_Email = Input_Email.Text.ToString();
-                Save_Account.Live_Data.User_Raw_Password = Input_Password.Text.ToString();
-
-                switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
+                if (!Save_Settings.Account_Manager())
                 {
-                    case AuthHash.H10:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "1.0";
-                        Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = string.Empty;
-                        break;
-                    case AuthHash.H11:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "1.1";
-                        Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
-                        break;
-                    case AuthHash.H12:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "1.2";
-                        Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
-                        break;
-                    case AuthHash.H13:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "1.3";
-                        Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
-                        break;
-                    case AuthHash.H20:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "2.0";
-                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(0).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
-                        break;
-                    case AuthHash.H21:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "2.1";
-                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(1).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
-                        break;
-                    case AuthHash.H22:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "2.2";
-                        Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(2).ToLower();
-                        Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
-                        break;
-                    default:
-                        Save_Account.Live_Data.Saved_Server_Hash_Version = "Unknown";
-                        Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                        Save_Account.Live_Data.User_Hashed_Password = string.Empty;
-                        Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
-                        return;
+                    Save_Account.Live_Data.User_Raw_Email = Input_Email.Text.ToString();
+                    Save_Account.Live_Data.User_Raw_Password = Input_Password.Text.ToString();
+
+                    switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
+                    {
+                        case AuthHash.H10:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.0";
+                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
+                            Save_Account.Live_Data.User_Hashed_Password = string.Empty;
+                            break;
+                        case AuthHash.H11:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.1";
+                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
+                            break;
+                        case AuthHash.H12:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.2";
+                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
+                            break;
+                        case AuthHash.H13:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.3";
+                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
+                            break;
+                        case AuthHash.H20:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.0";
+                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(0).ToLower();
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
+                            break;
+                        case AuthHash.H21:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.1";
+                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(1).ToLower();
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
+                            break;
+                        case AuthHash.H22:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.2";
+                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(2).ToLower();
+                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
+                            break;
+                        default:
+                            Save_Account.Live_Data.Saved_Server_Hash_Version = "Unknown";
+                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
+                            Save_Account.Live_Data.User_Hashed_Password = string.Empty;
+                            Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
+                            return;
+                    }
+                }
+                else if (ComboBox_Accounts.SelectedItem != default)
+                {
+                    Save_Account.Live_Data.User_Account_Index = ComboBox_Accounts.SelectedIndex.ToString();
                 }
 
                 Save_Account.Save();
@@ -253,7 +278,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 if (!string.IsNullOrWhiteSpace(Tokens.Warning))
                 {
                     Input_Email.Text = "EMAIL IS HIDDEN";
-                    MessageBox.Show(this, Tokens.Warning, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    Tokens.Warning.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Input_Email.Text = Email;
                 }
 
@@ -270,7 +295,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     Picture_Information_Window.Image = Image_Other.Information_Window_Error;
                 }
                 Input_Email.Text = "EMAIL IS HIDDEN";
-                MessageBox.Show(this, Tokens.Error, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Tokens.Error.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Input_Email.Text = Email;
             }
         }
@@ -307,8 +332,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 #else
                         Process.Start(new ProcessStartInfo { FileName = Launcher_Value.Launcher_Select_Server_JSON.Server_Registration_Page, UseShellExecute = true });
 #endif
-                        MessageBox.Show(this, "A browser window has been opened to complete registration on " +
-                            ServerListUpdater.ServerName("Register"), "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ("A browser window has been opened to complete registration on " +
+                            ServerListUpdater.ServerName("Register")).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else if (Launcher_Value.Launcher_Select_Server_Data.Name.ToUpper() == "WORLDUNITED OFFICIAL")
                     {
@@ -317,8 +342,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 #else
                         Process.Start(new ProcessStartInfo { FileName = "https://signup.worldunited.gg/", UseShellExecute = true });
 #endif
-                        MessageBox.Show(this, "A browser window has been opened to complete registration on " +
-                            Launcher_Value.Launcher_Select_Server_Data.Name, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        ("A browser window has been opened to complete registration on " +
+                            Launcher_Value.Launcher_Select_Server_Data.Name).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     else
                     {
@@ -339,12 +364,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
                 else
                 {
-                    MessageBox.Show(this, "Loading Server Information. Please try again.", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "Loading Server Information. Please try again.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
             {
-                MessageBox.Show(this, "Server seems to be Offline.", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                "Server seems to be Offline.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -448,6 +473,14 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ComboBox_Server_List.DataSource = ServerListUpdater.CleanList;
             /* Accounts Display List */
             Screen_Account_Manager.Credentials_Load();
+
+            /* Now Reflect the User Choice on Account Manager usage */
+            ComboBox_Accounts.Visible = Save_Settings.Account_Manager();
+            Button_Account_Manager.Visible = Save_Settings.Account_Manager();
+            Input_Email.Visible = !Save_Settings.Account_Manager();
+            Input_Password.Visible = !Save_Settings.Account_Manager();
+            Picture_Input_Email.Visible = !Save_Settings.Account_Manager();
+            Picture_Input_Password.Visible = !Save_Settings.Account_Manager();
 
             /* Display Server List Dialog if Server IP Doesn't Exist */
             if (string.IsNullOrWhiteSpace(Save_Account.Live_Data.Saved_Server_Address))
@@ -562,9 +595,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             TempEmailCache = Input_Email.Text;
                             Input_Email.Text = "EMAIL IS HIDDEN";
                         }
-                        MessageBox.Show(this, string.Format("Drive {0} was not found. Your actual installation directory is set to {1} now.",
-                            Drive, Locations.GameFilesFailSafePath),
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        string.Format("Drive {0} was not found. Your actual installation directory is set to {1} now.",
+                            Drive, Locations.GameFilesFailSafePath).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                         if (!string.IsNullOrWhiteSpace(TempEmailCache))
                         {
                             Input_Email.Text = TempEmailCache;

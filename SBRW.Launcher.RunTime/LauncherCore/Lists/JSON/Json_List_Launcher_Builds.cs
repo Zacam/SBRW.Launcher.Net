@@ -1,12 +1,12 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
 {
     /// <summary>
-    /// JSON Format for Creating a Proxy Logging List
+    /// JSON Format for Creating a Launcher Build List
     /// </summary>
     /// <remarks><i>Requires <b>Newtonsoft.Json</b> Library</i></remarks>
-    public class Json_List_Proxy_GZip_Version
+    public class Json_List_Launcher_Builds
     {
         /// <summary>
         /// 
@@ -16,8 +16,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("Version")]
-        public SBRW.Launcher.Core.Proxy.Nancy_.GzipVersion Version { get; set; }
+        [JsonProperty("Value")]
+        public long Value { get; set; }
         /// <summary>
         /// 
         /// </summary>

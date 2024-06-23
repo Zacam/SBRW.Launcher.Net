@@ -249,18 +249,23 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     else if (!File.Exists(GameExePath))
                     {
                         Display_Color_Icons(2);
-                        Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                        MessageBox.Show(this, "You do not have the Game Downloaded. Please Verify Game Files installation path.", "GameLauncher",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (!Save_Settings.Account_Manager())
+                        {
+                            Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        }
+                        ("You do not have the Game Downloaded. " +
+                            "Please Verify Game Files installation path.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Button_Login_Logout_Modes(true, true);
                         Display_Color_Icons();
                     }
                     else
                     {
                         Display_Color_Icons(2);
-                        Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                        MessageBox.Show(this, "Your NFSW.exe is Modified. Please Verify Game Files.", "GameLauncher",
-                            MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (!Save_Settings.Account_Manager())
+                        {
+                            Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        }
+                        ("Your NFSW.exe is Modified. Please Verify Game Files.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Button_Login_Logout_Modes(true, true);
                         Display_Color_Icons();
                     }
@@ -268,7 +273,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 catch (Exception Error)
                 {
                     Display_Color_Icons(2);
-                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                    if (!Save_Settings.Account_Manager())
+                    {
+                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                    }
                     LogToFileAddons.OpenLog("GAME LAUNCH", Error.Message, Error, "Error", false);
                     Button_Login_Logout_Modes(true, true);
                     Display_Color_Icons();
@@ -359,13 +367,15 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 DisableLogout = false;
 
-                if (Screen_Instance != null)
+                if (!Screen_Instance.DisposedForm())
                 {
-                    Label_Information_Window.SafeInvokeAction(() =>
-                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper(), this, false);
-                    Label_Download_Information.SafeInvokeAction(() =>
-                    Label_Download_Information.Text = Error_Msg.ToUpper(), this);
-                    Button_Play_OR_Update.SafeInvokeAction(() => Button_Play_OR_Update.Visible = false, this, false);
+                    if (!Save_Settings.Account_Manager())
+                    {
+                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                    }
+
+                    Screen_Instance.Label_Download_Information.Text = Error_Msg.ToUpper();
+                    Screen_Instance.Button_Play_OR_Update.Visible = false;
                 }
 
                 if (Did_Game_Start)
@@ -389,7 +399,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
                 }
 
-                if (MessageBox.Show(Screen_Instance, Error_Msg, "GameLauncher", MessageBoxButtons.OK, Icon_Box_Art) == DialogResult.OK)
+                if (Error_Msg.Message_Box(MessageBoxButtons.OK, Icon_Box_Art) == DialogResult.OK)
                 {
                     Display_Color_Icons(1);
                 }
@@ -630,15 +640,18 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             if (!string.Equals(driveInfo.DriveFormat, "NTFS", StringComparison.InvariantCultureIgnoreCase))
             {
                 Picture_Information_Window.Image = Image_Other.Information_Window_Error;
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                MessageBox.Show(this,
-                    $"Playing the game on a non-NTFS-formatted drive is not supported.\nDrive '{driveInfo.Name}' is formatted with: {driveInfo.DriveFormat}",
-                    "Compatibility",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error)
-                    ;
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                }
+                ($"Playing the game on a non-NTFS-formatted drive is not supported." +
+                    $"\nDrive '{driveInfo.Name}' is formatted with: {driveInfo.DriveFormat}").Message_Box(MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
                 Picture_Information_Window.Image = Image_Other.Information_Window_Success;
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                }
                 return;
             }
 #endif
@@ -650,23 +663,34 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             else if (Save_Settings.Live_Data.Game_Integrity != "Good")
             {
                 Display_Color_Icons(3);
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                MessageBox.Show(this, "GameLauncher has detected a GameFiles Integrity Error\nPlease 'Verify GameFiles' in the Settings Screen",
-                    "Game Files Integrity", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                }
+                ("GameLauncher has detected a GameFiles Integrity Error" +
+                    "\nPlease 'Verify GameFiles' in the Settings Screen").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 Display_Color_Icons();
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                }
                 return;
             }
 
             if (!Redistributable.Error_Free)
             {
                 Picture_Information_Window.Image = Image_Other.Information_Window_Error;
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                MessageBox.Show(this, "GameLauncher has detected that the 2015-2019 (or newer) VC++ Redistributable Package is not installed or may be damaged\n" +
-                    "Please manually Install or Repair the Packages for your Operating System",
-                    "VC++ Redistributable Package Check", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                }
+                ("GameLauncher has detected that the 2015-2019 (or newer) VC++ Redistributable Package is not installed or may be damaged\n" +
+                    "Please manually Install or Repair the Packages for your Operating System").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Picture_Information_Window.Image = Image_Other.Information_Window_Success;
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                if (!Save_Settings.Account_Manager())
+                {
+                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                }
                 return;
             }
 
@@ -756,14 +780,21 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 if (Time_Check < DateTime.Now.Date)
                                 {
                                     Display_Color_Icons(3);
-                                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
-                                    if (MessageBox.Show(this, "Launcher has found a ModNet Cache File.\nHowever, its a day old.\nWould you like to use the old File Cache?",
-                                        "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                                    if (!Save_Settings.Account_Manager())
+                                    {
+                                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                    }
+                                    if (("Launcher has found a ModNet Cache File." +
+                                        "\nHowever, its a day old." +
+                                        "\nWould you like to use the old File Cache?").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                                     {
                                         Allow_ModNet_Cache = true;
                                     }
                                     Display_Color_Icons();
-                                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                                    if (!Save_Settings.Account_Manager())
+                                    {
+                                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Save_Account.Live_Data.User_Raw_Email).ToUpper();
+                                    }
                                 }
                                 else
                                 {
@@ -795,7 +826,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         Display_Color_Icons(2);
                         Label_Download_Information.Text = ("JSON: Unable to Retrieve ModNet Files Information").ToUpper();
                         Presence_Launcher.Status(8);
-                        Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        if (!Save_Settings.Account_Manager())
+                        {
+                            Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        }
                         string LogMessage = "There was an error with ModNet JSON Retrieval:";
                         LogToFileAddons.OpenLog("MODNET FILES", LogMessage, Error, "Error", false);
                         Button_Login_Logout_Modes(true, true);
@@ -814,7 +848,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         Display_Color_Icons(2);
                         Label_Download_Information.Text = ("JSON: Invalid ModNet Files Information").ToUpper();
                         Presence_Launcher.Status(8);
-                        Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        if (!Save_Settings.Account_Manager())
+                        {
+                            Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        }
                         Button_Login_Logout_Modes(true, true);
                         Display_Color_Icons();
                         ModulesJSON = string.Empty;
@@ -912,7 +949,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             Display_Color_Icons(2);
                             Presence_Launcher.Status(8);
-                            Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            if (!Save_Settings.Account_Manager())
+                            {
+                                Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            }
                             string LogMessage = "There was an error with ModNet Files Check:";
                             LogToFileAddons.OpenLog("MODNET CORE", LogMessage, Error, "Error", false);
                             Button_Login_Logout_Modes(true, true);
@@ -957,7 +997,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             Label_Download_Information.Text = ("JSON: Unable to Retrieve Server Mod Information").ToUpper();
                             Presence_Launcher.Status(10);
-                            Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            if (!Save_Settings.Account_Manager())
+                            {
+                                Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            }
                             string LogMessage = "There was an error with Server Mod Information Retrieval:";
                             LogToFileAddons.OpenLog("SERVER MOD INFO", LogMessage, Error, "Error", false);
                             Button_Login_Logout_Modes(true, true);
@@ -973,7 +1016,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             Display_Color_Icons(2);
                             Label_Download_Information.Text = ("JSON: Invalid Server Mod Information").ToUpper();
                             Presence_Launcher.Status(10);
-                            Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            if (!Save_Settings.Account_Manager())
+                            {
+                                Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            }
                             Button_Login_Logout_Modes(true, true);
                             Display_Color_Icons();
                             ServerModInfo = string.Empty;
@@ -1100,7 +1146,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 Display_Color_Icons(2);
                                 Label_Download_Information.Text = ("JSON: Unable to Retrieve Server Mod List Information").ToUpper();
                                 Presence_Launcher.Status(10);
-                                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                if (!Save_Settings.Account_Manager())
+                                {
+                                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                }
                                 string LogMessage = "There was an error with Server Mod List Information Retrieval:";
                                 LogToFileAddons.OpenLog("SERVER MOD JSON", LogMessage, Error, "Error", false);
                                 Button_Login_Logout_Modes(true, true);
@@ -1116,7 +1165,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 Display_Color_Icons(2);
                                 Label_Download_Information.Text = ("JSON: Invalid Server Mod List Information").ToUpper();
                                 Presence_Launcher.Status(10, null);
-                                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                if (!Save_Settings.Account_Manager())
+                                {
+                                    Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                }
                                 Button_Login_Logout_Modes(true, true);
                                 Display_Color_Icons();
                                 ServerModListJSON = string.Empty;
@@ -1242,7 +1294,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 {
                                     Display_Color_Icons(2);
                                     Presence_Launcher.Status(10);
-                                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                    if (!Save_Settings.Account_Manager())
+                                    {
+                                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                                    }
                                     string LogMessage = "There was an error with Server Mods Check:";
                                     LogToFileAddons.OpenLog("SERVER MOD DOWNLOAD", LogMessage, Error, "Error", false);
                                     Button_Login_Logout_Modes(true, true);
@@ -1288,7 +1343,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     Display_Color_Icons(2);
                     Presence_Launcher.Status(8);
-                    Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                    if (!Save_Settings.Account_Manager())
+                    {
+                        Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                    }
                     string LogMessage = "There was an error downloading ModNet Files:";
                     LogToFileAddons.OpenLog("MODNET FILES", LogMessage, Error, "Error", false);
                     Button_Login_Logout_Modes(true, true);

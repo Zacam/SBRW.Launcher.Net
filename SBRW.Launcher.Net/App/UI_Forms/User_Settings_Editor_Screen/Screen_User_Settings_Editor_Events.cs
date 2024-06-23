@@ -3,6 +3,7 @@ using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Extra.XML_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -164,11 +165,11 @@ namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
         /// <param name="e"></param>
         private void LabelLauncherVersion_Click(object sender, EventArgs e)
         {
-            DialogResult Alert = MessageBox.Show(null, "Do you want my Super Honk?", "FunkyWacky", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+            DialogResult Alert = "Do you want my Super Honk?".Message_Box(MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
 
             if (Alert == DialogResult.No)
             {
-                MessageBox.Show(null, "**Sad Turbo Noises**", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "**Sad Turbo Noises**".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (Alert == DialogResult.Yes)
             {

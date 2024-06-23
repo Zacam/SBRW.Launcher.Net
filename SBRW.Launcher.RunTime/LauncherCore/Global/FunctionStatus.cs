@@ -20,6 +20,7 @@ using SBRW.Launcher.Core.Extra.XML_;
 using System.Threading.Tasks;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Global
 {
@@ -77,7 +78,6 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         public static bool IsVisualAPIsChecked { get; set; }
         /* Prevents Launcher from bring Closed when Game is Loading */
         public static bool LauncherBattlePass { get; set; }
-
         /// <summary>
         /// 
         /// </summary>
@@ -86,18 +86,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         /// <returns></returns>
         public static bool IsRestrictedGameFolderLocation(this string Game_Location_Path, int Check_Mode)
         {
-            return Game_Location_Path.IsRestrictedGameFolderLocation(Check_Mode, null);
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Game_Location_Path"></param>
-        /// <param name="Check_Mode"></param>
-        /// <param name="Form_Window_Handle"></param>
-        /// <returns></returns>
-        public static bool IsRestrictedGameFolderLocation(this string Game_Location_Path, int Check_Mode, IWin32Window? Form_Window_Handle)
-        {
-            if(Check_Mode == 0)
+            if (Check_Mode == 0)
             {
                 Presence_Launcher.Status(0, "Verifying Game Files Folder Location");
             }
@@ -113,7 +102,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     LogToFileAddons.Parent_Log_Screen(5, "FOLDER FUNCTION CHECK", "Not enough permissions.");
                     string ErrorMessage = "You don't have enough permission to select this path as the Installation folder. " +
                         "Please select another directory by manually setting a new path.";
-                    MessageBox.Show(Form_Window_Handle, ErrorMessage, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ErrorMessage.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     if (Check_Mode == 0)
                     {
                         LauncherForceClose = true;
@@ -129,9 +118,9 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                 {
                     case FolderType.IsRootFolder:
                         LogToFileAddons.Parent_Log_Screen(4, "FOLDER FUNCTION CHECK", "Installing NFSW in root of the harddisk is not allowed.");
-                        MessageBox.Show(Form_Window_Handle, string.Format("Installing NFSW in root of the harddisk is not allowed. " +
-                            "Instead, we will install it on {0}.", Locations.GameFilesFailSafePath),
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string.Format("Installing NFSW in root of the harddisk is not allowed. " +
+                            "Instead, we will install it on {0}.", Locations.GameFilesFailSafePath)
+                            .Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                         if (Check_Mode == 0)
@@ -139,19 +128,19 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                             Save_Settings.Save();
                         }
 
-                        return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode, Form_Window_Handle);
+                        return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode);
                     case FolderType.IsSameAsLauncherFolder:
                         LogToFileAddons.Parent_Log_Screen(4, "FOLDER FUNCTION CHECK", "Installing NFSW in same location where the GameLauncher resides is NOT allowed.");
-                        MessageBox.Show(Form_Window_Handle, string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed.\n " +
-                            "Instead, we will install it on {0}.", Locations.GameFilesFailSafePath),
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed.\n " +
+                            "Instead, we will install it on {0}.", Locations.GameFilesFailSafePath)
+                            .Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                         if (Check_Mode == 0)
                         {
                             Save_Settings.Save();
                         }
 
-                        return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode, Form_Window_Handle);
+                        return Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(Check_Mode);
                     default:
                         LogToFileAddons.Parent_Log_Screen(11, "FOLDER FUNCTION CHECK", "Directory Set at " + Game_Location_Path);
                         Save_Settings.Live_Data.Game_Path = Game_Location_Path;
@@ -347,7 +336,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
         /// <param name="Notes">Required: Where the Launcher is Closing From</param>
         /// <param name="Force_Restart">True: Restarts Launcher | False: Closes Launcher</param>
         /// <param name="No_Log_Prompt"> True to disable the Log Prompt.</param>
-        public static void ErrorCloseLauncher(string Notes, bool Force_Restart, IWin32Window? Window_Handle = default, bool No_Log_Prompt = true, bool Display_Close_Only = false)
+        public static void ErrorCloseLauncher(string Notes, bool Force_Restart, bool No_Log_Prompt = true, bool Display_Close_Only = false)
         {
             if (Presence_Launcher.Running())
             {
@@ -366,7 +355,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     "Below is a Summary of the Error:" + "\n" + LauncherForceCloseReason + "\n\n" +
                     LogToFileAddons.OpenLogMessage : "Launcher will close. Below is a Summary of the Reason: \n" + LauncherForceCloseReason;
 
-                DialogResult OpenLogFile = MessageBox.Show(Window_Handle, Message_Display, "SBRW Launcher",
+                DialogResult OpenLogFile = Message_Display.Message_Box(
                 (Display_Close_Only ? MessageBoxButtons.OK : MessageBoxButtons.YesNo), MessageBoxIcon.Information);
 
                 if (OpenLogFile == DialogResult.Yes && No_Log_Prompt)

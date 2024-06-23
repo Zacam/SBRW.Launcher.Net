@@ -213,7 +213,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                                 Tokens.Error = msgBoxInfo;
                             }
                         }
-                        else if (TEMP_DATA.UserId.Equals("0"))
+                        else if (TEMP_DATA.UserId == "0")
                         {
                             if (TEMP_DATA.Invalid_Login)
                             {
@@ -228,7 +228,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
                                 Tokens.Error = "ERROR " + ServerErrorCode + ": " + TEMP_DATA.Error;
                             }
                         }
-                        else if (TEMP_DATA.Error.Equals("SERVER FULL"))
+                        else if (TEMP_DATA.Error == "SERVER FULL")
                         {
                             Tokens.Error = "SERVER FULL";
                         }

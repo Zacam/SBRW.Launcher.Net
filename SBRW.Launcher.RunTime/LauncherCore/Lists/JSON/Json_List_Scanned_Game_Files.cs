@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace SBRW.Launcher.Core.Reference.Json_.Newtonsoft_
+namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
 {
     /// <summary>
     /// JSON Format for Game Files List

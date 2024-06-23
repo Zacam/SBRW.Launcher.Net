@@ -2,6 +2,7 @@
 using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Required.System.Windows_;
 using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -426,13 +427,13 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 if (!DisableButtonDRAPI)
                 {
                     if (BuildDevelopment.Allowed() || (Product_Version.GetWindowsNumber() >= 10 &&
-                        (MessageBox.Show(this, "There has been reports that some users are not able to run Windows Defender Checks." +
+                        (("There has been reports that some users are not able to run Windows Defender Checks." +
                         "\nThis ranges from the Built-In to Third-Party Anti-Virus Software." +
                         "\n\nIf this Window Closes or the Launcher Crashes with an Error Message" +
                         "\n\nDo not run this Check, just simply ignore this section." +
                         "\n\n\nClick Yes to Agree to a potential Launcher Crash" +
-                        "\nClick No to avoid a potential Launcher Crash",
-                        "Windows Defender API Check - SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)))
+                        "\nClick No to avoid a potential Launcher Crash")
+                        .Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)))
                     {
                         DisableButtonDRAPI = true;
 

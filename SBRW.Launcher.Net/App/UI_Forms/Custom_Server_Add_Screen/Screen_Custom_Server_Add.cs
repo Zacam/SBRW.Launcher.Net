@@ -224,7 +224,7 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Add_Screen
 
                                     File.WriteAllText(Locations.LauncherCustomServers, JsonConvert.SerializeObject(Servers));
 
-                                    MessageBox.Show(null, "The New server will be added on the next start of the Launcher.", "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    "The New server will be added on the next start of the Launcher.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 }
                             }
                             catch (Exception Error)

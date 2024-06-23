@@ -1,4 +1,5 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using SBRW.Launcher.Core.Extension.Logging_;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
 {
@@ -6,7 +7,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
     /// JSON Format for Creating a Proxy Logging List
     /// </summary>
     /// <remarks><i>Requires <b>Newtonsoft.Json</b> Library</i></remarks>
-    public class Json_List_Proxy_GZip_Version
+    public class Json_List_Launcher_Logging
     {
         /// <summary>
         /// 
@@ -16,8 +17,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("Version")]
-        public SBRW.Launcher.Core.Proxy.Nancy_.GzipVersion Version { get; set; }
+        [JsonProperty("Mode")]
+        public Log_Enum Mode { get; set; }
         /// <summary>
         /// 
         /// </summary>

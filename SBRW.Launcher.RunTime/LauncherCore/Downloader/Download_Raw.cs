@@ -21,10 +21,14 @@ using System.Linq;
 using SBRW.Launcher.App.UI_Forms.Settings_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System.Threading;
+using System.Runtime.CompilerServices;
+using SBRW.Launcher.App.UI_Forms.Main_Screen;
+using SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen;
+using SBRW.Launcher.App.UI_Forms.MessageBox_Screen;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 {
-    public class Download_Raw
+    public static class Download_Raw
 {
         public static BackgroundWorker? Thread { get; set; }
         /* VerifyHash */
@@ -138,6 +142,24 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="Error"></param>
+        private static void Error_Display_Formatter(this Exception Error)
+        {
+            if (!Screen_Settings.Screen_Instance.DisposedForm())
+            {
+                Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText(
+                    $"{Environment.NewLine + Environment.NewLine}" +
+                    $"{Error.Message + Environment.NewLine + Error.ToString()}");
+
+                if (Error.InnerException != default)
+                {
+                    Error.InnerException.Error_Display_Formatter();
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
         /// TODO: UPDATE TEXT FOR TRANSLATIONS
         public static void Start_Worker(object Live_Sender, DoWorkEventArgs Live_Worker)
         {
@@ -155,6 +177,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 }
 
                 DirectoryInfo Game_Files_Directory = new DirectoryInfo(Save_Settings.Live_Data.Game_Path);
+
                 /* */
                 if (Game_Files_Directory.Exists)
                 {
@@ -263,7 +286,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                 if (!Live_Events.CancellationPending)
                 {
-                    foreach (Json_List_Scanned_Game_Files Bad_File_OR_Folder in Generated_Scanned_List)
+                    foreach (Json_List_Scanned_Game_Files Bad_File_OR_Folder in Generated_Scanned_List.ToArray())
                     {
                         if (Bad_File_OR_Folder != default)
                         {
@@ -299,6 +322,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                     {
                                         Files_Deletion_Error_Total++;
                                         $"{Bad_File_OR_Folder.File_System_Info.Name}".Full_Verify(Error);
+                                        Error.Error_Display_Formatter();
                                     }
                                 }
                                 /* Detected as a File */
@@ -321,6 +345,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                     {
                                         Files_Deletion_Error_Total++;
                                         $"{Bad_File_OR_Folder.File_Info.Name}".Full_Verify(Error);
+                                        Error.Error_Display_Formatter();
                                     }
                                 }
                                 /* Detected as a Directory */
@@ -343,6 +368,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                                     {
                                         Files_Deletion_Error_Total++;
                                         $"{Bad_File_OR_Folder.Directory_Info.Name}".Full_Verify(Error);
+                                        Error.Error_Display_Formatter();
                                     }
                                 }
                             }
@@ -359,6 +385,32 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     return;
                 }
 
+                if (!Live_Events.CancellationPending)
+                {
+                    if (!Screen_Settings.Screen_Instance.DisposedForm())
+                    {
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Removal Progress: File Deletion Error";
+                        Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
+                            $"Encountered File Deletion Error. Would you like to continue with the scan?");
+                    }
+                    else if (!Screen_Main.Screen_Instance.DisposedForm())
+                    {
+
+                    }
+
+                    DialogResult Result_ = ("Encountered File Deletion Error. " +
+                        "Would you like to contniue?").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (Result_ == DialogResult.Yes)
+                    {
+
+                    }
+                }
+                else
+                {
+                    return;
+                }
+                
                 bool Supported_CDN = false;
 
                 if (!Live_Events.CancellationPending)
@@ -430,8 +482,12 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                             $"CHECKSUMS File".Full_Verify(Error);
                             $"CHECKSUMS File".Full(Error);
 
-                            /* The Following will need to replaced or subbed in with an alternative method of displaying the information */
-                            //LogToFileAddons.OpenLog("VERIFY HASH CHECKSUMS", "Downloading of the Checksums File has Encountered an Error", Error, "Error", false);
+                            if (!Screen_Settings.Screen_Instance.DisposedForm())
+                            {
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Error Message in Console Logs";
+                                Error.Error_Display_Formatter();
+                            }
+                            
                             ErrorFree = false;
                         }
                         finally
@@ -460,6 +516,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                         else
                         {
                             /* TODO: ADD CHECKSUMS ERROR MESSAGE */
+                            return;
                         }
                     }
 

@@ -27,6 +27,7 @@ using System.Windows.Forms;
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.Net
 {
@@ -231,15 +232,15 @@ namespace SBRW.Launcher.Net
                 {
                     if (NFSW.DetectGameProcess())
                     {
-                        MessageBox.Show(null, Translations.Database("Program_TextBox_GameIsRunning"), "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        Translations.Database("Program_TextBox_GameIsRunning").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else if (NFSW.DetectGameLauncherSimplified())
                     {
-                        MessageBox.Show(null, Translations.Database("Program_TextBox_SimplifiedIsRunning"), "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        Translations.Database("Program_TextBox_SimplifiedIsRunning").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                     else
                     {
-                        MessageBox.Show(null, Translations.Database("Program_TextBox_SBRWIsRunning"), "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        Translations.Database("Program_TextBox_SBRWIsRunning").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
 
                     FunctionStatus.LauncherForceClose = true;
@@ -305,8 +306,7 @@ namespace SBRW.Launcher.Net
                                 Client.DownloadFile(URLCall, LZMAPath);
                                 LauncherMustRestart = true;
 
-                                MessageBox.Show(null, Translations.Database("Program_TextBox_LZMA_Redownloaded"),
-                                    "GameLauncher Restart Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                Translations.Database("Program_TextBox_LZMA_Redownloaded").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
                             }
                             catch (Exception Error)
                             {
@@ -328,13 +328,13 @@ namespace SBRW.Launcher.Net
                     else if (UnixOS.Detected())
                     {
                         FunctionStatus.LauncherForceCloseReason = "Running Windows Build on Unix is Not Allowed";
-                        FunctionStatus.ErrorCloseLauncher(FunctionStatus.LauncherForceCloseReason, LauncherMustRestart, null, true, true);
+                        FunctionStatus.ErrorCloseLauncher(FunctionStatus.LauncherForceCloseReason, LauncherMustRestart, true, true);
                     }
 #else
                     else if (!UnixOS.Detected())
                     {
                         FunctionStatus.LauncherForceCloseReason = "Running Unix Build on Windows is Not Allowed";
-                        FunctionStatus.ErrorCloseLauncher(FunctionStatus.LauncherForceCloseReason, LauncherMustRestart, null, true, true);
+                        FunctionStatus.ErrorCloseLauncher(FunctionStatus.LauncherForceCloseReason, LauncherMustRestart, true, true);
                     }
 #endif
                     else
@@ -426,7 +426,7 @@ namespace SBRW.Launcher.Net
                                     }
 
                                     FunctionStatus.LauncherForceClose = true;
-                                    MessageBox.Show(null, Message_Display, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    Message_Display.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
 #endif
                                 if (FunctionStatus.LauncherForceClose)
@@ -440,8 +440,7 @@ namespace SBRW.Launcher.Net
                             }
                             else
                             {
-                                MessageBox.Show(null, Translations.Database("Program_TextBox_SBRWIsRunning"),
-                                    "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                Translations.Database("Program_TextBox_SBRWIsRunning").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                             }
                         }
                         finally

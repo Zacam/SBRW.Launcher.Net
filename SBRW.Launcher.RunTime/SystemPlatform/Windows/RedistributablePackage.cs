@@ -3,6 +3,8 @@ using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using System;
 using System.IO;
 using SBRW.Launcher.Core.Extension.Registry_;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
+
 #if !(RELEASE_UNIX || DEBUG_UNIX)
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using SBRW.Launcher.Core.Cache;
@@ -115,12 +117,9 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
 
             if (!RedistributablePackage.IsInstalled(RedistributablePackageVersion.VC2015to2019x86))
             {
-                if (MessageBox.Show(Translations.Database("Redistributable_VC_32") +
-                    "\n\n" + Translations.Database("Redistributable_VC_P2") +
-                    "\n\n" + Translations.Database("Redistributable_VC_P3") +
-                    "\n\n" + Translations.Database("Redistributable_VC_P4"),
-                    Translations.Database("Redistributable_VC_P5"),
-                    MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
+                if ((Translations.Database("Redistributable_VC_32") + "\n\n" + Translations.Database("Redistributable_VC_P2") +
+                    "\n\n" + Translations.Database("Redistributable_VC_P3") + "\n\n" + Translations.Database("Redistributable_VC_P4"))
+                    .Message_Box(MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                 {
                     await Task.Run(() =>
                     {
@@ -201,16 +200,22 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                 if (proc == null)
                                 {
                                     Error_Free = false;
-                                    MessageBox.Show(Translations.Database("Redistributable_VC_P6"),
-                                        Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                    Translations.Database("Redistributable_VC_P6").Message_Box(MessageBoxButtons.OK,
                                         MessageBoxIcon.Error);
                                 }
                                 else if (proc != null)
                                 {
                                     if (!proc.HasExited)
                                     {
-                                        if (proc.Responding) { proc.CloseMainWindow(); }
-                                        else { proc.Kill(); Error_Free = false; }
+                                        if (proc.Responding) 
+                                        { 
+                                            proc.CloseMainWindow(); 
+                                        }
+                                        else 
+                                        { 
+                                            proc.Kill(); 
+                                            Error_Free = false; 
+                                        }
                                     }
 
                                     if (proc.ExitCode != 0)
@@ -218,10 +223,9 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                         Error_Free = false;
                                         LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE INSTALLER [EXIT CODE]", proc.ExitCode.ToString() +
                                             " HEX: (0x" + proc.ExitCode.ToString("X") + ")", false, true);
-                                        MessageBox.Show(Translations.Database("Redistributable_VC_P7") + " " + proc.ExitCode.ToString() +
+                                        (Translations.Database("Redistributable_VC_P7") + " " + proc.ExitCode.ToString() +
                                             " (0x" + proc.ExitCode.ToString("X") + ")" +
-                                            "\n" + Translations.Database("Redistributable_VC_P8"),
-                                            Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                            "\n" + Translations.Database("Redistributable_VC_P8")).Message_Box(MessageBoxButtons.OK,
                                             MessageBoxIcon.Error);
                                     }
 
@@ -236,8 +240,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                     LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE x86 Process", Error.InnerException.Message, false, true);
                                 }
                                 Error_Free = false;
-                                MessageBox.Show(Translations.Database("Redistributable_VC_P9"),
-                                    Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                Translations.Database("Redistributable_VC_P9").Message_Box(MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                             }
                         });
@@ -247,8 +250,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                         Error_Free = false;
                         LogToFileAddons.Parent_Log_Screen(5, Translations.Database("Redistributable_VC_P10"),
                             Translations.Database("Redistributable_VC_P5"));
-                        MessageBox.Show(Translations.Database("Redistributable_VC_P10"),
-                            Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                        Translations.Database("Redistributable_VC_P10").Message_Box(MessageBoxButtons.OK,
                                 MessageBoxIcon.Error);
                     }
                 }
@@ -257,7 +259,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                     Error_Free = false;
                     LogToFileAddons.Parent_Log_Screen(5, Translations.Database("Redistributable_VC_P8"),
                             Translations.Database("Redistributable_VC_P5"));
-                    MessageBox.Show(Translations.Database("Redistributable_VC_P8"), Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                    Translations.Database("Redistributable_VC_P8").Message_Box(MessageBoxButtons.OK,
                         MessageBoxIcon.Error);
                 }
             }
@@ -270,11 +272,10 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
             {
                 if (!RedistributablePackage.IsInstalled(RedistributablePackageVersion.VC2015to2019x64))
                 {
-                    if (MessageBox.Show(Translations.Database("Redistributable_VC_64") +
+                    if ((Translations.Database("Redistributable_VC_64") +
                         "\n\n" + Translations.Database("Redistributable_VC_P2") +
                         "\n\n" + Translations.Database("Redistributable_VC_P3") +
-                        "\n\n" + Translations.Database("Redistributable_VC_P4"),
-                        Translations.Database("Redistributable_VC_P5"),
+                        "\n\n" + Translations.Database("Redistributable_VC_P4")).Message_Box(
                         MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
                     {
                         await Task.Run(() =>
@@ -356,16 +357,22 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                         Error_Free = false;
                                         LogToFileAddons.Parent_Log_Screen(5, Translations.Database("Redistributable_VC_P6"),
                                             Translations.Database("Redistributable_VC_P5"));
-                                        MessageBox.Show(Translations.Database("Redistributable_VC_P6"),
-                                            Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                        Translations.Database("Redistributable_VC_P6").Message_Box(MessageBoxButtons.OK,
                                             MessageBoxIcon.Error);
                                     }
                                     else if (proc != null)
                                     {
                                         if (!proc.HasExited)
                                         {
-                                            if (proc.Responding) { proc.CloseMainWindow(); }
-                                            else { proc.Kill(); Error_Free = false; }
+                                            if (proc.Responding) 
+                                            { 
+                                                proc.CloseMainWindow(); 
+                                            }
+                                            else 
+                                            { 
+                                                proc.Kill(); 
+                                                Error_Free = false; 
+                                            }
                                         }
 
                                         if (proc.ExitCode != 0)
@@ -373,10 +380,9 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                             Error_Free = false;
                                             LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE INSTALLER [EXIT CODE]", proc.ExitCode.ToString() +
                                                 " HEX: (0x" + proc.ExitCode.ToString("X") + ")");
-                                            MessageBox.Show(Translations.Database("Redistributable_VC_P7") + " " + proc.ExitCode.ToString() +
+                                            (Translations.Database("Redistributable_VC_P7") + " " + proc.ExitCode.ToString() +
                                                 " (0x" + proc.ExitCode.ToString("X") + ")" +
-                                                "\n" + Translations.Database("Redistributable_VC_P8"),
-                                                Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                                "\n" + Translations.Database("Redistributable_VC_P8")).Message_Box(MessageBoxButtons.OK,
                                                 MessageBoxIcon.Error);
                                         }
 
@@ -391,8 +397,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                                         LogToFileAddons.Parent_Log_Screen(5, "REDISTRIBUTABLE x64 INSTALLER", Error.InnerException.Message, false, true);
                                     }
                                     Error_Free = false;
-                                    MessageBox.Show(Translations.Database("Redistributable_VC_P9"),
-                                        Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                                    Translations.Database("Redistributable_VC_P9").Message_Box(MessageBoxButtons.OK,
                                         MessageBoxIcon.Error);
                                 }
                             });
@@ -402,8 +407,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                             Error_Free = false;
                             LogToFileAddons.Parent_Log_Screen(5, Translations.Database("Redistributable_VC_P10"),
                                 Translations.Database("Redistributable_VC_P5"));
-                            MessageBox.Show(Translations.Database("Redistributable_VC_P10"),
-                                Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                            Translations.Database("Redistributable_VC_P10").Message_Box(MessageBoxButtons.OK,
                                     MessageBoxIcon.Error);
                         }
                     }
@@ -412,8 +416,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
                         Error_Free = false;
                         LogToFileAddons.Parent_Log_Screen(5, Translations.Database("Redistributable_VC_P8"),
                                 Translations.Database("Redistributable_VC_P5"));
-                        MessageBox.Show(Translations.Database("Redistributable_VC_P8"),
-                            Translations.Database("Redistributable_VC_P5"), MessageBoxButtons.OK,
+                        Translations.Database("Redistributable_VC_P8").Message_Box(MessageBoxButtons.OK,
                             MessageBoxIcon.Error);
                     }
                 }

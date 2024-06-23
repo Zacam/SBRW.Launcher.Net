@@ -1,6 +1,6 @@
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace SBRW.Launcher.Core.Reference.Json_.Newtonsoft_
+namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
 {
     /// <summary>
     /// JSON Format for Creating a Proxy Logging List
@@ -12,16 +12,16 @@ namespace SBRW.Launcher.Core.Reference.Json_.Newtonsoft_
         /// 
         /// </summary>
         [JsonProperty("Name")]
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("Mode")]
-        public Proxy.Log_.CommunicationLogRecord Mode { get; set; }
+        public SBRW.Launcher.Core.Proxy.Log_.CommunicationLogRecord Mode { get; set; }
         /// <summary>
         /// 
         /// </summary>
         [JsonProperty("Details")]
-        public string Details { get; set; }
+        public string Details { get; set; } = string.Empty;
     }
 }

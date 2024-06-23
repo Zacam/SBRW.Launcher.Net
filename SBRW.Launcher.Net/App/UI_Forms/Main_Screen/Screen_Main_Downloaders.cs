@@ -393,7 +393,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }
 
                         string LogMessage = "CDN Downloader Encountered an Error:";
-                        LogToFileAddons.OpenLog("Game Download", LogMessage, Error, "Error", false, Screen_Instance);
+                        LogToFileAddons.OpenLog("Game Download", LogMessage, Error, "Error", false);
 
                         if (!string.IsNullOrWhiteSpace(TempEmailCache))
                         {
@@ -502,8 +502,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 long Game_Folder_Size = File_and_Folder_Extention.GetDirectorySize_GameFiles(new DirectoryInfo(Save_Settings.Live_Data.Game_Path));
                 /* TODO: Check for other files and Folder Size */
                 if ((Game_Folder_Size == -1) &&
-                    (MessageBox.Show(this, "Seems like we are unable to determine the Games Folder Size" +
-                        "\nDo you have the Game Files Already Downloaded?", "GameLauncher", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes))
+                    (("Seems like we are unable to determine the Games Folder Size" +
+                        "\nDo you have the Game Files Already Downloaded?").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes))
                 {
                     Game_Folder_Size = 3296810469;
                 }
@@ -612,7 +612,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                                     break;
                                             }
 
-                                            DialogResult User_Prompt_Box = MessageBox.Show(this, Status_Code_Explaination, "GameLauncher",
+                                            DialogResult User_Prompt_Box = Status_Code_Explaination.Message_Box(
                                                 Allow_Restart ? MessageBoxButtons.RetryCancel : MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             if (User_Prompt_Box == DialogResult.Retry)
                                             {
@@ -654,9 +654,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 break;
                             case APIStatus.Forbidden:
                             case APIStatus.NotFound:
-                                if (MessageBox.Show(Screen_Instance, "Game Archive is Not Present on Current Saved CDN." +
+                                if (("Game Archive is Not Present on Current Saved CDN." +
                                     "\nWould you like to check for LZMA Support? This would switch to the old LZMA Downloader." +
-                                    "\nOtherwise, please switch to another CDN.", "GameLauncher",
+                                    "\nOtherwise, please switch to another CDN.").Message_Box(
                                     MessageBoxButtons.RetryCancel, MessageBoxIcon.Warning) == DialogResult.Retry)
                                 {
                                     switch (API_Core.StatusCheck(Save_Settings.Live_Data.Launcher_CDN + "/en/index.xml", 10))

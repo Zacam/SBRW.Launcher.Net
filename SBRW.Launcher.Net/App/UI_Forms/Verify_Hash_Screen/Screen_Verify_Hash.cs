@@ -81,7 +81,7 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
             {
                 if (IsScanning)
                 {
-                    if (MessageBox.Show("Do you really want to exit the VerifyHash process?", "VerifyHash", MessageBoxButtons.YesNo) == DialogResult.No)
+                    if ("Do you really want to exit the VerifyHash process?".Message_Box(MessageBoxButtons.YesNo) == DialogResult.No)
                     {
                         CloseForm.Cancel = true;
                     }
@@ -165,8 +165,8 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                 }
                 else
                 {
-                    MessageBox.Show("Verify Hash has already done a Full Scan this run.\n" +
-                        "Please restart the GameLauncher to do a New Scan.", "VerifyHash", MessageBoxButtons.OK);
+                    ("Verify Hash has already done a Full Scan this run.\n" +
+                        "Please restart the GameLauncher to do a New Scan.").Message_Box(MessageBoxButtons.OK);
                 }
             }
             else if (!startScan)
@@ -178,8 +178,8 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                 {
                     DownloadErrorEncountered = false;
 
-                    if (MessageBox.Show("Verify Hash has encountered Download Errors.\n" +
-                        "Would you like to Open Verify.Log", "VerifyHash", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                    if (("Verify Hash has encountered Download Errors.\n" +
+                        "Would you like to Open Verify.Log").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         if (File.Exists(Log_Location.LogVerify))
                         {
@@ -359,10 +359,10 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
 
                     if (ScriptsFolder.EnumerateFiles().Count() > 1)
                     {
-                        if (MessageBox.Show("Verify Hash has found files in the Scripts folder.\n" +
+                        if (("Verify Hash has found files in the Scripts folder.\n" +
                             "If you have installed custom Scripts or have not installed any Scripts" +
                             "\n\nClick Yes, to Allow Deletion of Files" +
-                            "\nClick No, to Skip Deletion of Files", "VerifyHash", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                            "\nClick No, to Skip Deletion of Files").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
                         {
                             foreach (FileInfo FoundFile in ScriptsFolder.EnumerateFiles())
                             {
@@ -396,8 +396,8 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                 Log.Info("VERIFY HASH: Completed check for '.orig' Files and Symbolic Folders, BUT Encounterd a File or Folder Deletion Error. " +
                 "Check Verify.log for More Details");
 
-                if (MessageBox.Show("Verify Hash has encountered File or Folder Deletion Errors.\n" +
-                "Would you like to Open Verify.Log and Stop the Scanner?", "VerifyHash", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (("Verify Hash has encountered File or Folder Deletion Errors.\n" +
+                "Would you like to Open Verify.Log and Stop the Scanner?").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (File.Exists(Log_Location.LogVerify))
                     {

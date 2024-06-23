@@ -258,7 +258,7 @@ namespace SBRW.Launcher.App.UI_Forms.About_Screen
             catch
             {
                 PatchContainerPanel.Visible = false;
-                MessageBox.Show("The launcher was unable to retrieve 'About' info from the server!");
+                "The launcher was unable to retrieve 'About' info from the server!".Message_Box();
             }
         }
     }

@@ -443,8 +443,7 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
             }
             else
             {
-                MessageBox.Show(null, "Click on a Server to Remove it from Your Custom Saved List",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ("Click on a Server to Remove it from Your Custom Saved List").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -456,8 +455,7 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
             }
             else
             {
-                MessageBox.Show(null, "This feature will Unlocked After This Screen",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                "This feature will Unlocked After This Screen".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -483,8 +481,9 @@ namespace SBRW.Launcher.App.UI_Forms.Custom_Server_Screen
                 {
                     if (ServerListUpdater.NoCategoryList_CSO.Count > 0)
                     {
-                        if (MessageBox.Show(null, "Confirm to Remove " + ServerListBook[ListView_Server_List.SelectedIndices[0] + 1].Name + " from Saved Custom Servers",
-                            "GameLauncher", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        if (("Confirm to Remove " + 
+                            ServerListBook[ListView_Server_List.SelectedIndices[0] + 1].Name + 
+                            " from Saved Custom Servers").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                         {
                             ServerListUpdater.NoCategoryList_CSO.RemoveAt(ListView_Server_List.SelectedIndices[0]);
                             ListView_Server_List.Items.Remove(ListView_Server_List.SelectedItems[0]);

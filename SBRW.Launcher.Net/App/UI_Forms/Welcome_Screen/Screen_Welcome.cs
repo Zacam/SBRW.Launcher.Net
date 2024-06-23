@@ -51,9 +51,8 @@ namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
             /* Check If Launcher Failed to Connect to any APIs */
             if (!VisualsAPIChecker.Local_Cached_API())
             {
-                MessageBox.Show(null, "Unable to Connect to any CDN List API. Please check your connection." +
-                "\n\nCDN Selection List will not be available",
-                "SBRW Launcher Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                ("Unable to Connect to any CDN List API. Please check your connection." +
+                "\n\nCDN Selection List will not be available").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
 
             /*******************************/
@@ -286,8 +285,8 @@ namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
 
                     Ini_File LanguagePickerFile = new Ini_File(Save_Settings.Live_Data.Game_Path + "/scripts/LangPicker.ini");
                     LanguagePickerFile.Key_Write("Language", ((Json_List_Language)ComboBox_Game_Language.SelectedItem).Value_Ini);
-                    MessageBox.Show(null, "Please Note: If a Server does not provide a Language Pack, it will fallback to English instead.",
-                        "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    "Please Note: If a Server does not provide a Language Pack, it will fallback to English instead."
+                        .Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {

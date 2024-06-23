@@ -75,17 +75,17 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     FailSafePathCreation = true;
                     Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                     Log.Error("LAUNCHER: Installing NFSW in same location where the GameLauncher resides is NOT allowed.");
-                    MessageBox.Show(null, string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed." +
-                        "\nInstead, we will install it at {0}.", Locations.GameFilesFailSafePath), "GameLauncher",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed." +
+                        "\nInstead, we will install it at {0}.", 
+                        Locations.GameFilesFailSafePath).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case FolderType.IsTempFolder:
                     FailSafePathCreation = true;
                     Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                     Log.Error("LAUNCHER: (╯°□°）╯︵ ┻━┻ Installing NFSW in the Temp Folder is NOT allowed!");
-                    MessageBox.Show(null, string.Format("(╯°□°）╯︵ ┻━┻\n\nInstalling NFSW in the Temp Folder is NOT allowed!" +
-                        "\nInstead, we will install it at {0}.", Locations.GameFilesFailSafePath + "\n\n┬─┬ ノ( ゜-゜ノ)"), "GameLauncher",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string.Format("(╯°□°）╯︵ ┻━┻\n\nInstalling NFSW in the Temp Folder is NOT allowed!" +
+                        "\nInstead, we will install it at {0}.", 
+                        Locations.GameFilesFailSafePath + "\n\n┬─┬ ノ( ゜-゜ノ)").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
                 case FolderType.IsProgramFilesFolder:
                 case FolderType.IsUsersFolders:
@@ -93,9 +93,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     FailSafePathCreation = true;
                     Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                     Log.Error("LAUNCHER: Installing NFSW in a Special Directory is disadvised.");
-                    MessageBox.Show(null, string.Format("Installing NFSW in a Special Directory is not recommended or allowed." +
-                        "\nInstead, we will install it at {0}.", Locations.GameFilesFailSafePath), "GameLauncher",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string.Format("Installing NFSW in a Special Directory is not recommended or allowed." +
+                        "\nInstead, we will install it at {0}.", 
+                        Locations.GameFilesFailSafePath).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
             }
             Save_Settings.Save();
@@ -118,7 +118,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         }
         #endregion
         #region ComboxList Setup
-        private void RememberLastProxySettings()
+        private void RememberLastSettingsLists()
         {
             try
             {
@@ -126,7 +126,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_Log_Mode))
                 {
                     ComboBox_Proxy_Logging.SelectedIndex = 
-                        ProxySettingsListUpdater.Proxy_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Proxy_Log_Mode()));
+                        SettingsListUpdater.Proxy_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Proxy_Log_Mode()));
                 }
                 else
                 {
@@ -136,15 +136,37 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_GZip_Version))
                 {
                     ComboBox_Proxy_GZip_Version.SelectedIndex =
-                        ProxySettingsListUpdater.Proxy_GZip_Version.FindIndex(i => Equals(i.Version, Save_Settings.Proxy_GZip_Version()));
+                        SettingsListUpdater.Proxy_GZip_Version.FindIndex(i => Equals(i.Version, Save_Settings.Proxy_GZip_Version()));
                 }
                 else
                 {
                     ComboBox_Proxy_GZip_Version.SelectedIndex = 1;
                 }
+                /* Launcher Logging */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Log_Mode))
+                {
+                    ComboBox_Launcher_Logging.SelectedIndex =
+                        SettingsListUpdater.Launcher_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Log_Mode()));
+                }
+                else
+                {
+                    ComboBox_Launcher_Logging.SelectedIndex = 1;
+                }
+                /* Launcher Builds */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Insider))
+                {
+                    ComboBox_Launcher_Builds_Branch.SelectedIndex =
+                        SettingsListUpdater.Launcher_Builds.FindIndex(i => Equals(i.Value, Save_Settings.Preview_Mode_Int()));
+                }
+                else
+                {
+                    ComboBox_Launcher_Builds_Branch.SelectedIndex = 1;
+                }
                 /* Manually Invoke Index Change to Set Selected Details Text */
                 ComboBox_Proxy_Logging_SelectedIndexChanged(default, default);
                 ComboBox_Proxy_GZip_Version_SelectedIndexChanged(default, default);
+                ComboBox_Launcher_Logging_SelectedIndexChanged(default, default);
+                ComboBox_Launcher_Builds_Branch_SelectedIndexChanged(default, default);
             }
             catch (Exception Error)
             {

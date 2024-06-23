@@ -24,6 +24,7 @@ using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Proxy.Nancy_;
 using SBRW.Launcher.App.UI_Forms;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Global
 {
@@ -100,8 +101,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
 #else
                     Process.Start("explorer.exe", Launcher_Value.Launcher_Select_Server_JSON.Server_Account_Recovery_Page);
 #endif
-                    MessageBox.Show(null, "A browser window has been opened to complete password recovery on " +
-                        Launcher_Value.Launcher_Select_Server_JSON.Server_Name, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ("A browser window has been opened to complete password recovery on " +
+                        Launcher_Value.Launcher_Select_Server_JSON.Server_Name).Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
@@ -111,7 +112,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     {
                         if (!send.Valid_Email())
                         {
-                            MessageBox.Show(null, "Email Address is not Valid. Please Check and Try Again", "GameLauncher",
+                            "Email Address is not Valid. Please Check and Try Again".Message_Box(
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         else
@@ -171,8 +172,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                                     DisplayMessage = "The Server received the Forgot Password Request, but has not Accepted your Request.";
                                 }
 
-                                MessageBox.Show(null, DisplayMessage, "GameLauncher",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                DisplayMessage.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             }
                             catch (WebException Error)
                             {
@@ -186,8 +186,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     }
                     else
                     {
-                        MessageBox.Show(null, "Email Address can not be empty. Please Check and Try Again", "GameLauncher",
-                            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        "Email Address can not be empty. Please Check and Try Again".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
             }
@@ -301,20 +300,10 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         break;
                     case "password":
                     case "my password":
-                        if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
-                        {
-                            string Text_Display = string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Raw_Password) ? "No Password Found" :
+                        string Text_Display = string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Raw_Password) ? "No Password Found" :
                                 "Your Password: " + Save_Account.Live_Data.User_Raw_Password;
 
-                            if (Screen_Settings.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, Text_Display, "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else if (Screen_Main.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Main.Screen_Instance, Text_Display, "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
+                        Text_Display.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case "now loading":
                     case "now loading!!!":
@@ -341,17 +330,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
 #endif
                     case "build":
                     case "build date":
-                        if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
-                        {
-                            if (Screen_Settings.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, BuildInformation.NumberDisplayFull(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (Screen_Main.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Main.Screen_Instance, BuildInformation.NumberDisplayFull(), "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                        }
+                        BuildInformation.NumberDisplayFull().Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         break;
                     case "opt build beta":
                     case "opt build dev":
@@ -378,58 +357,32 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         }
                         break;
                     case "help":
-                        if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
-                        {
-                            string LIST_OF_COMMANDS = "Available Commands" +
+                        string LIST_OF_COMMANDS = "Available Commands" +
                                                         "\nMy Password - Displays your raw Password" +
                                                         "\nUpdate - Triggers the Update popup, if an Update is available" +
                                                         "\nBuild Date - Displays Compiled Date";
 
-                            if (Screen_Settings.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, LIST_OF_COMMANDS, "SBRW Launcher Commands",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                            else if (Screen_Main.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Main.Screen_Instance, LIST_OF_COMMANDS, "SBRW Launcher Commands",
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }
-                        }
+                        LIST_OF_COMMANDS.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                         break;
                     case "vhs":
                     case "verify hash skip":
                         if (Save_Settings.Live_Data.Game_Integrity != "Good")
                         {
-                            if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
+                            string Entry_Text = Prompt.ShowDialog("Enter New Game Integrity Status", "SBRW Launcher");
+                            if (!string.IsNullOrWhiteSpace(Entry_Text))
                             {
-                                string Entry_Text = Prompt.ShowDialog("Enter New Game Integrity Status", "SBRW Launcher");
-                                if (!string.IsNullOrWhiteSpace(Entry_Text))
+                                DialogResult WIN_OWNER_Vhs = ("Confirm the Following Changes:" +
+                                    "\n\nGame Integrity OLD: " + Save_Settings.Live_Data.Game_Integrity +
+                                    "\nGame Integrity NEW: Good").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                                if (WIN_OWNER_Vhs == DialogResult.Yes)
                                 {
-                                    DialogResult WIN_OWNER = DialogResult.OK;
-
-                                    if (Screen_Settings.Screen_Instance != default)
+                                    Save_Settings.Live_Data.Game_Integrity = Entry_Text;
+                                    Save_Settings.Save();
+                                    if (Screen_Main.Screen_Instance != null)
                                     {
-                                        WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "Confirm the Following Changes:" +
-                                        "\n\nGame Integrity OLD: " + Save_Settings.Live_Data.Game_Integrity +
-                                        "\nGame Integrity NEW: Good", "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                                    }
-                                    else if (Screen_Main.Screen_Instance != default)
-                                    {
-                                        WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "Confirm the Following Changes:" +
-                                        "\n\nGame Integrity OLD: " + Save_Settings.Live_Data.Game_Integrity +
-                                        "\nGame Integrity NEW: Good", "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                                    }
-
-                                    if (WIN_OWNER == DialogResult.Yes)
-                                    {
-                                        Save_Settings.Live_Data.Game_Integrity = Entry_Text;
-                                        Save_Settings.Save();
-                                        if (Screen_Main.Screen_Instance != null)
-                                        {
-                                            Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
-                                                Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White);
-                                        }
+                                        Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
+                                            Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White);
                                     }
                                 }
                             }
@@ -437,28 +390,13 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         break;
                     case "hwid":
                     case "hw!d":
-                        if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
+                        string Live_ID = FingerPrint.Api_ID(Live_Commands == "hw!d");
+                        DialogResult WIN_OWNER = ("ID:" + Live_ID +
+                            "\n\nClick Yes to Copy to Clipboard").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+
+                        if (WIN_OWNER == DialogResult.Yes)
                         {
-                            string Live_ID = FingerPrint.Api_ID(Live_Commands == "hw!d");
-                            DialogResult WIN_OWNER = DialogResult.OK;
-
-                            if (Screen_Settings.Screen_Instance != default)
-                            {
-                                WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "ID:" +
-                                Live_ID +
-                                "\n\nClick Yes to Copy to Clipboard", "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                            }
-                            else if (Screen_Main.Screen_Instance != default)
-                            {
-                                WIN_OWNER = MessageBox.Show(Screen_Main.Screen_Instance, "ID:" +
-                                Live_ID +
-                                "\n\nClick Yes to Copy to Clipboard", "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                            }
-
-                            if (WIN_OWNER == DialogResult.Yes)
-                            {
-                                Clipboard.SetText(Live_ID);
-                            }
+                            Clipboard.SetText(Live_ID);
                         }
                         break;
                     case "nfsw goes offline":
@@ -472,96 +410,28 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     case "pdp":
                         if (Save_Settings.Live_Data != default)
                         {
-                            if (Save_Settings.Live_Data.Launcher_Proxy.Equals("0"))
+                            if (Save_Settings.Live_Data.Launcher_Proxy == "0")
                             {
-                                if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
+                                string Entry_Text = Prompt.ShowDialog("Enter New Domain Name (Does not Save on Relaunch)", "SBRW Launcher");
+
+                                if (!string.IsNullOrWhiteSpace(Entry_Text))
                                 {
-                                    string Entry_Text = Prompt.ShowDialog("Enter New Domain Name (Does not Save on Relaunch)", "SBRW Launcher");
+                                    DialogResult WIN_OWNER_Pdp = WIN_OWNER = ("Confirm the Following Changes:" +
+                                        "\n\nOLD Domain: " + Proxy_Settings.Domain +
+                                        "\nNEW Domain: " + Entry_Text).Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
 
-                                    if (!string.IsNullOrWhiteSpace(Entry_Text))
+                                    if (WIN_OWNER_Pdp == DialogResult.Yes)
                                     {
-                                        DialogResult WIN_OWNER = DialogResult.OK;
-
-                                        if (Screen_Settings.Screen_Instance != default)
+                                        if (Proxy_Settings.Running())
                                         {
-                                            WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "Confirm the Following Changes:" +
-                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
-                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                                        }
-                                        else if (Screen_Main.Screen_Instance != default)
-                                        {
-                                            WIN_OWNER = MessageBox.Show(Screen_Main.Screen_Instance, "Confirm the Following Changes:" +
-                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
-                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                                            Proxy_Server.Instance.Stop("SBRW.Launcher.Core [Console]");
                                         }
 
-                                        if (WIN_OWNER == DialogResult.Yes)
+                                        Log.Function("[Console]: Custom Proxy Domain:".ToUpper() + " -> " + (Proxy_Settings.Domain = Entry_Text) + " has been Set");
+
+                                        if (!Proxy_Settings.Running())
                                         {
-                                            if (Proxy_Settings.Running())
-                                            {
-                                                Proxy_Server.Instance.Stop("SBRW.Launcher.Core [Console]");
-                                            }
-
-                                            Log.Function("[Console]: Custom Proxy Domain:".ToUpper() + " -> " + (Proxy_Settings.Domain = Entry_Text) + " has been Set");
-
-                                            if (!Proxy_Settings.Running())
-                                            {
-                                                Proxy_Server.Instance.Start("SBRW.Launcher.Core [Console]");
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case "proxy log":
-                        if (Save_Settings.Live_Data != default)
-                        {
-                            if (Save_Settings.Live_Data.Launcher_Proxy.Equals("0"))
-                            {
-                                if ((Screen_Settings.Screen_Instance != default) || (Screen_Main.Screen_Instance != default))
-                                {
-                                    string Entry_Text = Prompt.ShowDialog("Enter Proxy Log Mode (Does not Save on Relaunch)", "SBRW Launcher");
-
-                                    if (!string.IsNullOrWhiteSpace(Entry_Text))
-                                    {
-                                        DialogResult WIN_OWNER = DialogResult.OK;
-
-                                        if (Screen_Settings.Screen_Instance != default)
-                                        {
-                                            WIN_OWNER = MessageBox.Show(Screen_Settings.Screen_Instance, "Confirm the Following Changes:" +
-                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
-                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                                        }
-                                        else if (Screen_Main.Screen_Instance != default)
-                                        {
-                                            WIN_OWNER = MessageBox.Show(Screen_Main.Screen_Instance, "Confirm the Following Changes:" +
-                                            "\n\nOLD Domain: " + Proxy_Settings.Domain +
-                                            "\nNEW Domain: " + Entry_Text, "SBRW Launcher", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                                        }
-
-                                        if (WIN_OWNER == DialogResult.Yes)
-                                        {
-                                            if(Entry_Text == "0")
-                                            {
-                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.None;
-                                            }
-                                            else if (Entry_Text == "1")
-                                            {
-                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.All;
-                                            }
-                                            else if (Entry_Text == "2")
-                                            {
-                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Requests;
-                                            }
-                                            else if (Entry_Text == "3")
-                                            {
-                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Responses;
-                                            }
-                                            else if (Entry_Text == "4")
-                                            {
-                                                Proxy_Settings.Log_Mode = Core.Proxy.Log_.CommunicationLogRecord.Errors;
-                                            }
+                                            Proxy_Server.Instance.Start("SBRW.Launcher.Core [Console]");
                                         }
                                     }
                                 }
@@ -607,24 +477,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                                     if (File.Exists(Save_Settings.Live_Data.Game_Archive_Location))
                                     {
                                         File.Delete(Save_Settings.Live_Data.Game_Archive_Location);
-
-                                        if (Screen_Settings.Screen_Instance != default)
-                                        {
-                                            MessageBox.Show(Screen_Settings.Screen_Instance, "Game Files Pack File Removed Successfully",
-                                                "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        }
-                                        else if (Screen_Main.Screen_Instance != default)
-                                        {
-                                            MessageBox.Show(Screen_Settings.Screen_Instance, "Game Files Pack File Removed Successfully",
-                                                "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                        }
+                                        "Game Files Pack File Removed Successfully".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                 }
                             }
                         }
                         catch (Exception Error)
                         {
-                            LogToFileAddons.OpenLog("Console Commands [dgp]", string.Empty, Error, string.Empty, false, Screen_Settings.Screen_Instance??default);
+                            LogToFileAddons.OpenLog("Console Commands [dgp]", string.Empty, Error, string.Empty, false);
                         }
                         break;
                     case "the buggles":
@@ -665,16 +525,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     default:
                         if (!string.IsNullOrWhiteSpace(Live_Commands))
                         {
-                            if (Screen_Settings.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Settings.Screen_Instance, 
-                                    "Command not Found", "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
-                            else if (Screen_Main.Screen_Instance != default)
-                            {
-                                MessageBox.Show(Screen_Main.Screen_Instance,
-                                    "Command not Found", "SBRW Launcher", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                            }
+                            "Command not Found".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
                         break;
                 }

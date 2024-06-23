@@ -3,11 +3,159 @@ using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.Core.Extension.Logging_;
 using System;
 using System.Windows.Forms;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Support
 {
-    static class FormsControls
+    /// <summary>
+    /// 
+    /// </summary>
+    public static class FormsControls
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <returns></returns>
+        public static DialogResult Message_Box(this string Text)
+        {
+            return Message_Box(Text, MessageBoxButtons.OK);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <param name="Buttons"></param>
+        /// <returns></returns>
+        public static DialogResult Message_Box(this string Text, MessageBoxButtons Buttons)
+        {
+            return Message_Box(Text, Buttons, MessageBoxIcon.None);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Text"></param>
+        /// <param name="Buttons"></param>
+        /// <param name="Icon"></param>
+        /// <returns></returns>
+        public static DialogResult Message_Box(this string Text, MessageBoxButtons Buttons, MessageBoxIcon Icon)
+        {
+            if (Screen_Parent.Screen_Instance.DisposedForm())
+            {
+                return Message_Box(null, Text, Buttons, Icon);
+            }
+            else
+            {
+                return Message_Box(Screen_Parent.Screen_Instance, Text, Buttons, Icon);
+            }
+            
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Window_Handle"></param>
+        /// <param name="Text"></param>
+        /// <param name="Buttons"></param>
+        /// <param name="Icon"></param>
+        /// <returns></returns>
+        public static DialogResult Message_Box(this IWin32Window Window_Handle, string Text, MessageBoxButtons Buttons, MessageBoxIcon Icon)
+        {
+            string Caption = "Soapbox Race World: Launcher ";
+            switch (Icon)
+            {
+                case MessageBoxIcon.Error:
+                    Caption += "- Stop";
+                    break;
+                case MessageBoxIcon.Question:
+                    Caption += "- Question";
+                    break;
+                case MessageBoxIcon.Exclamation:
+                    Caption += "- Warning";
+                    break;
+                case MessageBoxIcon.Information:
+                    Caption += "- Information";
+                    break;
+            }
+
+            return MessageBox.Show(Window_Handle, Text, Caption, Buttons, Icon);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Window_Handle"></param>
+        /// <param name="Text"></param>
+        /// <param name="Buttons"></param>
+        /// <param name="Icon"></param>
+        /// <returns></returns>
+        public static DialogResult Message_Box_Details(this string Text_Message, string Text_Details, MessageBoxButtons Button_Text, MessageBoxIcon Title_Bar)
+        {
+            string Title_Bar_Caption = "Soapbox Race World: Launcher ";
+            switch (Title_Bar)
+            {
+                case MessageBoxIcon.Error:
+                    Title_Bar_Caption += "- Stop";
+                    break;
+                case MessageBoxIcon.Question:
+                    Title_Bar_Caption += "- Question";
+                    break;
+                case MessageBoxIcon.Exclamation:
+                    Title_Bar_Caption += "- Warning";
+                    break;
+                case MessageBoxIcon.Information:
+                    Title_Bar_Caption += "- Information";
+                    break;
+            }
+
+            /* Set the Custom Text for Buttons */
+            string Text_Okay = "OK";
+            string Text_Cancel = "Cancel";
+            bool Text_Changed = false;
+            switch (Button_Text)
+            {
+                case MessageBoxButtons.YesNoCancel:
+                    Text_Okay = "Yes";
+                    Text_Cancel = "No";
+                    Text_Changed = true;
+                    break;
+                case MessageBoxButtons.RetryCancel:
+                    Text_Okay = "Retry";
+                    Text_Cancel = "Cancel";
+                    Text_Changed = true;
+                    break;
+                case MessageBoxButtons.AbortRetryIgnore:
+                    Text_Okay = "Retry";
+                    Text_Cancel = "Abort";
+                    Text_Changed = true;
+                    break;
+            }
+
+            string Dialog_Type_Name = "System.Windows.Forms.PropertyGridInternal.GridErrorDlg";
+            Type Dialog_Type = typeof(Form).Assembly.GetType(Dialog_Type_Name);
+            /* Create dialog instance */
+            Form Dialog = (Form)Activator.CreateInstance(Dialog_Type, new PropertyGrid());
+            /* Populate relevant properties on the dialog instance */
+            Dialog.Text = Title_Bar_Caption;
+            Dialog_Type.GetProperty("Details").SetValue(Dialog, Text_Details, null);
+            Dialog_Type.GetProperty("Message").SetValue(Dialog, Text_Message, null);
+            /* Set the new Text for Buttons (Live Patch) */
+            Control[] Button_Ok = Dialog.Controls.Find("okBtn", true);
+            Control[] Button_Cancel = Dialog.Controls.Find("cancelBtn", true);
+            if (Button_Text == MessageBoxButtons.OK)
+            {
+                Button_Ok[0].Visible = false;
+                Button_Cancel[0].Text = Button_Ok[0].Text;
+            }
+            else if (Text_Changed)
+            {
+                Button_Ok[0].Text = Text_Okay;
+                Button_Cancel[0].Text = Text_Cancel;
+            }
+            
+            /* Display dialog */
+            return Dialog.ShowDialog(Screen_Parent.Screen_Instance);
+        }
         /// <summary>
         /// Checks if the Forms Screen has been Disposed
         /// </summary>

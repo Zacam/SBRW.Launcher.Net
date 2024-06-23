@@ -36,6 +36,8 @@ using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Runtime.CompilerServices;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -425,7 +427,24 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     LoginWelcomeTime = "Pshhh Pshhh";
                 }
 
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Input_Email.Text).ToUpper();
+                string Account_Username_Email = "Ryan Cooper";
+                if (Save_Settings.Account_Manager())
+                {
+                    if (ComboBox_Accounts.SelectedItem != default)
+                    {
+                        if (!string.IsNullOrWhiteSpace(((Json_List_Account)ComboBox_Accounts.SelectedItem).Nickname))
+                        {
+                            Account_Username_Email = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Nickname;
+                        }
+                    }
+                }
+                else
+                {
+                    Account_Username_Email = Input_Email.Text;
+                }
+
+                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Account_Username_Email).ToUpper();
+
                 if (Picture_Information_Window.Image != Image_Other.Information_Window_Success)
                 {
                     Picture_Information_Window.Image = Image_Other.Information_Window_Success;
@@ -462,20 +481,28 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Login.Visible = hideElements;
 
             Button_Register.Visible = hideElements;
-            Input_Email.Visible = hideElements;
-            Input_Password.Visible = hideElements;
+            if (Save_Settings.Account_Manager())
+            {
+                ComboBox_Accounts.Visible = hideElements;
+                Button_Account_Manager.Visible = hideElements;
+            }
+            else
+            {
+                Input_Email.Visible = hideElements;
+                Input_Password.Visible = hideElements;
+                Picture_Input_Email.Visible = hideElements;
+                Picture_Input_Password.Visible = hideElements;
+                /* Input Strokes */
+                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+                Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+            }
+            
             LinkLabel_Forgot_Password.Visible = hideElements;
             Button_Settings.Visible = hideElements;
             Button_Security_Center.Visible = hideElements;
 
             Button_Custom_Server.Enabled = hideElements;
             ComboBox_Server_List.Enabled = hideElements;
-
-            /* Input Strokes */
-            Picture_Input_Email.Visible = hideElements;
-            Picture_Input_Password.Visible = hideElements;
-            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
-            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
 
             if (Picture_Information_Window.Image != Image_Other.Information_Window)
             {
@@ -927,8 +954,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void ComboBox_Server_List_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
-            Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+            if (Save_Settings.Account_Manager())
+            {
+                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+                Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+            }
+            
             /* Disable Certain Functions */
             LoginEnabled = ServerEnabled = FunctionStatus.AllowRegistration = false;
             Launcher_Value.Launcher_Select_Server_JSON = null;
@@ -1800,7 +1831,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             Display_Color_Icons();
                             Label_Download_Information.Text = "Loading game. Launcher will minimize once Game has Loaded".ToUpperInvariant();
                             Label_Download_Information_Support.Text = string.Empty;
-                            Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            if (!Save_Settings.Account_Manager())
+                            {
+                                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                            }
 #if NETFRAMEWORK
                             ContextMenu = new ContextMenu();
                             ContextMenu.MenuItems.Add(new MenuItem("Now Loading!!!", (b, n) =>
@@ -1898,7 +1932,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                         Label_Download_Information.Text = "Launcher: Checking NFSW EXE File Hash".ToUpperInvariant();
                         Label_Download_Information_Support.Text = string.Empty;
-                        Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        if (!Save_Settings.Account_Manager())
+                        {
+                            Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
+                        }
                         break;
                     case 13:
                         if (UI_MODE != 0)

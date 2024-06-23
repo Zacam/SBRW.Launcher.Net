@@ -152,21 +152,21 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                         {
                             bool Update_Info_Tag = false;
 
-                            if (!TextBox_Password.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Password))
+                            if (!(TextBox_Password.Text.Encrypt_AES() == Accounts_Cache[Account_Index.Item_Index].Password))
                             {
                                 Accounts_Cache[Account_Index.Item_Index].Password = TextBox_Password.Text.Encrypt_AES();
                                 Update_Info_Tag = true;
                             }
 
-                            if (!TextBox_Email.Text.Encrypt_AES().Equals(Accounts_Cache[Account_Index.Item_Index].Email))
+                            if (!(TextBox_Email.Text.Encrypt_AES() == Accounts_Cache[Account_Index.Item_Index].Email))
                             {
                                 Accounts_Cache[Account_Index.Item_Index].Email = TextBox_Email.Text.Encrypt_AES();
                                 Update_Info_Tag = true;
                             }
 
-                            if (!TextBox_Nickname.Text.Equals(Accounts_Cache[Account_Index.Item_Index].Nickname))
+                            if (!(TextBox_Nickname.Text == Accounts_Cache[Account_Index.Item_Index].Nickname))
                             {
-                                if (!Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text))
+                                if (!Accounts_Cache.Any(Accounts_Cache_DB => Accounts_Cache_DB.Nickname == TextBox_Nickname.Text))
                                 {
                                     Accounts_Cache[Account_Index.Item_Index].Nickname = TextBox_Nickname.Text;
                                     Update_Info_Tag = true;

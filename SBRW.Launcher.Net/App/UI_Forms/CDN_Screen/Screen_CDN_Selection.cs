@@ -370,16 +370,16 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                     switch (Screen_Mode_Update)
                     {
                         case 1:
-                            MessageBox.Show(Screen_Welcome.Screen_Instance, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case 2:
-                            MessageBox.Show(Screen_Settings.Screen_Instance, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         default:
-                            MessageBox.Show(null, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                     }
                 }
@@ -414,16 +414,16 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                     switch (Screen_Mode_Update)
                     {
                         case 1:
-                            MessageBox.Show(Screen_Welcome.Screen_Instance, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         case 2:
-                            MessageBox.Show(Screen_Settings.Screen_Instance, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                         default:
-                            MessageBox.Show(null, "Selected CDN does not have a Valid URL. Please Choose Another CDN.",
-                            "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ("Selected CDN does not have a Valid URL. " +
+                                "Please Choose Another CDN.").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             break;
                     }
                 }
@@ -438,8 +438,9 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                 {
                     if (ServerListUpdater.NoCategoryList_CSO.Count > 0)
                     {
-                        if (MessageBox.Show(null, "Confirm to Remove " + ServerListBook[ListView_Server_List.SelectedIndices[0] + 1].Name + " from Saved Custom Servers",
-                            "GameLauncher", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+                        if (("Confirm to Remove " + 
+                            ServerListBook[ListView_Server_List.SelectedIndices[0] + 1].Name + 
+                            " from Saved Custom Servers").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
                         {
                             ServerListUpdater.NoCategoryList_CSO.RemoveAt(ListView_Server_List.SelectedIndices[0]);
                             ListView_Server_List.Items.Remove(ListView_Server_List.SelectedItems[0]);

@@ -125,7 +125,7 @@ namespace SBRW.Concepts
 
                 if (!New_Credential.Save())
                 {
-                    MessageBox.Show($"Failed to save credential for SBRW.Concepts.{Auto_ID}");
+                    $"Failed to save credential for SBRW.Concepts.{Auto_ID}".Message_Box();
                 }
                 else
                 {
@@ -139,7 +139,7 @@ namespace SBRW.Concepts
             }
             else
             {
-                MessageBox.Show("Enter Account Info");
+                "Enter Account Info".Message_Box();
             }
         }
 
@@ -156,7 +156,7 @@ namespace SBRW.Concepts
 
                         if (!new Credential() { Target = Account_Information.Target }.Delete())
                         {
-                            MessageBox.Show($"Failed to Remove credential: SBRW.Concepts.{Account_Information.Target}");
+                            $"Failed to Remove credential: SBRW.Concepts.{Account_Information.Target}".Message_Box();
                         }
                         else
                         {
@@ -196,7 +196,7 @@ namespace SBRW.Concepts
 
                         if (!Updated_Credential.Save())
                         {
-                            MessageBox.Show($"Failed to Update credential: SBRW.Concepts.{Account_Information.Target}");
+                            $"Failed to Update credential: SBRW.Concepts.{Account_Information.Target}".Message_Box();
                         }
                         else
                         {

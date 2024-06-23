@@ -19,6 +19,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
 {
@@ -168,7 +169,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                 if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Game_Path))
                                 {
 #pragma warning disable CS8604
-                                    Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(0, Screen_Instance ?? null);
+                                    Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(0);
 #pragma warning restore CS8604
                                 }
                                 else
@@ -206,7 +207,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                         }
                     }
 #pragma warning disable CS8604 // Possible null reference argument.
-                    else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1, Screen_Instance ?? null))
+                    else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1))
                     {
                         LogToFileAddons.Parent_Log_Screen(12, "LAUNCHER", "Folder Check Trigger in 'FOLDER SELECT DIALOG'");
                     }
@@ -214,7 +215,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                 }
             }
 #pragma warning disable CS8604 // Possible null reference argument.
-            else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1, Screen_Instance ?? null))
+            else if (Save_Settings.Live_Data.Game_Path.IsRestrictedGameFolderLocation(1))
             {
                 LogToFileAddons.Parent_Log_Screen(12, "LAUNCHER", "Folder Check Trigger");
             }
@@ -254,9 +255,9 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                 }
                             }
                             LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "Installing NFSW in same location where the GameLauncher resides is NOT allowed.", false, true);
-                            MessageBox.Show(null, string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed.\n" +
-                                "Instead, we will install it at {0}.", Locations.GameFilesFailSafePath),
-                                "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            string.Format("Installing NFSW in same location where the GameLauncher resides is NOT allowed.\n" +
+                                "Instead, we will install it at {0}.", Locations.GameFilesFailSafePath).Message_Box(
+                                MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                             break;
                         case FolderType.IsTempFolder:
@@ -290,7 +291,7 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                 }
                             }
                             LogToFileAddons.Parent_Log_Screen(4, "LAUNCHER", "Installing NFSW in a Restricted Location is not allowed.", false, true);
-                            MessageBox.Show(null, constructMsg, "GameLauncher", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            constructMsg.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Save_Settings.Live_Data.Game_Path = Locations.GameFilesFailSafePath;
                             break;
                     }
@@ -305,10 +306,10 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                 {
                     Presence_Launcher.Status(0, "Launcher Encountered API Errors");
 
-                    DialogResult restartAppNoApis = MessageBox.Show(null, "There is no internet connection or local cache, Launcher might crash." +
+                    DialogResult restartAppNoApis = ("There is no internet connection or local cache, Launcher might crash." +
                         "\n\nClick Yes to Close GameLauncher" +
                         "\nor" +
-                        "\nClick No Continue", "GameLauncher has Stopped, Failed To Connect To API", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        "\nClick No Continue").Message_Box(MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
                     if (restartAppNoApis == DialogResult.Yes)
                     {

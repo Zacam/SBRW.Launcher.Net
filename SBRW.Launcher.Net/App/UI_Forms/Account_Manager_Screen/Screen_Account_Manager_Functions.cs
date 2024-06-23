@@ -4,6 +4,7 @@ using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.RunTime.LauncherCore.Global;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -85,26 +86,20 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                     Accounts_Cache.Add(Queried_Account);
                 }
 
-                if (Screen_Instance != default)
+                if (!Screen_Instance.DisposedForm())
                 {
-                    if (Screen_Instance.DataGridView_Account_List.Visible)
-                    {
-                        Screen_Instance.DataGridView_Account_List.DataSource = Accounts_Cache;
-                        Screen_Instance.DataGridView_Account_List.Refresh();
-                        Screen_Instance.DataGridView_Account_List.ClearSelection();
-                    }
+                    Screen_Instance.DataGridView_Account_List.DataSource = Accounts_Cache;
+                    Screen_Instance.DataGridView_Account_List.Refresh();
+                    Screen_Instance.DataGridView_Account_List.ClearSelection();
                 }
 
-                if (Screen_Main.Screen_Instance != default)
+                if (!Screen_Main.Screen_Instance.DisposedForm())
                 {
-                    if (Screen_Main.Screen_Instance.ComboBox_Accounts.Visible)
-                    {
-                        /* Accounts Display List */
-                        Screen_Main.Screen_Instance.ComboBox_Accounts.DisplayMember = "Nickname";
-                        Log.Core("LAUNCHER: Setting Account list");
-                        Screen_Main.Screen_Instance.ComboBox_Accounts.DataSource = Accounts_Cache;
-                        Screen_Main.Screen_Instance.ComboBox_Accounts.Refresh();
-                    }
+                    /* Accounts Display List */
+                    Screen_Main.Screen_Instance.ComboBox_Accounts.DisplayMember = "Nickname";
+                    Log.Core("LAUNCHER: Setting Account list");
+                    Screen_Main.Screen_Instance.ComboBox_Accounts.DataSource = Accounts_Cache;
+                    Screen_Main.Screen_Instance.ComboBox_Accounts.Refresh();
                 }
             }
             catch (Exception Error)

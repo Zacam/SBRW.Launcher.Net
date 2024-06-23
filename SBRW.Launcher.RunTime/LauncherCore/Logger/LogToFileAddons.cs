@@ -9,16 +9,28 @@ using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Logger
 {
-    class LogToFileAddons
+    public static class LogToFileAddons
     {
         public static string OpenLogMessage { get; set; } = "Would you Like to Open the Launcher Error Log and Send it to a Support Channel?" +
                     "\nThis would be Useful for Fixing Issues and Potential Solutions";
-
-        public static void OpenLog(string From, string MessageDetails, Exception Error, string Icon, bool Suppress = true, IWin32Window? Window_Handle = default, bool Ignore_Log_Alert = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="From"></param>
+        /// <param name="MessageDetails"></param>
+        /// <param name="Error"></param>
+        /// <param name="Icon"></param>
+        /// <param name="Suppress"></param>
+        /// <param name="Window_Handle"></param>
+        /// <param name="Ignore_Log_Alert"></param>
+#if (DEBUG_UNIX || RELEASE_UNIX)
+        [Obsolete("Unix Builds has issues with this, use alternative methods")]
+#endif
+        public static void OpenLog(this string From, string MessageDetails, Exception Error, string Icon, bool Suppress = true, bool Ignore_Log_Alert = false)
         {
             if (Error != default)
             {
-                /* Call Garbe Collection since it will release the Exception Bubble buildup */
+                /* Call Garbage Collection since it will release the Exception Bubble buildup */
                 GarbageCollections.Cleanup();
             }
 
@@ -42,8 +54,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
                 string FormattedMessage = string.IsNullOrWhiteSpace(MessageDetails) ? string.Empty : 
                     MessageDetails + "\n" + ((Error != null) ? Error.Message : "Unknown Error [Null Exception]") + "\n\n";
 
-                DialogResult OpenLogFile = MessageBox.Show(Window_Handle, FormattedMessage + OpenLogMessage, "SBRW Launcher Error Log",
-                    MessageBoxButtons.YesNo, IconBox);
+                DialogResult OpenLogFile = (FormattedMessage + OpenLogMessage).Message_Box(MessageBoxButtons.YesNo, IconBox);
 
                 if (OpenLogFile == DialogResult.Yes && Core_File)
                 {
@@ -63,8 +74,15 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
                 }
             }
         }
-
-        public static void Parent_Log_Screen(int Log_Type, string From, string Log_Details, bool Log_Clear = false, bool Log_Supress = false)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Log_Type"></param>
+        /// <param name="From"></param>
+        /// <param name="Log_Details"></param>
+        /// <param name="Log_Clear"></param>
+        /// <param name="Log_Supress"></param>
+        public static void Parent_Log_Screen(this int Log_Type, string From, string Log_Details, bool Log_Clear = false, bool Log_Supress = false)
         {
             try
             {
@@ -166,17 +184,15 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Logger
                         break;
                 }
 
-                if (Screen_Parent.Screen_Instance != null && !FunctionStatus.LauncherForceClose)
+                if (!Screen_Parent.Screen_Instance.DisposedForm() && !FunctionStatus.LauncherForceClose)
                 {
                     if (Log_Clear)
                     {
-                        Screen_Parent.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() => 
-                        Screen_Parent.Screen_Instance.TextBox_Live_Log.Clear());
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.Clear();
                     }
                     else
                     {
-                        Screen_Parent.Screen_Instance.TextBox_Live_Log.SafeInvokeAction(() =>
-                        Screen_Parent.Screen_Instance.TextBox_Live_Log.AppendText(Environment.NewLine + "[" + Log_Type_String + "] " + Log_Full_String));
+                        Screen_Parent.Screen_Instance.TextBox_Live_Log.AppendText(Environment.NewLine + "[" + Log_Type_String + "] " + Log_Full_String);
                     }
                 }
             }
