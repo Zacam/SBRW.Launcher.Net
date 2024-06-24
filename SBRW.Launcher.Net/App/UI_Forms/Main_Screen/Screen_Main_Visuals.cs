@@ -477,10 +477,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 Label_Information_Window.Text = "Enter Your Account Information to Log In".ToUpper();
             }
 
-            CheckBox_Remember_Us.Visible = hideElements;
             Button_Login.Visible = hideElements;
-
             Button_Register.Visible = hideElements;
+
             if (Save_Settings.Account_Manager())
             {
                 ComboBox_Accounts.Visible = hideElements;
@@ -495,6 +494,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 /* Input Strokes */
                 Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
                 Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+                CheckBox_Remember_Us.Visible = hideElements;
             }
             
             LinkLabel_Forgot_Password.Visible = hideElements;

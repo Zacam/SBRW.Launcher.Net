@@ -3,7 +3,7 @@
     /* Used with CheckFolder Function in FunctionStatus.cs
     /* Or
     * Other Conditionals */
-    enum FolderType
+    public enum FolderType
     {
         IsTempFolder,
         IsUsersFolders,
@@ -19,7 +19,7 @@
     * Other Conditionals */
     ///<summary>(Name Only) Hash Standard Name that is used for Checking functions</summary>
     ///<returns>Hash Standard Name</returns>
-    enum AuthHash
+    public enum AuthHash
     {
         ///<summary><c>[Not Recommended]</c> Hash Version 1.0</summary>
         ///<remarks>Default Standard for https only servers</remarks>

@@ -29,6 +29,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Windows.Forms;
+using System.Linq;
+using SBRW.Launcher.Core.Extension.List_;
+using SBRW.Launcher.RunTime.LauncherCore.Client.Auth.JSON;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -142,19 +145,20 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             Tokens.Clear();
 
-            string Email;
-            string Password;
-
             Tokens.IPAddress = Launcher_Value.Launcher_Select_Server_Data.IPAddress;
             Tokens.ServerName = ServerListUpdater.ServerName("Login");
+
+            AuthenticationGeneration Live_Information = default;
 
             if (Save_Settings.Account_Manager())
             {
                 if (ComboBox_Accounts.SelectedItem != default)
                 {
                     Button_Login.Text = "Decrypting".ToUpper();
-                    Email = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Email.Decrypt_AES();
-                    Password = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Password.Decrypt_AES();
+                    Live_Information = (Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty).
+                        HashType().Login_Formater(
+                        (ComboBox_Accounts.SelectedItem as Json_List_Account).Email.Decrypt_AES(),
+                        (ComboBox_Accounts.SelectedItem as Json_List_Account).Password.Decrypt_AES());
                     Button_Login.Text = "Login".ToUpper();
                 }
                 else
@@ -165,43 +169,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             }
             else
             {
-                switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
-                {
-                    case AuthHash.H10:
-                        Email = Input_Email.Text.ToString();
-                        Password = Input_Password.Text.ToString();
-                        break;
-                    case AuthHash.H11:
-                        Email = Input_Email.Text.ToString();
-                        Password = Input_Password.Text.Hash_String(0).ToLower();
-                        break;
-                    case AuthHash.H12:
-                        Email = Input_Email.Text.ToString();
-                        Password = Input_Password.Text.Hash_String(1).ToLower();
-                        break;
-                    case AuthHash.H13:
-                        Email = Input_Email.Text.ToString();
-                        Password = Input_Password.Text.Hash_String(2).ToLower();
-                        break;
-                    case AuthHash.H20:
-                        Email = Input_Email.Text.Hash_String(0).ToLower();
-                        Password = Input_Password.Text.Hash_String(0).ToLower();
-                        break;
-                    case AuthHash.H21:
-                        Email = Input_Email.Text.Hash_String(1).ToLower();
-                        Password = Input_Password.Text.Hash_String(1).ToLower();
-                        break;
-                    case AuthHash.H22:
-                        Email = Input_Email.Text.Hash_String(2).ToLower();
-                        Password = Input_Password.Text.Hash_String(2).ToLower();
-                        break;
-                    default:
-                        Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
-                        return;
-                }
+                Live_Information = (Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty).
+                        HashType().Login_Formater(Input_Email.Text, Input_Password.Text);
             }
 
-            Authentication.Client("Login", Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Post, Email, Password, string.Empty);
+            Authentication.Client("Login", Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Post, 
+                Live_Information.Email, Live_Information.Password, string.Empty);
 
             if (string.IsNullOrWhiteSpace(Tokens.Error))
             {
@@ -222,55 +195,16 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     Save_Account.Live_Data.User_Raw_Email = Input_Email.Text.ToString();
                     Save_Account.Live_Data.User_Raw_Password = Input_Password.Text.ToString();
-
-                    switch (Authentication.HashType(Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty))
-                    {
-                        case AuthHash.H10:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.0";
-                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                            Save_Account.Live_Data.User_Hashed_Password = string.Empty;
-                            break;
-                        case AuthHash.H11:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.1";
-                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
-                            break;
-                        case AuthHash.H12:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.2";
-                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
-                            break;
-                        case AuthHash.H13:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "1.3";
-                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
-                            break;
-                        case AuthHash.H20:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.0";
-                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(0).ToLower();
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(0).ToLower();
-                            break;
-                        case AuthHash.H21:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.1";
-                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(1).ToLower();
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(1).ToLower();
-                            break;
-                        case AuthHash.H22:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "2.2";
-                            Save_Account.Live_Data.User_Hashed_Email = Input_Email.Text.Hash_String(2).ToLower();
-                            Save_Account.Live_Data.User_Hashed_Password = Input_Password.Text.Hash_String(2).ToLower();
-                            break;
-                        default:
-                            Save_Account.Live_Data.Saved_Server_Hash_Version = "Unknown";
-                            Save_Account.Live_Data.User_Hashed_Email = string.Empty;
-                            Save_Account.Live_Data.User_Hashed_Password = string.Empty;
-                            Log.Error("HASH TYPE: Unknown Hash Standard was Provided");
-                            return;
-                    }
+                    Save_Account.Live_Data.Saved_Server_Hash_Version = Live_Information.Version;
+                    Save_Account.Live_Data.User_Hashed_Email = Live_Information.Email;
+                    Save_Account.Live_Data.User_Hashed_Password = Live_Information.Password;
                 }
                 else if (ComboBox_Accounts.SelectedItem != default)
                 {
-                    Save_Account.Live_Data.User_Account_Index = ComboBox_Accounts.SelectedIndex.ToString();
+                    if ((ComboBox_Accounts.SelectedItem as Json_List_Account) != default)
+                    {
+                        Save_Account.Live_Data.User_Account_Index = (ComboBox_Accounts.SelectedItem as Json_List_Account).Nickname;
+                    }
                 }
 
                 Save_Account.Save();
@@ -279,7 +213,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     Input_Email.Text = "EMAIL IS HIDDEN";
                     Tokens.Warning.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    Input_Email.Text = Email;
+                    Input_Email.Text = Live_Information.Email;
                 }
 
                 LoginFormElements(false);
@@ -296,8 +230,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
                 Input_Email.Text = "EMAIL IS HIDDEN";
                 Tokens.Error.Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Input_Email.Text = Email;
+                Input_Email.Text = Live_Information.Email;
             }
+
+            /* Clear out from Memory */
+            Live_Information = default;
         }
         /// <summary>
         /// 
@@ -369,7 +306,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             }
             else
             {
-                "Server seems to be Offline.".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
+                "Server seems to be Offline or Unavailable. Try again Later".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         /// <summary>
@@ -434,7 +371,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         private void MainScreen_Load(object sender, EventArgs e)
         {
             Log.Visuals("CORE: Loading Main Screen");
-            Application.OpenForms[this.Name].Activate();
+            if(!Screen_Parent.Screen_Instance.DisposedForm())
+            {
+                Application.OpenForms[Screen_Parent.Screen_Instance.Name].Activate();
+            }
 
             if (!string.IsNullOrWhiteSpace(BuildInformation.SHORT_INFO_WITH_SECONDS))
             {
@@ -481,6 +421,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Input_Password.Visible = !Save_Settings.Account_Manager();
             Picture_Input_Email.Visible = !Save_Settings.Account_Manager();
             Picture_Input_Password.Visible = !Save_Settings.Account_Manager();
+            CheckBox_Remember_Us.Visible = !Save_Settings.Account_Manager();
 
             /* Display Server List Dialog if Server IP Doesn't Exist */
             if (string.IsNullOrWhiteSpace(Save_Account.Live_Data.Saved_Server_Address))
@@ -568,11 +509,38 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                             Log.Completed("SERVERLIST: All done");
                         }
-                        else { ComboBox_Server_List_SelectedIndexChanged(sender, e); Log.Completed("SERVERLIST: Empty List. Not Setting Index"); }
+                        else 
+                        { 
+                            ComboBox_Server_List_SelectedIndexChanged(sender, e); 
+                            Log.Completed("SERVERLIST: Empty List. Not Setting Index"); 
+                        }
                     }
                     catch (Exception Error)
                     {
-                        LogToFileAddons.OpenLog("Serverlist", string.Empty, Error, string.Empty, true);
+                        LogToFileAddons.OpenLog("Server List", string.Empty, Error, string.Empty, true);
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Account_Index) && Save_Settings.Account_Manager())
+                {
+                    try
+                    {
+                        if (Screen_Account_Manager.Accounts_Cache.Count != 0)
+                        {
+                            if (Screen_Account_Manager.Accounts_Cache.Find(i => string.Equals(i.Nickname, Save_Account.Live_Data.User_Account_Index)) != default)
+                            {
+                                var index = Screen_Account_Manager.Accounts_Cache.FindIndex(i => string.Equals(i.Nickname, Save_Account.Live_Data.User_Account_Index));
+
+                                if (index >= 0)
+                                {
+                                    ComboBox_Accounts.SelectedIndex = index;
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception Error)
+                    {
+                        LogToFileAddons.OpenLog("Account List", string.Empty, Error, string.Empty, true);
                     }
                 }
 

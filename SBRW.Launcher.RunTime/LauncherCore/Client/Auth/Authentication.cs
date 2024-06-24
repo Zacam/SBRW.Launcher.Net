@@ -16,7 +16,7 @@ using Newtonsoft.Json;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
 {
-    class Authentication
+    public static class Authentication
     {
         private static int ServerErrorCode { get; set; }
         private static string LoginResponse { get; set; } = string.Empty;
@@ -31,7 +31,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
         /// <returns>Receives UserId and Auth Key for Login. Sends Email and Password to Server</returns>
         /// <param name="ConnectionProtocol">Connection Protocol: Check AuthProtocol</param>
         /// <param name="Method">Form Type: "Login" or "Register"</param>
-        public static void Client(string Method, bool Modern_Auth, String Email, String Password, String Token)
+        public static void Client(string Method, bool Modern_Auth, string Email, string Password, string Token)
         {
             try
             {
@@ -302,7 +302,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Client.Auth
         /// Hash Method (Used how to Authenticate Logins)
         /// </summary>
         /// <returns>A hash type standard that is used on the server</returns>
-        public static AuthHash HashType(string HType)
+        public static AuthHash HashType(this string HType)
         {
             if (!string.IsNullOrWhiteSpace(HType))
             {

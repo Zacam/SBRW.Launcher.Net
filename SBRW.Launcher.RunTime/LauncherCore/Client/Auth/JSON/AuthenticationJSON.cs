@@ -39,5 +39,4 @@ public class Authentication_JSON
     /// <value>Gets a Warning Code. Used to inform the user about an issue, but can still login in</value>
     [JsonProperty("Warning")]
     public string Warning { get; set; } = string.Empty;
-    
 }
