@@ -138,7 +138,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Greenbutton_hover_MouseEnter(object sender, EventArgs e)
         {
-            Button_Register.BackgroundImage = Image_Button.Green_Hover;
+            Button_Register_Classic.BackgroundImage = Image_Button.Green_Hover;
         }
         /// <summary>
         /// 
@@ -147,7 +147,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Greenbutton_MouseLeave(object sender, EventArgs e)
         {
-            Button_Register.BackgroundImage = Image_Button.Green;
+            Button_Register_Classic.BackgroundImage = Image_Button.Green;
         }
         /// <summary>
         /// 
@@ -156,7 +156,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Greenbutton_hover_MouseUp(object sender, EventArgs e)
         {
-            Button_Register.BackgroundImage = Image_Button.Green_Hover;
+            Button_Register_Classic.BackgroundImage = Image_Button.Green_Hover;
         }
         /// <summary>
         /// 
@@ -165,7 +165,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void Greenbutton_click_MouseDown(object sender, EventArgs e)
         {
-            Button_Register.BackgroundImage = Image_Button.Green_Click;
+            Button_Register_Classic.BackgroundImage = Image_Button.Green_Click;
         }
         /// <summary>
         /// 
@@ -244,14 +244,14 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             if (string.IsNullOrWhiteSpace(Input_Email.Text) || string.IsNullOrWhiteSpace(Input_Password.Text))
             {
                 LoginEnabled = false;
-                Button_Login.BackgroundImage = Image_Button.Grey;
-                Button_Login.ForeColor = Color_Text.L_Six;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+                Button_Login_Classic.ForeColor = Color_Text.L_Six;
             }
             else
             {
                 LoginEnabled = true;
-                Button_Login.BackgroundImage = Image_Button.Grey;
-                Button_Login.ForeColor = Color_Text.L_Five;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+                Button_Login_Classic.ForeColor = Color_Text.L_Five;
             }
         }
         /// <summary>
@@ -263,11 +263,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         {
             if (LoginEnabled || Builtinserver)
             {
-                Button_Login.BackgroundImage = Image_Button.Grey_Hover;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey_Hover;
             }
             else
             {
-                Button_Login.BackgroundImage = Image_Button.Grey;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
             }
         }
         /// <summary>
@@ -279,11 +279,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         {
             if (LoginEnabled || Builtinserver)
             {
-                Button_Login.BackgroundImage = Image_Button.Grey_Click;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey_Click;
             }
             else
             {
-                Button_Login.BackgroundImage = Image_Button.Grey;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
             }
         }
         /// <summary>
@@ -293,8 +293,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void LoginButton_MouseEnter(object sender, EventArgs e)
         {
-            Button_Login.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Hover : Image_Button.Grey;
-            Button_Login.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
+            Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Hover : Image_Button.Grey;
+            Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
         }
         /// <summary>
         /// 
@@ -303,8 +303,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void LoginButton_MouseLeave(object sender, EventArgs e)
         {
-            Button_Login.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey : Image_Button.Grey;
-            Button_Login.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
+            Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey : Image_Button.Grey;
+            Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
         }
         /// <summary>
         /// 
@@ -464,7 +464,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 Button_Logout.ForeColor = Color_Text.L_Five;
             }
 
-            Panel_Launch.Visible = hideElements;
+            //Panel_Launch.Visible = hideElements;
         }
         /// <summary>
         /// After Logout, Show Login Forms
@@ -477,8 +477,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 Label_Information_Window.Text = "Enter Your Account Information to Log In".ToUpper();
             }
 
-            Button_Login.Visible = hideElements;
-            Button_Register.Visible = hideElements;
+            Button_Login_Classic.Visible = hideElements;
+            Button_Register_Classic.Visible = hideElements;
 
             if (Save_Settings.Account_Manager())
             {
@@ -497,7 +497,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 CheckBox_Remember_Us.Visible = hideElements;
             }
             
-            LinkLabel_Forgot_Password.Visible = hideElements;
+            LinkLabel_Forgot_Password_Classic.Visible = hideElements;
             Button_Settings.Visible = hideElements;
             Button_Security_Center.Visible = hideElements;
 
@@ -934,11 +934,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     Screen_Instance.Panel_Form_Screens.Controls.Clear();
                     Screen_Instance.Panel_Form_Screens.Visible = false;
                 }
-                else if (Screen_Instance.Panel_Register_Screen.Visible)
-                {
-                    Screen_Instance.Panel_Register_Screen.Controls.Clear();
-                    Screen_Instance.Panel_Register_Screen.Visible = false;
-                }
             }
 
             if (Screen_Parent.Screen_Instance != null)
@@ -964,7 +959,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             LoginEnabled = ServerEnabled = FunctionStatus.AllowRegistration = false;
             Launcher_Value.Launcher_Select_Server_JSON = null;
             /* Disable Login & Register Button */
-            Button_Login.Enabled = Button_Register.Enabled = false;
+            Button_Login_Classic.Enabled = Button_Register_Classic.Enabled = false;
             /* Disable Social Panel when switching */
             DisableSocialPanelandClearIt();
 
@@ -995,7 +990,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Label_Status_Game_Server_Data.Text = string.Empty;
             Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Server, SVG_Color.Base);
 
-            Button_Login.ForeColor = Color_Text.L_Six;
+            Button_Login_Classic.ForeColor = Color_Text.L_Six;
             string Banner_Cache_Folder = Path.Combine(Locations.LauncherDataFolder, "Bin", "Server", "Banner", "EyeCatcher");
             string Banner_Cache_File = Path.Combine(Banner_Cache_Folder, Launcher_Value.Launcher_Select_Server_Data.IPAddress.Hash_String(1) + ".bin");
             Picture_Server_Banner.Image = Image_Handler.Grayscale(Banner_Cache_File) ?? Image_Other.Server_Banner;
@@ -1007,23 +1002,23 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             if (ComboBox_Server_List.GetItemText(ComboBox_Server_List.SelectedItem) == "Offline Built-In Server")
             {
                 Builtinserver = true;
-                if (Button_Login.BackgroundImage != Image_Button.Grey)
+                if (Button_Login_Classic.BackgroundImage != Image_Button.Grey)
                 {
-                    Button_Login.BackgroundImage = Image_Button.Grey;
+                    Button_Login_Classic.BackgroundImage = Image_Button.Grey;
                 }
-                Button_Login.Text = "Launch".ToUpper();
-                Button_Login.ForeColor = Color_Text.L_Five;
+                Button_Login_Classic.Text = "Launch".ToUpper();
+                Button_Login_Classic.ForeColor = Color_Text.L_Five;
                 Panel_Server_Information.Visible = false;
             }
             else
             {
                 Builtinserver = false;
-                if (Button_Login.BackgroundImage != Image_Button.Grey)
+                if (Button_Login_Classic.BackgroundImage != Image_Button.Grey)
                 {
-                    Button_Login.BackgroundImage = Image_Button.Grey;
+                    Button_Login_Classic.BackgroundImage = Image_Button.Grey;
                 }
-                Button_Login.Text = "Login".ToUpper();
-                Button_Login.ForeColor = Color_Text.L_Six;
+                Button_Login_Classic.Text = "Login".ToUpper();
+                Button_Login_Classic.ForeColor = Color_Text.L_Six;
                 Panel_Server_Information.Visible = false;
             }
 
@@ -1402,9 +1397,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             Picture_Icon_Server.BackgroundImage = Picture_Icon_Server.Icon_Order(SVG_Icon.Server, SVG_Color.Success);
                             /* Enable Login & Register Button */
                             LoginEnabled = true;
-                            Button_Login.ForeColor = Color_Text.L_Five;
-                            Button_Login.Enabled = !IsDownloading;
-                            Button_Register.Enabled = true;
+                            Button_Login_Classic.ForeColor = Color_Text.L_Five;
+                            Button_Login_Classic.Enabled = !IsDownloading;
+                            Button_Register_Classic.Enabled = true;
                             Launcher_Value.Launcher_Select_Server_Category = ((Json_List_Server)ComboBox_Server_List.SelectedItem).Category ?? string.Empty;
 
                             if (Launcher_Value.Launcher_Select_Server_Category.ToUpper() == "DEV" ||
@@ -2177,9 +2172,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Input_Email.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Input_Password.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_Remember_Us.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            LinkLabel_Forgot_Password.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_Login.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
-            Button_Register.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
+            LinkLabel_Forgot_Password_Classic.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Button_Login_Classic.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
+            Button_Register_Classic.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
             Label_Client_Ping.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Logout.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
             Button_Play_OR_Update.Font = new Font(FormsFont.Primary_Bold(), FourthFontSize, FontStyle.Bold);
@@ -2225,16 +2220,16 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Label_Status_Game_Server_Data.ForeColor = Color_Text.L_Five;
             Label_Status_API_Details.ForeColor = Color_Text.L_Five;
 
-            Button_Login.ForeColor = Color_Text.L_Five;
-            Button_Login.BackgroundImage = Image_Button.Grey;
+            Button_Login_Classic.ForeColor = Color_Text.L_Five;
+            Button_Login_Classic.BackgroundImage = Image_Button.Grey;
 
-            Button_Register.ForeColor = Color_Text.L_Seven;
-            Button_Register.BackgroundImage = Image_Button.Green;
+            Button_Register_Classic.ForeColor = Color_Text.L_Seven;
+            Button_Register_Classic.BackgroundImage = Image_Button.Green;
 
             CheckBox_Remember_Us.ForeColor = Color_Text.L_Five;
 
-            LinkLabel_Forgot_Password.ActiveLinkColor = Color_Winform_Other.Link_Active;
-            LinkLabel_Forgot_Password.LinkColor = Color_Winform_Other.Link;
+            LinkLabel_Forgot_Password_Classic.ActiveLinkColor = Color_Winform_Other.Link_Active;
+            LinkLabel_Forgot_Password_Classic.LinkColor = Color_Winform_Other.Link;
 
             Input_Email.BackColor = Color_Winform_Other.Input;
             Input_Email.ForeColor = Color_Text.L_Five;
@@ -2300,11 +2295,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Security_Center.MouseUp += new MouseEventHandler(ButtonSecurityCenter_MouseLeaveANDMouseUp);
             Button_Security_Center.MouseDown += new MouseEventHandler(ButtonSecurityCenter_MouseDown);
 
-            Button_Login.MouseEnter += new EventHandler(LoginButton_MouseEnter);
-            Button_Login.MouseLeave += new EventHandler(LoginButton_MouseLeave);
-            Button_Login.MouseUp += new MouseEventHandler(LoginButton_MouseUp);
-            Button_Login.MouseDown += new MouseEventHandler(LoginButton_MouseDown);
-            Button_Login.Click += new EventHandler(LoginButton_Click);
+            Button_Login_Classic.MouseEnter += new EventHandler(LoginButton_MouseEnter);
+            Button_Login_Classic.MouseLeave += new EventHandler(LoginButton_MouseLeave);
+            Button_Login_Classic.MouseUp += new MouseEventHandler(LoginButton_MouseUp);
+            Button_Login_Classic.MouseDown += new MouseEventHandler(LoginButton_MouseDown);
+            Button_Login_Classic.Click += new EventHandler(LoginButton_Click);
 
             Button_Logout.MouseEnter += new EventHandler(Graybutton_hover_MouseEnter);
             Button_Logout.MouseLeave += new EventHandler(Graybutton_MouseLeave);
@@ -2329,7 +2324,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ComboBox_Accounts.DrawItem += new DrawItemEventHandler(ComboBox_Account_List_DrawItem);
             ComboBox_Accounts.MouseWheel += new MouseEventHandler(ComboBox_MouseWheel);
 
-            LinkLabel_Forgot_Password.LinkClicked += new LinkLabelLinkClickedEventHandler(FunctionEvents.ForgotPassword_LinkClicked);
+            LinkLabel_Forgot_Password_Classic.LinkClicked += new LinkLabelLinkClickedEventHandler(FunctionEvents.ForgotPassword_LinkClicked);
 
             if (Screen_Parent.Screen_Instance != null)
             {
@@ -2352,11 +2347,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Play_OR_Update.MouseDown += new MouseEventHandler(PlayButton_MouseDown);
             Button_Play_OR_Update.Click += new EventHandler(PlayButton_Click);
 
-            Button_Register.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
-            Button_Register.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
-            Button_Register.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
-            Button_Register.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
-            Button_Register.Click += new EventHandler(Button_Register_Click);
+            Button_Register_Classic.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
+            Button_Register_Classic.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
+            Button_Register_Classic.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
+            Button_Register_Classic.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
+            Button_Register_Classic.Click += new EventHandler(Button_Register_Click);
 
             Load += new EventHandler(MainScreen_Load);
 

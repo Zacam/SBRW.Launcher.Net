@@ -34,8 +34,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Picture_Logo = new System.Windows.Forms.PictureBox();
             this.Picture_Server_Banner = new System.Windows.Forms.PictureBox();
             this.Picture_Bar_Outline = new System.Windows.Forms.PictureBox();
-            this.Picture_Input_Email = new System.Windows.Forms.PictureBox();
-            this.Picture_Input_Password = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Security_Center = new System.Windows.Forms.PictureBox();
@@ -53,18 +51,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Picture_Icon_Server_Facebook = new System.Windows.Forms.PictureBox();
             this.Picture_Icon_Server_Home = new System.Windows.Forms.PictureBox();
             this.Picture_Icon_Server_Discord = new System.Windows.Forms.PictureBox();
-            this.Panel_Launch = new System.Windows.Forms.Panel();
-            this.Button_Play_OR_Update = new System.Windows.Forms.Button();
-            this.Button_Logout = new System.Windows.Forms.Button();
-            this.Label_Client_Ping = new System.Windows.Forms.Label();
             this.Label_Debug_Language = new System.Windows.Forms.Label();
             this.Label_Insider_Build_Number = new System.Windows.Forms.Label();
             this.ComboBox_Server_List = new System.Windows.Forms.ComboBox();
             this.Label_Information_Window = new System.Windows.Forms.Label();
-            this.Input_Email = new System.Windows.Forms.TextBox();
-            this.Input_Password = new System.Windows.Forms.TextBox();
             this.Button_Custom_Server = new System.Windows.Forms.Button();
-            this.CheckBox_Remember_Us = new System.Windows.Forms.CheckBox();
             this.Label_Download_Information = new System.Windows.Forms.Label();
             this.Label_Status_Launcher = new System.Windows.Forms.Label();
             this.Label_Status_Game_Server = new System.Windows.Forms.Label();
@@ -75,23 +66,47 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.NotifyIcon_Notification = new System.Windows.Forms.NotifyIcon(this.components);
             this.Button_Select_Server = new System.Windows.Forms.Button();
             this.ProgressBar = new SBRW.Launcher.Core.Theme.Control_ProgressBar();
-            this.LinkLabel_Forgot_Password = new System.Windows.Forms.LinkLabel();
             this.Label_Download_Information_Support = new System.Windows.Forms.Label();
             this.Picture_Information_Window = new System.Windows.Forms.PictureBox();
-            this.Button_Register = new System.Windows.Forms.Button();
-            this.Button_Login = new System.Windows.Forms.Button();
+            this.Button_Register_Classic = new System.Windows.Forms.Button();
+            this.Button_Login_Classic = new System.Windows.Forms.Button();
             this.Panel_Form_Screens = new System.Windows.Forms.Panel();
-            this.Panel_Register_Screen = new System.Windows.Forms.Panel();
             this.UI_Timer = new System.Windows.Forms.Timer(this.components);
             this.Input_Console = new System.Windows.Forms.TextBox();
             this.Button_Console_Submit = new System.Windows.Forms.Button();
+            this.TabControl_Login = new SBRW.Launcher.Core.Theme.Control_TabControl();
+            this.Login_Classic = new System.Windows.Forms.TabPage();
+            this.Input_Password = new System.Windows.Forms.TextBox();
+            this.Input_Email = new System.Windows.Forms.TextBox();
+            this.CheckBox_Remember_Us = new System.Windows.Forms.CheckBox();
+            this.LinkLabel_Forgot_Password_Classic = new System.Windows.Forms.LinkLabel();
+            this.Picture_Input_Password = new System.Windows.Forms.PictureBox();
+            this.Picture_Input_Email = new System.Windows.Forms.PictureBox();
+            this.Login_Account_Manager = new System.Windows.Forms.TabPage();
+            this.Button_Register = new System.Windows.Forms.Button();
+            this.Button_Login = new System.Windows.Forms.Button();
+            this.LinkLabel_Forgot_Password = new System.Windows.Forms.LinkLabel();
             this.ComboBox_Accounts = new System.Windows.Forms.ComboBox();
             this.Button_Account_Manager = new System.Windows.Forms.Button();
+            this.Register = new System.Windows.Forms.TabPage();
+            this.Button_Cancel = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.Input_Ticket = new System.Windows.Forms.TextBox();
+            this.Input_Password_Confirm = new System.Windows.Forms.TextBox();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.CheckBox_Rules_Agreement = new System.Windows.Forms.CheckBox();
+            this.Picture_Input_Ticket = new System.Windows.Forms.PictureBox();
+            this.Picture_Input_Password_Confirm = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.Login_Success = new System.Windows.Forms.TabPage();
+            this.Button_Play_OR_Update = new System.Windows.Forms.Button();
+            this.Button_Logout = new System.Windows.Forms.Button();
+            this.Label_Client_Ping = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Server_Banner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Bar_Outline)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Email)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Security_Center)).BeginInit();
@@ -103,8 +118,18 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Facebook)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Home)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Discord)).BeginInit();
-            this.Panel_Launch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Information_Window)).BeginInit();
+            this.TabControl_Login.SuspendLayout();
+            this.Login_Classic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Email)).BeginInit();
+            this.Login_Account_Manager.SuspendLayout();
+            this.Register.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Ticket)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password_Confirm)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.Login_Success.SuspendLayout();
             this.SuspendLayout();
             // 
             // Picture_Logo
@@ -143,28 +168,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Picture_Bar_Outline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.Picture_Bar_Outline.TabIndex = 2;
             this.Picture_Bar_Outline.TabStop = false;
-            // 
-            // Picture_Input_Email
-            // 
-            this.Picture_Input_Email.BackColor = System.Drawing.Color.Transparent;
-            this.Picture_Input_Email.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Picture_Input_Email.Location = new System.Drawing.Point(606, 161);
-            this.Picture_Input_Email.Name = "Picture_Input_Email";
-            this.Picture_Input_Email.Size = new System.Drawing.Size(231, 37);
-            this.Picture_Input_Email.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Picture_Input_Email.TabIndex = 3;
-            this.Picture_Input_Email.TabStop = false;
-            // 
-            // Picture_Input_Password
-            // 
-            this.Picture_Input_Password.BackColor = System.Drawing.Color.Transparent;
-            this.Picture_Input_Password.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.Picture_Input_Password.Location = new System.Drawing.Point(606, 210);
-            this.Picture_Input_Password.Name = "Picture_Input_Password";
-            this.Picture_Input_Password.Size = new System.Drawing.Size(231, 37);
-            this.Picture_Input_Password.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.Picture_Input_Password.TabIndex = 4;
-            this.Picture_Input_Password.TabStop = false;
             // 
             // Button_Close
             // 
@@ -357,59 +360,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Picture_Icon_Server_Discord.TabIndex = 13;
             this.Picture_Icon_Server_Discord.TabStop = false;
             // 
-            // Panel_Launch
-            // 
-            this.Panel_Launch.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Launch.Controls.Add(this.Button_Play_OR_Update);
-            this.Panel_Launch.Controls.Add(this.Button_Logout);
-            this.Panel_Launch.Controls.Add(this.Label_Client_Ping);
-            this.Panel_Launch.Location = new System.Drawing.Point(600, 281);
-            this.Panel_Launch.Name = "Panel_Launch";
-            this.Panel_Launch.Size = new System.Drawing.Size(239, 173);
-            this.Panel_Launch.TabIndex = 12;
-            this.Panel_Launch.Visible = false;
-            // 
-            // Button_Play_OR_Update
-            // 
-            this.Button_Play_OR_Update.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Play_OR_Update.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Play_OR_Update.FlatAppearance.BorderSize = 0;
-            this.Button_Play_OR_Update.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Button_Play_OR_Update.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Button_Play_OR_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Play_OR_Update.Location = new System.Drawing.Point(7, 104);
-            this.Button_Play_OR_Update.Name = "Button_Play_OR_Update";
-            this.Button_Play_OR_Update.Size = new System.Drawing.Size(230, 63);
-            this.Button_Play_OR_Update.TabIndex = 42;
-            this.Button_Play_OR_Update.Text = "PLAY NOW";
-            this.Button_Play_OR_Update.UseVisualStyleBackColor = false;
-            // 
-            // Button_Logout
-            // 
-            this.Button_Logout.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Logout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Logout.FlatAppearance.BorderSize = 0;
-            this.Button_Logout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Button_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Button_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Logout.Location = new System.Drawing.Point(7, 64);
-            this.Button_Logout.Name = "Button_Logout";
-            this.Button_Logout.Size = new System.Drawing.Size(230, 35);
-            this.Button_Logout.TabIndex = 41;
-            this.Button_Logout.Text = "LOGOUT";
-            this.Button_Logout.UseVisualStyleBackColor = false;
-            // 
-            // Label_Client_Ping
-            // 
-            this.Label_Client_Ping.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.Label_Client_Ping.ForeColor = System.Drawing.Color.White;
-            this.Label_Client_Ping.Location = new System.Drawing.Point(6, 0);
-            this.Label_Client_Ping.Name = "Label_Client_Ping";
-            this.Label_Client_Ping.Size = new System.Drawing.Size(230, 61);
-            this.Label_Client_Ping.TabIndex = 20;
-            this.Label_Client_Ping.Text = "Your Ping to the Server";
-            this.Label_Client_Ping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // Label_Debug_Language
             // 
             this.Label_Debug_Language.BackColor = System.Drawing.Color.Transparent;
@@ -450,29 +400,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Label_Information_Window.ForeColor = System.Drawing.Color.White;
             this.Label_Information_Window.Location = new System.Drawing.Point(625, 82);
             this.Label_Information_Window.Name = "Label_Information_Window";
-            this.Label_Information_Window.Size = new System.Drawing.Size(211, 60);
+            this.Label_Information_Window.Size = new System.Drawing.Size(211, 68);
             this.Label_Information_Window.TabIndex = 16;
             this.Label_Information_Window.Text = "ENTER YOUR ACCOUNT INFORMATION\r\n TO LOG IN";
             this.Label_Information_Window.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // Input_Email
-            // 
-            this.Input_Email.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.Input_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Input_Email.Location = new System.Drawing.Point(645, 173);
-            this.Input_Email.Name = "Input_Email";
-            this.Input_Email.Size = new System.Drawing.Size(180, 13);
-            this.Input_Email.TabIndex = 17;
-            // 
-            // Input_Password
-            // 
-            this.Input_Password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
-            this.Input_Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Input_Password.Location = new System.Drawing.Point(645, 221);
-            this.Input_Password.Name = "Input_Password";
-            this.Input_Password.Size = new System.Drawing.Size(180, 13);
-            this.Input_Password.TabIndex = 18;
-            this.Input_Password.UseSystemPasswordChar = true;
             // 
             // Button_Custom_Server
             // 
@@ -485,17 +416,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Button_Custom_Server.TabIndex = 19;
             this.Button_Custom_Server.Text = "+";
             this.Button_Custom_Server.UseVisualStyleBackColor = false;
-            // 
-            // CheckBox_Remember_Us
-            // 
-            this.CheckBox_Remember_Us.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Remember_Us.ForeColor = System.Drawing.Color.White;
-            this.CheckBox_Remember_Us.Location = new System.Drawing.Point(645, 260);
-            this.CheckBox_Remember_Us.Name = "CheckBox_Remember_Us";
-            this.CheckBox_Remember_Us.Size = new System.Drawing.Size(190, 18);
-            this.CheckBox_Remember_Us.TabIndex = 20;
-            this.CheckBox_Remember_Us.Text = "REMEMBER MY LOGIN";
-            this.CheckBox_Remember_Us.UseVisualStyleBackColor = false;
             // 
             // Label_Download_Information
             // 
@@ -604,17 +524,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.ProgressBar.TabStop = false;
             this.ProgressBar.Text = "control_ProgressBar1";
             // 
-            // LinkLabel_Forgot_Password
-            // 
-            this.LinkLabel_Forgot_Password.BackColor = System.Drawing.Color.Transparent;
-            this.LinkLabel_Forgot_Password.Location = new System.Drawing.Point(659, 281);
-            this.LinkLabel_Forgot_Password.Name = "LinkLabel_Forgot_Password";
-            this.LinkLabel_Forgot_Password.Size = new System.Drawing.Size(180, 14);
-            this.LinkLabel_Forgot_Password.TabIndex = 36;
-            this.LinkLabel_Forgot_Password.TabStop = true;
-            this.LinkLabel_Forgot_Password.Text = "I FORGOT MY PASSWORD";
-            this.LinkLabel_Forgot_Password.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // Label_Download_Information_Support
             // 
             this.Label_Download_Information_Support.BackColor = System.Drawing.Color.Transparent;
@@ -636,35 +545,35 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Picture_Information_Window.TabIndex = 40;
             this.Picture_Information_Window.TabStop = false;
             // 
-            // Button_Register
+            // Button_Register_Classic
             // 
-            this.Button_Register.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Register.FlatAppearance.BorderSize = 0;
-            this.Button_Register.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Button_Register.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Button_Register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Register.Location = new System.Drawing.Point(606, 409);
-            this.Button_Register.Name = "Button_Register";
-            this.Button_Register.Size = new System.Drawing.Size(231, 35);
-            this.Button_Register.TabIndex = 42;
-            this.Button_Register.Text = "REGISTER";
-            this.Button_Register.UseVisualStyleBackColor = false;
+            this.Button_Register_Classic.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Register_Classic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Register_Classic.FlatAppearance.BorderSize = 0;
+            this.Button_Register_Classic.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Register_Classic.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Register_Classic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Register_Classic.Location = new System.Drawing.Point(20, 229);
+            this.Button_Register_Classic.Name = "Button_Register_Classic";
+            this.Button_Register_Classic.Size = new System.Drawing.Size(231, 35);
+            this.Button_Register_Classic.TabIndex = 42;
+            this.Button_Register_Classic.Text = "REGISTER";
+            this.Button_Register_Classic.UseVisualStyleBackColor = false;
             // 
-            // Button_Login
+            // Button_Login_Classic
             // 
-            this.Button_Login.BackColor = System.Drawing.Color.Transparent;
-            this.Button_Login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.Button_Login.FlatAppearance.BorderSize = 0;
-            this.Button_Login.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.Button_Login.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.Button_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Login.Location = new System.Drawing.Point(606, 362);
-            this.Button_Login.Name = "Button_Login";
-            this.Button_Login.Size = new System.Drawing.Size(231, 35);
-            this.Button_Login.TabIndex = 43;
-            this.Button_Login.Text = "LOGIN";
-            this.Button_Login.UseVisualStyleBackColor = false;
+            this.Button_Login_Classic.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Login_Classic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Login_Classic.FlatAppearance.BorderSize = 0;
+            this.Button_Login_Classic.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Login_Classic.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Login_Classic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Login_Classic.Location = new System.Drawing.Point(20, 182);
+            this.Button_Login_Classic.Name = "Button_Login_Classic";
+            this.Button_Login_Classic.Size = new System.Drawing.Size(231, 35);
+            this.Button_Login_Classic.TabIndex = 43;
+            this.Button_Login_Classic.Text = "LOGIN";
+            this.Button_Login_Classic.UseVisualStyleBackColor = false;
             // 
             // Panel_Form_Screens
             // 
@@ -676,16 +585,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Panel_Form_Screens.Size = new System.Drawing.Size(891, 529);
             this.Panel_Form_Screens.TabIndex = 44;
             this.Panel_Form_Screens.Visible = false;
-            // 
-            // Panel_Register_Screen
-            // 
-            this.Panel_Register_Screen.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Register_Screen.ForeColor = System.Drawing.Color.Transparent;
-            this.Panel_Register_Screen.Location = new System.Drawing.Point(579, 79);
-            this.Panel_Register_Screen.Name = "Panel_Register_Screen";
-            this.Panel_Register_Screen.Size = new System.Drawing.Size(304, 449);
-            this.Panel_Register_Screen.TabIndex = 47;
-            this.Panel_Register_Screen.Visible = false;
             // 
             // UI_Timer
             // 
@@ -716,27 +615,375 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Button_Console_Submit.UseVisualStyleBackColor = false;
             this.Button_Console_Submit.Visible = false;
             // 
+            // TabControl_Login
+            // 
+            this.TabControl_Login.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.TabControl_Login.BackColor = System.Drawing.Color.Transparent;
+            this.TabControl_Login.Controls.Add(this.Login_Classic);
+            this.TabControl_Login.Controls.Add(this.Login_Account_Manager);
+            this.TabControl_Login.Controls.Add(this.Register);
+            this.TabControl_Login.Controls.Add(this.Login_Success);
+            this.TabControl_Login.Location = new System.Drawing.Point(587, 159);
+            this.TabControl_Login.Name = "TabControl_Login";
+            this.TabControl_Login.SelectedIndex = 0;
+            this.TabControl_Login.SelectedTabColor = System.Drawing.Color.DodgerBlue;
+            this.TabControl_Login.Size = new System.Drawing.Size(270, 368);
+            this.TabControl_Login.TabColor = System.Drawing.Color.YellowGreen;
+            this.TabControl_Login.TabIndex = 154;
+            // 
+            // Login_Classic
+            // 
+            this.Login_Classic.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Login_Classic.Controls.Add(this.Input_Password);
+            this.Login_Classic.Controls.Add(this.Input_Email);
+            this.Login_Classic.Controls.Add(this.CheckBox_Remember_Us);
+            this.Login_Classic.Controls.Add(this.LinkLabel_Forgot_Password_Classic);
+            this.Login_Classic.Controls.Add(this.Picture_Input_Password);
+            this.Login_Classic.Controls.Add(this.Picture_Input_Email);
+            this.Login_Classic.Controls.Add(this.Button_Login_Classic);
+            this.Login_Classic.Controls.Add(this.Button_Register_Classic);
+            this.Login_Classic.Location = new System.Drawing.Point(0, 24);
+            this.Login_Classic.Name = "Login_Classic";
+            this.Login_Classic.Padding = new System.Windows.Forms.Padding(3);
+            this.Login_Classic.Size = new System.Drawing.Size(270, 344);
+            this.Login_Classic.TabIndex = 0;
+            this.Login_Classic.Text = "Classic Login";
+            this.Login_Classic.UseVisualStyleBackColor = true;
+            // 
+            // Input_Password
+            // 
+            this.Input_Password.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.Input_Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Input_Password.Location = new System.Drawing.Point(59, 71);
+            this.Input_Password.Name = "Input_Password";
+            this.Input_Password.Size = new System.Drawing.Size(180, 13);
+            this.Input_Password.TabIndex = 40;
+            this.Input_Password.UseSystemPasswordChar = true;
+            // 
+            // Input_Email
+            // 
+            this.Input_Email.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.Input_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Input_Email.Location = new System.Drawing.Point(59, 27);
+            this.Input_Email.Name = "Input_Email";
+            this.Input_Email.Size = new System.Drawing.Size(180, 13);
+            this.Input_Email.TabIndex = 39;
+            // 
+            // CheckBox_Remember_Us
+            // 
+            this.CheckBox_Remember_Us.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Remember_Us.ForeColor = System.Drawing.Color.White;
+            this.CheckBox_Remember_Us.Location = new System.Drawing.Point(21, 110);
+            this.CheckBox_Remember_Us.Name = "CheckBox_Remember_Us";
+            this.CheckBox_Remember_Us.Size = new System.Drawing.Size(230, 18);
+            this.CheckBox_Remember_Us.TabIndex = 41;
+            this.CheckBox_Remember_Us.Text = "REMEMBER MY LOGIN";
+            this.CheckBox_Remember_Us.UseVisualStyleBackColor = false;
+            // 
+            // LinkLabel_Forgot_Password_Classic
+            // 
+            this.LinkLabel_Forgot_Password_Classic.BackColor = System.Drawing.Color.Transparent;
+            this.LinkLabel_Forgot_Password_Classic.Location = new System.Drawing.Point(20, 135);
+            this.LinkLabel_Forgot_Password_Classic.Name = "LinkLabel_Forgot_Password_Classic";
+            this.LinkLabel_Forgot_Password_Classic.Size = new System.Drawing.Size(231, 14);
+            this.LinkLabel_Forgot_Password_Classic.TabIndex = 42;
+            this.LinkLabel_Forgot_Password_Classic.TabStop = true;
+            this.LinkLabel_Forgot_Password_Classic.Text = "I FORGOT MY PASSWORD";
+            this.LinkLabel_Forgot_Password_Classic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Picture_Input_Password
+            // 
+            this.Picture_Input_Password.BackColor = System.Drawing.Color.Transparent;
+            this.Picture_Input_Password.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Picture_Input_Password.Location = new System.Drawing.Point(20, 60);
+            this.Picture_Input_Password.Name = "Picture_Input_Password";
+            this.Picture_Input_Password.Size = new System.Drawing.Size(231, 37);
+            this.Picture_Input_Password.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picture_Input_Password.TabIndex = 38;
+            this.Picture_Input_Password.TabStop = false;
+            // 
+            // Picture_Input_Email
+            // 
+            this.Picture_Input_Email.BackColor = System.Drawing.Color.Transparent;
+            this.Picture_Input_Email.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.Picture_Input_Email.Location = new System.Drawing.Point(20, 15);
+            this.Picture_Input_Email.Name = "Picture_Input_Email";
+            this.Picture_Input_Email.Size = new System.Drawing.Size(231, 37);
+            this.Picture_Input_Email.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picture_Input_Email.TabIndex = 37;
+            this.Picture_Input_Email.TabStop = false;
+            // 
+            // Login_Account_Manager
+            // 
+            this.Login_Account_Manager.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Login_Account_Manager.Controls.Add(this.Button_Register);
+            this.Login_Account_Manager.Controls.Add(this.Button_Login);
+            this.Login_Account_Manager.Controls.Add(this.LinkLabel_Forgot_Password);
+            this.Login_Account_Manager.Controls.Add(this.ComboBox_Accounts);
+            this.Login_Account_Manager.Controls.Add(this.Button_Account_Manager);
+            this.Login_Account_Manager.Location = new System.Drawing.Point(0, 27);
+            this.Login_Account_Manager.Name = "Login_Account_Manager";
+            this.Login_Account_Manager.Padding = new System.Windows.Forms.Padding(3);
+            this.Login_Account_Manager.Size = new System.Drawing.Size(270, 341);
+            this.Login_Account_Manager.TabIndex = 1;
+            this.Login_Account_Manager.Text = "Manager Login";
+            this.Login_Account_Manager.UseVisualStyleBackColor = true;
+            // 
+            // Button_Register
+            // 
+            this.Button_Register.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Register.FlatAppearance.BorderSize = 0;
+            this.Button_Register.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Register.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Register.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Register.Location = new System.Drawing.Point(17, 160);
+            this.Button_Register.Name = "Button_Register";
+            this.Button_Register.Size = new System.Drawing.Size(232, 35);
+            this.Button_Register.TabIndex = 157;
+            this.Button_Register.Text = "REGISTER";
+            this.Button_Register.UseVisualStyleBackColor = false;
+            // 
+            // Button_Login
+            // 
+            this.Button_Login.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Login.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Login.FlatAppearance.BorderSize = 0;
+            this.Button_Login.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Login.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Login.Location = new System.Drawing.Point(17, 113);
+            this.Button_Login.Name = "Button_Login";
+            this.Button_Login.Size = new System.Drawing.Size(232, 35);
+            this.Button_Login.TabIndex = 158;
+            this.Button_Login.Text = "LOGIN";
+            this.Button_Login.UseVisualStyleBackColor = false;
+            // 
+            // LinkLabel_Forgot_Password
+            // 
+            this.LinkLabel_Forgot_Password.BackColor = System.Drawing.Color.Transparent;
+            this.LinkLabel_Forgot_Password.Location = new System.Drawing.Point(17, 87);
+            this.LinkLabel_Forgot_Password.Name = "LinkLabel_Forgot_Password";
+            this.LinkLabel_Forgot_Password.Size = new System.Drawing.Size(231, 14);
+            this.LinkLabel_Forgot_Password.TabIndex = 156;
+            this.LinkLabel_Forgot_Password.TabStop = true;
+            this.LinkLabel_Forgot_Password.Text = "I FORGOT MY PASSWORD";
+            this.LinkLabel_Forgot_Password.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // ComboBox_Accounts
             // 
             this.ComboBox_Accounts.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.ComboBox_Accounts.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_Accounts.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ComboBox_Accounts.FormattingEnabled = true;
-            this.ComboBox_Accounts.Location = new System.Drawing.Point(607, 161);
+            this.ComboBox_Accounts.Location = new System.Drawing.Point(17, 19);
             this.ComboBox_Accounts.Name = "ComboBox_Accounts";
-            this.ComboBox_Accounts.Size = new System.Drawing.Size(230, 21);
-            this.ComboBox_Accounts.TabIndex = 152;
+            this.ComboBox_Accounts.Size = new System.Drawing.Size(231, 21);
+            this.ComboBox_Accounts.TabIndex = 154;
             this.ComboBox_Accounts.Visible = false;
             // 
             // Button_Account_Manager
             // 
-            this.Button_Account_Manager.Location = new System.Drawing.Point(606, 204);
+            this.Button_Account_Manager.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Account_Manager.Location = new System.Drawing.Point(17, 48);
             this.Button_Account_Manager.Name = "Button_Account_Manager";
             this.Button_Account_Manager.Size = new System.Drawing.Size(231, 30);
-            this.Button_Account_Manager.TabIndex = 153;
+            this.Button_Account_Manager.TabIndex = 155;
             this.Button_Account_Manager.Text = "Account Manager";
             this.Button_Account_Manager.UseVisualStyleBackColor = true;
             this.Button_Account_Manager.Visible = false;
+            // 
+            // Register
+            // 
+            this.Register.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Register.Controls.Add(this.Button_Cancel);
+            this.Register.Controls.Add(this.button1);
+            this.Register.Controls.Add(this.Input_Ticket);
+            this.Register.Controls.Add(this.Input_Password_Confirm);
+            this.Register.Controls.Add(this.textBox1);
+            this.Register.Controls.Add(this.textBox2);
+            this.Register.Controls.Add(this.CheckBox_Rules_Agreement);
+            this.Register.Controls.Add(this.Picture_Input_Ticket);
+            this.Register.Controls.Add(this.Picture_Input_Password_Confirm);
+            this.Register.Controls.Add(this.pictureBox1);
+            this.Register.Controls.Add(this.pictureBox2);
+            this.Register.Location = new System.Drawing.Point(0, 27);
+            this.Register.Name = "Register";
+            this.Register.Size = new System.Drawing.Size(270, 341);
+            this.Register.TabIndex = 2;
+            this.Register.Text = "Register";
+            this.Register.UseVisualStyleBackColor = true;
+            // 
+            // Button_Cancel
+            // 
+            this.Button_Cancel.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Cancel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Cancel.FlatAppearance.BorderSize = 0;
+            this.Button_Cancel.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Cancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Cancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Cancel.Location = new System.Drawing.Point(20, 286);
+            this.Button_Cancel.Name = "Button_Cancel";
+            this.Button_Cancel.Size = new System.Drawing.Size(233, 35);
+            this.Button_Cancel.TabIndex = 55;
+            this.Button_Cancel.Text = "CANCEL";
+            this.Button_Cancel.UseVisualStyleBackColor = false;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(20, 243);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(233, 35);
+            this.button1.TabIndex = 54;
+            this.button1.Text = "REGISTER";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // Input_Ticket
+            // 
+            this.Input_Ticket.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.Input_Ticket.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Input_Ticket.Location = new System.Drawing.Point(59, 163);
+            this.Input_Ticket.Name = "Input_Ticket";
+            this.Input_Ticket.Size = new System.Drawing.Size(180, 13);
+            this.Input_Ticket.TabIndex = 53;
+            // 
+            // Input_Password_Confirm
+            // 
+            this.Input_Password_Confirm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.Input_Password_Confirm.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Input_Password_Confirm.Location = new System.Drawing.Point(59, 117);
+            this.Input_Password_Confirm.Name = "Input_Password_Confirm";
+            this.Input_Password_Confirm.Size = new System.Drawing.Size(180, 13);
+            this.Input_Password_Confirm.TabIndex = 52;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Location = new System.Drawing.Point(59, 71);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(180, 13);
+            this.textBox1.TabIndex = 51;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(32)))), ((int)(((byte)(42)))));
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Location = new System.Drawing.Point(59, 27);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(180, 13);
+            this.textBox2.TabIndex = 50;
+            // 
+            // CheckBox_Rules_Agreement
+            // 
+            this.CheckBox_Rules_Agreement.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_Rules_Agreement.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
+            this.CheckBox_Rules_Agreement.Location = new System.Drawing.Point(20, 200);
+            this.CheckBox_Rules_Agreement.Name = "CheckBox_Rules_Agreement";
+            this.CheckBox_Rules_Agreement.Size = new System.Drawing.Size(233, 35);
+            this.CheckBox_Rules_Agreement.TabIndex = 49;
+            this.CheckBox_Rules_Agreement.Text = "BY REGISTERING YOU AGREE TO FOLLOW SERVER RULES";
+            this.CheckBox_Rules_Agreement.UseVisualStyleBackColor = false;
+            // 
+            // Picture_Input_Ticket
+            // 
+            this.Picture_Input_Ticket.BackColor = System.Drawing.Color.Transparent;
+            this.Picture_Input_Ticket.Location = new System.Drawing.Point(20, 152);
+            this.Picture_Input_Ticket.Name = "Picture_Input_Ticket";
+            this.Picture_Input_Ticket.Size = new System.Drawing.Size(231, 37);
+            this.Picture_Input_Ticket.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picture_Input_Ticket.TabIndex = 48;
+            this.Picture_Input_Ticket.TabStop = false;
+            // 
+            // Picture_Input_Password_Confirm
+            // 
+            this.Picture_Input_Password_Confirm.BackColor = System.Drawing.Color.Transparent;
+            this.Picture_Input_Password_Confirm.Location = new System.Drawing.Point(20, 106);
+            this.Picture_Input_Password_Confirm.Name = "Picture_Input_Password_Confirm";
+            this.Picture_Input_Password_Confirm.Size = new System.Drawing.Size(231, 37);
+            this.Picture_Input_Password_Confirm.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.Picture_Input_Password_Confirm.TabIndex = 47;
+            this.Picture_Input_Password_Confirm.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Location = new System.Drawing.Point(20, 60);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(231, 37);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 46;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox2.Location = new System.Drawing.Point(20, 15);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(231, 37);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 45;
+            this.pictureBox2.TabStop = false;
+            // 
+            // Login_Success
+            // 
+            this.Login_Success.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.Login_Success.Controls.Add(this.Button_Play_OR_Update);
+            this.Login_Success.Controls.Add(this.Button_Logout);
+            this.Login_Success.Controls.Add(this.Label_Client_Ping);
+            this.Login_Success.Location = new System.Drawing.Point(0, 27);
+            this.Login_Success.Name = "Login_Success";
+            this.Login_Success.Size = new System.Drawing.Size(270, 341);
+            this.Login_Success.TabIndex = 3;
+            this.Login_Success.Text = "Successful Login";
+            this.Login_Success.UseVisualStyleBackColor = true;
+            // 
+            // Button_Play_OR_Update
+            // 
+            this.Button_Play_OR_Update.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Play_OR_Update.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Play_OR_Update.FlatAppearance.BorderSize = 0;
+            this.Button_Play_OR_Update.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Play_OR_Update.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Play_OR_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Play_OR_Update.Location = new System.Drawing.Point(17, 191);
+            this.Button_Play_OR_Update.Name = "Button_Play_OR_Update";
+            this.Button_Play_OR_Update.Size = new System.Drawing.Size(230, 63);
+            this.Button_Play_OR_Update.TabIndex = 45;
+            this.Button_Play_OR_Update.Text = "PLAY NOW";
+            this.Button_Play_OR_Update.UseVisualStyleBackColor = false;
+            // 
+            // Button_Logout
+            // 
+            this.Button_Logout.BackColor = System.Drawing.Color.Transparent;
+            this.Button_Logout.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.Button_Logout.FlatAppearance.BorderSize = 0;
+            this.Button_Logout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.Button_Logout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.Button_Logout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Logout.Location = new System.Drawing.Point(17, 151);
+            this.Button_Logout.Name = "Button_Logout";
+            this.Button_Logout.Size = new System.Drawing.Size(230, 35);
+            this.Button_Logout.TabIndex = 44;
+            this.Button_Logout.Text = "LOGOUT";
+            this.Button_Logout.UseVisualStyleBackColor = false;
+            // 
+            // Label_Client_Ping
+            // 
+            this.Label_Client_Ping.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Client_Ping.ForeColor = System.Drawing.Color.White;
+            this.Label_Client_Ping.Location = new System.Drawing.Point(16, 87);
+            this.Label_Client_Ping.Name = "Label_Client_Ping";
+            this.Label_Client_Ping.Size = new System.Drawing.Size(230, 61);
+            this.Label_Client_Ping.TabIndex = 43;
+            this.Label_Client_Ping.Text = "Your Ping to the Server";
+            this.Label_Client_Ping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Screen_Main
             // 
@@ -745,10 +992,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(891, 529);
             this.Controls.Add(this.Panel_Form_Screens);
-            this.Controls.Add(this.Button_Console_Submit);
+            this.Controls.Add(this.TabControl_Login);
             this.Controls.Add(this.Input_Console);
-            this.Controls.Add(this.Panel_Register_Screen);
-            this.Controls.Add(this.Panel_Launch);
+            this.Controls.Add(this.Button_Console_Submit);
             this.Controls.Add(this.ProgressBar);
             this.Controls.Add(this.Label_Download_Information_Support);
             this.Controls.Add(this.Button_Select_Server);
@@ -760,18 +1006,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Controls.Add(this.Label_Status_Launcher);
             this.Controls.Add(this.Label_Download_Information);
             this.Controls.Add(this.Button_Custom_Server);
-            this.Controls.Add(this.ComboBox_Accounts);
-            this.Controls.Add(this.Button_Account_Manager);
-            this.Controls.Add(this.Input_Password);
-            this.Controls.Add(this.Input_Email);
             this.Controls.Add(this.Label_Information_Window);
             this.Controls.Add(this.ComboBox_Server_List);
             this.Controls.Add(this.Label_Insider_Build_Number);
             this.Controls.Add(this.Label_Debug_Language);
-            this.Controls.Add(this.Button_Register);
-            this.Controls.Add(this.Button_Login);
-            this.Controls.Add(this.CheckBox_Remember_Us);
-            this.Controls.Add(this.LinkLabel_Forgot_Password);
             this.Controls.Add(this.Panel_Server_Information);
             this.Controls.Add(this.Picture_Icon_API);
             this.Controls.Add(this.Picture_Icon_Version);
@@ -779,8 +1017,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Controls.Add(this.Button_Security_Center);
             this.Controls.Add(this.Button_Settings);
             this.Controls.Add(this.Button_Close);
-            this.Controls.Add(this.Picture_Input_Password);
-            this.Controls.Add(this.Picture_Input_Email);
             this.Controls.Add(this.Picture_Bar_Outline);
             this.Controls.Add(this.Picture_Server_Banner);
             this.Controls.Add(this.Picture_Logo);
@@ -794,8 +1030,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Server_Banner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Bar_Outline)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Email)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Security_Center)).EndInit();
@@ -807,8 +1041,20 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Facebook)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Home)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Icon_Server_Discord)).EndInit();
-            this.Panel_Launch.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Information_Window)).EndInit();
+            this.TabControl_Login.ResumeLayout(false);
+            this.Login_Classic.ResumeLayout(false);
+            this.Login_Classic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Email)).EndInit();
+            this.Login_Account_Manager.ResumeLayout(false);
+            this.Register.ResumeLayout(false);
+            this.Register.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Ticket)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Picture_Input_Password_Confirm)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            this.Login_Success.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -819,8 +1065,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public PictureBox Picture_Logo;
         public PictureBox Picture_Server_Banner;
         public PictureBox Picture_Bar_Outline;
-        public PictureBox Picture_Input_Email;
-        public PictureBox Picture_Input_Password;
         public PictureBox Button_Close;
         public PictureBox Button_Security_Center;
         public PictureBox Picture_Icon_Server;
@@ -835,11 +1079,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public Label Label_Insider_Build_Number;
         public ComboBox ComboBox_Server_List;
         public Label Label_Information_Window;
-        public TextBox Input_Email;
-        public TextBox Input_Password;
         public Button Button_Custom_Server;
-        public Label Label_Client_Ping;
-        public CheckBox CheckBox_Remember_Us;
         public Label Label_Server_Force_Restart_Timer;
         public Label Label_Server_Scenery;
         public Label Label_Download_Information;
@@ -855,22 +1095,45 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public LinkLabel LinkLabel_Server_Twitter;
         public Button Button_Select_Server;
         public Core.Theme.Control_ProgressBar ProgressBar;
-        public LinkLabel LinkLabel_Forgot_Password;
         public Label Label_Download_Information_Support;
         public PictureBox Picture_Information_Window;
-        public Button Button_Logout;
-        public Button Button_Register;
-        public Button Button_Login;
+        public Button Button_Register_Classic;
+        public Button Button_Login_Classic;
         public NotifyIcon NotifyIcon_Notification;
         public Panel Panel_Form_Screens;
-        public Panel Panel_Register_Screen;
         public PictureBox Button_Settings;
-        public Panel Panel_Launch;
-        public Button Button_Play_OR_Update;
         public Timer UI_Timer;
         public TextBox Input_Console;
         public Button Button_Console_Submit;
+        private Core.Theme.Control_TabControl TabControl_Login;
+        private TabPage Login_Classic;
+        private TabPage Login_Account_Manager;
+        private TabPage Register;
         public ComboBox ComboBox_Accounts;
         public Button Button_Account_Manager;
+        public TextBox Input_Password;
+        public TextBox Input_Email;
+        public CheckBox CheckBox_Remember_Us;
+        public LinkLabel LinkLabel_Forgot_Password_Classic;
+        public PictureBox Picture_Input_Password;
+        public PictureBox Picture_Input_Email;
+        public LinkLabel LinkLabel_Forgot_Password;
+        private TabPage Login_Success;
+        public Button Button_Play_OR_Update;
+        public Button Button_Logout;
+        public Label Label_Client_Ping;
+        public Button Button_Register;
+        public Button Button_Login;
+        private Button Button_Cancel;
+        private Button button1;
+        private TextBox Input_Ticket;
+        private TextBox Input_Password_Confirm;
+        private TextBox textBox1;
+        private TextBox textBox2;
+        private CheckBox CheckBox_Rules_Agreement;
+        private PictureBox Picture_Input_Ticket;
+        private PictureBox Picture_Input_Password_Confirm;
+        private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
     }
 }

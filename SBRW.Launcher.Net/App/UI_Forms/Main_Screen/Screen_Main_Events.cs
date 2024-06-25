@@ -154,12 +154,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             {
                 if (ComboBox_Accounts.SelectedItem != default)
                 {
-                    Button_Login.Text = "Decrypting".ToUpper();
+                    Button_Login_Classic.Text = "Decrypting".ToUpper();
                     Live_Information = (Launcher_Value.Launcher_Select_Server_JSON.Server_Authentication_Version ?? string.Empty).
                         HashType().Login_Formater(
                         (ComboBox_Accounts.SelectedItem as Json_List_Account).Email.Decrypt_AES(),
                         (ComboBox_Accounts.SelectedItem as Json_List_Account).Password.Decrypt_AES());
-                    Button_Login.Text = "Login".ToUpper();
+                    Button_Login_Classic.Text = "Login".ToUpper();
                 }
                 else
                 {
@@ -286,11 +286,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     {
                         try
                         {
-                            Screen_Register Custom_Instance_Register = new Screen_Register() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true, FormBorderStyle = FormBorderStyle.None };
-                            Panel_Register_Screen.Controls.Add(Custom_Instance_Register);
-                            Panel_Register_Screen.Visible = true;
-                            Custom_Instance_Register.Show();
-                            Text = "Register - SBRW Launcher: " + Application.ProductVersion;
+                            "TODO: IMPLEMENT NEW REGISTERATION TAB SCREEN".Message_Box();
                         }
                         catch (Exception Error)
                         {
@@ -396,8 +392,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             Log.Core("LAUNCHER: Checking for password");
             LoginEnabled = ServerEnabled = !string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Raw_Password);
-            Button_Login.BackgroundImage = Image_Button.Grey;
-            Button_Login.ForeColor = LoginEnabled ? Color_Text.L_Five : Color_Text.L_Six;
+            Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+            Button_Login_Classic.ForeColor = LoginEnabled ? Color_Text.L_Five : Color_Text.L_Six;
 
             if (!string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Raw_Email) &&
                 (!string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Hashed_Password) || !string.IsNullOrWhiteSpace(Save_Account.Live_Data.User_Raw_Password)))

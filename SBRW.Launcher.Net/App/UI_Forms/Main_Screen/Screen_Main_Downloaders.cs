@@ -314,7 +314,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
 
                     Label_Download_Information.SafeInvokeAction(() => Label_Download_Information.Text = "Ready!".ToUpper(), this);
-                    Button_Login.Enabled = LoginEnabled;
+                    Button_Login_Classic.Enabled = LoginEnabled;
 
                     EnablePlayButton();
                 }

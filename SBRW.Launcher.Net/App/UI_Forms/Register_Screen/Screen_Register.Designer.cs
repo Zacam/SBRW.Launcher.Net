@@ -116,7 +116,7 @@
             this.Input_Email.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Email.Location = new System.Drawing.Point(67, 98);
             this.Input_Email.Name = "Input_Email";
-            this.Input_Email.Size = new System.Drawing.Size(180, 16);
+            this.Input_Email.Size = new System.Drawing.Size(180, 13);
             this.Input_Email.TabIndex = 18;
             // 
             // Input_Password
@@ -125,7 +125,7 @@
             this.Input_Password.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Password.Location = new System.Drawing.Point(67, 146);
             this.Input_Password.Name = "Input_Password";
-            this.Input_Password.Size = new System.Drawing.Size(180, 16);
+            this.Input_Password.Size = new System.Drawing.Size(180, 13);
             this.Input_Password.TabIndex = 19;
             // 
             // Input_Password_Confirm
@@ -134,7 +134,7 @@
             this.Input_Password_Confirm.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Password_Confirm.Location = new System.Drawing.Point(67, 195);
             this.Input_Password_Confirm.Name = "Input_Password_Confirm";
-            this.Input_Password_Confirm.Size = new System.Drawing.Size(180, 16);
+            this.Input_Password_Confirm.Size = new System.Drawing.Size(180, 13);
             this.Input_Password_Confirm.TabIndex = 20;
             // 
             // Input_Ticket
@@ -143,7 +143,7 @@
             this.Input_Ticket.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.Input_Ticket.Location = new System.Drawing.Point(67, 244);
             this.Input_Ticket.Name = "Input_Ticket";
-            this.Input_Ticket.Size = new System.Drawing.Size(180, 16);
+            this.Input_Ticket.Size = new System.Drawing.Size(180, 13);
             this.Input_Ticket.TabIndex = 21;
             // 
             // Button_Register
