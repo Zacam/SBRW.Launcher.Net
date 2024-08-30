@@ -695,19 +695,6 @@ namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
                 comboResolutions.Visible = false;
             }
 
-            if (comboBoxPerformanceLevel.SelectedIndex == 5)
-            {
-                ((Control)TabPage_Advanced).Enabled = true;
-                ((Control)TabPage_Advanced).Visible = true;
-                LabelGraphicPreset.Visible = PresetPanel.Visible = true;
-            }
-            else
-            {
-                ((Control)TabPage_Advanced).Enabled = false;
-                ((Control)TabPage_Advanced).Visible = false;
-                LabelGraphicPreset.Visible = PresetPanel.Visible = false;
-            }
-
             numericResWidth.Value = Convert.ToInt32(XML_File.XML_Settings_Data.ScreenWidth);
             numericResHeight.Value = Convert.ToInt32(XML_File.XML_Settings_Data.ScreenHeight);
             numericBrightness.Value = Convert.ToDecimal(XML_File.XML_Settings_Data.Brightness);
@@ -829,7 +816,7 @@ namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
 
             Shown += (x, y) =>
             {
-                RememberLastLanguage();
+                Shown_Setup();
             };
         }
     }

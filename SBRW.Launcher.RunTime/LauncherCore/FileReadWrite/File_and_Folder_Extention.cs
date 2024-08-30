@@ -154,13 +154,13 @@ namespace SBRW.Launcher.RunTime.LauncherCore.FileReadWrite
         /// <param name="Recursive"></param>
         /// <returns></returns>
         /// <remarks>
-        /// Full Install - 3859168701
-        /// EN Install - 3859168701
-        /// DE Install - 3859168701
-        /// ES Install - 3859168701
-        /// FR Install - 3859168701
-        /// RU Install - 3859168701
-        /// TW Install - 3859168701
+        /// Full Install - 3859168701<br/>
+        /// EN Install - 3859168701<br/>
+        /// DE Install - 3859168701<br/>
+        /// ES Install - 3859168701<br/>
+        /// FR Install - 3859168701<br/>
+        /// RU Install - 3859168701<br/>
+        /// TW Install - 3859168701<br/>
         /// </remarks>
         public static long GetDirectorySize_GameFiles(System.IO.DirectoryInfo Directory_Info, bool Recursive = true)
         {

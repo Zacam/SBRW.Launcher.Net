@@ -3,6 +3,7 @@ using SBRW.Launcher.Core.Extra.XML_;
 using SBRW.Launcher.RunTime.LauncherCore.Lists;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using System;
+using System.Windows.Forms;
 
 namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
 {
@@ -11,8 +12,21 @@ namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
         /// <summary>
         /// 
         /// </summary>
-        private void RememberLastLanguage()
+        private void Shown_Setup()
         {
+            if (comboBoxPerformanceLevel.SelectedIndex == 5)
+            {
+                ((Control)TabPage_Advanced).Enabled = true;
+                ((Control)TabPage_Advanced).Visible = true;
+                LabelGraphicPreset.Visible = PresetPanel.Visible = true;
+            }
+            else
+            {
+                ((Control)TabPage_Advanced).Enabled = false;
+                ((Control)TabPage_Advanced).Visible = false;
+                LabelGraphicPreset.Visible = PresetPanel.Visible = false;
+            }
+
             try
             {
                 if (!string.IsNullOrWhiteSpace(XML_File.XML_Settings_Data.Language))
@@ -22,7 +36,6 @@ namespace SBRW.Launcher.App.UI_Forms.User_Settings_Editor_Screen
                 }
                 else
                 {
-                    Log.Warning("GAME SETTINGS LANGLIST: Unable to find anything, assuming default");
                     ComboBox_Language_List.SelectedIndex = 1;
                 }
             }

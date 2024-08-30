@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<TargetFrameworks>net461</TargetFrameworks>
+		<TargetFrameworks>net461;net6.0-windows</TargetFrameworks>
 		<!-- NoWarn below suppresses project-wide -->
 		<NoWarn>$(NoWarn);NU1701;SYSLIB0006;SYSLIB0014</NoWarn>
 		<Nullable>enable</Nullable>
@@ -81,7 +81,7 @@
 		<PackageReference Include="SBRW.Launcher.Core.Downloader.LZMA" Version="0.3.2" />
 		<PackageReference Include="SBRW.Launcher.Core.Extra" Version="0.5.1" />
 		<PackageReference Include="SBRW.Launcher.Core.Proxy" Version="0.5.1" />
-		<PackageReference Include="SBRW.Launcher.Core.Theme" Version="0.3.2" />
+		<PackageReference Include="SBRW.Launcher.Core.Theme" Version="0.3.3" />
 		<PackageReference Include="SBRW.Nancy" Version="2.0.13" />
 		<PackageReference Include="SBRW.Nancy.Hosting.Self" Version="2.0.11" />
 		<PackageReference Include="SBRW.Svg" Version="3.4.7" />

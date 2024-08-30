@@ -8,6 +8,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 {
@@ -22,8 +23,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         private static bool Playenabled { get; set; }
         private static bool IsDownloading { get; set; } = true;
         private static bool DisableLogout { get; set; }
-
-        public static string GetTempName { get; set; } = Path.GetTempFileName();
+        private static bool Login_Launch_Lock { get; set; }
 
         private static int LastSelectedServerId { get; set; }
         public static int NfswPid { get; set; }
@@ -52,7 +52,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public static bool IsDownloadingModNetFiles { get; set; }
         public static int CurrentModFileCount { get; set; }
         public static int TotalModFileCount { get; set; }
-        public static string Custom_SBRW_Pack { get { return Path.Combine(Locations.LauncherFolder, "GameFiles.sbrwpack"); } }
         public static int[] Game_Affinity_Range { get; set; } = new int[] { 0, 3 };
 
         public Screen_Main()

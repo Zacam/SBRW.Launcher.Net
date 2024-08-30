@@ -4,8 +4,7 @@ using SBRW.Launcher.Core.Extension.Logging_;
 using System;
 using System.Windows.Forms;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
-using System.Xml.Linq;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using System.Collections.Generic;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Support
 {
@@ -14,6 +13,114 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Support
     /// </summary>
     public static class FormsControls
     {
+        #region Extentions
+        /// <summary>
+        /// https://stackoverflow.com/a/8524085/17539426
+        /// </summary>
+        private static Dictionary<string, TabPageData> hiddenPages = new Dictionary<string, TabPageData>();
+        /// <summary>
+        /// 
+        /// </summary>
+        private struct TabPageData
+        {
+            internal int Index;
+            internal TabControl Parent;
+            internal TabPage Page;
+
+            internal TabPageData(int index, TabControl parent, TabPage page)
+            {
+                Index = index;
+                Parent = parent;
+                Page = page;
+            }
+
+            internal static string GetKey(TabControl tabCtrl, TabPage tabPage)
+            {
+                string key = "";
+                if (tabCtrl != null && tabPage != null)
+                {
+                    key = string.Format("{0}:{1}", tabCtrl.Name, tabPage.Name);
+                }
+                return key;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="parent"></param>
+        public static void SetVisible(this TabPage page, TabControl parent)
+        {
+            if (parent != null && !parent.IsDisposed)
+            {
+                TabPageData tpinfo;
+
+                string key = TabPageData.GetKey(parent, page);
+                if (hiddenPages.ContainsKey(key))
+                {
+                    tpinfo = hiddenPages[key];
+                    if (tpinfo.Index < parent.TabPages.Count)
+                        parent.TabPages.Insert(tpinfo.Index, tpinfo.Page); // add the page in the same position it had
+                    else
+                        parent.TabPages.Add(tpinfo.Page);
+                    hiddenPages.Remove(key);
+                }
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static int FindIndex(this TabPage page)
+        {
+            if (page != null && page.Parent != null)
+            {
+                if (!page.Parent.IsDisposed)
+                {
+                    return ((TabControl)page.Parent).TabPages.IndexOf(page);
+                }
+            }
+
+            return -1;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        public static void SetInvisible(this TabPage page)
+        {
+            if (IsVisible(page))
+            {
+                TabControl tabCtrl = (TabControl)page.Parent;
+                TabPageData tpinfo;
+                tpinfo = new TabPageData(tabCtrl.TabPages.IndexOf(page), tabCtrl, page);
+                tabCtrl.TabPages.Remove(page);
+                hiddenPages.Add(TabPageData.GetKey(tabCtrl, page), tpinfo);
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        /// <returns></returns>
+        public static bool IsVisible(this TabPage page)
+        {
+            return page != null && page.Parent != null; // when Parent is null the tab page does not belong to any container
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="page"></param>
+        public static void CleanUpHiddenPages(this TabPage page)
+        {
+            foreach (TabPageData info in hiddenPages.Values)
+            {
+                if (info.Parent != null && info.Parent.Equals((TabControl)page.Parent))
+                    info.Page.Dispose();
+            }
+        }
+        #endregion
         /// <summary>
         /// 
         /// </summary>

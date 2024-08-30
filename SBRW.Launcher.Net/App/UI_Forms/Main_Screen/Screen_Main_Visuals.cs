@@ -36,8 +36,6 @@ using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using SBRW.Launcher.Core.Extra.File_.Save_;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Runtime.CompilerServices;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -136,36 +134,48 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Greenbutton_hover_MouseEnter(object sender, EventArgs e)
+        private void Button_Register_MouseLeave(object sender, EventArgs e)
         {
-            Button_Register_Classic.BackgroundImage = Image_Button.Green_Hover;
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
+            {
+                Button_Register_Classic.BackgroundImage = Image_Button.Green;
+            }
+            else
+            {
+                Button_Register.BackgroundImage = Image_Button.Green;
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Greenbutton_MouseLeave(object sender, EventArgs e)
+        private void Button_Register_Hover_MouseUpEnter(object sender, EventArgs e)
         {
-            Button_Register_Classic.BackgroundImage = Image_Button.Green;
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
+            {
+                Button_Register_Classic.BackgroundImage = Image_Button.Green_Hover;
+            }
+            else
+            {
+                Button_Register.BackgroundImage = Image_Button.Green_Hover;
+            }
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Greenbutton_hover_MouseUp(object sender, EventArgs e)
+        private void Button_Register_Click_MouseDown(object sender, EventArgs e)
         {
-            Button_Register_Classic.BackgroundImage = Image_Button.Green_Hover;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Greenbutton_click_MouseDown(object sender, EventArgs e)
-        {
-            Button_Register_Classic.BackgroundImage = Image_Button.Green_Click;
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
+            {
+                Button_Register_Classic.BackgroundImage = Image_Button.Green_Click;
+            }
+            else
+            {
+                Button_Register.BackgroundImage = Image_Button.Green_Click;
+            }
         }
         /// <summary>
         /// 
@@ -191,67 +201,53 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Graybutton_click_MouseDown(object sender, EventArgs e)
+        private void Button_Logout_Click_MouseDown(object sender, EventArgs e)
         {
-            if (Button_Logout.BackgroundImage != Image_Button.Grey_Click)
-            {
-                Button_Logout.BackgroundImage = Image_Button.Grey_Click;
-            }
+            Button_Logout.BackgroundImage = Image_Button.Grey_Click;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Graybutton_hover_MouseEnter(object sender, EventArgs e)
+        private void Button_Logout_Hover_MouseUpEnter(object sender, EventArgs e)
         {
-            if (Button_Logout.BackgroundImage != Image_Button.Grey_Hover)
-            {
-                Button_Logout.BackgroundImage = Image_Button.Grey_Hover;
-            }
+            Button_Logout.BackgroundImage = Image_Button.Grey_Hover;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Graybutton_MouseLeave(object sender, EventArgs e)
+        private void Button_Logout_MouseLeave(object sender, EventArgs e)
         {
-            if (Button_Logout.BackgroundImage != Image_Button.Grey)
-            {
-                Button_Logout.BackgroundImage = Image_Button.Grey;
-            }
+            Button_Logout.BackgroundImage = Image_Button.Grey;
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Graybutton_hover_MouseUp(object sender, EventArgs e)
+        private void Input_Classic_Login_Enabler(object sender, EventArgs e)
         {
-            if (Button_Logout.BackgroundImage != Image_Button.Grey_Hover)
-            {
-                Button_Logout.BackgroundImage = Image_Button.Grey_Hover;
-            }
+            LoginEnabled = (string.IsNullOrWhiteSpace(Input_Email.Text) || string.IsNullOrWhiteSpace(Input_Password.Text));
         }
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Loginbuttonenabler(object sender, EventArgs e)
+        private void Button_Login_MouseUpEnter(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(Input_Email.Text) || string.IsNullOrWhiteSpace(Input_Password.Text))
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
             {
-                LoginEnabled = false;
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
-                Button_Login_Classic.ForeColor = Color_Text.L_Six;
+                Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Hover : Image_Button.Grey;
+                Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
             else
             {
-                LoginEnabled = true;
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
-                Button_Login_Classic.ForeColor = Color_Text.L_Five;
+                Button_Login.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Hover : Image_Button.Grey;
+                Button_Login.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
         }
         /// <summary>
@@ -259,15 +255,17 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LoginButton_MouseUp(object sender, EventArgs e)
+        private void Button_Login_MouseDown(object sender, EventArgs e)
         {
-            if (LoginEnabled || Builtinserver)
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
             {
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey_Hover;
+                Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Click : Image_Button.Grey;
+                Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
             else
             {
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+                Button_Login.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Click : Image_Button.Grey;
+                Button_Login.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
         }
         /// <summary>
@@ -275,54 +273,46 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LoginButton_MouseDown(object sender, EventArgs e)
+        private void Button_Login_MouseLeave(object sender, EventArgs e)
         {
-            if (LoginEnabled || Builtinserver)
+            if (TabControl_Login.SelectedTab == TabPage_Login_Classic)
             {
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey_Click;
+                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+                Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
             else
             {
-                Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+                Button_Login.BackgroundImage = Image_Button.Grey;
+                Button_Login.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
             }
         }
         /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LoginButton_MouseEnter(object sender, EventArgs e)
-        {
-            Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey_Hover : Image_Button.Grey;
-            Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LoginButton_MouseLeave(object sender, EventArgs e)
-        {
-            Button_Login_Classic.BackgroundImage = (LoginEnabled || Builtinserver) ? Image_Button.Grey : Image_Button.Grey;
-            Button_Login_Classic.ForeColor = (LoginEnabled || Builtinserver) ? Color_Text.L_Five : Color_Text.L_Six;
-        }
-        /// <summary>
-        /// 
+        /// After Logout, Show Login Forms
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LogoutButton_Click(object sender, EventArgs e)
         {
-            if (DisableLogout == true)
+            if (!DisableLogout)
             {
-                return;
+                TabControl_Login.SelectedTab = Save_Settings.Account_Manager() ? TabPage_Login_Account_Manager : TabPage_Login_Classic;
+
+                Label_Information_Window.Text = "Enter Your Account Information to Log In".ToUpper();
+                /* Input Strokes */
+                if (!Save_Settings.Account_Manager())
+                {
+                    Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
+                    Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
+                }
+
+                if (Picture_Information_Window.Image != Image_Other.Information_Window)
+                {
+                    Picture_Information_Window.Image = Image_Other.Information_Window;
+                }
+
+                UserId = string.Empty;
+                LoginToken = string.Empty;
             }
-
-            LoggedInFormElements(false);
-            LoginFormElements(true);
-
-            UserId = string.Empty;
-            LoginToken = string.Empty;
         }
         /// <summary>
         /// 
@@ -331,11 +321,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="e"></param>
         private void PlayButton_MouseUp(object sender, EventArgs e)
         {
-            if (Playenabled == false)
-            {
-                return;
-            }
-
             if (Button_Play_OR_Update.BackgroundImage != Image_Button.Play_Hover)
             {
                 Button_Play_OR_Update.BackgroundImage = Image_Button.Play_Hover;
@@ -390,123 +375,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             if (Button_Play_OR_Update.BackgroundImage != Image_Button.Play)
             {
                 Button_Play_OR_Update.BackgroundImage = Image_Button.Play;
-            }
-        }
-        /// <summary>
-        /// After Successful Login, Hide Login Forms
-        /// </summary>
-        /// <param name="hideElements"></param>
-        private void LoggedInFormElements(bool hideElements)
-        {
-            if (hideElements == true)
-            {
-                try
-                {
-                    DateTime currentTime = DateTime.Now;
-
-                    if ((currentTime.Hour >= 5) && (currentTime.Hour < 12))
-                    {
-                        LoginWelcomeTime = "Good Morning";
-                    }
-                    else if ((currentTime.Hour >= 12) && (currentTime.Hour < 18))
-                    {
-                        LoginWelcomeTime = "Good Afternoon";
-                    }
-                    else if ((currentTime.Hour >= 18) && (currentTime.Hour < 22))
-                    {
-                        LoginWelcomeTime = "Good Evening";
-                    }
-                    else
-                    {
-                        LoginWelcomeTime = "Hello Night Owl";
-                    }
-                }
-                catch (Exception Error)
-                {
-                    LogToFileAddons.OpenLog("LOGIN TIME", string.Empty, Error, string.Empty, true);
-                    LoginWelcomeTime = "Pshhh Pshhh";
-                }
-
-                string Account_Username_Email = "Ryan Cooper";
-                if (Save_Settings.Account_Manager())
-                {
-                    if (ComboBox_Accounts.SelectedItem != default)
-                    {
-                        if (!string.IsNullOrWhiteSpace(((Json_List_Account)ComboBox_Accounts.SelectedItem).Nickname))
-                        {
-                            Account_Username_Email = ((Json_List_Account)ComboBox_Accounts.SelectedItem).Nickname;
-                        }
-                    }
-                }
-                else
-                {
-                    Account_Username_Email = Input_Email.Text;
-                }
-
-                Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Account_Username_Email).ToUpper();
-
-                if (Picture_Information_Window.Image != Image_Other.Information_Window_Success)
-                {
-                    Picture_Information_Window.Image = Image_Other.Information_Window_Success;
-                }
-
-                if (Picture_Information_Window.Image != Image_Other.Information_Window_Success)
-                {
-                    Picture_Information_Window.Image = Image_Other.Information_Window_Success;
-                }
-                Button_Play_OR_Update.ForeColor = Color_Text.L_Five;
-                Button_Play_OR_Update.Visible = hideElements;
-
-                if (Button_Logout.BackgroundImage != Image_Button.Grey)
-                {
-                    Button_Logout.BackgroundImage = Image_Button.Grey;
-                }
-                Button_Logout.ForeColor = Color_Text.L_Five;
-            }
-
-            //Panel_Launch.Visible = hideElements;
-        }
-        /// <summary>
-        /// After Logout, Show Login Forms
-        /// </summary>
-        /// <param name="hideElements"></param>
-        private void LoginFormElements(bool hideElements)
-        {
-            if (hideElements == true)
-            {
-                Label_Information_Window.Text = "Enter Your Account Information to Log In".ToUpper();
-            }
-
-            Button_Login_Classic.Visible = hideElements;
-            Button_Register_Classic.Visible = hideElements;
-
-            if (Save_Settings.Account_Manager())
-            {
-                ComboBox_Accounts.Visible = hideElements;
-                Button_Account_Manager.Visible = hideElements;
-            }
-            else
-            {
-                Input_Email.Visible = hideElements;
-                Input_Password.Visible = hideElements;
-                Picture_Input_Email.Visible = hideElements;
-                Picture_Input_Password.Visible = hideElements;
-                /* Input Strokes */
-                Picture_Input_Email.Image = Picture_Input_Email.Icon_Order(SVG_Icon.Input_Box_Email, SVG_Color.Base);
-                Picture_Input_Password.Image = Picture_Input_Password.Icon_Order(SVG_Icon.Input_Box_Password, SVG_Color.Base);
-                CheckBox_Remember_Us.Visible = hideElements;
-            }
-            
-            LinkLabel_Forgot_Password_Classic.Visible = hideElements;
-            Button_Settings.Visible = hideElements;
-            Button_Security_Center.Visible = hideElements;
-
-            Button_Custom_Server.Enabled = hideElements;
-            ComboBox_Server_List.Enabled = hideElements;
-
-            if (Picture_Information_Window.Image != Image_Other.Information_Window)
-            {
-                Picture_Information_Window.Image = Image_Other.Information_Window;
             }
         }
         /// <summary>
@@ -857,24 +725,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             }
         }
         /// <summary>
-        /// Disable Play Button and Logout Buttons
-        /// </summary>
-        /// <param name="Enabler_Mode"></param>
-        private void Button_Login_Logout_Modes(bool Enabler_Mode = false, bool Disable_Play_Button = false)
-        {
-            if (Enabler_Mode)
-            {
-                Button_Play_OR_Update.Visible = Disable_Play_Button ? false : true;
-                Button_Logout.Visible = EnablePlayButton(true);
-                DisableLogout = false;
-            }
-            else
-            {
-                Button_Play_OR_Update.Visible = Button_Logout.Visible = DisablePlayButton();
-                DisableLogout = true;
-            }
-        }
-        /// <summary>
         /// Check Serverlist API Status Upon Main Screen load - DavidCarbon
         /// </summary>
         private void PingServerListAPIStatus()
@@ -981,7 +831,10 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 return;
             }
 
-            if (!SkipServerTrigger) { return; }
+            if (!SkipServerTrigger) 
+            {
+                return;
+            }
 
             LastSelectedServerId = ComboBox_Server_List.SelectedIndex;
 
@@ -1961,7 +1814,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         {
                             if (!IsDisposed || !Disposing)
                             {
-                                Button_Close.Visible = Button_Logout.Visible = EnablePlayButton(true);
+                                IsDownloading = false;
+                                Playenabled = true;
 
                                 if (Screen_Parent.Screen_Instance != default)
                                 {
@@ -2206,6 +2060,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ProgressBar.ForeColor = Color_Winform_Other.ProgressBar_Unknown_Bottom;
             ProgressBar.OuterRectangleBackColor = Color_Winform_Other.ProgressBar_Background;
 
+            Button_Play_OR_Update.ForeColor = Color_Text.L_Five;
+
             Label_Download_Information.ForeColor = Color_Text.L_Five;
             Label_Download_Information_Support.ForeColor = Color_Text.L_Five;
 
@@ -2222,14 +2078,23 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             Button_Login_Classic.ForeColor = Color_Text.L_Five;
             Button_Login_Classic.BackgroundImage = Image_Button.Grey;
+            Button_Login.ForeColor = Color_Text.L_Five;
+            Button_Login.BackgroundImage = Image_Button.Grey;
+
+            Button_Logout.ForeColor = Color_Text.L_Five;
+            Button_Logout.BackgroundImage = Image_Button.Grey;
 
             Button_Register_Classic.ForeColor = Color_Text.L_Seven;
             Button_Register_Classic.BackgroundImage = Image_Button.Green;
+            Button_Register.ForeColor = Color_Text.L_Seven;
+            Button_Register.BackgroundImage = Image_Button.Green;
 
             CheckBox_Remember_Us.ForeColor = Color_Text.L_Five;
 
             LinkLabel_Forgot_Password_Classic.ActiveLinkColor = Color_Winform_Other.Link_Active;
             LinkLabel_Forgot_Password_Classic.LinkColor = Color_Winform_Other.Link;
+            LinkLabel_Forgot_Password.ActiveLinkColor = Color_Winform_Other.Link_Active;
+            LinkLabel_Forgot_Password.LinkColor = Color_Winform_Other.Link;
 
             Input_Email.BackColor = Color_Winform_Other.Input;
             Input_Email.ForeColor = Color_Text.L_Five;
@@ -2260,6 +2125,15 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Console_Submit.BackColor = Color_Winform_Buttons.Green_Back_Color;
             Button_Console_Submit.FlatAppearance.BorderColor = Color_Winform_Buttons.Green_Border_Color;
             Button_Console_Submit.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Green_Mouse_Over_Back_Color;
+
+            /* Tab Control Settings */
+            TabControl_Login.TabsHide = true;
+            /* Temporay Disable Classic Login if Account Manager is Choosen/Saved
+             * On Shown (The control visibility/enable will reset) and to prevent a flicker affect - DavidCarbon */
+            if (Save_Settings.Account_Manager())
+            {
+                ((Control)TabPage_Login_Classic).Enabled = false;
+            }
 
             /********************************/
             /* Events                        /
@@ -2295,25 +2169,31 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Security_Center.MouseUp += new MouseEventHandler(ButtonSecurityCenter_MouseLeaveANDMouseUp);
             Button_Security_Center.MouseDown += new MouseEventHandler(ButtonSecurityCenter_MouseDown);
 
-            Button_Login_Classic.MouseEnter += new EventHandler(LoginButton_MouseEnter);
-            Button_Login_Classic.MouseLeave += new EventHandler(LoginButton_MouseLeave);
-            Button_Login_Classic.MouseUp += new MouseEventHandler(LoginButton_MouseUp);
-            Button_Login_Classic.MouseDown += new MouseEventHandler(LoginButton_MouseDown);
+            Button_Login_Classic.MouseEnter += new EventHandler(Button_Login_MouseUpEnter);
+            Button_Login_Classic.MouseLeave += new EventHandler(Button_Login_MouseLeave);
+            Button_Login_Classic.MouseUp += new MouseEventHandler(Button_Login_MouseUpEnter);
+            Button_Login_Classic.MouseDown += new MouseEventHandler(Button_Login_MouseDown);
             Button_Login_Classic.Click += new EventHandler(LoginButton_Click);
 
-            Button_Logout.MouseEnter += new EventHandler(Graybutton_hover_MouseEnter);
-            Button_Logout.MouseLeave += new EventHandler(Graybutton_MouseLeave);
-            Button_Logout.MouseUp += new MouseEventHandler(Graybutton_hover_MouseUp);
-            Button_Logout.MouseDown += new MouseEventHandler(Graybutton_click_MouseDown);
+            Button_Login.MouseEnter += new EventHandler(Button_Login_MouseUpEnter);
+            Button_Login.MouseLeave += new EventHandler(Button_Login_MouseLeave);
+            Button_Login.MouseUp += new MouseEventHandler(Button_Login_MouseUpEnter);
+            Button_Login.MouseDown += new MouseEventHandler(Button_Login_MouseDown);
+            Button_Login.Click += new EventHandler(LoginButton_Click);
+
+            Button_Logout.MouseEnter += new EventHandler(Button_Logout_Hover_MouseUpEnter);
+            Button_Logout.MouseLeave += new EventHandler(Button_Logout_MouseLeave);
+            Button_Logout.MouseUp += new MouseEventHandler(Button_Logout_Hover_MouseUpEnter);
+            Button_Logout.MouseDown += new MouseEventHandler(Button_Logout_Click_MouseDown);
             Button_Logout.Click += new EventHandler(LogoutButton_Click);
 
             Button_Custom_Server.Click += new EventHandler(FunctionEvents.AddServer_Click);
             Button_Account_Manager.Click += new EventHandler(Button_Account_Manager_Click);
 
-            Input_Email.KeyUp += new KeyEventHandler(Loginbuttonenabler);
-            Input_Email.KeyDown += new KeyEventHandler(LoginEnter);
-            Input_Password.KeyUp += new KeyEventHandler(Loginbuttonenabler);
-            Input_Password.KeyDown += new KeyEventHandler(LoginEnter);
+            Input_Email.KeyUp += new KeyEventHandler(Input_Classic_Login_Enabler);
+            Input_Email.KeyDown += new KeyEventHandler(Input_Classic_Login_Enter);
+            Input_Password.KeyUp += new KeyEventHandler(Input_Classic_Login_Enabler);
+            Input_Password.KeyDown += new KeyEventHandler(Input_Classic_Login_Enter);
 
             ComboBox_Server_List.SelectedIndexChanged += new EventHandler(ComboBox_Server_List_SelectedIndexChanged);
             ComboBox_Server_List.DrawItem += new DrawItemEventHandler(ServerList_Menu_DrawItem);
@@ -2326,7 +2206,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             LinkLabel_Forgot_Password_Classic.LinkClicked += new LinkLabelLinkClickedEventHandler(FunctionEvents.ForgotPassword_LinkClicked);
 
-            if (Screen_Parent.Screen_Instance != null)
+            if (!Screen_Parent.Screen_Instance.DisposedForm())
             {
                 MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
                 MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
@@ -2347,11 +2227,17 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             Button_Play_OR_Update.MouseDown += new MouseEventHandler(PlayButton_MouseDown);
             Button_Play_OR_Update.Click += new EventHandler(PlayButton_Click);
 
-            Button_Register_Classic.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
-            Button_Register_Classic.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
-            Button_Register_Classic.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
-            Button_Register_Classic.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
+            Button_Register_Classic.MouseEnter += new EventHandler(Button_Register_Hover_MouseUpEnter);
+            Button_Register_Classic.MouseLeave += new EventHandler(Button_Register_MouseLeave);
+            Button_Register_Classic.MouseUp += new MouseEventHandler(Button_Register_Hover_MouseUpEnter);
+            Button_Register_Classic.MouseDown += new MouseEventHandler(Button_Register_Click_MouseDown);
             Button_Register_Classic.Click += new EventHandler(Button_Register_Click);
+
+            Button_Register.MouseEnter += new EventHandler(Button_Register_Hover_MouseUpEnter);
+            Button_Register.MouseLeave += new EventHandler(Button_Register_MouseLeave);
+            Button_Register.MouseUp += new MouseEventHandler(Button_Register_Hover_MouseUpEnter);
+            Button_Register.MouseDown += new MouseEventHandler(Button_Register_Click_MouseDown);
+            Button_Register.Click += new EventHandler(Button_Register_Click);
 
             Load += new EventHandler(MainScreen_Load);
 
@@ -2383,6 +2269,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             Shown += async (x, y) =>
             {
+                if (Save_Settings.Account_Manager())
+                {
+                    TabControl_Login.SelectedTab = TabPage_Login_Account_Manager;
+                    /* Re-enable Classic Login Tab as we now successfully selected the new Tab */
+                    ((Control)TabPage_Login_Classic).Enabled = true;
+                }
                 Game_Folder_Checks();
                 await Task.Run(() =>
                 {

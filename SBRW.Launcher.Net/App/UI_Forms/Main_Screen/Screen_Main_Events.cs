@@ -43,11 +43,11 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void LoginEnter(object sender, KeyEventArgs e)
+        private void Input_Classic_Login_Enter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Return && LoginEnabled)
             {
-                LoginButton_Click(null, null);
+                LoginButton_Click(default, default);
                 e.SuppressKeyPress = true;
             }
         }
@@ -134,7 +134,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     TempEmailCache = Input_Email.Text;
                     Input_Email.Text = "EMAIL IS HIDDEN";
                 }
-                "Please wait while the GameLauncher is still downloading the game files.".Message_Box(MessageBoxButtons.OK);
+                "Please wait while the Launcher is still downloading the game files.".Message_Box(MessageBoxButtons.OK);
                 if (!string.IsNullOrWhiteSpace(TempEmailCache))
                 {
                     Input_Email.Text = TempEmailCache;
@@ -216,8 +216,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     Input_Email.Text = Live_Information.Email;
                 }
 
-                LoginFormElements(false);
-                LoggedInFormElements(true);
+                TabControl_Login.SelectedTab = TabPage_Login_Success;
             }
             else
             {
@@ -409,15 +408,6 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ComboBox_Server_List.DataSource = ServerListUpdater.CleanList;
             /* Accounts Display List */
             Screen_Account_Manager.Credentials_Load();
-
-            /* Now Reflect the User Choice on Account Manager usage */
-            ComboBox_Accounts.Visible = Save_Settings.Account_Manager();
-            Button_Account_Manager.Visible = Save_Settings.Account_Manager();
-            Input_Email.Visible = !Save_Settings.Account_Manager();
-            Input_Password.Visible = !Save_Settings.Account_Manager();
-            Picture_Input_Email.Visible = !Save_Settings.Account_Manager();
-            Picture_Input_Password.Visible = !Save_Settings.Account_Manager();
-            CheckBox_Remember_Us.Visible = !Save_Settings.Account_Manager();
 
             /* Display Server List Dialog if Server IP Doesn't Exist */
             if (string.IsNullOrWhiteSpace(Save_Account.Live_Data.Saved_Server_Address))

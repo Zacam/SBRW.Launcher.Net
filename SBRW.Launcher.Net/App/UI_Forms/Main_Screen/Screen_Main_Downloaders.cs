@@ -306,35 +306,23 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
             try
             {
-                if (Screen_Instance != null && !(IsDisposed || Disposing))
+                if (!Screen_Instance.DisposedForm())
                 {
                     if (UI_MODE != 5)
                     {
                         UI_MODE = 5;
                     }
 
-                    Label_Download_Information.SafeInvokeAction(() => Label_Download_Information.Text = "Ready!".ToUpper(), this);
-                    Button_Login_Classic.Enabled = LoginEnabled;
+                    Screen_Instance.Label_Download_Information.Text = "Ready!".ToUpper();
 
-                    EnablePlayButton();
+                    IsDownloading = false;
+                    Playenabled = true;
                 }
             }
             catch (Exception Error_Live)
             {
                 LogToFileAddons.OpenLog("Progress Bar/Outline ODF", string.Empty, Error_Live, string.Empty, true);
             }
-        }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="Return_Value"></param>
-        /// <returns></returns>
-        private bool EnablePlayButton(bool Return_Value = false)
-        {
-            IsDownloading = false;
-            Playenabled = true;
-
-            return Return_Value;
         }
         /// <summary>
         /// 
@@ -492,11 +480,16 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <remarks>That's right the Protype Extractor from 2.1.5.x, now back from the dead - DavidCarbon</remarks>
         private void Game_Pack_Downloader()
         {
-            if (Screen_Instance != null)
+            if (!Screen_Instance.DisposedForm())
             {
                 if (UI_MODE != 9)
                 {
                     UI_MODE = 9;
+                }
+
+                if (!Screen_Instance.DisposedForm())
+                {
+                    Screen_Instance.Label_Download_Information.Text = "Please Wait, Calculating Game Folder Size.";
                 }
 
                 long Game_Folder_Size = File_and_Folder_Extention.GetDirectorySize_GameFiles(new DirectoryInfo(Save_Settings.Live_Data.Game_Path));
@@ -1002,7 +995,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         /// <param name="path"></param>
         public void DownloadModNetFilesRightNow(string path)
         {
-            if (!(Disposing || IsDisposed))
+            if (!Screen_Instance.DisposedForm())
             {
                 while (IsDownloadingModNetFiles == false)
                 {

@@ -721,7 +721,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Save.DialogResult = DialogResult.OK;
             Button_Exit.DialogResult = DialogResult.Cancel;
 
-            if (Screen_Parent.Launcher_Setup.Equals(1))
+            if (Screen_Parent.Launcher_Setup == 1)
             {
                 Button_Exit.Text = "Basic";
             }
