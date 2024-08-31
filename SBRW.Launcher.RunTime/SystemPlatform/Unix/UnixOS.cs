@@ -10,11 +10,8 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
 {
     class UnixOS
     {
-#if NETFRAMEWORK
         private static int CachedNumPlatform { get; set; } = 2020;
-#endif
         private static string CacheUnixOSName { get; set; } = string.Empty;
-#if NETFRAMEWORK
         public static int Platform()
         {
             try
@@ -48,7 +45,6 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
                 _ => PlatformIDPort.Unknown,
             };
         }
-#endif
         /// <summary>
         /// 
         /// </summary>
@@ -222,7 +218,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Unix
         }
 #endif
 
-        /* If Launcher Targets .Net Framework 4.7.1 then the code above is redundent and would recommend the following for Detected Boolean */
-        /* https://gist.github.com/DavidCarbon/97494268b0175a81a5f89a5e5aebce38#file-unixos-cs */
-    }
+            /* If Launcher Targets .Net Framework 4.7.1 then the code above is redundent and would recommend the following for Detected Boolean */
+            /* https://gist.github.com/DavidCarbon/97494268b0175a81a5f89a5e5aebce38#file-unixos-cs */
+        }
 }

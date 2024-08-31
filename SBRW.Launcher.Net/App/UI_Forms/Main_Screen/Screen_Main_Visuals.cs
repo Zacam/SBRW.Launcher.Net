@@ -1286,7 +1286,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                         }
 
+#if NETFRAMEWORK
                         Server_Ping(ServerURI.Host, 5000);
+#endif
 
                         ServerEnabled = true;
 

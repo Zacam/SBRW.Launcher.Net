@@ -1,4 +1,5 @@
-﻿using SBRW.Launcher.Core.Extension.Logging_;
+﻿#if (DEBUG || RELEASE)
+using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Required.System.Windows_;
 using SBRW.Launcher.RunTime.InsiderKit;
@@ -860,3 +861,4 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         }
     }
 }
+#endif

@@ -45,6 +45,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 {
     partial class Screen_Main
     {
+#if NETFRAMEWORK
         /// <summary>
         /// 
         /// </summary>
@@ -136,6 +137,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
             }
         }
+#endif
         /// <summary>
         /// 
         /// </summary>
@@ -960,7 +962,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                             }
                         }
 
+#if NETFRAMEWORK
                         Server_Ping(Launcher_Value.Launcher_Select_Server_Data.IPAddress, 5000);
+#endif
 
                         Uri newModNetUri = new Uri(Launcher_Value.Launcher_Select_Server_Data.IPAddress + "/Modding/GetModInfo");
                         ServicePointManager.FindServicePoint(newModNetUri).ConnectionLeaseTimeout = (int)TimeSpan.FromSeconds(Launcher_Value.Launcher_WebCall_Timeout_Enable ?

@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-16"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFrameworks>net461;net6.0-windows</TargetFrameworks>
@@ -75,17 +76,16 @@
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.PowerShell.5.ReferenceAssemblies" Version="1.1.0" />
-		<PackageReference Include="SBRW.Launcher.Core" Version="0.5.1" />
-		<PackageReference Include="SBRW.Launcher.Core.Discord" Version="0.5.1" />
+		<PackageReference Include="SBRW.Launcher.Core" Version="0.5.2" />
+		<PackageReference Include="SBRW.Launcher.Core.Discord" Version="0.5.2" />
 		<PackageReference Include="SBRW.Launcher.Core.Downloader" Version="0.3.8" />
 		<PackageReference Include="SBRW.Launcher.Core.Downloader.LZMA" Version="0.3.2" />
 		<PackageReference Include="SBRW.Launcher.Core.Extra" Version="0.6.0" />
-		<PackageReference Include="SBRW.Launcher.Core.Proxy" Version="0.7.0-preview002" />
+		<PackageReference Include="SBRW.Launcher.Core.Proxy" Version="0.7.0-preview003" />
 		<PackageReference Include="SBRW.Launcher.Core.Theme" Version="0.3.3" />
 		<PackageReference Include="SBRW.Nancy" Version="2.1.1" />
 		<PackageReference Include="SBRW.Nancy.Hosting.Self" Version="2.1.1" />
 		<PackageReference Include="SBRW.Svg" Version="3.4.7" />
-		<PackageReference Include="SvgNet" Version="3.3.2" />
 		<PackageReference Include="System.IO.Compression" Version="4.3.0" />
 		<PackageReference Include="System.ValueTuple" Version="4.5.0" />
 	</ItemGroup>
@@ -95,15 +95,6 @@
 	</ItemGroup>
 	<ItemGroup Condition="'$(Configuration)'=='Release' OR '$(Configuration)'=='Release.Unix'">
 		<ProjectReference Include="..\GameLauncher\GameLauncher.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="PresentationCore" />
-		<Reference Include="PresentationFramework" />
-		<Reference Include="System.Xaml" />
-		<Reference Include="UIAutomationProvider" />
-		<Reference Include="UIAutomationTypes" />
-		<Reference Include="WindowsBase" />
-		<Reference Include="WindowsFormsIntegration" />
 	</ItemGroup>
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="if &quot;$(Configuration)&quot; == &quot;Release&quot; (&#xD;&#xA;if exist &quot;$(SolutionDir)Keys\Launcher.p12&quot; (&quot;C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe&quot; sign /f &quot;$(SolutionDir)Keys\Launcher.p12&quot; /p &quot;Launcher Development CRT&quot; /d &quot;Soapbox Race World&quot; /du &quot;https://soapboxrace.world&quot; /tr http://timestamp.digicert.com /td SHA256 &quot;$(TargetPath)&quot;)&#xD;&#xA;if exist &quot;$(SolutionDir)Keys\Launcher.p12&quot; (&quot;C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe&quot; sign /f &quot;$(SolutionDir)Keys\Launcher.p12&quot; /p &quot;Launcher Development CRT&quot; /d &quot;Soapbox Race World&quot; /du &quot;https://soapboxrace.world&quot; /tr http://timestamp.digicert.com /td SHA256 &quot;$(TargetDir)SBRW.*.exe&quot;)&#xD;&#xA;)&#xD;&#xA;&#xD;&#xA;if &quot;$(Configuration)&quot; == &quot;Release.Unix&quot; (&#xD;&#xA;if exist &quot;$(SolutionDir)Keys\Launcher.p12&quot; (&quot;C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe&quot; sign /f &quot;$(SolutionDir)Keys\Launcher.p12&quot; /p &quot;Launcher Development CRT&quot; /d &quot;Soapbox Race World&quot; /du &quot;https://soapboxrace.world&quot; /tr http://timestamp.digicert.com /td SHA256 &quot;$(TargetPath)&quot;)&#xD;&#xA;if exist &quot;$(SolutionDir)Keys\Launcher.p12&quot; (&quot;C:\Program Files (x86)\Microsoft SDKs\ClickOnce\SignTool\signtool.exe&quot; sign /f &quot;$(SolutionDir)Keys\Launcher.p12&quot; /p &quot;Launcher Development CRT&quot; /d &quot;Soapbox Race World&quot; /du &quot;https://soapboxrace.world&quot; /tr http://timestamp.digicert.com /td SHA256 &quot;$(TargetDir)SBRW.*.exe&quot;)&#xD;&#xA;)" />
