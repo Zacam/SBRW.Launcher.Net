@@ -679,7 +679,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 {
                     Screen_Instance.Label_Information_Window.Text = string.Format(LoginWelcomeTime + "\n{0}", Is_Email.Mask(Save_Account.Live_Data.User_Raw_Email)).ToUpper();
                 }
-                ("GameLauncher has detected that the 2015-2019 (or newer) VC++ Redistributable Package is not installed or may be damaged\n" +
+                ("GameLauncher has detected that the correct 2015-2022 VC++ Redistributable Package is not installed or may be damaged\n" +
                     "Please manually Install or Repair the Packages for your Operating System").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Picture_Information_Window.Image = Image_Other.Information_Window_Success;
                 if (!Save_Settings.Account_Manager() && !Screen_Instance.DisposedForm())
