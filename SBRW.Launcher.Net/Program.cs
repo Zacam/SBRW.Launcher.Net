@@ -349,21 +349,21 @@ namespace SBRW.Launcher.Net
                                 string[] File_List =
                                 {
                                         "DiscordRPC.dll - 1.2.1.24",
-                                        "Flurl.dll - 3.0.6",
-                                        "Flurl.Http.dll - 3.2.4",
+                                        "Flurl.dll - 4.0.0",
+                                        "Flurl.Http.dll - 4.0.2",
                                         "LZMA.dll - 9.10 beta",
                                         "Newtonsoft.Json.dll - 13.0.3",
                                         "System.ValueTuple.dll - 4.6.26515.06 @BuiltBy: dlab-DDVSOWINAGE059 " +
                                         "@Branch: release/2.1 @SrcCode: https://github.com/dotnet/corefx/tree/30ab651fcb4354552bd4891619a0bdd81e0ebdbf",
                                         "WindowsFirewallHelper.dll - 2.2.0.85",
                                         "SBRW.Ini.Parser.dll - 3.0.2",
-                                        "SBRW.Nancy.dll - 2.0.13",
-                                        "SBRW.Nancy.Hosting.Self.dll - 2.0.11",
-                                        "SBRW.Launcher.Core.dll - 0.5.1",
-                                        "SBRW.Launcher.Core.Extra.dll - 0.5.1",
-                                        "SBRW.Launcher.Core.Discord.dll - 0.5.1",
-                                        "SBRW.Launcher.Core.Proxy.dll - 0.5.1",
-                                        "SBRW.Launcher.Core.Theme.dll - 0.3.1",
+                                        "SBRW.Nancy.dll - 2.1.1",
+                                        "SBRW.Nancy.Hosting.Self.dll - 2.1.1",
+                                        "SBRW.Launcher.Core.dll - 0.5.2",
+                                        "SBRW.Launcher.Core.Extra.dll - 0.6.0",
+                                        "SBRW.Launcher.Core.Discord.dll - 0.5.2",
+                                        "SBRW.Launcher.Core.Proxy.dll - 0.7.0",
+                                        "SBRW.Launcher.Core.Theme.dll - 0.3.3",
                                         "SBRW.Launcher.Core.Downloader.dll - 0.3.8",
                                         "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.2"
                                 };
