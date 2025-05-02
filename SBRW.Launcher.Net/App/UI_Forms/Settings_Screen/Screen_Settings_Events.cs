@@ -367,7 +367,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
 
                     /* Delete/Enable profwords filter here */
-                    if (CheckBox_Word_Filter_Check.Checked)
+                    if (!CheckBox_InGame_Word_Filter.Checked)
                     {
                         if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords"))
                         {
@@ -594,6 +594,24 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             CheckBox_Enable_Affinity_Range.Text = $"Affinity Range {(CheckBox_Enable_Affinity_Range.Checked ? "(Enabled)" :"(Disabled)")}";
             Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_Verify_Scan_Scripts_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_Verify_Scan_Scripts.Text = $"Remove Script Files {(CheckBox_Verify_Scan_Scripts.Checked ? "(Enabled)" : "(Disabled)")}";
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CheckBox_InGame_Word_Filter_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox_InGame_Word_Filter.Text = $"Chat Filter {(CheckBox_InGame_Word_Filter.Enabled ? (CheckBox_InGame_Word_Filter.Checked ? "(Enabled)" : "(Disabled)") : "(Pending)")}";
         }
         /// <summary>
         /// Settings Cancel
@@ -925,19 +943,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private async void Screen_Settings_Load(object sender, EventArgs e)
         {
 
-            /*******************************/
-            /* Read Settings.ini            /
-            /*******************************/
-
-            if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords") || File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
-            {
-                CheckBox_Word_Filter_Check.Checked = !File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords");
-            }
-            else
-            {
-                CheckBox_Word_Filter_Check.Enabled = false;
-            }
-
             Label_Theme_Name.Text = "Theme Name: " + Theming.ThemeName;
             Label_Theme_Author.Text = "Theme Author: " + Theming.ThemeAuthor;
 
@@ -948,6 +953,20 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             NewGameFilesPath = Save_Settings.Live_Data.Game_Path;
             NewLauncherPath = Locations.LauncherFolder;
 
+            /*******************************/
+            /* Read Settings.ini            /
+            /*******************************/
+
+            if (File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords") || File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords_dis"))
+            {
+                CheckBox_InGame_Word_Filter.Checked = File.Exists(Save_Settings.Live_Data.Game_Path + "/profwords");
+            }
+            else
+            {
+                /* If Game Files isn't downloaded Disable Checkbox */
+                CheckBox_InGame_Word_Filter.Enabled = false;
+            }
+
             CheckBox_Proxy.Checked = Save_Settings.Proxy_RunTime();
             CheckBox_RPC.Checked = Save_Settings.RPC_Discord();
             CheckBox_Alt_WebCalls.Checked = Save_Settings.WebCalls_Alt();
@@ -957,6 +976,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Host_to_IP.Checked = Save_Settings.Legacy_Host_To_IP();
             CheckBox_Account_Manager.Checked = Save_Settings.Account_Manager();
             CheckBox_Custom_Certificate.Checked = Save_Settings.Certificate_Mode();
+            CheckBox_Enable_Affinity_Range.Checked = Save_Settings.Game_Affinity_Range_Mode();
+            CheckBox_Verify_Scan_Scripts.Checked = Save_Settings.Verify_Script_Removal();
 
             /* Trigger Events for CheckBox Text */
             CheckBox_Enable_Affinity_Range_CheckedChanged(default, default);
@@ -969,6 +990,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Proxy_Domain_CheckedChanged(default, default);
             CheckBox_Account_Manager_CheckedChanged(default, default);
             CheckBox_Custom_Certificate_CheckedChanged(default, default);
+            CheckBox_Verify_Scan_Scripts_CheckedChanged(default, default);
+            CheckBox_InGame_Word_Filter_CheckedChanged(default, default);
 
             switch (Save_Settings.Downloader_Game())
             {

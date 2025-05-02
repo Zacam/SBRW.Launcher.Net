@@ -61,8 +61,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         ///<summary>Disable Button: Permission Set</summary>
         private static bool DisableButtonPRAA { get; set; } = true;
         #endregion
-        #region Verify Hash
-        #endregion
         #endregion
 #pragma warning disable CS8618
         public Screen_Settings()

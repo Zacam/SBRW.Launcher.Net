@@ -124,7 +124,7 @@
             this.Radio_Button_Static_Timer = new System.Windows.Forms.RadioButton();
             this.Radio_Button_Dynamic_Timer = new System.Windows.Forms.RadioButton();
             this.Radio_Button_No_Timer = new System.Windows.Forms.RadioButton();
-            this.CheckBox_Word_Filter_Check = new System.Windows.Forms.CheckBox();
+            this.CheckBox_InGame_Word_Filter = new System.Windows.Forms.CheckBox();
             this.Button_Game_User_Settings = new System.Windows.Forms.Button();
             this.Label_Game_Settings = new System.Windows.Forms.Label();
             this.Button_Change_Game_Path = new System.Windows.Forms.Button();
@@ -202,6 +202,15 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -437,10 +446,10 @@
             this.TabPage_Settings.Controls.Add(this.Button_Save);
             this.TabPage_Settings.Controls.Add(this.Button_Exit);
             this.TabPage_Settings.Controls.Add(this.TabControl_Settings);
-            this.TabPage_Settings.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Settings.Location = new System.Drawing.Point(0, 24);
             this.TabPage_Settings.Name = "TabPage_Settings";
             this.TabPage_Settings.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Settings.Size = new System.Drawing.Size(839, 428);
+            this.TabPage_Settings.Size = new System.Drawing.Size(839, 431);
             this.TabPage_Settings.TabIndex = 0;
             this.TabPage_Settings.Text = "Settings";
             this.TabPage_Settings.UseVisualStyleBackColor = true;
@@ -596,7 +605,7 @@
             // Radio_Button_GameFiles_Downloader_LZMA
             // 
             this.Radio_Button_GameFiles_Downloader_LZMA.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_GameFiles_Downloader_LZMA.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_LZMA.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_GameFiles_Downloader_LZMA.Location = new System.Drawing.Point(5, 5);
             this.Radio_Button_GameFiles_Downloader_LZMA.Name = "Radio_Button_GameFiles_Downloader_LZMA";
             this.Radio_Button_GameFiles_Downloader_LZMA.Size = new System.Drawing.Size(80, 18);
@@ -609,7 +618,7 @@
             // Radio_Button_GameFiles_Downloader_SBRW_Pack
             // 
             this.Radio_Button_GameFiles_Downloader_SBRW_Pack.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Location = new System.Drawing.Point(5, 29);
             this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Name = "Radio_Button_GameFiles_Downloader_SBRW_Pack";
             this.Radio_Button_GameFiles_Downloader_SBRW_Pack.Size = new System.Drawing.Size(80, 18);
@@ -622,7 +631,7 @@
             // Radio_Button_GameFiles_Downloader_Raw
             // 
             this.Radio_Button_GameFiles_Downloader_Raw.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_GameFiles_Downloader_Raw.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_GameFiles_Downloader_Raw.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_GameFiles_Downloader_Raw.Location = new System.Drawing.Point(5, 53);
             this.Radio_Button_GameFiles_Downloader_Raw.Name = "Radio_Button_GameFiles_Downloader_Raw";
             this.Radio_Button_GameFiles_Downloader_Raw.Size = new System.Drawing.Size(80, 18);
@@ -734,7 +743,7 @@
             // Label_WebClient_Timeout
             // 
             this.Label_WebClient_Timeout.BackColor = System.Drawing.Color.Transparent;
-            this.Label_WebClient_Timeout.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_WebClient_Timeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.Label_WebClient_Timeout.ForeColor = System.Drawing.Color.DarkGray;
             this.Label_WebClient_Timeout.Location = new System.Drawing.Point(6, 35);
             this.Label_WebClient_Timeout.Name = "Label_WebClient_Timeout";
@@ -747,7 +756,7 @@
             // 
             this.NumericUpDown_WebClient_Timeout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
             this.NumericUpDown_WebClient_Timeout.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumericUpDown_WebClient_Timeout.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_WebClient_Timeout.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.NumericUpDown_WebClient_Timeout.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.NumericUpDown_WebClient_Timeout.Location = new System.Drawing.Point(10, 55);
             this.NumericUpDown_WebClient_Timeout.Maximum = new decimal(new int[] {
@@ -763,6 +772,10 @@
             // 
             // TabPage_Launcher_Proxy
             // 
+            this.TabPage_Launcher_Proxy.Controls.Add(this.label17);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.label14);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.label15);
+            this.TabPage_Launcher_Proxy.Controls.Add(this.label16);
             this.TabPage_Launcher_Proxy.Controls.Add(this.ComboBox_Proxy_GZip_Version);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version_Selected_Details);
             this.TabPage_Launcher_Proxy.Controls.Add(this.Label_Proxy_GZip_Version_Details);
@@ -776,10 +789,10 @@
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Proxy_Domain);
             this.TabPage_Launcher_Proxy.Controls.Add(this.CheckBox_Host_to_IP);
-            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Proxy.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Proxy.Name = "TabPage_Launcher_Proxy";
             this.TabPage_Launcher_Proxy.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Launcher_Proxy.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Proxy.TabIndex = 1;
             this.TabPage_Launcher_Proxy.Text = "Proxy";
             this.TabPage_Launcher_Proxy.UseVisualStyleBackColor = true;
@@ -875,7 +888,7 @@
             // Label_Proxy_Port
             // 
             this.Label_Proxy_Port.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Proxy_Port.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Proxy_Port.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Proxy_Port.ForeColor = System.Drawing.Color.DarkGray;
             this.Label_Proxy_Port.Location = new System.Drawing.Point(6, 84);
             this.Label_Proxy_Port.Name = "Label_Proxy_Port";
@@ -888,7 +901,7 @@
             // 
             this.NumericUpDown_Proxy_Port.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
             this.NumericUpDown_Proxy_Port.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumericUpDown_Proxy_Port.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Proxy_Port.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.NumericUpDown_Proxy_Port.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.NumericUpDown_Proxy_Port.Location = new System.Drawing.Point(107, 84);
             this.NumericUpDown_Proxy_Port.Maximum = new decimal(new int[] {
@@ -937,6 +950,11 @@
             // 
             // TabPage_Launcher_Miscellaneous
             // 
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label23);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label24);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label18);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label20);
+            this.TabPage_Launcher_Miscellaneous.Controls.Add(this.label21);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.ComboBox_Launcher_Logging);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Logging_Selected_Details);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.Label_Launcher_Logging_Details);
@@ -953,9 +971,9 @@
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_RPC);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_JSON_Update_Cache);
             this.TabPage_Launcher_Miscellaneous.Controls.Add(this.CheckBox_Theme_Support);
-            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Launcher_Miscellaneous.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Launcher_Miscellaneous.Name = "TabPage_Launcher_Miscellaneous";
-            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Launcher_Miscellaneous.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Launcher_Miscellaneous.TabIndex = 2;
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
@@ -1147,10 +1165,10 @@
             this.TabPage_Experiments.Controls.Add(this.label10);
             this.TabPage_Experiments.Controls.Add(this.label7);
             this.TabPage_Experiments.Controls.Add(this.Button_Experiments);
-            this.TabPage_Experiments.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Experiments.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Experiments.Name = "TabPage_Experiments";
             this.TabPage_Experiments.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Experiments.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Experiments.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Experiments.TabIndex = 3;
             this.TabPage_Experiments.Text = "Experiments";
             this.TabPage_Experiments.UseVisualStyleBackColor = true;
@@ -1270,7 +1288,7 @@
             this.TabPage_Game.Controls.Add(this.TabControl_Game);
             this.TabPage_Game.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game.Name = "TabPage_Game";
-            this.TabPage_Game.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_Game.Size = new System.Drawing.Size(834, 354);
             this.TabPage_Game.TabIndex = 3;
             this.TabPage_Game.Text = "Game";
             this.TabPage_Game.UseVisualStyleBackColor = true;
@@ -1295,7 +1313,7 @@
             this.TabPage_Game_General.Controls.Add(this.Label_Game_Current_Path);
             this.TabPage_Game_General.Controls.Add(this.Label_Display_Timer);
             this.TabPage_Game_General.Controls.Add(this.Panel_Display_Timer);
-            this.TabPage_Game_General.Controls.Add(this.CheckBox_Word_Filter_Check);
+            this.TabPage_Game_General.Controls.Add(this.CheckBox_InGame_Word_Filter);
             this.TabPage_Game_General.Controls.Add(this.Button_Game_User_Settings);
             this.TabPage_Game_General.Controls.Add(this.Label_Game_Settings);
             this.TabPage_Game_General.Controls.Add(this.Button_Change_Game_Path);
@@ -1332,7 +1350,7 @@
             // Label_Display_Timer
             // 
             this.Label_Display_Timer.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Display_Timer.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Display_Timer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Display_Timer.ForeColor = System.Drawing.Color.DarkGray;
             this.Label_Display_Timer.Location = new System.Drawing.Point(10, 169);
             this.Label_Display_Timer.Name = "Label_Display_Timer";
@@ -1356,7 +1374,7 @@
             // Radio_Button_Static_Timer
             // 
             this.Radio_Button_Static_Timer.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Static_Timer.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Static_Timer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_Static_Timer.ForeColor = System.Drawing.Color.Blue;
             this.Radio_Button_Static_Timer.Location = new System.Drawing.Point(5, 2);
             this.Radio_Button_Static_Timer.Name = "Radio_Button_Static_Timer";
@@ -1370,7 +1388,7 @@
             // Radio_Button_Dynamic_Timer
             // 
             this.Radio_Button_Dynamic_Timer.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_Dynamic_Timer.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_Dynamic_Timer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_Dynamic_Timer.ForeColor = System.Drawing.Color.Blue;
             this.Radio_Button_Dynamic_Timer.Location = new System.Drawing.Point(99, 2);
             this.Radio_Button_Dynamic_Timer.Name = "Radio_Button_Dynamic_Timer";
@@ -1384,7 +1402,7 @@
             // Radio_Button_No_Timer
             // 
             this.Radio_Button_No_Timer.BackColor = System.Drawing.Color.Transparent;
-            this.Radio_Button_No_Timer.Font = new System.Drawing.Font("DejaVu Sans", 9F);
+            this.Radio_Button_No_Timer.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.Radio_Button_No_Timer.ForeColor = System.Drawing.Color.Blue;
             this.Radio_Button_No_Timer.Location = new System.Drawing.Point(193, 2);
             this.Radio_Button_No_Timer.Name = "Radio_Button_No_Timer";
@@ -1395,16 +1413,16 @@
             this.Radio_Button_No_Timer.Text = "None";
             this.Radio_Button_No_Timer.UseVisualStyleBackColor = false;
             // 
-            // CheckBox_Word_Filter_Check
+            // CheckBox_InGame_Word_Filter
             // 
-            this.CheckBox_Word_Filter_Check.BackColor = System.Drawing.Color.Transparent;
-            this.CheckBox_Word_Filter_Check.ForeColor = System.Drawing.Color.Black;
-            this.CheckBox_Word_Filter_Check.Location = new System.Drawing.Point(11, 224);
-            this.CheckBox_Word_Filter_Check.Name = "CheckBox_Word_Filter_Check";
-            this.CheckBox_Word_Filter_Check.Size = new System.Drawing.Size(222, 18);
-            this.CheckBox_Word_Filter_Check.TabIndex = 181;
-            this.CheckBox_Word_Filter_Check.Text = "Chat Filter ( STATUS )";
-            this.CheckBox_Word_Filter_Check.UseVisualStyleBackColor = false;
+            this.CheckBox_InGame_Word_Filter.BackColor = System.Drawing.Color.Transparent;
+            this.CheckBox_InGame_Word_Filter.ForeColor = System.Drawing.Color.Black;
+            this.CheckBox_InGame_Word_Filter.Location = new System.Drawing.Point(11, 224);
+            this.CheckBox_InGame_Word_Filter.Name = "CheckBox_InGame_Word_Filter";
+            this.CheckBox_InGame_Word_Filter.Size = new System.Drawing.Size(222, 18);
+            this.CheckBox_InGame_Word_Filter.TabIndex = 181;
+            this.CheckBox_InGame_Word_Filter.Text = "Chat Filter ( STATUS )";
+            this.CheckBox_InGame_Word_Filter.UseVisualStyleBackColor = false;
             // 
             // Button_Game_User_Settings
             // 
@@ -1459,9 +1477,9 @@
             this.TabPage_Game_Verify_Hash.Controls.Add(this.Label_Verify_Scan);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.ProgressBar_Verify_Scan);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.Button_Verify_Scan);
-            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Verify_Hash.Name = "TabPage_Game_Verify_Hash";
-            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
@@ -1471,7 +1489,7 @@
             this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(181)))), ((int)(((byte)(191)))));
             this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
             this.button1.Location = new System.Drawing.Point(13, 90);
             this.button1.Name = "button1";
@@ -1485,7 +1503,7 @@
             // 
             this.VerifyHashWelcome.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.VerifyHashWelcome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.VerifyHashWelcome.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.VerifyHashWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.VerifyHashWelcome.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.VerifyHashWelcome.Location = new System.Drawing.Point(434, 13);
             this.VerifyHashWelcome.Name = "VerifyHashWelcome";
@@ -1532,7 +1550,7 @@
             // 
             // Label_Verify_Scan
             // 
-            this.Label_Verify_Scan.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Label_Verify_Scan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label_Verify_Scan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
             this.Label_Verify_Scan.Location = new System.Drawing.Point(10, 129);
             this.Label_Verify_Scan.Margin = new System.Windows.Forms.Padding(0);
@@ -1554,7 +1572,7 @@
             this.Button_Verify_Scan.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(181)))), ((int)(((byte)(191)))));
             this.Button_Verify_Scan.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
             this.Button_Verify_Scan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Verify_Scan.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_Verify_Scan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Button_Verify_Scan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
             this.Button_Verify_Scan.Location = new System.Drawing.Point(13, 13);
             this.Button_Verify_Scan.Name = "Button_Verify_Scan";
@@ -1566,9 +1584,9 @@
             // TabPage_Game_Security_Center
             // 
             this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
-            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
-            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Security_Center.TabIndex = 4;
             this.TabPage_Game_Security_Center.Text = "Security Center";
             this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
@@ -2034,10 +2052,10 @@
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_NFSWO_Logs);
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Server_Mods);
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Crash_Logs);
-            this.TabPage_Game_Miscellaneous.Location = new System.Drawing.Point(0, 27);
+            this.TabPage_Game_Miscellaneous.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game_Miscellaneous.Name = "TabPage_Game_Miscellaneous";
             this.TabPage_Game_Miscellaneous.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Game_Miscellaneous.Size = new System.Drawing.Size(832, 327);
+            this.TabPage_Game_Miscellaneous.Size = new System.Drawing.Size(832, 328);
             this.TabPage_Game_Miscellaneous.TabIndex = 5;
             this.TabPage_Game_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Game_Miscellaneous.UseVisualStyleBackColor = true;
@@ -2045,7 +2063,7 @@
             // Label_Affinity_Core_Calculator
             // 
             this.Label_Affinity_Core_Calculator.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Affinity_Core_Calculator.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.Label_Affinity_Core_Calculator.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.Label_Affinity_Core_Calculator.ForeColor = System.Drawing.Color.DarkGray;
             this.Label_Affinity_Core_Calculator.Location = new System.Drawing.Point(8, 33);
             this.Label_Affinity_Core_Calculator.Name = "Label_Affinity_Core_Calculator";
@@ -2080,7 +2098,7 @@
             // 
             this.NumericUpDown_Range_Affinity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
             this.NumericUpDown_Range_Affinity.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.NumericUpDown_Range_Affinity.Font = new System.Drawing.Font("DejaVu Sans", 9F, System.Drawing.FontStyle.Bold);
+            this.NumericUpDown_Range_Affinity.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.NumericUpDown_Range_Affinity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.NumericUpDown_Range_Affinity.Location = new System.Drawing.Point(163, 8);
             this.NumericUpDown_Range_Affinity.Maximum = new decimal(new int[] {
@@ -2258,7 +2276,7 @@
             // 
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
             this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.label5.Location = new System.Drawing.Point(506, 187);
             this.label5.Name = "label5";
@@ -2280,7 +2298,7 @@
             // 
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
             this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label3.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.label3.Location = new System.Drawing.Point(305, 187);
             this.label3.Name = "label3";
@@ -2302,7 +2320,7 @@
             // 
             this.PatchText1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(22)))), ((int)(((byte)(29)))), ((int)(((byte)(38)))));
             this.PatchText1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PatchText1.Font = new System.Drawing.Font("DejaVu Sans", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PatchText1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PatchText1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(178)))), ((int)(((byte)(210)))), ((int)(((byte)(255)))));
             this.PatchText1.Location = new System.Drawing.Point(104, 187);
             this.PatchText1.Name = "PatchText1";
@@ -2415,6 +2433,105 @@
             // 
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
+            // 
+            // label14
+            // 
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.ForeColor = System.Drawing.Color.DarkGray;
+            this.label14.Location = new System.Drawing.Point(240, 58);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(576, 18);
+            this.label14.TabIndex = 210;
+            this.label14.Text = "Changes Proxy Hostname";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label15
+            // 
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.ForeColor = System.Drawing.Color.DarkGray;
+            this.label15.Location = new System.Drawing.Point(240, 34);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(576, 18);
+            this.label15.TabIndex = 209;
+            this.label15.Text = "Changes Launcher convertion search of Servers Hostname to IP";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label16
+            // 
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.ForeColor = System.Drawing.Color.DarkGray;
+            this.label16.Location = new System.Drawing.Point(240, 10);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(576, 18);
+            this.label16.TabIndex = 208;
+            this.label16.Text = "Changes how the Launcher and Game Client communicates with the Game Server";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label17
+            // 
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.ForeColor = System.Drawing.Color.DarkGray;
+            this.label17.Location = new System.Drawing.Point(240, 82);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(576, 18);
+            this.label17.TabIndex = 211;
+            this.label17.Text = "Set Proxy Port if random port is blocked or being used by another service";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label18
+            // 
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.ForeColor = System.Drawing.Color.DarkGray;
+            this.label18.Location = new System.Drawing.Point(241, 105);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(576, 18);
+            this.label18.TabIndex = 229;
+            this.label18.Text = "Changes Launcher\'s default theme with a custom theme";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label20
+            // 
+            this.label20.BackColor = System.Drawing.Color.Transparent;
+            this.label20.ForeColor = System.Drawing.Color.DarkGray;
+            this.label20.Location = new System.Drawing.Point(241, 81);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(576, 18);
+            this.label20.TabIndex = 228;
+            this.label20.Text = "Changes Launcher\'s ability to use and cache API Data";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label21
+            // 
+            this.label21.BackColor = System.Drawing.Color.Transparent;
+            this.label21.ForeColor = System.Drawing.Color.DarkGray;
+            this.label21.Location = new System.Drawing.Point(241, 57);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(576, 18);
+            this.label21.TabIndex = 227;
+            this.label21.Text = "Changes the Display of In-Game Status to Discord";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label23
+            // 
+            this.label23.BackColor = System.Drawing.Color.Transparent;
+            this.label23.ForeColor = System.Drawing.Color.DarkGray;
+            this.label23.Location = new System.Drawing.Point(241, 153);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(576, 18);
+            this.label23.TabIndex = 231;
+            this.label23.Text = "Changes Launcher\'s Custom Root CA to be installed for File Integrity checks";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label24
+            // 
+            this.label24.BackColor = System.Drawing.Color.Transparent;
+            this.label24.ForeColor = System.Drawing.Color.DarkGray;
+            this.label24.Location = new System.Drawing.Point(241, 129);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(576, 18);
+            this.label24.TabIndex = 230;
+            this.label24.Text = "Changes the login method to use the account manager or regular login";
+            this.label24.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Screen_Settings
             // 
@@ -2574,7 +2691,7 @@
         public System.Windows.Forms.RadioButton Radio_Button_Static_Timer;
         public System.Windows.Forms.RadioButton Radio_Button_Dynamic_Timer;
         public System.Windows.Forms.RadioButton Radio_Button_No_Timer;
-        public System.Windows.Forms.CheckBox CheckBox_Word_Filter_Check;
+        public System.Windows.Forms.CheckBox CheckBox_InGame_Word_Filter;
         public System.Windows.Forms.Button Button_Game_User_Settings;
         public System.Windows.Forms.Label Label_Game_Settings;
         public System.Windows.Forms.Button Button_Change_Game_Path;
@@ -2658,5 +2775,14 @@
         public System.Windows.Forms.Label Label_Launcher_Logging_Selected_Details;
         public System.Windows.Forms.Label Label_Launcher_Logging_Details;
         public System.Windows.Forms.Label Label_Launcher_Logging;
+        public System.Windows.Forms.Label label14;
+        public System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Label label16;
+        public System.Windows.Forms.Label label17;
+        public System.Windows.Forms.Label label18;
+        public System.Windows.Forms.Label label20;
+        public System.Windows.Forms.Label label21;
+        public System.Windows.Forms.Label label23;
+        public System.Windows.Forms.Label label24;
     }
 }

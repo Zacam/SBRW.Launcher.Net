@@ -463,7 +463,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            CheckBox_Word_Filter_Check.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            CheckBox_InGame_Word_Filter.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             #endregion
             #endregion
 
@@ -513,7 +513,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             NumericUpDown_Proxy_Port.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
 
             /* Check boxes */
-            CheckBox_Word_Filter_Check.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            CheckBox_InGame_Word_Filter.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Proxy.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_RPC.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
             CheckBox_Alt_WebCalls.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
@@ -649,6 +649,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Proxy_Domain.CheckedChanged += new EventHandler(CheckBox_Proxy_Domain_CheckedChanged);
             CheckBox_Account_Manager.CheckedChanged += new EventHandler(CheckBox_Account_Manager_CheckedChanged);
             CheckBox_Custom_Certificate.CheckedChanged += new EventHandler(CheckBox_Custom_Certificate_CheckedChanged);
+            CheckBox_Verify_Scan_Scripts.CheckedChanged += new EventHandler(CheckBox_Verify_Scan_Scripts_CheckedChanged);
 
             /********************************/
             /* Sets Red Buttons/Disables     /
@@ -677,7 +678,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ToolTip_Hover.SetToolTip(Button_Launcher_logs, "Removes all but current session \"LOGS\\\" folders");
             ToolTip_Hover.SetToolTip(Button_Clear_Server_Mods, "Erases all Server Mods from .data/MODS folders");
 
-            ToolTip_Hover.SetToolTip(CheckBox_Word_Filter_Check, "Disables the In-Game Chat \"censor\" or word filter.");
+            ToolTip_Hover.SetToolTip(CheckBox_InGame_Word_Filter, "Disables the In-Game Chat \"censor\" or word filter.");
             ToolTip_Hover.SetToolTip(CheckBox_Proxy, "Disables the Launcher Proxy communications hook.\n" +
                 "Can not be turned off for httpS Servers.\n" +
                 "Will also impact/limit the DiscordRPC functions.");
