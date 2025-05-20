@@ -927,6 +927,18 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Screen_Instance.DisposedForm())
+            {
+                Label_Launcher_Logging_Cleanup_Selected_Details.Text = ((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Details;
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ComboBox_Launcher_Builds_Branch_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!Screen_Instance.DisposedForm())

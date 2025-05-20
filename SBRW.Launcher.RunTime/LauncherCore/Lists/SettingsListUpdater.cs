@@ -29,6 +29,10 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
         /// <summary>
         /// 
         /// </summary>
+        public static List<Json_List_Launcher_Logging_Cleanup> Launcher_Logging_Cleanup { get; set; } = new List<Json_List_Launcher_Logging_Cleanup>();
+        /// <summary>
+        /// 
+        /// </summary>
         public static List<Json_List_Launcher_Builds> Launcher_Builds { get; set; } = new List<Json_List_Launcher_Builds>();
         /// <summary>
         /// 
@@ -117,7 +121,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 });
                 Launcher_Logging.Add(new Json_List_Launcher_Logging()
                 {
-                    Name = "Responses",
+                    Name = "Information",
                     Details = "Saves Information Only",
                     Mode = Log_Enum.Information
                 });
@@ -136,7 +140,32 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                     Details = "Disables Logging and Improves Performance",
                     Mode = Log_Enum.None
                 });
-                /* Launcher_Builds */
+                /* Launcher Logging Cleanup */
+                Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
+                {
+                    Name = "Daily",
+                    Details = "Removes All Logs every day",
+                    Value = 1
+                });
+                Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
+                {
+                    Name = "Weekly",
+                    Details = "Removes All Logs every week",
+                    Value = 2
+                });
+                Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
+                {
+                    Name = "Monthly",
+                    Details = "Removes All Logs every month",
+                    Value = 3
+                });
+                Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
+                {
+                    Name = "Never",
+                    Details = "Retains All Logs. Will use up more storage space",
+                    Value = 0
+                });
+                /* Launcher Builds */
                 Launcher_Builds.Add(new Json_List_Launcher_Builds()
                 {
                     Name = "Stable",

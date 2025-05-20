@@ -166,6 +166,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 ComboBox_Proxy_Logging_SelectedIndexChanged(default, default);
                 ComboBox_Proxy_GZip_Version_SelectedIndexChanged(default, default);
                 ComboBox_Launcher_Logging_SelectedIndexChanged(default, default);
+                ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged(default, default);
                 ComboBox_Launcher_Builds_Branch_SelectedIndexChanged(default, default);
             }
             catch (Exception Error)

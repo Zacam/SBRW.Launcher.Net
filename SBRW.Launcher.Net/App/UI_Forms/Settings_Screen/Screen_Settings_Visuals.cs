@@ -133,7 +133,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             try
             {
-                string Gzip_Version_Name = string.Empty;
+                string Logging_Name = string.Empty;
 
                 if (sender is ComboBox cb)
                 {
@@ -141,12 +141,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     {
                         if (cb.Items[e.Index] is Json_List_Launcher_Logging si)
                         {
-                            Gzip_Version_Name = si.Name;
+                            Logging_Name = si.Name;
                         }
                     }
                 }
 
-                if (!string.IsNullOrWhiteSpace(Gzip_Version_Name) && sender != null)
+                if (!string.IsNullOrWhiteSpace(Logging_Name) && sender != null)
                 {
                     Font font = ((ComboBox)sender).Font;
                     Brush backgroundColor;
@@ -165,7 +165,53 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
 
                     e.Graphics.FillRectangle(backgroundColor, e.Bounds);
-                    e.Graphics.DrawString("    " + Gzip_Version_Name, font, textColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Logging_Name, font, textColor, e.Bounds);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Launcher_Logging_Cleanup_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Logging_Cleanup_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Launcher_Logging_Cleanup si)
+                        {
+                            Logging_Cleanup_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Logging_Cleanup_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Logging_Cleanup_Name, font, textColor, e.Bounds);
                 }
             }
             catch { }
@@ -438,13 +484,20 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             /* Proxy Tab */
             CheckBox_Proxy.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Proxy_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             CheckBox_Host_to_IP.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Host_to_IP_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             CheckBox_Proxy_Domain.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Proxy_Domain_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             NumericUpDown_Proxy_Port.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Proxy_Port_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Proxy_Logging.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_Logging_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Proxy_Logging_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_GZip_Version.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Proxy_GZip_Version_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Proxy_GZip_Version_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             /* Miscellaneous */
             CheckBox_RPC.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_JSON_Update_Cache.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -562,6 +615,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Proxy_GZip_Version.DataSource = SettingsListUpdater.Proxy_GZip_Version;
             ComboBox_Launcher_Logging.DisplayMember = "Name";
             ComboBox_Launcher_Logging.DataSource = SettingsListUpdater.Launcher_Logging;
+            ComboBox_Launcher_Logging_Cleanup.DisplayMember = "Name";
+            ComboBox_Launcher_Logging_Cleanup.DataSource = SettingsListUpdater.Launcher_Logging_Cleanup;
             ComboBox_Launcher_Builds_Branch.DisplayMember = "Name";
             ComboBox_Launcher_Builds_Branch.DataSource = SettingsListUpdater.Launcher_Builds;
 
@@ -580,6 +635,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Launcher_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_DrawItem);
             ComboBox_Launcher_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_SelectedIndexChanged);
             ComboBox_Launcher_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
+            ComboBox_Launcher_Logging_Cleanup.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_Cleanup_DrawItem);
+            ComboBox_Launcher_Logging_Cleanup.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged);
+            ComboBox_Launcher_Logging_Cleanup.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
 
             ComboBox_Launcher_Builds_Branch.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Builds_Branch_DrawItem);
             ComboBox_Launcher_Builds_Branch.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Builds_Branch_SelectedIndexChanged);

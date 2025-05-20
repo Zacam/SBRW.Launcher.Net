@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Invalid_Game_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Launcher_Builds.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Launcher_Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Launcher_Logging_Cleanup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Scanned_Game_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_GZip_Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_Logging.cs" />
