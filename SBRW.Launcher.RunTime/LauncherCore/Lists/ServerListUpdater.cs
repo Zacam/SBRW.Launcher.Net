@@ -14,6 +14,7 @@ using System.IO;
 using System.Linq;
 using SBRW.Launcher.RunTime.LauncherCore.APICheckers;
 using System.Threading.Tasks;
+using SBRW.Launcher.Core.Extension.Time_;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Lists
 {
@@ -46,7 +47,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
 
                     if (VisualsAPIChecker.CarbonAPITwo())
                     {
-                        DateTime Time_Check = DateTime.Now.Date;
+                        DateTime Time_Check = Time_Clock.UnixEpochNetwork().Date;
                         string Launcher_Data_Folder = Path.Combine("Launcher_Data", "JSON", "Lists");
                         string Time_Stamp = Path.Combine(Launcher_Data_Folder, "Time_Stamp.txt");
 
@@ -62,7 +63,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                             }
                         }
 
-                        if ((Time_Check < DateTime.Now.Date) || !File.Exists(Time_Stamp))
+                        if ((Time_Check < Time_Clock.UnixEpochNetwork().Date) || !File.Exists(Time_Stamp))
                         {
                             if (!Directory.Exists(Launcher_Data_Folder))
                             {
@@ -71,7 +72,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
 
                             File.WriteAllText(Path.Combine(Launcher_Data_Folder, "Game_Servers.json"), CachedJSONList);
                             File.WriteAllText(Path.Combine(Launcher_Data_Folder, "Content_Delivery_Networks.json"), CDNListUpdater.CachedJSONList);
-                            File.WriteAllText(Time_Stamp, DateTime.Now.ToString());
+                            File.WriteAllText(Time_Stamp, Time_Clock.UnixEpochNetwork().ToString());
                         }
                     }
                 }

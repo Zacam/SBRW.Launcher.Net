@@ -32,6 +32,7 @@ using System.Windows.Forms;
 using System.Linq;
 using SBRW.Launcher.Core.Extension.List_;
 using SBRW.Launcher.RunTime.LauncherCore.Client.Auth.JSON;
+using SBRW.Launcher.Core.Extension.Time_;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -580,7 +581,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 try
                 {
                     /* Internal Message Reference Time: 01/14/2023 1:31 AM PST */
-                    if (DateTime.Now == new DateTime(DateTime.Now.Year, 1, 14) || DateTime.Now == new DateTime(DateTime.Now.Year, 4, 18))
+                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 1, 14) ||
+                        Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 4, 18))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("RIP M.L. (1925-2023)", (_, E) =>
                         {
@@ -608,7 +610,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 try
                 {
-                    if (DateTime.Now == new DateTime(DateTime.Now.Year, 4, 1))
+                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 4, 1))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("The Mermaid Sisters is Here!", (_, E) =>
                         {
@@ -637,7 +639,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 try
                 {
-                    if (DateTime.Now == new DateTime(DateTime.Now.Year, 7, 4))
+                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 7, 4))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Fireworks", (_, E) =>
                         {
@@ -649,7 +651,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }));
                         ContextMenu.MenuItems.Add("-");
                     }
-                    else if (DateTime.Now == new DateTime(DateTime.Now.Year, 6, 4))
+                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 6, 4))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem(
                             ((BuildBeta.Allowed() || BuildDevelopment.Allowed()) ?
@@ -664,7 +666,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2017 */
-                    else if (DateTime.Now == new DateTime(DateTime.Now.Year, 6, 18))
+                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 6, 18))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 1", (_, E) =>
                         {
@@ -677,7 +679,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2017 */
-                    else if (DateTime.Now == new DateTime(DateTime.Now.Year, 11, 2))
+                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 11, 2))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 2!", (_, E) =>
                         {
@@ -690,7 +692,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2018 */
-                    else if (DateTime.Now == new DateTime(DateTime.Now.Year, 11, 8))
+                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 11, 8))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 3!", (_, E) =>
                         {

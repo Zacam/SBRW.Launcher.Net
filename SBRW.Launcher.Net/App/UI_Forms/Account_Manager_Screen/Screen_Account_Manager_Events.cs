@@ -1,4 +1,5 @@
 ﻿using SBRW.Launcher.Core.Extension.Hash_;
+using SBRW.Launcher.Core.Extension.Time_;
 using SBRW.Launcher.Core.Reference.Json_.Newtonsoft_;
 using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using System;
@@ -85,8 +86,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                         Password = TextBox_Password.Text.Encrypt_AES(),
                         Nickname = !Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text)
                             ? TextBox_Nickname.Text : string.Empty,
-                        Created = DateTime.Now,
-                        Updated = DateTime.Now,
+                        Created = Time_Clock.UnixEpochNetwork().ToLocalTime(),
+                        Updated = Time_Clock.UnixEpochNetwork().ToLocalTime(),
                         AID = Auto_ID
                     });
 
@@ -175,7 +176,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
                             if (Update_Info_Tag)
                             {
-                                Accounts_Cache[Account_Index.Item_Index].Updated = DateTime.Now;
+                                Accounts_Cache[Account_Index.Item_Index].Updated = Time_Clock.UnixEpochNetwork().ToLocalTime();
                             }
                         }
 

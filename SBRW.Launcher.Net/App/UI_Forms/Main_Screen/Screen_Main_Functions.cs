@@ -39,6 +39,7 @@ using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.Core.Extension.Time_;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -514,7 +515,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                         NotifyIcon_Notification.Visible = D_Live_Events.Valid;
                                         NotifyIcon_Notification.BalloonTipIcon = ToolTipIcon.Info;
                                         NotifyIcon_Notification.BalloonTipTitle = "Force Restart - " + Launcher_Value.Game_Server_Name;
-                                        NotifyIcon_Notification.BalloonTipText = "Game will shutdown by " + (D_Live_Events.Session_End_Time ?? DateTime.Now.AddMinutes(5)).ToString("t") + ". Please restart it manually before the launcher does it.";
+                                        NotifyIcon_Notification.BalloonTipText = "Game will shutdown by " + 
+                                        (D_Live_Events.Session_End_Time ?? Time_Clock.UnixEpochNetwork().ToLocalTime().AddMinutes(5)).ToString("t") + ". Please restart it manually before the launcher does it.";
                                         NotifyIcon_Notification.ShowBalloonTip(TimeSpan.FromMinutes(2).Seconds);
                                         NotifyIcon_Notification.BalloonTipClicked += (x, D_Live_Events) =>
                                         {
@@ -738,7 +740,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
 
                     /* ModNet Cache File Comparison */
-                    DateTime Time_Check = DateTime.Now.Date;
+                    DateTime Time_Check = Time_Clock.UnixEpochNetwork().Date;
                     string Launcher_Data_Folder = Path.Combine("Launcher_Data", "JSON", "ModNet");
                     string Time_Stamp = Path.Combine(Launcher_Data_Folder, "Time_Stamp.txt");
                     string Server_List_Cache = Path.Combine(Launcher_Data_Folder, "Modules.json");
@@ -771,7 +773,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 Log.Warning("MODNET FILE CACHE: Found");
 
                                 bool Allow_ModNet_Cache = false;
-                                if (Time_Check < DateTime.Now.Date)
+                                if (Time_Check < Time_Clock.UnixEpochNetwork().Date)
                                 {
                                     Display_Color_Icons(3);
                                     if (!Save_Settings.Account_Manager())
@@ -861,7 +863,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 {
                                     try
                                     {
-                                        if ((Time_Check < DateTime.Now.Date) || !File.Exists(Time_Stamp))
+                                        if ((Time_Check < Time_Clock.UnixEpochNetwork().Date) || !File.Exists(Time_Stamp))
                                         {
                                             if (!Directory.Exists(Launcher_Data_Folder))
                                             {
@@ -869,7 +871,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                             }
 
                                             File.WriteAllText(Server_List_Cache, ModulesJSON);
-                                            File.WriteAllText(Time_Stamp, DateTime.Now.ToString());
+                                            File.WriteAllText(Time_Stamp, Time_Clock.UnixEpochNetwork().ToString());
                                         }
                                     }
                                     catch { }
