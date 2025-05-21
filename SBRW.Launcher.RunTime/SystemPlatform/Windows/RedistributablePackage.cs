@@ -429,7 +429,7 @@ namespace SBRW.Launcher.RunTime.SystemPlatform.Windows
             LogToFileAddons.Parent_Log_Screen(3, "REDISTRIBUTABLE", "Done");
 #endif
 
-        LogToFileAddons.Parent_Log_Screen(1, "LIST", "Moved to Function");
+            LogToFileAddons.Parent_Log_Screen(1, "LIST", "Moved to Function");
             /* (Start Process) Sets Up Langauge List */
             LanguageListUpdater.GetList();
         }

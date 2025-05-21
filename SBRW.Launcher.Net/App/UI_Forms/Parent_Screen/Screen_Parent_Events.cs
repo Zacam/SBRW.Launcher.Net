@@ -694,11 +694,24 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                 LogToFileAddons.Parent_Log_Screen(2, "PROXY", "Checking if Proxy Is Disabled from User Settings! It's value is " + Save_Settings.Live_Data.Launcher_Proxy);
                                 LogToFileAddons.Parent_Log_Screen(2, "CLIENT", "Checking Alternative WebCalls, it's value is " + Save_Settings.Live_Data.Launcher_WebClient_Method);
 
-                                LogToFileAddons.Parent_Log_Screen(2, "PRELOAD", "Headers");
-                                await Task.Run(() => Custom_Header.Headers_WHC());
-                                LogToFileAddons.Parent_Log_Screen(3, "PRELOAD", "Headers");
                                 Presence_Launcher.Status(0, "Checking Root Certificate Authority");
-                                await Task.Run(() => Certificate_Store.Latest());
+                                LogToFileAddons.Parent_Log_Screen(2, "R.C.A.", "Root Certificate Authority");
+                                await Task.Run(() =>
+                                {
+                                    /* Retrive Latest Informatiom */
+                                    Certificate_Store.Latest();
+                                    /* Install it normally */
+                                    Certificate_Store.Install();
+                                    /* Do server handshake verification */
+                                    Certificate_Store.Enigma();
+                                    /* Removal of certificate triggers after the update check */
+                                });
+                                LogToFileAddons.Parent_Log_Screen(3, "R.C.A.", "Root Certificate Authority");
+
+                                Presence_Launcher.Status(0, "Preloading Webclient Headers");
+                                LogToFileAddons.Parent_Log_Screen(2, "PRELOAD", "Headers");
+                                await Task.Run(() => { Custom_Header.Headers_WHC(); });
+                                LogToFileAddons.Parent_Log_Screen(3, "PRELOAD", "Headers");
 
                                 LogToFileAddons.Parent_Log_Screen(1, "REDISTRIBUTABLE", "Moved to Function");
                                 /* (Starts Function Chain) Check if Redistributable Packages are Installed */

@@ -477,6 +477,25 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void NumericUpDown_Range_Affinity_MouseWheel(object sender, MouseEventArgs e)
+        {
+            //TODO: Increment correctly
+            //if (e.Delta > 0) // Wheel moving up (increment)
+            //{
+            //    NumericUpDown_Range_Affinity.Value += 
+            //        (CheckBox_Enable_Affinity_Range.Checked ? 1 : 0) + NumericUpDown_Range_Affinity.Increment;
+            //}
+            //else if (e.Delta < 0) // Wheel moving down (decrement)
+            //{
+            //    NumericUpDown_Range_Affinity.Value -=
+            //        (CheckBox_Enable_Affinity_Range.Checked ? 1 : 0) + NumericUpDown_Range_Affinity.Increment;
+            //}
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NumericUpDown_Range_Affinity_ValueChanged(object sender, EventArgs e)
         {
             if (CheckBox_Enable_Affinity_Range.Checked)
@@ -547,7 +566,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void CheckBox_Account_Manager_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox_Account_Manager.Text = $"Account_Manager {(CheckBox_Account_Manager.Checked ? "(Enabled)" : "(Disabled)")}";
+            CheckBox_Account_Manager.Text = $"Account Manager {(CheckBox_Account_Manager.Checked ? "(Enabled)" : "(Disabled)")}";
         }
         /// <summary>
         /// 

@@ -29,6 +29,7 @@ using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.Core.Required.Certificate;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
 {
@@ -197,6 +198,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
             {
                 if (Start_Up_Function)
                 {
+                    LogToFileAddons.Parent_Log_Screen(2, "R.C.A.", "Root Certificate Authority - Removal Check");
+                    /* Check if user wants to keep the certificate installed (now that we done the main update prompt) */
+                    if (!Save_Settings.Certificate_Mode())
+                    {
+                        Certificate_Store.Remove();
+                    }
+                    LogToFileAddons.Parent_Log_Screen(3, "R.C.A.", "Root Certificate Authority - Removal Check");
+
                     LogToFileAddons.Parent_Log_Screen(1, "FIRST TIME RUN", "Moved to Function");
                     /* Do First Time Run Checks */
                     Screen_Parent.First_Time_Run();
@@ -241,6 +250,15 @@ namespace SBRW.Launcher.RunTime.LauncherCore.LauncherUpdater
 
                         if (UserResult == DialogResult.OK)
                         {
+                            if (!Save_Settings.Certificate_Mode())
+                            {
+                                /* Install the certificate even if user has it removed.
+                                * Updater will do its own checks that requires the certificate.
+                                * Launcher will respect the setting (if removal is set) after updating launcher update.
+                                */
+                                Certificate_Store.Install();
+                            }
+
                             StatusUpdate = true;
                             string UpdaterPath = Path.Combine(Locations.LauncherFolder, Locations.NameUpdater);
                             if (File.Exists(UpdaterPath))
