@@ -560,6 +560,43 @@ namespace SBRW.Launcher.App.UI_Forms.Parent_Screen
                                     }
                                 }
 
+                                /* Log Cleanup Check */
+                                LogToFileAddons.Parent_Log_Screen(2, "LAUNCHER LOG CLEANUP SCHEDULE", "Checking");
+                                await Task.Run(() =>
+                                {
+                                    try
+                                    {
+                                        if ((Save_Settings.Log_Cleanup_Mode() != Log_Enum_Cleanup.None) && Save_Settings.Log_Cleanup())
+                                        {
+                                            DirectoryInfo InstallationDirectory = new DirectoryInfo(Log_Location.LogFolder);
+
+                                            foreach (DirectoryInfo Folder in InstallationDirectory.EnumerateDirectories())
+                                            {
+                                                if (Directory.Exists(Folder.FullName))
+                                                {
+                                                    if (Folder.FullName != Log_Location.LogCurrentFolder)
+                                                    {
+                                                        Directory.Delete(Folder.FullName, true);
+                                                    }
+                                                }
+                                            }
+
+                                            /* Schedule new time for next cleanup */
+                                            Save_Settings.Live_Data.Launcher_Log_Schedule = Save_Settings.Log_Cleanup_Mode().Log_Cleanup_Scheduler().ToString();
+                                            Save_Settings.Save();
+                                        }
+                                    }
+                                    catch (Exception Error)
+                                    {
+                                        LogToFileAddons.OpenLog("FOLDER Launcher Log Cleanup Schedule", string.Empty, Error, string.Empty, true);
+                                        if (Error.InnerException != null && !string.IsNullOrWhiteSpace(Error.InnerException.Message))
+                                        {
+                                            LogToFileAddons.Parent_Log_Screen(5, "FOLDER Launcher Log Cleanup Schedule", Error.InnerException.Message, false, true);
+                                        }
+                                    }
+                                });
+                                LogToFileAddons.Parent_Log_Screen(2, "LAUNCHER LOG CLEANUP SCHEDULE", "Done");
+
                                 try
                                 {
                                     LogToFileAddons.Parent_Log_Screen(2, "FOLDER", "Launcher Data Folder");

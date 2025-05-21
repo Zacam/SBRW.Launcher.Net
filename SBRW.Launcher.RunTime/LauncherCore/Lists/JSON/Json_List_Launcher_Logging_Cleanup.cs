@@ -17,8 +17,8 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists.JSON
         /// <summary>
         /// 
         /// </summary>
-        [JsonProperty("Value")]
-        public long Value { get; set; }
+        [JsonProperty("Mode")]
+        public Log_Enum_Cleanup Mode { get; set; }
         /// <summary>
         /// 
         /// </summary>

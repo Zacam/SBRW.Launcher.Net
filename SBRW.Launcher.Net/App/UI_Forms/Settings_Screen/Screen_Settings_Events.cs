@@ -326,7 +326,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Proxy_Log_Mode() != ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode)
                     {
                         Save_Settings.Live_Data.Launcher_Proxy_Log_Mode =
-                            ((int)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
+                            ((long)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
                     }
                 }
                 /* Proxy GZip Version */
@@ -335,7 +335,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Proxy_GZip_Version() != ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version)
                     {
                         Save_Settings.Live_Data.Launcher_Proxy_GZip_Version =
-                            ((int)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
+                            ((long)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
                     }
                 }
                 /* Launcher Logging */
@@ -344,7 +344,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Log_Mode() != ((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode)
                     {
                         Save_Settings.Live_Data.Launcher_Log_Mode =
-                            ((int)((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode).ToString();
+                            ((long)((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode).ToString();
+                    }
+                }
+                /* Launcher Log Cleanup */
+                if (ComboBox_Launcher_Logging_Cleanup.SelectedItem != default)
+                {
+                    if (Save_Settings.Log_Cleanup_Mode() != ((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Mode)
+                    {
+                        Save_Settings.Live_Data.Launcher_Log_Schedule_Mode =
+                            ((long)((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Mode).ToString();
                     }
                 }
                 /* Launcher Builds */
@@ -752,37 +761,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             TabControl_Shared_Hub.SelectedTab = TabPage_Settings;
         }
         /// <summary>
-        /// Settings Clear Old Launcher Logs
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SettingsClearLauncherLogsButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DirectoryInfo InstallationDirectory = new DirectoryInfo(Log_Location.LogFolder);
-
-                foreach (DirectoryInfo Folder in InstallationDirectory.EnumerateDirectories())
-                {
-                    if (Directory.Exists(Folder.FullName))
-                    {
-                        if (Folder.FullName != Log_Location.LogCurrentFolder)
-                        {
-                            Directory.Delete(Folder.FullName, true);
-                        }
-                    }
-                }
-
-                ButtonsColorSet(Button_Launcher_logs, 1, false);
-                "Deleted Old Launcher Logs".Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            catch (Exception Error)
-            {
-                ButtonsColorSet(Button_Launcher_logs, 3, true);
-                LogToFileAddons.OpenLog("SETTINGS CLEAR", "Unable to Delete Old Launcher Logs", Error, "Exclamation", false);
-            }
-        }
-        /// <summary>
         /// Settings Change Game Files Location
         /// </summary>
         /// <param name="sender"></param>
@@ -1107,29 +1085,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                 });
             }
-
-
-            await Task.Run(() =>
-            {
-                try
-                {
-                    DirectoryInfo LauncherLogFilesDirectory = new DirectoryInfo(Log_Location.LogFolder);
-
-                    if (LauncherLogFilesDirectory.EnumerateDirectories().Count() != 1)
-                    {
-                        ButtonsColorSet(Button_Launcher_logs, 2, true);
-                    }
-                    else
-                    {
-                        ButtonsColorSet(Button_Launcher_logs, 1, false);
-                    }
-                }
-                catch (Exception Error)
-                {
-                    ButtonsColorSet(Button_Launcher_logs, 3, false);
-                    LogToFileAddons.OpenLog("SettingsScreen [Launcher Log Check]", string.Empty, Error, string.Empty, true);
-                }
-            });
 
             try
             {

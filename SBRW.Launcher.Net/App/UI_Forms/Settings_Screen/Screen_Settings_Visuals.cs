@@ -441,7 +441,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Button_Launcher_logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_NFSWO_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             #region FONT: Setup Tab
@@ -530,7 +529,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ButtonsColorSet(Button_Verify_Scan, 0, false);
             ButtonsColorSet(Button_Game_User_Settings, 0, true);
             ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
-            ButtonsColorSet(Button_Launcher_logs, 0, true);
             ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
             ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
             ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
@@ -672,7 +670,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Version_Build_About.Click += new EventHandler(Label_Version_Build_Click);
             Button_Change_Game_Path.Click += new EventHandler(SettingsGameFiles_Click);
             Button_Change_Game_Path_Setup.Click += new EventHandler(SettingsGameFiles_Click);
-            Button_Launcher_logs.Click += new EventHandler(SettingsClearLauncherLogsButton_Click);
 
             Button_Change_Tabs.Click += new EventHandler(Button_Change_Tabs_Click);
             /* Close */
@@ -734,7 +731,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             ToolTip_Hover.SetToolTip(Button_Clear_Crash_Logs, "Removes \"SBRCrashLogs_*\" DMP and TXT files from GameFiles Folder");
 
-            ToolTip_Hover.SetToolTip(Button_Launcher_logs, "Removes all but current session \"LOGS\\\" folders");
             ToolTip_Hover.SetToolTip(Button_Clear_Server_Mods, "Erases all Server Mods from .data/MODS folders");
 
             ToolTip_Hover.SetToolTip(CheckBox_InGame_Word_Filter, "Disables the In-Game Chat \"censor\" or word filter.");

@@ -145,25 +145,25 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 {
                     Name = "Daily",
                     Details = "Removes All Logs every day",
-                    Value = 1
+                    Mode = Log_Enum_Cleanup.Daily
                 });
                 Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
                 {
                     Name = "Weekly",
                     Details = "Removes All Logs every week",
-                    Value = 2
+                    Mode = Log_Enum_Cleanup.Weekly
                 });
                 Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
                 {
                     Name = "Monthly",
                     Details = "Removes All Logs every month",
-                    Value = 3
+                    Mode = Log_Enum_Cleanup.Monthly
                 });
                 Launcher_Logging_Cleanup.Add(new Json_List_Launcher_Logging_Cleanup()
                 {
                     Name = "Never",
                     Details = "Retains All Logs. Will use up more storage space",
-                    Value = 0
+                    Mode = Log_Enum_Cleanup.None
                 });
                 /* Launcher Builds */
                 Launcher_Builds.Add(new Json_List_Launcher_Builds()

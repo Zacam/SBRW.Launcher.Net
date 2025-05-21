@@ -91,6 +91,10 @@
             this.CheckBox_Proxy_Domain = new System.Windows.Forms.CheckBox();
             this.CheckBox_Host_to_IP = new System.Windows.Forms.CheckBox();
             this.TabPage_Launcher_Miscellaneous = new System.Windows.Forms.TabPage();
+            this.ComboBox_Launcher_Logging_Cleanup = new System.Windows.Forms.ComboBox();
+            this.Label_Launcher_Logging_Cleanup_Selected_Details = new System.Windows.Forms.Label();
+            this.Label_Launcher_Logging_Cleanup_Details = new System.Windows.Forms.Label();
+            this.Label_Launcher_Logging_Cleanup = new System.Windows.Forms.Label();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -105,7 +109,6 @@
             this.LinkLabel_Launcher_Path = new System.Windows.Forms.LinkLabel();
             this.Label_Launcher_Path = new System.Windows.Forms.Label();
             this.CheckBox_Account_Manager = new System.Windows.Forms.CheckBox();
-            this.Button_Launcher_logs = new System.Windows.Forms.Button();
             this.Label_Launcher_Builds_Branch_Selected_Details = new System.Windows.Forms.Label();
             this.Label_Launcher_Builds_Branch_Details = new System.Windows.Forms.Label();
             this.Label_Launcher_Builds_Branch = new System.Windows.Forms.Label();
@@ -211,10 +214,6 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
-            this.ComboBox_Launcher_Logging_Cleanup = new System.Windows.Forms.ComboBox();
-            this.Label_Launcher_Logging_Cleanup_Selected_Details = new System.Windows.Forms.Label();
-            this.Label_Launcher_Logging_Cleanup_Details = new System.Windows.Forms.Label();
-            this.Label_Launcher_Logging_Cleanup = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -449,7 +448,6 @@
             this.TabPage_Settings.Controls.Add(this.Button_Save);
             this.TabPage_Settings.Controls.Add(this.Button_Exit);
             this.TabPage_Settings.Controls.Add(this.TabControl_Settings);
-            this.TabPage_Settings.Controls.Add(this.Button_Launcher_logs);
             this.TabPage_Settings.Location = new System.Drawing.Point(0, 24);
             this.TabPage_Settings.Name = "TabPage_Settings";
             this.TabPage_Settings.Padding = new System.Windows.Forms.Padding(3);
@@ -1029,6 +1027,50 @@
             this.TabPage_Launcher_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Launcher_Miscellaneous.UseVisualStyleBackColor = true;
             // 
+            // ComboBox_Launcher_Logging_Cleanup
+            // 
+            this.ComboBox_Launcher_Logging_Cleanup.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Launcher_Logging_Cleanup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Launcher_Logging_Cleanup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Launcher_Logging_Cleanup.FormattingEnabled = true;
+            this.ComboBox_Launcher_Logging_Cleanup.Location = new System.Drawing.Point(8, 302);
+            this.ComboBox_Launcher_Logging_Cleanup.Name = "ComboBox_Launcher_Logging_Cleanup";
+            this.ComboBox_Launcher_Logging_Cleanup.Size = new System.Drawing.Size(222, 22);
+            this.ComboBox_Launcher_Logging_Cleanup.TabIndex = 235;
+            // 
+            // Label_Launcher_Logging_Cleanup_Selected_Details
+            // 
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.Location = new System.Drawing.Point(241, 303);
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.Name = "Label_Launcher_Logging_Cleanup_Selected_Details";
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.TabIndex = 234;
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.Label_Launcher_Logging_Cleanup_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Launcher_Logging_Cleanup_Details
+            // 
+            this.Label_Launcher_Logging_Cleanup_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Logging_Cleanup_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Logging_Cleanup_Details.Location = new System.Drawing.Point(241, 279);
+            this.Label_Launcher_Logging_Cleanup_Details.Name = "Label_Launcher_Logging_Cleanup_Details";
+            this.Label_Launcher_Logging_Cleanup_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Launcher_Logging_Cleanup_Details.TabIndex = 233;
+            this.Label_Launcher_Logging_Cleanup_Details.Text = "Changes Launchers Log Cleanup Schedule";
+            this.Label_Launcher_Logging_Cleanup_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Launcher_Logging_Cleanup
+            // 
+            this.Label_Launcher_Logging_Cleanup.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Launcher_Logging_Cleanup.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Launcher_Logging_Cleanup.Location = new System.Drawing.Point(7, 279);
+            this.Label_Launcher_Logging_Cleanup.Name = "Label_Launcher_Logging_Cleanup";
+            this.Label_Launcher_Logging_Cleanup.Size = new System.Drawing.Size(223, 16);
+            this.Label_Launcher_Logging_Cleanup.TabIndex = 232;
+            this.Label_Launcher_Logging_Cleanup.Text = "Log Cleanup:";
+            this.Label_Launcher_Logging_Cleanup.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
             // label23
             // 
             this.label23.BackColor = System.Drawing.Color.Transparent;
@@ -1090,7 +1132,7 @@
             this.ComboBox_Launcher_Logging.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.ComboBox_Launcher_Logging.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.ComboBox_Launcher_Logging.FormattingEnabled = true;
-            this.ComboBox_Launcher_Logging.Location = new System.Drawing.Point(8, 252);
+            this.ComboBox_Launcher_Logging.Location = new System.Drawing.Point(8, 250);
             this.ComboBox_Launcher_Logging.Name = "ComboBox_Launcher_Logging";
             this.ComboBox_Launcher_Logging.Size = new System.Drawing.Size(222, 22);
             this.ComboBox_Launcher_Logging.TabIndex = 226;
@@ -1099,7 +1141,7 @@
             // 
             this.Label_Launcher_Logging_Selected_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Logging_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging_Selected_Details.Location = new System.Drawing.Point(241, 253);
+            this.Label_Launcher_Logging_Selected_Details.Location = new System.Drawing.Point(241, 251);
             this.Label_Launcher_Logging_Selected_Details.Name = "Label_Launcher_Logging_Selected_Details";
             this.Label_Launcher_Logging_Selected_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Logging_Selected_Details.TabIndex = 225;
@@ -1110,7 +1152,7 @@
             // 
             this.Label_Launcher_Logging_Details.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Logging_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging_Details.Location = new System.Drawing.Point(241, 229);
+            this.Label_Launcher_Logging_Details.Location = new System.Drawing.Point(241, 227);
             this.Label_Launcher_Logging_Details.Name = "Label_Launcher_Logging_Details";
             this.Label_Launcher_Logging_Details.Size = new System.Drawing.Size(576, 18);
             this.Label_Launcher_Logging_Details.TabIndex = 224;
@@ -1121,7 +1163,7 @@
             // 
             this.Label_Launcher_Logging.BackColor = System.Drawing.Color.Transparent;
             this.Label_Launcher_Logging.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging.Location = new System.Drawing.Point(7, 229);
+            this.Label_Launcher_Logging.Location = new System.Drawing.Point(7, 227);
             this.Label_Launcher_Logging.Name = "Label_Launcher_Logging";
             this.Label_Launcher_Logging.Size = new System.Drawing.Size(223, 16);
             this.Label_Launcher_Logging.TabIndex = 223;
@@ -1181,17 +1223,6 @@
             this.CheckBox_Account_Manager.TabIndex = 204;
             this.CheckBox_Account_Manager.Text = "Account Manager ( STATUS )";
             this.CheckBox_Account_Manager.UseVisualStyleBackColor = false;
-            // 
-            // Button_Launcher_logs
-            // 
-            this.Button_Launcher_logs.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.Button_Launcher_logs.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Button_Launcher_logs.Location = new System.Drawing.Point(6, 397);
-            this.Button_Launcher_logs.Name = "Button_Launcher_logs";
-            this.Button_Launcher_logs.Size = new System.Drawing.Size(159, 25);
-            this.Button_Launcher_logs.TabIndex = 203;
-            this.Button_Launcher_logs.Text = "Clear Launcher Logs";
-            this.Button_Launcher_logs.UseVisualStyleBackColor = false;
             // 
             // Label_Launcher_Builds_Branch_Selected_Details
             // 
@@ -1394,7 +1425,7 @@
             this.TabPage_Game.Controls.Add(this.TabControl_Game);
             this.TabPage_Game.Location = new System.Drawing.Point(0, 26);
             this.TabPage_Game.Name = "TabPage_Game";
-            this.TabPage_Game.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_Game.Size = new System.Drawing.Size(200, 74);
             this.TabPage_Game.TabIndex = 3;
             this.TabPage_Game.Text = "Game";
             this.TabPage_Game.UseVisualStyleBackColor = true;
@@ -1583,9 +1614,9 @@
             this.TabPage_Game_Verify_Hash.Controls.Add(this.Label_Verify_Scan);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.ProgressBar_Verify_Scan);
             this.TabPage_Game_Verify_Hash.Controls.Add(this.Button_Verify_Scan);
-            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Verify_Hash.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Game_Verify_Hash.Name = "TabPage_Game_Verify_Hash";
-            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Game_Verify_Hash.Size = new System.Drawing.Size(832, 327);
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
@@ -1690,9 +1721,9 @@
             // TabPage_Game_Security_Center
             // 
             this.TabPage_Game_Security_Center.Controls.Add(this.TabControl_Security_Center);
-            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Security_Center.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Game_Security_Center.Name = "TabPage_Game_Security_Center";
-            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Game_Security_Center.Size = new System.Drawing.Size(832, 327);
             this.TabPage_Game_Security_Center.TabIndex = 4;
             this.TabPage_Game_Security_Center.Text = "Security Center";
             this.TabPage_Game_Security_Center.UseVisualStyleBackColor = true;
@@ -2158,10 +2189,10 @@
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_NFSWO_Logs);
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Server_Mods);
             this.TabPage_Game_Miscellaneous.Controls.Add(this.Button_Clear_Crash_Logs);
-            this.TabPage_Game_Miscellaneous.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Miscellaneous.Location = new System.Drawing.Point(0, 27);
             this.TabPage_Game_Miscellaneous.Name = "TabPage_Game_Miscellaneous";
             this.TabPage_Game_Miscellaneous.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_Game_Miscellaneous.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Game_Miscellaneous.Size = new System.Drawing.Size(832, 327);
             this.TabPage_Game_Miscellaneous.TabIndex = 5;
             this.TabPage_Game_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Game_Miscellaneous.UseVisualStyleBackColor = true;
@@ -2282,7 +2313,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2373,7 +2404,7 @@
             this.TabPage_About.Location = new System.Drawing.Point(0, 26);
             this.TabPage_About.Name = "TabPage_About";
             this.TabPage_About.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPage_About.Size = new System.Drawing.Size(834, 354);
+            this.TabPage_About.Size = new System.Drawing.Size(200, 74);
             this.TabPage_About.TabIndex = 1;
             this.TabPage_About.Text = "Version: XXX.XXX.XXX";
             this.TabPage_About.UseVisualStyleBackColor = true;
@@ -2539,50 +2570,6 @@
             // 
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
-            // 
-            // ComboBox_Launcher_Logging_Cleanup
-            // 
-            this.ComboBox_Launcher_Logging_Cleanup.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Launcher_Logging_Cleanup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Launcher_Logging_Cleanup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Launcher_Logging_Cleanup.FormattingEnabled = true;
-            this.ComboBox_Launcher_Logging_Cleanup.Location = new System.Drawing.Point(8, 304);
-            this.ComboBox_Launcher_Logging_Cleanup.Name = "ComboBox_Launcher_Logging_Cleanup";
-            this.ComboBox_Launcher_Logging_Cleanup.Size = new System.Drawing.Size(222, 22);
-            this.ComboBox_Launcher_Logging_Cleanup.TabIndex = 235;
-            // 
-            // Label_Launcher_Logging_Cleanup_Selected_Details
-            // 
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.Location = new System.Drawing.Point(241, 305);
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.Name = "Label_Launcher_Logging_Cleanup_Selected_Details";
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.TabIndex = 234;
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
-            this.Label_Launcher_Logging_Cleanup_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Launcher_Logging_Cleanup_Details
-            // 
-            this.Label_Launcher_Logging_Cleanup_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Launcher_Logging_Cleanup_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging_Cleanup_Details.Location = new System.Drawing.Point(241, 281);
-            this.Label_Launcher_Logging_Cleanup_Details.Name = "Label_Launcher_Logging_Cleanup_Details";
-            this.Label_Launcher_Logging_Cleanup_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Launcher_Logging_Cleanup_Details.TabIndex = 233;
-            this.Label_Launcher_Logging_Cleanup_Details.Text = "Changes Launchers Log Cleanup Schedule";
-            this.Label_Launcher_Logging_Cleanup_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Launcher_Logging_Cleanup
-            // 
-            this.Label_Launcher_Logging_Cleanup.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Launcher_Logging_Cleanup.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Launcher_Logging_Cleanup.Location = new System.Drawing.Point(7, 281);
-            this.Label_Launcher_Logging_Cleanup.Name = "Label_Launcher_Logging_Cleanup";
-            this.Label_Launcher_Logging_Cleanup.Size = new System.Drawing.Size(223, 16);
-            this.Label_Launcher_Logging_Cleanup.TabIndex = 232;
-            this.Label_Launcher_Logging_Cleanup.Text = "Log Cleanup:";
-            this.Label_Launcher_Logging_Cleanup.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // Screen_Settings
             // 
@@ -2793,7 +2780,6 @@
         public System.Windows.Forms.Button Button_Clear_NFSWO_Logs;
         public System.Windows.Forms.Button Button_Clear_Server_Mods;
         public System.Windows.Forms.Button Button_Clear_Crash_Logs;
-        public System.Windows.Forms.Button Button_Launcher_logs;
         public System.Windows.Forms.CheckBox CheckBox_Account_Manager;
         public System.Windows.Forms.LinkLabel LinkLabel_Game_Path;
         public System.Windows.Forms.Label Label_Game_Current_Path;

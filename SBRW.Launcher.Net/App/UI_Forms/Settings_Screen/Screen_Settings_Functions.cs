@@ -152,6 +152,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 {
                     ComboBox_Launcher_Logging.SelectedIndex = 1;
                 }
+                /* Launcher Log Cleanup */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Log_Schedule_Mode))
+                {
+                    ComboBox_Launcher_Logging_Cleanup.SelectedIndex =
+                        SettingsListUpdater.Launcher_Logging_Cleanup.FindIndex(i => Equals(i.Mode, Save_Settings.Log_Cleanup_Mode()));
+                }
+                else
+                {
+                    ComboBox_Launcher_Logging_Cleanup.SelectedIndex = 1;
+                }
                 /* Launcher Builds */
                 if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Insider))
                 {

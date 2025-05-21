@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.Core.Extension.Time_;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Global
 {
@@ -295,7 +296,27 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                 }
             }
         }
-
+        /// <summary>
+        /// Log Cleanup Scheduler (UTC)
+        /// </summary>
+        /// <param name="Provided_Schedule">Log Cleanup Type</param>
+        /// <returns>New DateTime Time</returns>
+        public static DateTime Log_Cleanup_Scheduler(this Log_Enum_Cleanup Provided_Schedule)
+        {
+            DateTime Cached_Value = Time_Clock.UnixEpoch().CompareNetworkWithPCTime();
+            /* Check the users selected cleanup mode */
+            switch (Provided_Schedule)
+            {
+                case Log_Enum_Cleanup.Daily:
+                    return Cached_Value.AddDays(1);
+                case Log_Enum_Cleanup.Weekly:
+                    return Cached_Value.AddDays(7);
+                case Log_Enum_Cleanup.Monthly:
+                    return Cached_Value.AddMonths(1);
+                default:
+                    return Cached_Value;
+            }
+        }
         /* Converts Host Name to a IP (ex. http://localhost -> 192.168.1.69 */
         /// <summary>
         /// Converts Host Name to a IP
