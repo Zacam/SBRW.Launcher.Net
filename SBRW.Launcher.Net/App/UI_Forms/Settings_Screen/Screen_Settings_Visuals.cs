@@ -437,36 +437,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <remarks>Settings Screen Visuals</remarks>
         private void Set_Visuals()
         {
-            #region Primary Settings
-            /*******************************/
-            /* Set Window Name              /
-            /*******************************/
-
-            Icon = FormsIcon.Retrive_Icon();
-            Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
-
-            /*******************************/
-            /* Set Background Image         /
-            /*******************************/
-
-            BackgroundImage = Image_Background.Settings;
-            TransparencyKey = Color_Screen.BG_Settings;
-
-            /*******************************/
-            /* Set Hardcoded Text           /
-            /*******************************/
-
-            New_Choosen_CDN = LinkLabel_CDN_Current_Setup.Text = LinkLabel_CDN_Current.Text = Save_Settings.Live_Data.Launcher_CDN;
-            LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = Save_Settings.Live_Data.Game_Path;
-            LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
-            TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
-
-            //TODO Add Implementation for Setting Range if User has Range Enabled
-            Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
-
-            /*******************************/
-            /* Set Font                     /
-            /*******************************/
+            #region Form
+            /*
+             * Set Font
+             */
 #if !(RELEASE_UNIX || DEBUG_UNIX)
             float MainFontSize = 9f * 96f / CreateGraphics().DpiY;
             float SecondaryFontSize = 8f * 96f / CreateGraphics().DpiY;
@@ -477,11 +451,120 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             float ThirdFontSize = 10f;
 #endif
             Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
+            Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Exit.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /*
+             * Set Values
+             */
+            KeyPreview = true;
+            New_Choosen_CDN = Save_Settings.Live_Data.Launcher_CDN;
+            Text = "Settings - SBRW Launcher: " + Application.ProductVersion;
+            /*
+             * Buttons
+             */
+            ButtonsColorSet(Button_Verify_Scan, 0, false);
+            ButtonsColorSet(Button_Console_Submit, 1, true);
+            /*
+             * Theme
+             */
+            Icon = FormsIcon.Retrive_Icon();
+            /* Background */
+            BackgroundImage = Image_Background.Settings;
+            TransparencyKey = Color_Screen.BG_Settings;
+            /* Main Settings Buttons (Save or Cancel) */
+            Button_Save.ForeColor = Color_Text.L_Seven;
+            Button_Save.Image = Image_Button.Green;
+            Button_Exit.Image = Image_Button.Grey;
+            Button_Exit.ForeColor = Color_Text.L_One;
+            Input_Console.BackColor = Color_Winform_Other.Input;
+            Input_Console.ForeColor = Color_Text.L_Five;
+            /* Secondary Buttons */
+            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
+            Picture_Logo.BackgroundImage = Image_Other.Logo;
+            BackColor = Color_Winform_About.BG_Fore_Color;
+            ForeColor = Color_Winform_About.Text_Fore_Color;
+            /*
+             * Functions
+             */
+            if (!CDNListUpdater.LoadedList)
+            {
+                CDNListUpdater.GetList();
+            }
+            /*
+             * Events
+             */
+            Button_Save.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
+            Button_Save.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
+            Button_Save.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
+            Button_Save.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
+            Button_Save.Click += new EventHandler(SettingsSave_Click);
+            Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
+            Button_Exit.MouseEnter += new EventHandler(Graybutton_hover_MouseEnter);
+            Button_Exit.MouseLeave += new EventHandler(Graybutton_MouseLeave);
+            Button_Exit.MouseUp += new MouseEventHandler(Graybutton_hover_MouseUp);
+            Button_Exit.MouseDown += new MouseEventHandler(Graybutton_click_MouseDown);
+            Button_Exit.Click += new EventHandler(SettingsCancel_Click);
+            Input_Console.KeyDown += new KeyEventHandler(Console_Quick_Send);
+            Button_Console_Submit.Click += new EventHandler(Console_Enter);
+            Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
+            Button_Close.MouseEnter += new EventHandler(ButtonClose_MouseEnter);
+            Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
+            Button_Close.MouseUp += new MouseEventHandler(ButtonClose_MouseLeaveANDMouseUp);
+            Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
+            Button_Close.Click += new EventHandler(ButtonClose_Click);
+            if (Screen_Parent.Screen_Instance != null)
+            {
+                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
+                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
+                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
+            }
+            Load += new EventHandler(Screen_Settings_Load);
+            Shown += (x, y) =>
+            {
+                RememberLastSettingsLists();
+                PingSavedCDN();
+                PingAPIStatus();
+            };
+            #endregion
+            #region Parent Tab(s)
+            /* Tabs Global Background Color */
+            TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = TabControl_Game.BackColor = TabControl_Security_Center.BackColor = Color.FromArgb(22, 29, 38);
+            /* Tabs (Menu) Text Color */
+            TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = TabControl_Game.ForeColor = TabControl_Security_Center.ForeColor = Color.FromArgb(192, 192, 192);
+            /* Tabs Current Selected & Hover Menu Tab */
+            TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = TabControl_Game.SelectedTabColor = TabControl_Security_Center.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
+            /* Tabs Other Menu Tab */
+            TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = TabControl_Game.TabColor = TabControl_Security_Center.TabColor = Color.FromArgb(44, 58, 76);
+            /* */
+            TabControl_Shared_Hub.TabsHide = true;
+            /* */
+            Button_Save.DialogResult = DialogResult.OK;
+            Button_Exit.DialogResult = DialogResult.Cancel;
+            TabPage_About.Text = "Version: " + Application.ProductVersion;
 
+            if (Screen_Parent.Launcher_Setup == 1)
+            {
+                Button_Exit.Text = "Basic";
+            }
+            else
+            {
+                /* */
+                ((Control)TabPage_Setup).Enabled = false;
+            }
+            #endregion
             #region Setup Tab
-            /* Setup Tab - Set Values */
+            /*
+             * Setup Tab - Set Values
+             */
             Label_Version_Setup.Text = "Version: " + Application.ProductVersion;
             Label_API_Status_List_Setup.Text = "API: United";
+            LinkLabel_CDN_Current_Setup.Text = Save_Settings.Live_Data.Launcher_CDN;
+            LinkLabel_Game_Path_Setup.Text = Save_Settings.Live_Data.Game_Path;
+            Label_Introduction_Setup.Text = "Howdy!\n" +
+                    "Looks like this is the first time this launcher has been started.\n" +
+                    "Please select from the options below in order to continue this setup.";
 
             if (!VisualsAPIChecker.UnitedAPI())
             {
@@ -503,11 +586,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     }
                 }
             }
-
-            Label_Introduction_Setup.Text = "Howdy!\n" +
-                    "Looks like this is the first time this launcher has been started.\n" +
-                    "Please select from the options below in order to continue this setup.";
-            /* Setup Tab - FONT */
+            /*
+             * Setup Tab - FONT
+             */
             Label_Introduction_Setup.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
             Label_API_Status_List_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_CDN_Current_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
@@ -519,13 +600,17 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Change_Game_Path_Setup_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Version_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            /* Setup Tab - Buttons */
+            /*
+             * Setup Tab - Buttons
+             */
             /* If the launcher has connection issues, have user use Simple Mode for bypass not Advanced (since they will give up on this mode) */
             ButtonsColorSet(Button_Save_Setup, 4, Launcher_API_Error_Bypass);
             ButtonsColorSet(Button_Change_Tabs_Setup, 0, true);
             ButtonsColorSet(Button_Change_Game_Path_Setup, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
-            /* Setup Tab - Theme */
+            /*
+             * Setup Tab - Theme
+             */
             Label_Introduction_Setup.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
             Label_API_Status_List_Setup.ForeColor = Color_Text.L_Five;
             Label_Game_Current_Path_Setup.ForeColor = Color_Text.L_Five;
@@ -537,36 +622,53 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_Game_Path_Setup.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
             Label_Change_Game_Path_Setup_Details.ForeColor = Color_Text.L_Five;
             Label_Version_Setup.ForeColor = Color_Text.L_Five;
+            /* 
+             * Setup Tab - Events
+             */
+            Button_Change_Game_Path_Setup.Click += new EventHandler(SettingsGameFiles_Click);
+            Button_Change_Tabs_Setup.Click += new EventHandler(Button_Change_Tabs_Click);
             #endregion
-
-            Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            /* */
-            
-            Button_Verify_Scan.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-
-            #region FONT: Settings Tab
-            /* Global */
-            Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_Exit.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            /* Settings Tab */
-            #region FONT: About Tab
+            #region About Tab
+            /* 
+            * About Tab - Font
+            */
             Label_Version_Build_About.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Theme_Name.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Theme_Author.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /*
+             * About Tab - Theme
+             */
+            Label_Version_Build_About.ForeColor = Color_Text.L_Five;
+            Label_Theme_Name.ForeColor = Color_Text.L_Five;
+            Label_Theme_Author.ForeColor = Color_Text.L_Five;
             #endregion
-            #region FONT: API Tab
+            #region API Tab
+            /* 
+             * API Tab - Font
+             */
             Label_API_Status.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_API_Status_One.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Two.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Three.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Four.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_API_Status_Five.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* 
+             * API Tab - Theme
+             */
+            Label_API_Status.ForeColor = Color_Text.L_Five;
+            /* 
+             * API Tab - Set Values
+             */
+            Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
+            /*
+             * API Tab - Events
+             */
+            Label_Version_Build_About.Click += new EventHandler(Label_Version_Build_Click);
             #endregion
-            #region FONT: Launcher Tab
-            /* Downloader Tab */
+            #region Downloader Tab
+            /* 
+             * Downloader Tab - Font
+             */
             CheckBox_Alt_WebCalls.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_WebClient_Timeout.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Alt_WebCalls_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
@@ -584,7 +686,40 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Radio_Button_GameFiles_Downloader_LZMA.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_GameFiles_Downloader_SBRW_Pack.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Radio_Button_GameFiles_Downloader_Raw.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            /* Proxy Tab */
+            /* 
+             * Downloader Tab - Buttons
+             */
+            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
+            /* 
+             * Downloader Tab - Theme
+             */
+            CheckBox_Alt_WebCalls.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            Label_WebClient_Timeout.ForeColor = Color_Text.L_Five;
+            NumericUpDown_WebClient_Timeout.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
+            NumericUpDown_WebClient_Timeout.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
+            Label_CDN_Current.ForeColor = Color_Text.L_Five;
+            LinkLabel_CDN_Current.LinkColor = Color_Winform_Other.Link_Settings;
+            LinkLabel_CDN_Current.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
+            Label_GameFiles_Downloader.ForeColor = Color_Text.L_Five;
+            Radio_Button_GameFiles_Downloader_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_GameFiles_Downloader_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
+            Radio_Button_GameFiles_Downloader_Raw.ForeColor = Color_Winform.Text_Fore_Color;
+            /*
+             * Downloader Tab - Events
+             */
+            CheckBox_Alt_WebCalls.CheckedChanged += new EventHandler(CheckBox_Alt_WebCalls_CheckedChanged);
+            LinkLabel_CDN_Current.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsCDNCurrent_LinkClicked);
+            Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
+            Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
+            /*
+             * Downloader Tab - Set Value
+             */
+            LinkLabel_CDN_Current.Text = Save_Settings.Live_Data.Launcher_CDN;
+            #endregion
+            #region Proxy Tab
+            /* 
+             * Proxy Tab - Font
+             */
             CheckBox_Proxy.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Proxy_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             CheckBox_Host_to_IP.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -600,7 +735,39 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Proxy_GZip_Version.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Proxy_GZip_Version_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Proxy_GZip_Version_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            /* Miscellaneous */
+            /* 
+            * Proxy Tab - Theme
+            */
+            CheckBox_Proxy.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            CheckBox_Host_to_IP.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            CheckBox_Proxy_Domain.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            Label_Proxy_Port.ForeColor = Color_Text.L_Five;
+            NumericUpDown_Proxy_Port.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
+            NumericUpDown_Proxy_Port.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
+            /*
+             * Proxy Tab - Set Values 
+             */
+            ComboBox_Proxy_Logging.DisplayMember = "Name";
+            ComboBox_Proxy_Logging.DataSource = SettingsListUpdater.Proxy_Logging;
+            ComboBox_Proxy_GZip_Version.DisplayMember = "Name";
+            ComboBox_Proxy_GZip_Version.DataSource = SettingsListUpdater.Proxy_GZip_Version;
+            /*
+             * Proxy Tab - Events
+             */
+            CheckBox_Proxy.CheckedChanged += new EventHandler(CheckBox_Proxy_CheckedChanged);
+            CheckBox_Host_to_IP.CheckedChanged += new EventHandler(CheckBox_Host_to_IP_CheckedChanged);
+            CheckBox_Proxy_Domain.CheckedChanged += new EventHandler(CheckBox_Proxy_Domain_CheckedChanged);
+            ComboBox_Proxy_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Logging_DrawItem);
+            ComboBox_Proxy_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_Logging_SelectedIndexChanged);
+            ComboBox_Proxy_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+            ComboBox_Proxy_GZip_Version.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Gzip_Version_DrawItem);
+            ComboBox_Proxy_GZip_Version.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_GZip_Version_SelectedIndexChanged);
+            ComboBox_Proxy_GZip_Version.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+            #endregion
+            #region Miscellaneous Tab (Launcher Tab)
+            /* 
+             * Miscellaneous - Font
+             */
             Label_Launcher_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             LinkLabel_Launcher_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             CheckBox_RPC.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -622,14 +789,54 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Launcher_Logging_Cleanup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Launcher_Logging_Cleanup_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Launcher_Logging_Cleanup_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            /*
+             * Miscellaneous - Theme
+             */
+            Label_Launcher_Path.ForeColor = Color_Text.L_Five;
+            LinkLabel_Launcher_Path.LinkColor = Color_Winform_Other.Link_Settings;
+            LinkLabel_Launcher_Path.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
+            CheckBox_RPC.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            CheckBox_JSON_Update_Cache.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            CheckBox_Theme_Support.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            /*
+             * Miscellaneous Tab - Set Values
+             */
+            LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
+            ComboBox_Launcher_Builds_Branch.DisplayMember = "Name";
+            ComboBox_Launcher_Builds_Branch.DataSource = SettingsListUpdater.Launcher_Builds;
+            ComboBox_Launcher_Logging.DisplayMember = "Name";
+            ComboBox_Launcher_Logging.DataSource = SettingsListUpdater.Launcher_Logging;
+            ComboBox_Launcher_Logging_Cleanup.DisplayMember = "Name";
+            ComboBox_Launcher_Logging_Cleanup.DataSource = SettingsListUpdater.Launcher_Logging_Cleanup;
+            /*
+            * Miscellaneous Tab - Events
+            */
+            LinkLabel_Launcher_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsLauncherPathCurrent_LinkClicked);
+            CheckBox_RPC.CheckedChanged += new EventHandler(CheckBox_RPC_CheckedChanged);
+            CheckBox_JSON_Update_Cache.CheckedChanged += new EventHandler(CheckBox_JSON_Update_Cache_CheckedChanged);
+            CheckBox_Theme_Support.CheckedChanged += new EventHandler(CheckBox_Theme_Support_CheckedChanged);
+            CheckBox_Account_Manager.CheckedChanged += new EventHandler(CheckBox_Account_Manager_CheckedChanged);
+            CheckBox_Custom_Certificate.CheckedChanged += new EventHandler(CheckBox_Custom_Certificate_CheckedChanged);
+            ComboBox_Launcher_Builds_Branch.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Builds_Branch_DrawItem);
+            ComboBox_Launcher_Builds_Branch.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Builds_Branch_SelectedIndexChanged);
+            ComboBox_Launcher_Builds_Branch.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+            ComboBox_Launcher_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_DrawItem);
+            ComboBox_Launcher_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_SelectedIndexChanged);
+            ComboBox_Launcher_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+            ComboBox_Launcher_Logging_Cleanup.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_Cleanup_DrawItem);
+            ComboBox_Launcher_Logging_Cleanup.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged);
+            ComboBox_Launcher_Logging_Cleanup.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
             #endregion
-            #region FONT: Game Tab
-            /* General Tab - Font */
+            #region General Tab (Game Tab)
+            /* 
+             * General Tab - Font
+             */
             Label_Game_Current_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             LinkLabel_Game_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Change_Game_Path_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Game_User_Settings_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -638,9 +845,194 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Display_Timer_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             CheckBox_InGame_Word_Filter.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_InGame_Word_Filter_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            /* General Tab - Buttons */
+            /* 
+             * General Tab - Buttons
+             */
+            ButtonsColorSet(Button_Change_Game_Path, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_Game_User_Settings, 0, true);
-            /* Miscellaneous Tab - Font */
+            /*
+             * General Tab - Theme
+             */
+            Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
+            LinkLabel_Game_Path.LinkColor = Color_Winform_Other.Link_Settings;
+            LinkLabel_Game_Path.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
+            Label_Game_Settings.ForeColor = Color_Text.L_Five;
+            Label_Display_Timer.ForeColor = Color_Text.L_Five;
+            CheckBox_InGame_Word_Filter.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
+            /*
+             * General Tab - Set Values
+             */
+            ComboBox_Display_Timer.DisplayMember = "Name";
+            ComboBox_Display_Timer.DataSource = SettingsListUpdater.Title_Window_Display_Timer;
+            LinkLabel_Game_Path.Text = Save_Settings.Live_Data.Game_Path;
+            /*
+             * General Tab - Events
+             */
+            LinkLabel_Game_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsGameFilesCurrent_LinkClicked);
+            Button_Change_Game_Path.Click += new EventHandler(SettingsGameFiles_Click);
+            Button_Game_User_Settings.Click += new EventHandler(SettingsUEditorButton_Click);
+            ComboBox_Display_Timer.DrawItem += new DrawItemEventHandler(ComboBox_Display_Timer_DrawItem);
+            ComboBox_Display_Timer.SelectedIndexChanged += new EventHandler(ComboBox_Display_Timer_SelectedIndexChanged);
+            ComboBox_Display_Timer.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+            #endregion
+            #region Verify Tab
+            /*
+             * Verify Tab - Font
+             */
+            Label_Verify_Scan_Details.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan_Progress.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan_Scripts_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            /*
+             * Verify Tab - Theme
+             */
+            Label_Verify_Scan_Progress.ForeColor = Color_Winform.Text_Fore_Color;
+            Label_Verify_Scan_Details.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            Button_Verify_Scan.ForeColor = Color_Winform.Success_Text_Fore_Color;
+            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+            Button_Verify_Scan.ForeColor = Color_Winform.Warning_Text_Fore_Color;
+            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
+            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
+            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
+            GroupBox_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
+            TextBox_Verify_Scan.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            TextBox_Verify_Scan.BackColor = Color_Winform.BG_Darker_Fore_Color;
+            /*
+             * Verify Tab - Buttons
+             */
+            if (FunctionStatus.IsVerifyHashDisabled)
+            {
+                ButtonsColorSet(Button_Verify_Scan, 3, true);
+            }
+            /*
+             * Verify Tab - Events
+             */
+            Button_Verify_Scan.Click += new EventHandler(Button_Verify_Scan_Click);
+            CheckBox_Verify_Scan_Scripts.CheckedChanged += new EventHandler(CheckBox_Verify_Scan_Scripts_CheckedChanged);
+            /*
+             * Verify Tab - Set Value
+             */
+            /* Hardcoded Text [Linux Fix], Maybe it can be fixed with translations down the line- DavidCarbon */
+            TextBox_Verify_Scan.AppendText(
+                $"Welcome!{Environment.NewLine}The scanning process is pretty quick, but may still take a while." +
+                $"{Environment.NewLine}Depending on your connection, re-downloading will take the longest. " +
+                $"{Environment.NewLine}Please allow it to complete fully!");
+            Label_Verify_Scan_Progress.Text = "Scanning Progress:";
+            #endregion
+            #region Firewall Tab
+            /*
+             * Firewall Tab - Font
+             */
+            TextWindowsFirewall.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            ButtonFirewallRulesAPI.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesAddAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesAddLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesAddGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesRemoveAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesRemoveLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFirewallRulesRemoveGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            /*
+             * Firewall Tab - Buttons
+             */
+            ButtonsColorSet(ButtonFirewallRulesAPI, 2, true);
+            ButtonsColorSet(ButtonFirewallRulesCheck, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesAddAll, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesAddLauncher, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesAddGame, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesRemoveAll, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesRemoveLauncher, 2017, false);
+            ButtonsColorSet(ButtonFirewallRulesRemoveGame, 2017, false);
+            /*
+             * Firewall Tab - Theme
+             */
+            TextWindowsFirewall.ForeColor = Color_Text.L_Five;
+            /*
+             * Firewall Tab - Events
+             */
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+            ButtonFirewallRulesAPI.Click += new EventHandler(ButtonFirewallRulesAPI_Click);
+            ButtonFirewallRulesCheck.Click += new EventHandler(ButtonFirewallRulesCheck_Click);
+            ButtonFirewallRulesAddAll.Click += new EventHandler(ButtonFirewallRulesAddAll_Click);
+            ButtonFirewallRulesAddLauncher.Click += new EventHandler(ButtonFirewallRulesAddLauncher_Click);
+            ButtonFirewallRulesAddGame.Click += new EventHandler(ButtonFirewallRulesAddGame_Click);
+            ButtonFirewallRulesRemoveAll.Click += new EventHandler(ButtonFirewallRulesRemoveAll_Click);
+            ButtonFirewallRulesRemoveLauncher.Click += new EventHandler(ButtonFirewallRulesRemoveLauncher_Click);
+            ButtonFirewallRulesRemoveGame.Click += new EventHandler(ButtonFirewallRulesRemoveGame_Click);
+#endif
+            #endregion
+            #region Defender Tab
+            /*
+             * Defender Tab - Font
+             */
+            TextWindowsDefender.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionAPI.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionAddAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionAddLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionAddGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionRemoveAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionRemoveLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonDefenderExclusionRemoveGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            /*
+             * Defender Tab - Buttons
+             */
+            ButtonsColorSet(ButtonDefenderExclusionAPI, 2, true);
+            ButtonsColorSet(ButtonDefenderExclusionCheck, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionAddAll, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionAddLauncher, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionAddGame, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionRemoveAll, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionRemoveLauncher, 2017, false);
+            ButtonsColorSet(ButtonDefenderExclusionRemoveGame, 2017, false);
+            /*
+             * Defender Tab - Theme
+             */
+            TextWindowsDefender.ForeColor = Color_Text.L_Five;
+            /*
+             * Defender Tab - Events
+             */
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+            ButtonDefenderExclusionAPI.Click += new EventHandler(ButtonDefenderExclusionAPI_Click);
+            ButtonDefenderExclusionCheck.Click += new EventHandler(ButtonDefenderExclusionCheck_Click);
+            ButtonDefenderExclusionAddAll.Click += new EventHandler(ButtonDefenderExclusionAddAll_Click);
+            ButtonDefenderExclusionAddLauncher.Click += new EventHandler(ButtonDefenderExclusionAddLauncher_Click);
+            ButtonDefenderExclusionAddGame.Click += new EventHandler(ButtonDefenderExclusionAddGame_Click);
+            ButtonDefenderExclusionRemoveAll.Click += new EventHandler(ButtonDefenderExclusionRemoveAll_Click);
+            ButtonDefenderExclusionRemoveLauncher.Click += new EventHandler(ButtonDefenderExclusionRemoveLauncher_Click);
+            ButtonDefenderExclusionRemoveGame.Click += new EventHandler(ButtonDefenderExclusionRemoveGame_Click);
+#endif
+            #endregion
+            #region Permissions Tab
+            /*
+             * Permissions Tab - Font
+             */
+            TextFolderPermissions.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            ButtonFolderPermissonCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            ButtonFolderPermissonSet.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            /*
+             * Permissions Tab - Buttons
+             */
+            ButtonsColorSet(ButtonFolderPermissonCheck, 2, true);
+            ButtonsColorSet(ButtonFolderPermissonSet, 2017, false);
+            /*
+             * Permissions Tab - Theme
+             */
+            TextFolderPermissions.ForeColor = Color_Text.L_Five;
+            /*
+             * Permissions Tab - Events
+             */
+#if !(RELEASE_UNIX || DEBUG_UNIX)
+            ButtonFolderPermissonCheck.Click += new EventHandler(ButtonFolderPermissonCheck_Click);
+            ButtonFolderPermissonSet.Click += new EventHandler(ButtonFolderPermissonSet_Click);
+#endif
+            #endregion
+            #region Miscellaneous Tab (Game Tab)
+            /*
+             * Miscellaneous Tab - Font
+             */
             CheckBox_Enable_Affinity_Range.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Enable_Affinity_Range_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Affinity_Core_Calculator.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -653,416 +1045,25 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Clear_NFSWO_Logs_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Label_Clear_Server_Mods_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            /* Miscellaneous Tab - Buttons */
+            /*
+             * Miscellaneous Tab - Buttons
+             */
             ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
             ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
             ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
-            #endregion
-            #endregion
-
-            /********************************/
-            /* Set Theme Colors & Images     /
-            /********************************/
-
-            /* Buttons */
-            ButtonsColorSet(Button_Change_Game_Path, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
-            ButtonsColorSet(Button_Verify_Scan, 0, false);
-            ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
-            ButtonsColorSet(Button_Console_Submit, 1, true);
-
-            /* Label Links */
-            LinkLabel_Game_Path.LinkColor = Color_Winform_Other.Link_Settings;
-            LinkLabel_Game_Path.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
-            LinkLabel_CDN_Current.LinkColor = Color_Winform_Other.Link_Settings;
-            LinkLabel_CDN_Current.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
-            LinkLabel_Launcher_Path.LinkColor = Color_Winform_Other.Link_Settings;
-            LinkLabel_Launcher_Path.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
-
-            /* Labels */
-            Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
-            Label_CDN_Current.ForeColor = Color_Text.L_Five;
-            Label_Launcher_Path.ForeColor = Color_Text.L_Five;
-            Label_GameFiles_Downloader.ForeColor = Color_Text.L_Five;
-            Label_Game_Settings.ForeColor = Color_Text.L_Five;
-            Label_API_Status.ForeColor = Color_Text.L_Five;
-            Label_Display_Timer.ForeColor = Color_Text.L_Five;
-            Label_WebClient_Timeout.ForeColor = Color_Text.L_Five;
-            Label_Proxy_Port.ForeColor = Color_Text.L_Five;
-
-            /* Input Boxes */
-            NumericUpDown_WebClient_Timeout.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
-            NumericUpDown_WebClient_Timeout.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
-            NumericUpDown_Proxy_Port.ForeColor = Color_Winform_Other.DropMenu_Text_ForeColor;
-            NumericUpDown_Proxy_Port.BackColor = Color_Winform_Other.DropMenu_Background_ForeColor;
-
-            /* Check boxes */
-            CheckBox_InGame_Word_Filter.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Proxy.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_RPC.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Alt_WebCalls.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Theme_Support.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_JSON_Update_Cache.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Host_to_IP.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-            CheckBox_Proxy_Domain.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
-
-            /* Radio Buttons */
-            Radio_Button_GameFiles_Downloader_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_GameFiles_Downloader_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_GameFiles_Downloader_Raw.ForeColor = Color_Winform.Text_Fore_Color;
-
-            /* Bottom Left */
-            Label_Version_Build_About.ForeColor = Color_Text.L_Five;
-            Label_Theme_Name.ForeColor = Color_Text.L_Five;
-            Label_Theme_Author.ForeColor = Color_Text.L_Five;
-
-            /* Main Settings Buttons (Save or Cancel) */
-            Button_Save.ForeColor = Color_Text.L_Seven;
-            Button_Save.Image = Image_Button.Green;
-            Button_Exit.Image = Image_Button.Grey;
-            Button_Exit.ForeColor = Color_Text.L_One;
-
-            Input_Console.BackColor = Color_Winform_Other.Input;
-            Input_Console.ForeColor = Color_Text.L_Five;
-
-            /* Secondary Buttons */
-            Button_Close.BackgroundImage = Button_Close.Icon_Order(SVG_Icon.Cross, SVG_Color.White);
-
-            /*******************************/
-            /* Load CDN List                /
-            /*******************************/
-
-            if (!CDNListUpdater.LoadedList)
-            {
-                CDNListUpdater.GetList();
-            }
-            
-            ComboBox_Proxy_Logging.DisplayMember = "Name";
-            ComboBox_Proxy_Logging.DataSource = SettingsListUpdater.Proxy_Logging;
-            ComboBox_Proxy_GZip_Version.DisplayMember = "Name";
-            ComboBox_Proxy_GZip_Version.DataSource = SettingsListUpdater.Proxy_GZip_Version;
-            ComboBox_Launcher_Logging.DisplayMember = "Name";
-            ComboBox_Launcher_Logging.DataSource = SettingsListUpdater.Launcher_Logging;
-            ComboBox_Launcher_Logging_Cleanup.DisplayMember = "Name";
-            ComboBox_Launcher_Logging_Cleanup.DataSource = SettingsListUpdater.Launcher_Logging_Cleanup;
-            ComboBox_Launcher_Builds_Branch.DisplayMember = "Name";
-            ComboBox_Launcher_Builds_Branch.DataSource = SettingsListUpdater.Launcher_Builds;
-            ComboBox_Display_Timer.DisplayMember = "Name";
-            ComboBox_Display_Timer.DataSource = SettingsListUpdater.Title_Window_Display_Timer;
-
-            /********************************/
-            /* Events                        /
-            /********************************/
-
-            ComboBox_Proxy_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Logging_DrawItem);
-            ComboBox_Proxy_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_Logging_SelectedIndexChanged);
-            ComboBox_Proxy_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            ComboBox_Proxy_GZip_Version.DrawItem += new DrawItemEventHandler(ComboBox_Proxy_Gzip_Version_DrawItem);
-            ComboBox_Proxy_GZip_Version.SelectedIndexChanged += new EventHandler(ComboBox_Proxy_GZip_Version_SelectedIndexChanged);
-            ComboBox_Proxy_GZip_Version.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            ComboBox_Launcher_Logging.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_DrawItem);
-            ComboBox_Launcher_Logging.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_SelectedIndexChanged);
-            ComboBox_Launcher_Logging.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            ComboBox_Launcher_Logging_Cleanup.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Logging_Cleanup_DrawItem);
-            ComboBox_Launcher_Logging_Cleanup.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged);
-            ComboBox_Launcher_Logging_Cleanup.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            ComboBox_Launcher_Builds_Branch.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Builds_Branch_DrawItem);
-            ComboBox_Launcher_Builds_Branch.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Builds_Branch_SelectedIndexChanged);
-            ComboBox_Launcher_Builds_Branch.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            ComboBox_Display_Timer.DrawItem += new DrawItemEventHandler(ComboBox_Display_Timer_DrawItem);
-            ComboBox_Display_Timer.SelectedIndexChanged += new EventHandler(ComboBox_Display_Timer_SelectedIndexChanged);
-            ComboBox_Display_Timer.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
-
-            Button_Save.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
-            Button_Save.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
-            Button_Save.MouseUp += new MouseEventHandler(Greenbutton_hover_MouseUp);
-            Button_Save.MouseDown += new MouseEventHandler(Greenbutton_click_MouseDown);
-            Button_Save.Click += new EventHandler(SettingsSave_Click);
-            Button_Save_Setup.Click += new EventHandler(SettingsSave_Click);
-
-            Button_Exit.MouseEnter += new EventHandler(Graybutton_hover_MouseEnter);
-            Button_Exit.MouseLeave += new EventHandler(Graybutton_MouseLeave);
-            Button_Exit.MouseUp += new MouseEventHandler(Graybutton_hover_MouseUp);
-            Button_Exit.MouseDown += new MouseEventHandler(Graybutton_click_MouseDown);
-            Button_Exit.Click += new EventHandler(SettingsCancel_Click);
-
-            Input_Console.KeyDown += new KeyEventHandler(Console_Quick_Send);
-            Button_Console_Submit.Click += new EventHandler(Console_Enter);
-            Button_CDN_List.Click += new EventHandler(Button_CDN_Selector_Click);
-            Button_CDN_List_Setup.Click += new EventHandler(Button_CDN_Selector_Click);
-            Button_Verify_Scan.Click += new EventHandler(Button_Verify_Scan_Click);
-            
-            Button_Experiments.Click += new EventHandler(Button_Experiments_Click);
-            
-            Button_Game_User_Settings.Click += new EventHandler(SettingsUEditorButton_Click);
-            Button_Clear_Server_Mods.Click += new EventHandler(SettingsClearServerModCacheButton_Click);
-            Button_Clear_NFSWO_Logs.Click += new EventHandler(SettingsClearCommunicationLogButton_Click);
-            Button_Clear_Crash_Logs.Click += new EventHandler(SettingsClearCrashLogsButton_Click);
-            Label_Version_Build_About.Click += new EventHandler(Label_Version_Build_Click);
-            Button_Change_Game_Path.Click += new EventHandler(SettingsGameFiles_Click);
-            Button_Change_Game_Path_Setup.Click += new EventHandler(SettingsGameFiles_Click);
-
-            Button_Change_Tabs_Setup.Click += new EventHandler(Button_Change_Tabs_Click);
-            /* Close */
-            Button_Close.MouseEnter += new EventHandler(ButtonClose_MouseEnter);
-            Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
-            Button_Close.MouseUp += new MouseEventHandler(ButtonClose_MouseLeaveANDMouseUp);
-            Button_Close.MouseDown += new MouseEventHandler(ButtonClose_MouseDown);
-            Button_Close.Click += new EventHandler(ButtonClose_Click);
-
-            LinkLabel_Launcher_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsLauncherPathCurrent_LinkClicked);
-            LinkLabel_CDN_Current.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsCDNCurrent_LinkClicked);
-            LinkLabel_Game_Path.LinkClicked += new LinkLabelLinkClickedEventHandler(SettingsGameFilesCurrent_LinkClicked);
-
-            if (Screen_Parent.Screen_Instance != null)
-            {
-                MouseMove += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Move);
-                MouseUp += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Up);
-                MouseDown += new MouseEventHandler(Screen_Parent.Screen_Instance.Move_Window_Mouse_Down);
-            }
-
-            Load += new EventHandler(Screen_Settings_Load);
-
-            KeyPreview = true;
-
+            /*
+             * Miscellaneous Tab - Events
+             */
+            CheckBox_Enable_Affinity_Range.CheckedChanged += new EventHandler(CheckBox_Enable_Affinity_Range_CheckedChanged);
             NumericUpDown_Range_Affinity.ValueChanged += new EventHandler(NumericUpDown_Range_Affinity_ValueChanged);
             NumericUpDown_Range_Affinity.MouseWheel += new MouseEventHandler(NumericUpDown_Range_Affinity_MouseWheel);
-            CheckBox_Enable_Affinity_Range.CheckedChanged += new EventHandler(CheckBox_Enable_Affinity_Range_CheckedChanged);
-            CheckBox_RPC.CheckedChanged += new EventHandler(CheckBox_RPC_CheckedChanged);
-            CheckBox_JSON_Update_Cache.CheckedChanged += new EventHandler(CheckBox_JSON_Update_Cache_CheckedChanged);
-            CheckBox_Theme_Support.CheckedChanged += new EventHandler(CheckBox_Theme_Support_CheckedChanged);
-            CheckBox_Alt_WebCalls.CheckedChanged += new EventHandler(CheckBox_Alt_WebCalls_CheckedChanged);
-            CheckBox_Proxy.CheckedChanged += new EventHandler(CheckBox_Proxy_CheckedChanged);
-            CheckBox_Host_to_IP.CheckedChanged += new EventHandler(CheckBox_Host_to_IP_CheckedChanged);
-            CheckBox_Proxy_Domain.CheckedChanged += new EventHandler(CheckBox_Proxy_Domain_CheckedChanged);
-            CheckBox_Account_Manager.CheckedChanged += new EventHandler(CheckBox_Account_Manager_CheckedChanged);
-            CheckBox_Custom_Certificate.CheckedChanged += new EventHandler(CheckBox_Custom_Certificate_CheckedChanged);
-            CheckBox_Verify_Scan_Scripts.CheckedChanged += new EventHandler(CheckBox_Verify_Scan_Scripts_CheckedChanged);
-
-            /********************************/
-            /* Sets Red Buttons/Disables     /
-            /********************************/
-
-            if (FunctionStatus.IsVerifyHashDisabled)
-            {
-                ButtonsColorSet(Button_Verify_Scan, 3, true);
-            }
-
-            /*******************************/
-            /* Set ToolTip Texts            /
-            /*******************************/
-
-            ToolTip_Hover.SetToolTip(Button_Change_Game_Path, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
-            ToolTip_Hover.SetToolTip(Button_Change_Game_Path_Setup, "Change the location of where the \'nfsw.exe\' that the Launcher will run");
-            ToolTip_Hover.SetToolTip(Button_Verify_Scan, "Checks and Restores GameFiles back to \"Stock\"");
-            ToolTip_Hover.SetToolTip(Button_CDN_List, "Download Location for Fetching the base GameFiles\n" +
-                "Can also be a Soruce for VerifyHash to get replacement files");
-            ToolTip_Hover.SetToolTip(Button_CDN_List_Setup, "Download Location for Fetching the base GameFiles\n" +
-                "Can also be a Soruce for VerifyHash to get replacement files");
-            ToolTip_Hover.SetToolTip(Button_Game_User_Settings, "Opens a UserSettings.xml Editor\nAllows in-depth control over Game Settings");
-
-            ToolTip_Hover.SetToolTip(Button_Clear_Crash_Logs, "Removes \"SBRCrashLogs_*\" DMP and TXT files from GameFiles Folder");
-
-            ToolTip_Hover.SetToolTip(Button_Clear_Server_Mods, "Erases all Server Mods from .data/MODS folders");
-
-            ToolTip_Hover.SetToolTip(CheckBox_InGame_Word_Filter, "Disables the In-Game Chat \"censor\" or word filter.");
-            ToolTip_Hover.SetToolTip(CheckBox_Proxy, "Disables the Launcher Proxy communications hook.\n" +
-                "Can not be turned off for httpS Servers.\n" +
-                "Will also impact/limit the DiscordRPC functions.");
-            ToolTip_Hover.SetToolTip(CheckBox_RPC, "Prevents Launcher from sending Discord Presence information.");
-
-            ToolTip_Hover.SetToolTip(CheckBox_Theme_Support, "Enables supporting External Themes for the Launcher");
-            /* @Zacam: Update Text to reflect new options 
-            ToolTip_Hover.SetToolTip(CheckBox_Legacy_Timer, "Setting for Legacy Timer:\n" +
-                "If Checked, this restores count down timer on Window Title\n" +
-                "If Unchecked, displays the time on when the session ends"); */
-            ToolTip_Hover.SetToolTip(CheckBox_Alt_WebCalls, "Changes the internal method used by Launcher for Communications\n" +
-                "Unchecked: Uses \'standard\' WebClient calls\n" +
-                "Checked: Uses WebClientWithTimeout");
-            ToolTip_Hover.SetToolTip(CheckBox_JSON_Update_Cache, "Setting for JSON Update Cache Frequency:\n" +
-                "If Checked, this enables daily cache update for Launcher Related JSON Files\n" +
-                "If Unchecked, enables hourly cache update for Launcher Related JSON Files");
-
-            Shown += (x, y) =>
-            {
-                RememberLastSettingsLists();
-                PingSavedCDN();
-                PingAPIStatus();
-            };
-
-            Picture_Logo.BackgroundImage = Image_Other.Logo;
-
-            BackColor = Color_Winform_About.BG_Fore_Color;
-            ForeColor = Color_Winform_About.Text_Fore_Color;
-
-            /* Tabs Global Background Color */
-            TabControl_Shared_Hub.BackColor = TabControl_Settings.BackColor = TabControl_Launcher.BackColor = TabControl_Game.BackColor = TabControl_Security_Center.BackColor = Color.FromArgb(22, 29, 38);
-            /* Tabs (Menu) Text Color */
-            TabControl_Shared_Hub.ForeColor = TabControl_Settings.ForeColor = TabControl_Launcher.ForeColor = TabControl_Game.ForeColor = TabControl_Security_Center.ForeColor = Color.FromArgb(192, 192, 192);
-            /* Tabs Current Selected & Hover Menu Tab */
-            TabControl_Shared_Hub.SelectedTabColor = TabControl_Settings.SelectedTabColor = TabControl_Launcher.SelectedTabColor = TabControl_Game.SelectedTabColor = TabControl_Security_Center.SelectedTabColor = Color.FromArgb(128, 44, 58, 76);
-            /* Tabs Other Menu Tab */
-            TabControl_Shared_Hub.TabColor = TabControl_Settings.TabColor = TabControl_Launcher.TabColor = TabControl_Game.TabColor = TabControl_Security_Center.TabColor = Color.FromArgb(44, 58, 76);
-            /* */
-            TabControl_Shared_Hub.TabsHide = true;
-            /* */
-            Button_Save.DialogResult = DialogResult.OK;
-            Button_Exit.DialogResult = DialogResult.Cancel;
-
-            if (Screen_Parent.Launcher_Setup == 1)
-            {
-                Button_Exit.Text = "Basic";
-            }
-            else
-            {
-                /* */
-                ((Control)TabPage_Setup).Enabled = false;
-            }
-            #endregion
-            /* Theming, Function, EventHandlers, Etc. Meant to load critial functions before the forms loads */
-            #region Security Center Tab
-            /********************************/
-            /* Set Theme Colors & Images     /
-            /********************************/
-
-            TextWindowsFirewall.ForeColor = Color_Text.L_Five;
-            TextWindowsDefender.ForeColor = Color_Text.L_Five;
-            TextFolderPermissions.ForeColor = Color_Text.L_Five;
-
-            /*******************************/
-            /* Set Colored Buttons          /
-            /*******************************/
-
-            ButtonsColorSet(ButtonFirewallRulesAPI, 2, true);
-            ButtonsColorSet(ButtonFirewallRulesCheck, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesAddAll, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesAddLauncher, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesAddGame, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesRemoveAll, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesRemoveLauncher, 2017, false);
-            ButtonsColorSet(ButtonFirewallRulesRemoveGame, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionAPI, 2, true);
-            ButtonsColorSet(ButtonDefenderExclusionCheck, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionAddAll, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionAddLauncher, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionAddGame, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionRemoveAll, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionRemoveLauncher, 2017, false);
-            ButtonsColorSet(ButtonDefenderExclusionRemoveGame, 2017, false);
-            ButtonsColorSet(ButtonFolderPermissonCheck, 2, true);
-            ButtonsColorSet(ButtonFolderPermissonSet, 2017, false);
-
-            /*******************************/
-            /* Set Font                     /
-            /*******************************/
-
-            /* Text */
-            TextWindowsFirewall.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            TextWindowsDefender.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            TextFolderPermissions.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            /* Firewall */
-            ButtonFirewallRulesAPI.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesAddAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesAddLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesAddGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesRemoveAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesRemoveLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesRemoveGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            /* Defender */
-            ButtonFirewallRulesAPI.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFirewallRulesAddAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonDefenderExclusionAddLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonDefenderExclusionAddGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonDefenderExclusionRemoveAll.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonDefenderExclusionRemoveLauncher.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonDefenderExclusionRemoveGame.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            /* File/Folder Permission */
-            ButtonFolderPermissonCheck.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            ButtonFolderPermissonSet.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-
-            /*******************************/
-            /* Set Event Handlers           /
-            /*******************************/
-#if !(RELEASE_UNIX || DEBUG_UNIX)
-            /* Firewall Checks */
-            ButtonFirewallRulesAPI.Click += new EventHandler(ButtonFirewallRulesAPI_Click);
-            ButtonFirewallRulesCheck.Click += new EventHandler(ButtonFirewallRulesCheck_Click);
-            /* Firewall Add */
-            ButtonFirewallRulesAddAll.Click += new EventHandler(ButtonFirewallRulesAddAll_Click);
-            ButtonFirewallRulesAddLauncher.Click += new EventHandler(ButtonFirewallRulesAddLauncher_Click);
-            ButtonFirewallRulesAddGame.Click += new EventHandler(ButtonFirewallRulesAddGame_Click);
-            /* Firewall Remove */
-            ButtonFirewallRulesRemoveAll.Click += new EventHandler(ButtonFirewallRulesRemoveAll_Click);
-            ButtonFirewallRulesRemoveLauncher.Click += new EventHandler(ButtonFirewallRulesRemoveLauncher_Click);
-            ButtonFirewallRulesRemoveGame.Click += new EventHandler(ButtonFirewallRulesRemoveGame_Click);
-            /* Defender Checks */
-            ButtonDefenderExclusionAPI.Click += new EventHandler(ButtonDefenderExclusionAPI_Click);
-            ButtonDefenderExclusionCheck.Click += new EventHandler(ButtonDefenderExclusionCheck_Click);
-            /* Defender Add */
-            ButtonDefenderExclusionAddAll.Click += new EventHandler(ButtonDefenderExclusionAddAll_Click);
-            ButtonDefenderExclusionAddLauncher.Click += new EventHandler(ButtonDefenderExclusionAddLauncher_Click);
-            ButtonDefenderExclusionAddGame.Click += new EventHandler(ButtonDefenderExclusionAddGame_Click);
-            /* Defender Remove */
-            ButtonDefenderExclusionRemoveAll.Click += new EventHandler(ButtonDefenderExclusionRemoveAll_Click);
-            ButtonDefenderExclusionRemoveLauncher.Click += new EventHandler(ButtonDefenderExclusionRemoveLauncher_Click);
-            ButtonDefenderExclusionRemoveGame.Click += new EventHandler(ButtonDefenderExclusionRemoveGame_Click);
-            /* Permission Checks */
-            ButtonFolderPermissonCheck.Click += new EventHandler(ButtonFolderPermissonCheck_Click);
-            ButtonFolderPermissonSet.Click += new EventHandler(ButtonFolderPermissonSet_Click);
-#endif
-            #endregion
-            #region Verfy Hash
-            Label_Verify_Scan_Details.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Verify_Scan_Progress.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Verify_Scan_Scripts_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
-            Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-
-            /********************************/
-            /* Set Theme Colors              /
-            /********************************/
-
-            Label_Verify_Scan_Progress.ForeColor = Color_Winform.Text_Fore_Color;
-
-            Label_Verify_Scan_Details.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-
-            Button_Verify_Scan.ForeColor = Color_Winform.Success_Text_Fore_Color;
-            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
-            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
-            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
-
-            Button_Verify_Scan.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-            Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
-            Button_Verify_Scan.FlatAppearance.BorderColor = Color_Winform_Buttons.Blue_Border_Color;
-            Button_Verify_Scan.FlatAppearance.MouseOverBackColor = Color_Winform_Buttons.Blue_Mouse_Over_Back_Color;
-
-            GroupBox_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
-            TextBox_Verify_Scan.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
-            TextBox_Verify_Scan.BackColor = Color_Winform.BG_Darker_Fore_Color;
-
-            /********************************/
-            /* Events Handlers               /
-            /********************************/
-
-            //Button_Verify_Scan.Click += new EventHandler(StopScanner_Click);
-
-            /********************************/
-            /* Hardcoded Text [Linux Fix]    /
-            /********************************/
-
-            TextBox_Verify_Scan.AppendText(
-                $"Welcome!{Environment.NewLine}The scanning process is pretty quick, but may still take a while." +
-                $"{Environment.NewLine}Depending on your connection, re-downloading will take the longest. " +
-                $"{Environment.NewLine}Please allow it to complete fully!");
-            Label_Verify_Scan_Progress.Text = "Scanning Progress:";
-            //DownloadProgressText.Text = "Download Progress:";
-            //VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";
+            Button_Clear_Crash_Logs.Click += new EventHandler(SettingsClearCrashLogsButton_Click);
+            Button_Clear_NFSWO_Logs.Click += new EventHandler(SettingsClearCommunicationLogButton_Click);
+            Button_Clear_Server_Mods.Click += new EventHandler(SettingsClearServerModCacheButton_Click);
+            /*
+             * Miscellaneous Tab - Call Functions
+             */
+            Enable_Affinity_Range(Save_Settings.Game_Affinity_Range_Mode());
             #endregion
         }
         #endregion

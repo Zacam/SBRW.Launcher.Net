@@ -78,7 +78,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                 if ((TextBox_Email.Text.Length > 1) && (TextBox_Password.Text.Length > 1))
                 {
                     Auto_ID++;
-
+                    DateTime Time_Cache = Time_Clock.UnixEpoch().CompareNetworkWithPCTime();
                     Accounts_Cache.Add(new Json_List_Account()
                     {
                         Target = $"{Application.ProductName}.Account.{Auto_ID}",
@@ -86,8 +86,8 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
                         Password = TextBox_Password.Text.Encrypt_AES(),
                         Nickname = !Accounts_Cache.Any(Nickname_Exists => Nickname_Exists.Nickname == TextBox_Nickname.Text)
                             ? TextBox_Nickname.Text : string.Empty,
-                        Created = Time_Clock.UnixEpochNetwork().ToLocalTime(),
-                        Updated = Time_Clock.UnixEpochNetwork().ToLocalTime(),
+                        Created = Time_Cache.ToLocalTime(),
+                        Updated = Time_Cache.ToLocalTime(),
                         AID = Auto_ID
                     });
 
@@ -176,7 +176,7 @@ namespace SBRW.Launcher.App.UI_Forms.Account_Manager_Screen
 
                             if (Update_Info_Tag)
                             {
-                                Accounts_Cache[Account_Index.Item_Index].Updated = Time_Clock.UnixEpochNetwork().ToLocalTime();
+                                Accounts_Cache[Account_Index.Item_Index].Updated = Time_Clock.UnixEpoch().CompareNetworkWithPCTime().ToLocalTime();
                             }
                         }
 

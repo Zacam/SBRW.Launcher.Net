@@ -576,13 +576,14 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 PingServerListAPIStatus();
 
                 Log.Visuals("CORE: Applyinng ContextMenu");
+                DateTime ContextMenu_Time_Compare_Cache = Time_Clock.UnixEpoch().CompareNetworkWithPCTime();
 #if NETFRAMEWORK
                 ContextMenu = new ContextMenu();
                 try
                 {
                     /* Internal Message Reference Time: 01/14/2023 1:31 AM PST */
-                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 1, 14) ||
-                        Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 4, 18))
+                    if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 1, 14) ||
+                        ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 4, 18))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("RIP M.L. (1925-2023)", (_, E) =>
                         {
@@ -610,7 +611,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 try
                 {
-                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 4, 1))
+                    if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 4, 1))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("The Mermaid Sisters is Here!", (_, E) =>
                         {
@@ -639,7 +640,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 
                 try
                 {
-                    if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 7, 4))
+                    if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 7, 4))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Fireworks", (_, E) =>
                         {
@@ -651,7 +652,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         }));
                         ContextMenu.MenuItems.Add("-");
                     }
-                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 6, 4))
+                    else if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 6, 4))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem(
                             ((BuildBeta.Allowed() || BuildDevelopment.Allowed()) ?
@@ -666,7 +667,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2017 */
-                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 6, 18))
+                    else if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 6, 18))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 1", (_, E) =>
                         {
@@ -679,7 +680,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2017 */
-                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 11, 2))
+                    else if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 11, 2))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 2!", (_, E) =>
                         {
@@ -692,7 +693,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                         ContextMenu.MenuItems.Add("-");
                     }
                     /* Development Release Year: 2018 */
-                    else if (Time_Clock.UnixEpochNetwork() == new DateTime(Time_Clock.UnixEpochNetwork().Year, 11, 8))
+                    else if (ContextMenu_Time_Compare_Cache == new DateTime(ContextMenu_Time_Compare_Cache.Year, 11, 8))
                     {
                         ContextMenu.MenuItems.Add(new MenuItem("Happy Birthday Interface 3!", (_, E) =>
                         {
