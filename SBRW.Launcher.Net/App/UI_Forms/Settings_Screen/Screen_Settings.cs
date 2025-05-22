@@ -21,6 +21,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private string NewLauncherPath { get; set; }
         private string NewGameFilesPath { get; set; }
         public string New_Choosen_CDN { get; set; }
+        private static bool Launcher_API_Error_Bypass { get; set; }
         #region Security Center
         ///<summary>Windows 10: Caches Old Game Path in the event of the user does Firewall First</summary>
         private static string CacheOldGameLocation { get; set; } = Save_Settings.Live_Data.Game_Path_Old;

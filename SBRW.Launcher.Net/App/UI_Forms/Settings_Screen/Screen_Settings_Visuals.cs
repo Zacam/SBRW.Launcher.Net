@@ -267,6 +267,52 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void ComboBox_Display_Timer_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                string Gzip_Version_Name = string.Empty;
+
+                if (sender is ComboBox cb)
+                {
+                    if (e.Index != -1 && cb.Items != null)
+                    {
+                        if (cb.Items[e.Index] is Json_List_Tile_Window_Display_Timer si)
+                        {
+                            Gzip_Version_Name = si.Name;
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(Gzip_Version_Name) && sender != null)
+                {
+                    Font font = ((ComboBox)sender).Font;
+                    Brush backgroundColor;
+                    Brush textColor;
+
+                    font = new Font(font, FontStyle.Bold);
+                    if ((e.State & DrawItemState.Selected) == DrawItemState.Selected && e.State != DrawItemState.ComboBoxEdit)
+                    {
+                        backgroundColor = SystemBrushes.Highlight;
+                        textColor = SystemBrushes.HighlightText;
+                    }
+                    else
+                    {
+                        backgroundColor = new SolidBrush(Color_Winform_Other.DropMenu_Background_ForeColor);
+                        textColor = new SolidBrush(Color_Winform_Other.DropMenu_Text_ForeColor);
+                    }
+
+                    e.Graphics.FillRectangle(backgroundColor, e.Bounds);
+                    e.Graphics.DrawString("    " + Gzip_Version_Name, font, textColor, e.Bounds);
+                }
+            }
+            catch { }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Greenbutton_hover_MouseEnter(object sender, EventArgs e)
         {
             if (Button_Save.Image != Image_Button.Green_Hover)
@@ -410,8 +456,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Set Hardcoded Text           /
             /*******************************/
 
-            New_Choosen_CDN = LinkLabel_CDN_Current.Text = Save_Settings.Live_Data.Launcher_CDN;
-            LinkLabel_Game_Path.Text = Save_Settings.Live_Data.Game_Path;
+            New_Choosen_CDN = LinkLabel_CDN_Current_Setup.Text = LinkLabel_CDN_Current.Text = Save_Settings.Live_Data.Launcher_CDN;
+            LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = Save_Settings.Live_Data.Game_Path;
             LinkLabel_Launcher_Path.Text = AppDomain.CurrentDomain.BaseDirectory;
             TabPage_About.Text = Label_Version_Build_About.Text = "Version: " + Application.ProductVersion;
 
@@ -424,12 +470,74 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 #if !(RELEASE_UNIX || DEBUG_UNIX)
             float MainFontSize = 9f * 96f / CreateGraphics().DpiY;
             float SecondaryFontSize = 8f * 96f / CreateGraphics().DpiY;
+            float ThirdFontSize = 10f * 96f / CreateGraphics().DpiY;
 #else
             float MainFontSize = 9f;
             float SecondaryFontSize = 8f;
+            float ThirdFontSize = 10f;
 #endif
-            /* General */
             Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Regular);
+
+            #region Setup Tab
+            /* Setup Tab - Set Values */
+            Label_Version_Setup.Text = "Version: " + Application.ProductVersion;
+            Label_API_Status_List_Setup.Text = "API: United";
+
+            if (!VisualsAPIChecker.UnitedAPI())
+            {
+                Label_API_Status_List_Setup.Text = "API: Carbon";
+
+                if (!VisualsAPIChecker.CarbonAPI())
+                {
+                    Label_API_Status_List_Setup.Text = "API: Carbon (Backup)";
+
+                    if (!VisualsAPIChecker.CarbonAPITwo())
+                    {
+                        Label_API_Status_List_Setup.Text = "API: Local Cache";
+
+                        if (!VisualsAPIChecker.Local_Cached_API())
+                        {
+                            Label_API_Status_List_Setup.Text = "API: Connection - Error";
+                            Launcher_API_Error_Bypass = true;
+                        }
+                    }
+                }
+            }
+
+            Label_Introduction_Setup.Text = "Howdy!\n" +
+                    "Looks like this is the first time this launcher has been started.\n" +
+                    "Please select from the options below in order to continue this setup.";
+            /* Setup Tab - FONT */
+            Label_Introduction_Setup.Font = new Font(FormsFont.Primary_Bold(), ThirdFontSize, FontStyle.Bold);
+            Label_API_Status_List_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_CDN_Current_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            LinkLabel_CDN_Current_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Label_CDN_List_Setup_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Game_Current_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            LinkLabel_Game_Path_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Change_Game_Path_Setup_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Version_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            /* Setup Tab - Buttons */
+            /* If the launcher has connection issues, have user use Simple Mode for bypass not Advanced (since they will give up on this mode) */
+            ButtonsColorSet(Button_Save_Setup, 4, Launcher_API_Error_Bypass);
+            ButtonsColorSet(Button_Change_Tabs_Setup, 0, true);
+            ButtonsColorSet(Button_Change_Game_Path_Setup, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
+            ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
+            /* Setup Tab - Theme */
+            Label_Introduction_Setup.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            Label_API_Status_List_Setup.ForeColor = Color_Text.L_Five;
+            Label_Game_Current_Path_Setup.ForeColor = Color_Text.L_Five;
+            Label_CDN_Current_Setup.ForeColor = Color_Text.L_Five;
+            LinkLabel_CDN_Current_Setup.LinkColor = Color_Winform_Other.Link;
+            LinkLabel_CDN_Current_Setup.ActiveLinkColor = Color_Winform_Other.Link_Active;
+            Label_CDN_List_Setup_Details.ForeColor = Color_Text.L_Five;
+            LinkLabel_Game_Path_Setup.LinkColor = Color_Winform_Other.Link_Settings;
+            LinkLabel_Game_Path_Setup.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
+            Label_Change_Game_Path_Setup_Details.ForeColor = Color_Text.L_Five;
+            Label_Version_Setup.ForeColor = Color_Text.L_Five;
+            #endregion
 
             Button_Console_Submit.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
             Input_Console.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
@@ -439,16 +547,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Game_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Game_User_Settings.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
 
-            #region FONT: Setup Tab
-            /* Setup Tab */
-            Label_Introduction_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_CDN_Current_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            LinkLabel_CDN_Current_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_CDN_List_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Label_Game_Current_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            LinkLabel_Game_Path_Setup.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_Change_Game_Path_Setup.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            #endregion
             #region FONT: Settings Tab
             /* Global */
             Button_Save.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
@@ -526,24 +624,39 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Label_Launcher_Logging_Cleanup_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             #endregion
             #region FONT: Game Tab
-            /* General Tab */
+            /* General Tab - Font */
             Label_Game_Current_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             LinkLabel_Game_Path.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
             Label_Game_Files.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Change_Game_Path.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Change_Game_Path_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Button_Game_User_Settings.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Game_User_Settings_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Display_Timer.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Radio_Button_Static_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_Dynamic_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Radio_Button_No_Timer.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Display_Timer_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Display_Timer_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Label_Display_Timer_Selected_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             CheckBox_InGame_Word_Filter.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
-            Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Button_Clear_NFSWO_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
-            /* Miscellaneous */
+            Label_InGame_Word_Filter_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            /* General Tab - Buttons */
+            ButtonsColorSet(Button_Game_User_Settings, 0, true);
+            /* Miscellaneous Tab - Font */
             CheckBox_Enable_Affinity_Range.Font = new Font(FormsFont.Primary(), MainFontSize, FontStyle.Regular);
+            Label_Enable_Affinity_Range_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Label_Affinity_Core_Calculator.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Label_Affinity_Core_Range.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             NumericUpDown_Range_Affinity.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Affinity_Core_Range_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Button_Clear_Crash_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Label_Clear_Crash_Logs_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Button_Clear_NFSWO_Logs.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Label_Clear_NFSWO_Logs_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            Button_Clear_Server_Mods.Font = new Font(FormsFont.Primary_Bold(), SecondaryFontSize, FontStyle.Bold);
+            Label_Clear_Server_Mods_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
+            /* Miscellaneous Tab - Buttons */
+            ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
+            ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
+            ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
             #endregion
             #endregion
 
@@ -553,17 +666,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             /* Buttons */
             ButtonsColorSet(Button_Change_Game_Path, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
-            ButtonsColorSet(Button_Change_Game_Path_Setup, Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0, true);
             ButtonsColorSet(Button_Verify_Scan, 0, false);
-            ButtonsColorSet(Button_Game_User_Settings, 0, true);
-            ButtonsColorSet(Button_Clear_Crash_Logs, 0, false);
-            ButtonsColorSet(Button_Clear_NFSWO_Logs, 0, false);
-            ButtonsColorSet(Button_Clear_Server_Mods, 0, false);
             ButtonsColorSet(Button_CDN_List, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
-            ButtonsColorSet(Button_CDN_List_Setup, VisualsAPIChecker.Local_Cached_API() ? (Screen_Parent.Launcher_Setup.Equals(1) ? 2 : 0) : 4, true);
             ButtonsColorSet(Button_Console_Submit, 1, true);
-            ButtonsColorSet(Button_Save_Setup, 4, false);
-            ButtonsColorSet(Button_Change_Tabs, 0, true);
 
             /* Label Links */
             LinkLabel_Game_Path.LinkColor = Color_Winform_Other.Link_Settings;
@@ -574,7 +679,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             LinkLabel_Launcher_Path.ActiveLinkColor = Color_Winform_Other.Link_Settings_Active;
 
             /* Labels */
-            Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
             Label_Game_Current_Path.ForeColor = Color_Text.L_Five;
             Label_CDN_Current.ForeColor = Color_Text.L_Five;
             Label_Launcher_Path.ForeColor = Color_Text.L_Five;
@@ -602,9 +706,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             CheckBox_Proxy_Domain.ForeColor = Color_Winform_Other.CheckBoxes_Settings;
 
             /* Radio Buttons */
-            Radio_Button_Static_Timer.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_Dynamic_Timer.ForeColor = Color_Winform.Text_Fore_Color;
-            Radio_Button_No_Timer.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_GameFiles_Downloader_LZMA.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_GameFiles_Downloader_SBRW_Pack.ForeColor = Color_Winform.Text_Fore_Color;
             Radio_Button_GameFiles_Downloader_Raw.ForeColor = Color_Winform.Text_Fore_Color;
@@ -645,6 +746,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Launcher_Logging_Cleanup.DataSource = SettingsListUpdater.Launcher_Logging_Cleanup;
             ComboBox_Launcher_Builds_Branch.DisplayMember = "Name";
             ComboBox_Launcher_Builds_Branch.DataSource = SettingsListUpdater.Launcher_Builds;
+            ComboBox_Display_Timer.DisplayMember = "Name";
+            ComboBox_Display_Timer.DataSource = SettingsListUpdater.Title_Window_Display_Timer;
 
             /********************************/
             /* Events                        /
@@ -669,6 +772,10 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             ComboBox_Launcher_Builds_Branch.DrawItem += new DrawItemEventHandler(ComboBox_Launcher_Builds_Branch_DrawItem);
             ComboBox_Launcher_Builds_Branch.SelectedIndexChanged += new EventHandler(ComboBox_Launcher_Builds_Branch_SelectedIndexChanged);
             ComboBox_Launcher_Builds_Branch.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
+
+            ComboBox_Display_Timer.DrawItem += new DrawItemEventHandler(ComboBox_Display_Timer_DrawItem);
+            ComboBox_Display_Timer.SelectedIndexChanged += new EventHandler(ComboBox_Display_Timer_SelectedIndexChanged);
+            ComboBox_Display_Timer.MouseWheel += new MouseEventHandler(DropDownMenu_MouseWheel);
 
             Button_Save.MouseEnter += new EventHandler(Greenbutton_hover_MouseEnter);
             Button_Save.MouseLeave += new EventHandler(Greenbutton_MouseLeave);
@@ -699,7 +806,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             Button_Change_Game_Path.Click += new EventHandler(SettingsGameFiles_Click);
             Button_Change_Game_Path_Setup.Click += new EventHandler(SettingsGameFiles_Click);
 
-            Button_Change_Tabs.Click += new EventHandler(Button_Change_Tabs_Click);
+            Button_Change_Tabs_Setup.Click += new EventHandler(Button_Change_Tabs_Click);
             /* Close */
             Button_Close.MouseEnter += new EventHandler(ButtonClose_MouseEnter);
             Button_Close.MouseLeave += new EventHandler(ButtonClose_MouseLeaveANDMouseUp);
@@ -911,8 +1018,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 #endif
             #endregion
             #region Verfy Hash
-            VerifyHashWelcome.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
-            Label_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan_Details.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan_Progress.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
+            Label_Verify_Scan_Scripts_Details.Font = new Font(FormsFont.Primary(), SecondaryFontSize, FontStyle.Italic);
             Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
             Button_Verify_Scan.Font = new Font(FormsFont.Primary_Bold(), MainFontSize, FontStyle.Bold);
 
@@ -920,12 +1028,9 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Set Theme Colors              /
             /********************************/
 
-            ForeColor = Color_Winform.Text_Fore_Color;
-            BackColor = Color_Winform.BG_Fore_Color;
+            Label_Verify_Scan_Progress.ForeColor = Color_Winform.Text_Fore_Color;
 
-            Label_Verify_Scan.ForeColor = Color_Winform.Text_Fore_Color;
-
-            VerifyHashWelcome.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
+            Label_Verify_Scan_Details.ForeColor = Color_Winform.Secondary_Text_Fore_Color;
 
             Button_Verify_Scan.ForeColor = Color_Winform.Success_Text_Fore_Color;
             Button_Verify_Scan.BackColor = Color_Winform_Buttons.Blue_Back_Color;
@@ -955,7 +1060,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 $"Welcome!{Environment.NewLine}The scanning process is pretty quick, but may still take a while." +
                 $"{Environment.NewLine}Depending on your connection, re-downloading will take the longest. " +
                 $"{Environment.NewLine}Please allow it to complete fully!");
-            Label_Verify_Scan.Text = "Scanning Progress:";
+            Label_Verify_Scan_Progress.Text = "Scanning Progress:";
             //DownloadProgressText.Text = "Download Progress:";
             //VerifyHashText.Text = "Please select \"Start Scan\" \nTo begin Validating Gamefiles";
             #endregion

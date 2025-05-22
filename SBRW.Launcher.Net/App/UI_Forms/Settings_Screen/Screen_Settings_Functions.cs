@@ -172,12 +172,23 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 {
                     ComboBox_Launcher_Builds_Branch.SelectedIndex = 1;
                 }
+                /* Window Title Timer Game Display */
+                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Display_Timer))
+                {
+                    ComboBox_Display_Timer.SelectedIndex =
+                        SettingsListUpdater.Launcher_Builds.FindIndex(i => Equals(i.Value, Save_Settings.Display_Timer()));
+                }
+                else
+                {
+                    ComboBox_Display_Timer.SelectedIndex = 1;
+                }
                 /* Manually Invoke Index Change to Set Selected Details Text */
                 ComboBox_Proxy_Logging_SelectedIndexChanged(default, default);
                 ComboBox_Proxy_GZip_Version_SelectedIndexChanged(default, default);
                 ComboBox_Launcher_Logging_SelectedIndexChanged(default, default);
                 ComboBox_Launcher_Logging_Cleanup_SelectedIndexChanged(default, default);
                 ComboBox_Launcher_Builds_Branch_SelectedIndexChanged(default, default);
+                ComboBox_Display_Timer_SelectedIndexChanged(default, default);
             }
             catch (Exception Error)
             {
@@ -185,24 +196,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
         }
         #endregion
-        /// <summary>
-        /// 
-        /// </summary>
-        private void Display_Timer_Button()
-        {
-            if (Save_Settings.Live_Data.Launcher_Display_Timer == "1")
-            {
-                Radio_Button_Dynamic_Timer.Checked = true;
-            }
-            else if (Save_Settings.Live_Data.Launcher_Display_Timer == "2")
-            {
-                Radio_Button_No_Timer.Checked = true;
-            }
-            else
-            {
-                Radio_Button_Static_Timer.Checked = true;
-            }
-        }
         /// <summary>
         /// 
         /// </summary>
@@ -230,7 +223,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         {
             if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_CDN))
             {
-                LinkLabel_CDN_Current.LinkColor = Color_Text.L_Two;
+                LinkLabel_CDN_Current_Setup.LinkColor = LinkLabel_CDN_Current.LinkColor = Color_Text.L_Two;
                 Log.Info("SETTINGS PINGING CDN: Checking Current CDN from Settings.ini");
 
                 if (Screen_Instance != null)
@@ -242,20 +235,16 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                             case APIStatus.Online:
                                 if (Screen_Instance != null)
                                 {
-                                    LinkLabel_CDN_Current.SafeInvokeAction(() =>
-                                    {
-                                        LinkLabel_CDN_Current.LinkColor = Color_Text.S_Sucess;
-                                    });
+                                    Screen_Instance.LinkLabel_CDN_Current.LinkColor = Color_Text.S_Sucess;
+                                    Screen_Instance.LinkLabel_CDN_Current_Setup.LinkColor = Color_Text.S_Sucess;
                                     Log.UrlCall("SETTINGS PINGING CDN: " + Save_Settings.Live_Data.Launcher_CDN + " Is Online!");
                                 }
                                 break;
                             default:
                                 if (Screen_Instance != null)
                                 {
-                                    LinkLabel_CDN_Current.SafeInvokeAction(() =>
-                                    {
-                                        LinkLabel_CDN_Current.LinkColor = Color_Text.S_Error;
-                                    });
+                                    Screen_Instance.LinkLabel_CDN_Current.LinkColor = Color_Text.S_Error;
+                                    Screen_Instance.LinkLabel_CDN_Current_Setup.LinkColor = Color_Text.S_Error;
                                     Log.UrlCall("SETTINGS PINGING CDN: " + Save_Settings.Live_Data.Launcher_CDN + " Is Offline!");
                                 }
                                 break;
@@ -437,25 +426,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                         Elements.Enabled = EnabledORDisabled;
                     });
                     break;
-            }
-        }
-        /// <summary>
-        /// Translation for Game Display Timer
-        /// </summary>
-        /// <returns></returns>
-        private string Display_Timer_Button_Selection()
-        {
-            if (Radio_Button_Dynamic_Timer.Checked)
-            {
-                return "1";
-            }
-            else if (Radio_Button_No_Timer.Checked)
-            {
-                return "2";
-            }
-            else
-            {
-                return "0";
             }
         }
         /// <summary>

@@ -104,7 +104,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 case -1:
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scanning Progress: Stop Requested";
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = "Scanning Progress: Stop Requested";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"User has Requested to Stop Scan {Stage}");
                     }
@@ -112,7 +112,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 case 1:
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scan Progress: Complete";
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = "Scan Progress: Complete";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"No Invalid Files Found {Stage}");
                     }
@@ -120,7 +120,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 case 2:
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Currently (re)downloading files. " +
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = "Currently (re)downloading files. " +
                             "This part may take awhile depending on your connection.";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"Preparing to Download Files {Stage}");
@@ -129,7 +129,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 case 3:
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "TODO: ADD NOT SUPPORTED CDN MESSAGE";
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = "TODO: ADD NOT SUPPORTED CDN MESSAGE";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"TODO: ADD NOT SUPPORTED CDN MESSAGE {Stage}");
                     }
@@ -171,7 +171,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 if (!Screen_Settings.Screen_Instance.DisposedForm())
                 {
                     Presence_Launcher.Status(25);
-                    Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = "Scanning Progress: Removing any '.orig' Files in Game Directory";
+                    Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = "Scanning Progress: Removing any '.orig' Files in Game Directory";
                     Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                         $"VERIFY HASH: Checking and Deleting '.orig' Files and Symbolic Folders");
                 }
@@ -389,7 +389,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 {
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Removal Progress: File Deletion Error";
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Removal Progress: File Deletion Error";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"Encountered File Deletion Error. Would you like to continue with the scan?");
                     }
@@ -417,7 +417,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                 {
                     if (!Screen_Settings.Screen_Instance.DisposedForm())
                     {
-                        Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Scanning Progress: Checking Hash for checksums.dat";
+                        Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Scanning Progress: Checking Hash for checksums.dat";
                         Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                             $"Generating Hash for checksums.dat. This may take awhile.");
                     }
@@ -430,14 +430,14 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                         /* Read Local checksums.dat */
                         if (!Screen_Settings.Screen_Instance.DisposedForm())
                         {
-                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Read Progress: Reading checksums.dat File";
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Read Progress: Reading checksums.dat File";
                             Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                                 $"Checksums File Hash Matched. Reading File. This may take awhile.");
                         }
                         File_Checksum = File.ReadAllLines("checksums.dat");
                         if (!Screen_Settings.Screen_Instance.DisposedForm())
                         {
-                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Read Progress: Loaded checksums.dat File";
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Read Progress: Loaded checksums.dat File";
                             Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                                 $"Checksums File has been Loaded");
                         }
@@ -446,7 +446,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                     {
                         if (!Screen_Settings.Screen_Instance.DisposedForm())
                         {
-                            Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Retriving Checksums File";
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Download Progress: Retriving Checksums File";
                             Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                                 $"Downloading Checksums File from {Verify_CDN_URL + "/unpacked/checksums.dat"}");
                         }
@@ -484,7 +484,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                             if (!Screen_Settings.Screen_Instance.DisposedForm())
                             {
-                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Error Message in Console Logs";
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Download Progress: Error Message in Console Logs";
                                 Error.Error_Display_Formatter();
                             }
                             
@@ -499,7 +499,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
                         {
                             if (!Screen_Settings.Screen_Instance.DisposedForm())
                             {
-                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Saving Checksums File";
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Download Progress: Saving Checksums File";
                                 Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                                     $"Saving Checksums File to drive. This may take awhile.");
                             }
@@ -508,7 +508,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Downloader
 
                             if (!Screen_Settings.Screen_Instance.DisposedForm())
                             {
-                                Screen_Settings.Screen_Instance.Label_Verify_Scan.Text = $"Download Progress: Saved Checksums File";
+                                Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = $"Download Progress: Saved Checksums File";
                                 Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText($"{Environment.NewLine}" +
                                     $"Sucessfully Saved Checksums File.");
                             }

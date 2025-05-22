@@ -39,6 +39,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)launchercore\lists\json\Json_List_Scanned_Game_Files.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_GZip_Version.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Proxy_Logging.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\JSON\Json_List_Tile_Window_Display_Timer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\LanguageListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\SettingsListUpdater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)LauncherCore\Lists\ResolutionsListUpdater.cs" />

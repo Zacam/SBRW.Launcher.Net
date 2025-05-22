@@ -268,11 +268,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     Launcher_Value.Launcher_Alternative_Webcalls(Save_Settings.Live_Data.Launcher_WebClient_Method == "WebClient");
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Display_Timer != Display_Timer_Button_Selection())
-                {
-                    Save_Settings.Live_Data.Launcher_Display_Timer = Display_Timer_Button_Selection();
-                }
-
                 if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
                 {
                     Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = NumericUpDown_WebClient_Timeout.Value.ToString();
@@ -364,6 +359,15 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                         Save_Settings.Live_Data.Launcher_Insider =
                             ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value.ToString();
                         RestartRequired = true;
+                    }
+                }
+                /* Window Title Timer Game Display */
+                if (ComboBox_Display_Timer.SelectedItem != default)
+                {
+                    if (Save_Settings.Display_Timer() != ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Value)
+                    {
+                        Save_Settings.Live_Data.Launcher_Display_Timer =
+                            ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Value.ToString();
                     }
                 }
 
@@ -817,7 +821,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 LinkLabel_Game_Path_Setup.Text = LinkLabel_Game_Path.Text = NewGameFilesPath;
             }
 #endif
-            if (Screen_Parent.Launcher_Setup ==1 && (Status_Dialog_Result == DialogResult.OK))
+            if (Screen_Parent.Launcher_Setup == 1 && (Status_Dialog_Result == DialogResult.OK))
             {
                 ButtonsColorSet(Button_Change_Game_Path, 1, true);
                 ButtonsColorSet(Button_Change_Game_Path_Setup, 1, true);
@@ -943,6 +947,18 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 Label_Launcher_Builds_Branch_Selected_Details.Text = ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Details;
             }
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox_Display_Timer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!Screen_Instance.DisposedForm())
+            {
+                Label_Display_Timer_Selected_Details.Text = ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Details;
+            }
+        }
         #region Settings Load
         /// <summary>
         /// 
@@ -1044,8 +1060,6 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             }
 
             NumericUpDown_WebClient_Timeout.Value = WebClient_Timeout_Convert;
-
-            Display_Timer_Button();
 
             /*******************************/
             /* Enable/Disable Visuals       /

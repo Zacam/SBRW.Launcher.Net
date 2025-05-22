@@ -6,6 +6,10 @@ using System.Collections.Generic;
 using SBRW.Launcher.RunTime.LauncherCore.Lists.JSON;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.Core.Cache;
+using SBRW.Launcher.Core.Extension.Time_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
+using System.Windows.Forms;
 
 namespace SBRW.Launcher.RunTime.LauncherCore.Lists
 {
@@ -34,6 +38,10 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
         /// 
         /// </summary>
         public static List<Json_List_Launcher_Builds> Launcher_Builds { get; set; } = new List<Json_List_Launcher_Builds>();
+        /// <summary>
+        /// 
+        /// </summary>
+        public static List<Json_List_Tile_Window_Display_Timer> Title_Window_Display_Timer { get; set; } = new List<Json_List_Tile_Window_Display_Timer>();
         /// <summary>
         /// 
         /// </summary>
@@ -182,6 +190,27 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Lists
                 {
                     Name = "Development",
                     Details = "Unstable Development Builds (Advanced Users Only)",
+                    Value = 2
+                });
+                string Place_Holder_Window_Title = "Server: Soapbox Race World | Version: " + Application.ProductVersion;
+                Title_Window_Display_Timer.Add(new Json_List_Tile_Window_Display_Timer ()
+                {
+                    Name = "Static",
+                    Details = Place_Holder_Window_Title + " | Force Restart By: " + Time_Clock.UnixEpoch().CompareNetworkWithPCTime().ToString("hh:mm tt"),
+                    Value = 0
+                });
+                Title_Window_Display_Timer.Add(new Json_List_Tile_Window_Display_Timer()
+                {
+                    Name = "Dynamic",
+                    Details = Place_Holder_Window_Title + " | Force Restart In:" + 
+                    ((Launcher_Value.Launcher_Insider_Dev || Launcher_Value.Launcher_Insider_Beta) ? " 1 Day," : " ")
+                    + "7 Hours, 59 Minutes",
+                    Value = 1
+                });
+                Title_Window_Display_Timer.Add(new Json_List_Tile_Window_Display_Timer()
+                {
+                    Name = "None",
+                    Details = Place_Holder_Window_Title,
                     Value = 2
                 });
             }

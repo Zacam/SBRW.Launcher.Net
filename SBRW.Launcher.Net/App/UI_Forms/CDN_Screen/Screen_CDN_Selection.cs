@@ -181,7 +181,7 @@ namespace SBRW.Launcher.App.UI_Forms.Selection_CDN_Screen
                                             {
                                                 if (e3.Reply != null)
                                                 {
-                                                    if (e3.Reply.Status == IPStatus.Success && Queue_Local_Server_Info[2] != "Offline Built-In Server")
+                                                    if (e3.Reply.Status == IPStatus.Success)
                                                     {
                                                         ListView_Server_List.SafeInvokeAction(() =>
                                                         {
