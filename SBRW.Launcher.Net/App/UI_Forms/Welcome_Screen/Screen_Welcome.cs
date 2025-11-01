@@ -253,9 +253,9 @@ namespace SBRW.Launcher.App.UI_Forms.Welcome_Screen
             }
             */
 
-            if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
+            if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != (int)NumericUpDown_WebClient_Timeout.Value)
             {
-                Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = NumericUpDown_WebClient_Timeout.Value.ToString();
+                Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = (int)NumericUpDown_WebClient_Timeout.Value;
 
                 if (NumericUpDown_WebClient_Timeout.Value > 0)
                 {

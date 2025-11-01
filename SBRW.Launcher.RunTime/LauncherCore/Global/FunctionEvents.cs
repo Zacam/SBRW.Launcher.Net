@@ -338,20 +338,20 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                         if (Live_Commands.Contains("beta"))
                         {
                             Screen_Settings.Insider_Settings_Lock = true;
-                            Save_Settings.Live_Data.Launcher_Insider = "1";
+                            Save_Settings.Live_Data.Launcher_Insider = 1;
                             BuildDevelopment.Allowed(false);
                             BuildBeta.Allowed(true);
                         }
                         else if (Live_Commands.Contains("dev"))
                         {
                             Screen_Settings.Insider_Settings_Lock = true;
-                            Save_Settings.Live_Data.Launcher_Insider = "2";
+                            Save_Settings.Live_Data.Launcher_Insider = 2;
                             BuildDevelopment.Allowed(true);
                             BuildBeta.Allowed(false);
                         }
                         else
                         {
-                            Save_Settings.Live_Data.Launcher_Insider = "0";
+                            Save_Settings.Live_Data.Launcher_Insider = 0;
                             BuildDevelopment.Allowed(false);
                             BuildBeta.Allowed(false);
                         }
@@ -410,7 +410,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Global
                     case "pdp":
                         if (Save_Settings.Live_Data != default)
                         {
-                            if (Save_Settings.Live_Data.Launcher_Proxy == "0")
+                            if (Save_Settings.Live_Data.Launcher_Proxy)
                             {
                                 string Entry_Text = Prompt.ShowDialog("Enter New Domain Name (Does not Save on Relaunch)", "SBRW Launcher");
 

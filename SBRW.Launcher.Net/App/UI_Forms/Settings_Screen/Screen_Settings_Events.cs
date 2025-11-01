@@ -225,61 +225,52 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
             {
-                if (Save_Settings.Live_Data.Launcher_Proxy != (CheckBox_Proxy.Checked ? "0" : "1"))
+                if (Save_Settings.Proxy_RunTime() != CheckBox_Proxy.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked ? "0" : "1";
+                    Save_Settings.Live_Data.Launcher_Proxy = CheckBox_Proxy.Checked;
 
-                    if (Save_Settings.Live_Data.Launcher_Proxy == "1" && InformationCache.SelectedServerEnforceProxy)
+                    if (Save_Settings.Proxy_RunTime() && InformationCache.SelectedServerEnforceProxy)
                     {
                         (ServerListUpdater.ServerName("Settings") + " requires Proxy to be Enabled.\nThe launcher will turn on Proxy, " +
                         "even if you have chosen to Disable it").Message_Box(MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Proxy_Port != NumericUpDown_Proxy_Port.Value.ToStringInvariant())
+                if (Save_Settings.Proxy_Port_Int() != (int)NumericUpDown_Proxy_Port.Value)
                 {
                     Save_Settings.Live_Data.Launcher_Proxy_Port = NumericUpDown_Proxy_Port.Value.ToStringInvariant();
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP != (CheckBox_Host_to_IP.Checked ? "1" : "0"))
+                if (Save_Settings.Legacy_Host_To_IP() != CheckBox_Host_to_IP.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP = CheckBox_Host_to_IP.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Legacy_Host_To_IP = CheckBox_Host_to_IP.Checked;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Proxy_Domain != (CheckBox_Proxy_Domain.Checked ? "1" : "0"))
+                if (Save_Settings.Proxy_Domain() != CheckBox_Proxy_Domain.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Proxy_Domain = CheckBox_Proxy_Domain.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Proxy_Domain = CheckBox_Proxy_Domain.Checked;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Discord_Presence != (CheckBox_RPC.Checked ? "0" : "1"))
+                if (Save_Settings.RPC_Discord() != CheckBox_RPC.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked ? "0" : "1";
+                    Save_Settings.Live_Data.Launcher_Discord_Presence = CheckBox_RPC.Checked;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Theme_Support != (CheckBox_Theme_Support.Checked ? "1" : "0"))
+                if (Save_Settings.Theme_Custom() != CheckBox_Theme_Support.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Theme_Support = CheckBox_Theme_Support.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Theme_Support = CheckBox_Theme_Support.Checked;
                     RestartRequired = true;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_WebClient_Method != (CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient"))
+                if (Save_Settings.WebCalls_Alt() != CheckBox_Alt_WebCalls.Checked)
                 {
                     Save_Settings.Live_Data.Launcher_WebClient_Method = CheckBox_Alt_WebCalls.Checked ? "WebClientWithTimeout" : "WebClient";
-                    Launcher_Value.Launcher_Alternative_Webcalls(Save_Settings.Live_Data.Launcher_WebClient_Method == "WebClient");
+                    Launcher_Value.Launcher_Alternative_Webcalls(!Save_Settings.WebCalls_Alt());
                 }
 
-                if (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time != NumericUpDown_WebClient_Timeout.Value.ToString())
+                if (Save_Settings.WebCalls_Timeout() != ((int)NumericUpDown_WebClient_Timeout.Value))
                 {
-                    Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = NumericUpDown_WebClient_Timeout.Value.ToString();
-
-                    if (NumericUpDown_WebClient_Timeout.Value > 0)
-                    {
-                        Launcher_Value.Launcher_WebCall_Timeout_Enable = true;
-                    }
-                    else
-                    {
-                        Launcher_Value.Launcher_WebCall_Timeout_Enable = false;
-                    }
+                    Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = (int)NumericUpDown_WebClient_Timeout.Value;
                 }
 
                 if (Save_Settings.Live_Data.Launcher_Game_Downloader != GameDownloaderButtonSelection())
@@ -288,19 +279,19 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     Stop_and_Restart_Downloader = true;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache != (CheckBox_JSON_Update_Cache.Checked ? "1" : "0"))
+                if (Save_Settings.Update_Frequency_JSON() != CheckBox_JSON_Update_Cache.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache = CheckBox_JSON_Update_Cache.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_JSON_Frequency_Update_Cache = CheckBox_JSON_Update_Cache.Checked;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Certificate_Mode != (CheckBox_Custom_Certificate.Checked ? "1" : "0"))
+                if (Save_Settings.Certificate_Mode() != CheckBox_Custom_Certificate.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Certificate_Mode = CheckBox_Custom_Certificate.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Certificate_Mode = CheckBox_Custom_Certificate.Checked;
                 }
 
-                if (Save_Settings.Live_Data.Launcher_Account_Manager != (CheckBox_Account_Manager.Checked ? "1" : "0"))
+                if (Save_Settings.Account_Manager() != CheckBox_Account_Manager.Checked)
                 {
-                    Save_Settings.Live_Data.Launcher_Account_Manager = CheckBox_Account_Manager.Checked ? "1" : "0";
+                    Save_Settings.Live_Data.Launcher_Account_Manager = CheckBox_Account_Manager.Checked;
 
                     if (!Screen_Main.Screen_Instance.DisposedForm())
                     {
@@ -321,7 +312,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Proxy_Log_Mode() != ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode)
                     {
                         Save_Settings.Live_Data.Launcher_Proxy_Log_Mode =
-                            ((long)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode).ToString();
+                            ((long)((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Mode);
                     }
                 }
                 /* Proxy GZip Version */
@@ -330,7 +321,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Proxy_GZip_Version() != ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version)
                     {
                         Save_Settings.Live_Data.Launcher_Proxy_GZip_Version =
-                            ((long)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version).ToString();
+                            ((long)((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Version);
                     }
                 }
                 /* Launcher Logging */
@@ -339,7 +330,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Log_Mode() != ((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode)
                     {
                         Save_Settings.Live_Data.Launcher_Log_Mode =
-                            ((long)((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode).ToString();
+                            ((long)((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Mode);
                     }
                 }
                 /* Launcher Log Cleanup */
@@ -348,7 +339,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Log_Cleanup_Mode() != ((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Mode)
                     {
                         Save_Settings.Live_Data.Launcher_Log_Schedule_Mode =
-                            ((long)((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Mode).ToString();
+                            ((long)((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Mode);
                     }
                 }
                 /* Launcher Builds */
@@ -357,7 +348,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Preview_Mode_Int() != ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value)
                     {
                         Save_Settings.Live_Data.Launcher_Insider =
-                            ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value.ToString();
+                            (int)((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Value;
                         RestartRequired = true;
                     }
                 }
@@ -367,7 +358,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                     if (Save_Settings.Display_Timer() != ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Value)
                     {
                         Save_Settings.Live_Data.Launcher_Display_Timer =
-                            ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Value.ToString();
+                            ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Value;
                     }
                 }
 
@@ -1046,20 +1037,12 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
 
             NumericUpDown_Proxy_Port.Value = Proxy_Port_Convert;
 
-            int WebClient_Timeout_Convert = 0;
-            if (int.TryParse(Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time, out WebClient_Timeout_Convert))
+            if ((Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time < 0) || (Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time > 179))
             {
-                if ((WebClient_Timeout_Convert < 0) || (WebClient_Timeout_Convert > 179))
-                {
-                    WebClient_Timeout_Convert = 0;
-                }
-            }
-            else
-            {
-                WebClient_Timeout_Convert = 0;
+                Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time = 0;
             }
 
-            NumericUpDown_WebClient_Timeout.Value = WebClient_Timeout_Convert;
+            NumericUpDown_WebClient_Timeout.Value = Save_Settings.Live_Data.Launcher_WebCall_TimeOut_Time;
 
             /*******************************/
             /* Enable/Disable Visuals       /

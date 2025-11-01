@@ -123,65 +123,23 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             try
             {
                 /* Proxy Logging */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_Log_Mode))
-                {
-                    ComboBox_Proxy_Logging.SelectedIndex = 
+                ComboBox_Proxy_Logging.SelectedIndex =
                         SettingsListUpdater.Proxy_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Proxy_Log_Mode()));
-                }
-                else
-                {
-                    ComboBox_Proxy_Logging.SelectedIndex = 1;
-                }
                 /* Proxy GZip Version */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Proxy_GZip_Version))
-                {
-                    ComboBox_Proxy_GZip_Version.SelectedIndex =
+                ComboBox_Proxy_GZip_Version.SelectedIndex =
                         SettingsListUpdater.Proxy_GZip_Version.FindIndex(i => Equals(i.Version, Save_Settings.Proxy_GZip_Version()));
-                }
-                else
-                {
-                    ComboBox_Proxy_GZip_Version.SelectedIndex = 1;
-                }
                 /* Launcher Logging */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Log_Mode))
-                {
-                    ComboBox_Launcher_Logging.SelectedIndex =
+                ComboBox_Launcher_Logging.SelectedIndex =
                         SettingsListUpdater.Launcher_Logging.FindIndex(i => Equals(i.Mode, Save_Settings.Log_Mode()));
-                }
-                else
-                {
-                    ComboBox_Launcher_Logging.SelectedIndex = 1;
-                }
                 /* Launcher Log Cleanup */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Log_Schedule_Mode))
-                {
-                    ComboBox_Launcher_Logging_Cleanup.SelectedIndex =
+                ComboBox_Launcher_Logging_Cleanup.SelectedIndex =
                         SettingsListUpdater.Launcher_Logging_Cleanup.FindIndex(i => Equals(i.Mode, Save_Settings.Log_Cleanup_Mode()));
-                }
-                else
-                {
-                    ComboBox_Launcher_Logging_Cleanup.SelectedIndex = 1;
-                }
                 /* Launcher Builds */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Insider))
-                {
-                    ComboBox_Launcher_Builds_Branch.SelectedIndex =
+                ComboBox_Launcher_Builds_Branch.SelectedIndex =
                         SettingsListUpdater.Launcher_Builds.FindIndex(i => Equals(i.Value, Save_Settings.Preview_Mode_Int()));
-                }
-                else
-                {
-                    ComboBox_Launcher_Builds_Branch.SelectedIndex = 1;
-                }
                 /* Window Title Timer Game Display */
-                if (!string.IsNullOrWhiteSpace(Save_Settings.Live_Data.Launcher_Display_Timer))
-                {
-                    ComboBox_Display_Timer.SelectedIndex =
+                ComboBox_Display_Timer.SelectedIndex =
                         SettingsListUpdater.Launcher_Builds.FindIndex(i => Equals(i.Value, Save_Settings.Display_Timer()));
-                }
-                else
-                {
-                    ComboBox_Display_Timer.SelectedIndex = 1;
-                }
                 /* Manually Invoke Index Change to Set Selected Details Text */
                 ComboBox_Proxy_Logging_SelectedIndexChanged(default, default);
                 ComboBox_Proxy_GZip_Version_SelectedIndexChanged(default, default);
@@ -200,19 +158,19 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// 
         /// </summary>
         /// <returns></returns>
-        private string GameDownloaderButtonSelection()
+        private long GameDownloaderButtonSelection()
         {
             if (Radio_Button_GameFiles_Downloader_LZMA.Checked)
             {
-                return "0";
+                return 0;
             }
             else if (Radio_Button_GameFiles_Downloader_SBRW_Pack.Checked)
             {
-                return "1";
+                return 1;
             }
             else
             {
-                return "2";
+                return 2;
             }
         }
         /* CDN Display Playing Game! - DavidCarbon */

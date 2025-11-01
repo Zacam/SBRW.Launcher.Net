@@ -33,8 +33,7 @@ namespace SBRW.Launcher.RunTime.LauncherCore.Visuals
         /* Read Theme File and Check Values */
         public static void CheckIfThemeExists()
         {
-            if (File.Exists(Path.Combine(Locations.LauncherThemeFolder, "Theme.ini")) &&
-                (Save_Settings.Live_Data.Launcher_Theme_Support == "1"))
+            if (File.Exists(Path.Combine(Locations.LauncherThemeFolder, "Theme.ini")) && Save_Settings.Theme_Custom())
             {
                 try
                 {
