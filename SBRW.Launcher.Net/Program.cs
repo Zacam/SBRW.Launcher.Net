@@ -359,12 +359,12 @@ namespace SBRW.Launcher.Net
                                         "SBRW.Ini.Parser.dll - 3.0.2",
                                         "SBRW.Nancy.dll - 2.1.2",
                                         "SBRW.Nancy.Hosting.Self.dll - 2.1.2",
-                                        "SBRW.Launcher.Core.dll - 0.6.0",
-                                        "SBRW.Launcher.Core.Extra.dll - 0.7.2",
-                                        "SBRW.Launcher.Core.Discord.dll - 0.6.0",
-                                        "SBRW.Launcher.Core.Proxy.dll - 0.8.1",
+                                        "SBRW.Launcher.Core.dll - 0.7.1",
+                                        "SBRW.Launcher.Core.Extra.dll - 0.8.0-preview004",
+                                        "SBRW.Launcher.Core.Discord.dll - 0.7.2",
+                                        "SBRW.Launcher.Core.Proxy.dll - 0.9.2",
                                         "SBRW.Launcher.Core.Theme.dll - 0.3.3",
-                                        "SBRW.Launcher.Core.Downloader.dll - 0.3.8",
+                                        "SBRW.Launcher.Core.Downloader.dll - 0.4.0-preview003",
                                         "SBRW.Launcher.Core.Downloader.LZMA.dll - 0.3.2"
                                 };
 
