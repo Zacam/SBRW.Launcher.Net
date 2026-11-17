@@ -36,6 +36,8 @@
             this.Input_Console = new System.Windows.Forms.TextBox();
             this.TabControl_Shared_Hub = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Setup = new System.Windows.Forms.TabPage();
+            this.Label_Change_Game_Path_Setup_Details = new System.Windows.Forms.Label();
+            this.Label_API_Status_List_Setup = new System.Windows.Forms.Label();
             this.LinkLabel_Game_Path_Setup = new System.Windows.Forms.LinkLabel();
             this.Label_Game_Current_Path_Setup = new System.Windows.Forms.Label();
             this.Button_Change_Game_Path_Setup = new System.Windows.Forms.Button();
@@ -116,6 +118,7 @@
             this.CheckBox_JSON_Update_Cache = new System.Windows.Forms.CheckBox();
             this.CheckBox_Theme_Support = new System.Windows.Forms.CheckBox();
             this.TabPage_Experiments = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -129,6 +132,13 @@
             this.TabPage_Game = new System.Windows.Forms.TabPage();
             this.TabControl_Game = new SBRW.Launcher.Core.Theme.Control_TabControl();
             this.TabPage_Game_General = new System.Windows.Forms.TabPage();
+            this.Label_InGame_Word_Filter_Details = new System.Windows.Forms.Label();
+            this.ComboBox_Display_Timer = new System.Windows.Forms.ComboBox();
+            this.Label_Display_Timer_Selected_Details = new System.Windows.Forms.Label();
+            this.Label_Display_Timer_Details = new System.Windows.Forms.Label();
+            this.Label_Display_Timer = new System.Windows.Forms.Label();
+            this.Label_Change_Game_Path_Details = new System.Windows.Forms.Label();
+            this.Label_Game_User_Settings_Details = new System.Windows.Forms.Label();
             this.LinkLabel_Game_Path = new System.Windows.Forms.LinkLabel();
             this.Label_Game_Current_Path = new System.Windows.Forms.Label();
             this.CheckBox_InGame_Word_Filter = new System.Windows.Forms.CheckBox();
@@ -137,6 +147,8 @@
             this.Button_Change_Game_Path = new System.Windows.Forms.Button();
             this.Label_Game_Files = new System.Windows.Forms.Label();
             this.TabPage_Game_Verify_Hash = new System.Windows.Forms.TabPage();
+            this.Label_Verify_Scan_Scripts_Details = new System.Windows.Forms.Label();
+            this.Label_Verify_Scan_Details = new System.Windows.Forms.Label();
             this.CheckBox_Verify_Scan_Scripts = new System.Windows.Forms.CheckBox();
             this.GroupBox_Verify_Scan = new System.Windows.Forms.GroupBox();
             this.TextBox_Verify_Scan = new System.Windows.Forms.TextBox();
@@ -176,6 +188,11 @@
             this.ButtonFolderPermissonSet = new System.Windows.Forms.Button();
             this.TextFolderPermissions = new System.Windows.Forms.Label();
             this.TabPage_Game_Miscellaneous = new System.Windows.Forms.TabPage();
+            this.Label_Clear_Server_Mods_Details = new System.Windows.Forms.Label();
+            this.Label_Clear_NFSWO_Logs_Details = new System.Windows.Forms.Label();
+            this.Label_Clear_Crash_Logs_Details = new System.Windows.Forms.Label();
+            this.Label_Affinity_Core_Range_Details = new System.Windows.Forms.Label();
+            this.Label_Enable_Affinity_Range_Details = new System.Windows.Forms.Label();
             this.Label_Affinity_Core_Calculator = new System.Windows.Forms.Label();
             this.Panel_Affinity_Range = new System.Windows.Forms.Panel();
             this.Label_Affinity_Core_Range = new System.Windows.Forms.Label();
@@ -207,23 +224,22 @@
             this.Button_Settings = new System.Windows.Forms.PictureBox();
             this.Button_Close = new System.Windows.Forms.PictureBox();
             this.Clock = new System.Windows.Forms.Timer(this.components);
-            this.Label_API_Status_List_Setup = new System.Windows.Forms.Label();
-            this.Label_Change_Game_Path_Setup_Details = new System.Windows.Forms.Label();
-            this.Label_Game_User_Settings_Details = new System.Windows.Forms.Label();
-            this.Label_Change_Game_Path_Details = new System.Windows.Forms.Label();
-            this.ComboBox_Display_Timer = new System.Windows.Forms.ComboBox();
-            this.Label_Display_Timer_Selected_Details = new System.Windows.Forms.Label();
-            this.Label_Display_Timer_Details = new System.Windows.Forms.Label();
-            this.Label_Display_Timer = new System.Windows.Forms.Label();
-            this.Label_InGame_Word_Filter_Details = new System.Windows.Forms.Label();
-            this.Label_Enable_Affinity_Range_Details = new System.Windows.Forms.Label();
-            this.Label_Affinity_Core_Range_Details = new System.Windows.Forms.Label();
-            this.Label_Clear_Crash_Logs_Details = new System.Windows.Forms.Label();
-            this.Label_Clear_NFSWO_Logs_Details = new System.Windows.Forms.Label();
-            this.Label_Clear_Server_Mods_Details = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.Label_Verify_Scan_Details = new System.Windows.Forms.Label();
-            this.Label_Verify_Scan_Scripts_Details = new System.Windows.Forms.Label();
+            this.TabPage_Game_Server_Mod_Packs = new System.Windows.Forms.TabPage();
+            this.control_TabControl1 = new SBRW.Launcher.Core.Theme.Control_TabControl();
+            this.TabPage_ModLoader_Server = new System.Windows.Forms.TabPage();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.ListView_Server_List = new System.Windows.Forms.ListView();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label18 = new System.Windows.Forms.Label();
+            this.TabPage_ModLoader_Client = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.label17 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.fileSystemWatcher1)).BeginInit();
             this.TabControl_Shared_Hub.SuspendLayout();
             this.TabPage_Setup.SuspendLayout();
@@ -260,6 +276,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).BeginInit();
+            this.TabPage_Game_Server_Mod_Packs.SuspendLayout();
+            this.control_TabControl1.SuspendLayout();
+            this.TabPage_ModLoader_Server.SuspendLayout();
+            this.TabPage_ModLoader_Client.SuspendLayout();
             this.SuspendLayout();
             // 
             // fileSystemWatcher1
@@ -335,6 +355,28 @@
             this.TabPage_Setup.TabIndex = 1;
             this.TabPage_Setup.Text = "Welcome Setup";
             this.TabPage_Setup.UseVisualStyleBackColor = true;
+            // 
+            // Label_Change_Game_Path_Setup_Details
+            // 
+            this.Label_Change_Game_Path_Setup_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Change_Game_Path_Setup_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Change_Game_Path_Setup_Details.Location = new System.Drawing.Point(240, 261);
+            this.Label_Change_Game_Path_Setup_Details.Name = "Label_Change_Game_Path_Setup_Details";
+            this.Label_Change_Game_Path_Setup_Details.Size = new System.Drawing.Size(578, 25);
+            this.Label_Change_Game_Path_Setup_Details.TabIndex = 202;
+            this.Label_Change_Game_Path_Setup_Details.Text = "Folder Path for the Game Files installation";
+            this.Label_Change_Game_Path_Setup_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_API_Status_List_Setup
+            // 
+            this.Label_API_Status_List_Setup.BackColor = System.Drawing.Color.Transparent;
+            this.Label_API_Status_List_Setup.ForeColor = System.Drawing.Color.Black;
+            this.Label_API_Status_List_Setup.Location = new System.Drawing.Point(11, 389);
+            this.Label_API_Status_List_Setup.Name = "Label_API_Status_List_Setup";
+            this.Label_API_Status_List_Setup.Size = new System.Drawing.Size(271, 28);
+            this.Label_API_Status_List_Setup.TabIndex = 201;
+            this.Label_API_Status_List_Setup.Text = "API: PLACEHOLDER DEBUG";
+            this.Label_API_Status_List_Setup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LinkLabel_Game_Path_Setup
             // 
@@ -1322,6 +1364,20 @@
             this.TabPage_Experiments.Text = "Experiments";
             this.TabPage_Experiments.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(181)))), ((int)(((byte)(191)))));
+            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
+            this.button1.Location = new System.Drawing.Point(13, 19);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(222, 24);
+            this.button1.TabIndex = 229;
+            this.button1.Text = "Concept Error Textbox";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
             // comboBox2
             // 
             this.comboBox2.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
@@ -1449,6 +1505,7 @@
             this.TabControl_Game.Controls.Add(this.TabPage_Game_Verify_Hash);
             this.TabControl_Game.Controls.Add(this.TabPage_Game_Security_Center);
             this.TabControl_Game.Controls.Add(this.TabPage_Game_Miscellaneous);
+            this.TabControl_Game.Controls.Add(this.TabPage_Game_Server_Mod_Packs);
             this.TabControl_Game.HotTrack = true;
             this.TabControl_Game.Location = new System.Drawing.Point(1, 3);
             this.TabControl_Game.Name = "TabControl_Game";
@@ -1479,6 +1536,83 @@
             this.TabPage_Game_General.TabIndex = 0;
             this.TabPage_Game_General.Text = "General";
             this.TabPage_Game_General.UseVisualStyleBackColor = true;
+            // 
+            // Label_InGame_Word_Filter_Details
+            // 
+            this.Label_InGame_Word_Filter_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_InGame_Word_Filter_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_InGame_Word_Filter_Details.Location = new System.Drawing.Point(244, 224);
+            this.Label_InGame_Word_Filter_Details.Name = "Label_InGame_Word_Filter_Details";
+            this.Label_InGame_Word_Filter_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_InGame_Word_Filter_Details.TabIndex = 240;
+            this.Label_InGame_Word_Filter_Details.Text = "Changes the In-Game Chat \"censor\" or word filter.";
+            this.Label_InGame_Word_Filter_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // ComboBox_Display_Timer
+            // 
+            this.ComboBox_Display_Timer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.ComboBox_Display_Timer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboBox_Display_Timer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ComboBox_Display_Timer.FormattingEnabled = true;
+            this.ComboBox_Display_Timer.Location = new System.Drawing.Point(11, 189);
+            this.ComboBox_Display_Timer.Name = "ComboBox_Display_Timer";
+            this.ComboBox_Display_Timer.Size = new System.Drawing.Size(222, 22);
+            this.ComboBox_Display_Timer.TabIndex = 239;
+            // 
+            // Label_Display_Timer_Selected_Details
+            // 
+            this.Label_Display_Timer_Selected_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Display_Timer_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Display_Timer_Selected_Details.Location = new System.Drawing.Point(244, 190);
+            this.Label_Display_Timer_Selected_Details.Name = "Label_Display_Timer_Selected_Details";
+            this.Label_Display_Timer_Selected_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Display_Timer_Selected_Details.TabIndex = 238;
+            this.Label_Display_Timer_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.Label_Display_Timer_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Display_Timer_Details
+            // 
+            this.Label_Display_Timer_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Display_Timer_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Display_Timer_Details.Location = new System.Drawing.Point(244, 166);
+            this.Label_Display_Timer_Details.Name = "Label_Display_Timer_Details";
+            this.Label_Display_Timer_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Display_Timer_Details.TabIndex = 237;
+            this.Label_Display_Timer_Details.Text = "Changes Window Title Timer Display of the Game";
+            this.Label_Display_Timer_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Display_Timer
+            // 
+            this.Label_Display_Timer.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Display_Timer.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Display_Timer.Location = new System.Drawing.Point(10, 166);
+            this.Label_Display_Timer.Name = "Label_Display_Timer";
+            this.Label_Display_Timer.Size = new System.Drawing.Size(223, 16);
+            this.Label_Display_Timer.TabIndex = 236;
+            this.Label_Display_Timer.Text = "Title Window Display Timer:";
+            this.Label_Display_Timer.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            // 
+            // Label_Change_Game_Path_Details
+            // 
+            this.Label_Change_Game_Path_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Change_Game_Path_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Change_Game_Path_Details.Location = new System.Drawing.Point(244, 78);
+            this.Label_Change_Game_Path_Details.Name = "Label_Change_Game_Path_Details";
+            this.Label_Change_Game_Path_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Change_Game_Path_Details.TabIndex = 190;
+            this.Label_Change_Game_Path_Details.Text = "Folder Path for the Game Files installation";
+            this.Label_Change_Game_Path_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Game_User_Settings_Details
+            // 
+            this.Label_Game_User_Settings_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Game_User_Settings_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Game_User_Settings_Details.Location = new System.Drawing.Point(244, 134);
+            this.Label_Game_User_Settings_Details.Name = "Label_Game_User_Settings_Details";
+            this.Label_Game_User_Settings_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Game_User_Settings_Details.TabIndex = 189;
+            this.Label_Game_User_Settings_Details.Text = "Edit settings not normally visable In-Game";
+            this.Label_Game_User_Settings_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // LinkLabel_Game_Path
             // 
@@ -1571,6 +1705,28 @@
             this.TabPage_Game_Verify_Hash.TabIndex = 3;
             this.TabPage_Game_Verify_Hash.Text = "Verify Hash";
             this.TabPage_Game_Verify_Hash.UseVisualStyleBackColor = true;
+            // 
+            // Label_Verify_Scan_Scripts_Details
+            // 
+            this.Label_Verify_Scan_Scripts_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Verify_Scan_Scripts_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Verify_Scan_Scripts_Details.Location = new System.Drawing.Point(242, 48);
+            this.Label_Verify_Scan_Scripts_Details.Name = "Label_Verify_Scan_Scripts_Details";
+            this.Label_Verify_Scan_Scripts_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Verify_Scan_Scripts_Details.TabIndex = 228;
+            this.Label_Verify_Scan_Scripts_Details.Text = "Allows the deletion of the scripts folder that contains asi mods if installed";
+            this.Label_Verify_Scan_Scripts_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Verify_Scan_Details
+            // 
+            this.Label_Verify_Scan_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Verify_Scan_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Verify_Scan_Details.Location = new System.Drawing.Point(242, 16);
+            this.Label_Verify_Scan_Details.Name = "Label_Verify_Scan_Details";
+            this.Label_Verify_Scan_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Verify_Scan_Details.TabIndex = 227;
+            this.Label_Verify_Scan_Details.Text = "Please select \"Start Scan\" To begin Validating Gamefiles";
+            this.Label_Verify_Scan_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // CheckBox_Verify_Scan_Scripts
             // 
@@ -2123,6 +2279,65 @@
             this.TabPage_Game_Miscellaneous.Text = "Miscellaneous";
             this.TabPage_Game_Miscellaneous.UseVisualStyleBackColor = true;
             // 
+            // Label_Clear_Server_Mods_Details
+            // 
+            this.Label_Clear_Server_Mods_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Clear_Server_Mods_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Clear_Server_Mods_Details.Location = new System.Drawing.Point(246, 168);
+            this.Label_Clear_Server_Mods_Details.Name = "Label_Clear_Server_Mods_Details";
+            this.Label_Clear_Server_Mods_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Clear_Server_Mods_Details.TabIndex = 227;
+            this.Label_Clear_Server_Mods_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
+    "itive way";
+            this.Label_Clear_Server_Mods_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Clear_NFSWO_Logs_Details
+            // 
+            this.Label_Clear_NFSWO_Logs_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Clear_NFSWO_Logs_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Clear_NFSWO_Logs_Details.Location = new System.Drawing.Point(246, 133);
+            this.Label_Clear_NFSWO_Logs_Details.Name = "Label_Clear_NFSWO_Logs_Details";
+            this.Label_Clear_NFSWO_Logs_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Clear_NFSWO_Logs_Details.TabIndex = 226;
+            this.Label_Clear_NFSWO_Logs_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
+    "itive way";
+            this.Label_Clear_NFSWO_Logs_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Clear_Crash_Logs_Details
+            // 
+            this.Label_Clear_Crash_Logs_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Clear_Crash_Logs_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Clear_Crash_Logs_Details.Location = new System.Drawing.Point(246, 98);
+            this.Label_Clear_Crash_Logs_Details.Name = "Label_Clear_Crash_Logs_Details";
+            this.Label_Clear_Crash_Logs_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Clear_Crash_Logs_Details.TabIndex = 225;
+            this.Label_Clear_Crash_Logs_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
+    "itive way";
+            this.Label_Clear_Crash_Logs_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Affinity_Core_Range_Details
+            // 
+            this.Label_Affinity_Core_Range_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Affinity_Core_Range_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Affinity_Core_Range_Details.Location = new System.Drawing.Point(246, 61);
+            this.Label_Affinity_Core_Range_Details.Name = "Label_Affinity_Core_Range_Details";
+            this.Label_Affinity_Core_Range_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Affinity_Core_Range_Details.TabIndex = 224;
+            this.Label_Affinity_Core_Range_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
+    "itive way";
+            this.Label_Affinity_Core_Range_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // Label_Enable_Affinity_Range_Details
+            // 
+            this.Label_Enable_Affinity_Range_Details.BackColor = System.Drawing.Color.Transparent;
+            this.Label_Enable_Affinity_Range_Details.ForeColor = System.Drawing.Color.DarkGray;
+            this.Label_Enable_Affinity_Range_Details.Location = new System.Drawing.Point(247, 8);
+            this.Label_Enable_Affinity_Range_Details.Name = "Label_Enable_Affinity_Range_Details";
+            this.Label_Enable_Affinity_Range_Details.Size = new System.Drawing.Size(576, 18);
+            this.Label_Enable_Affinity_Range_Details.TabIndex = 223;
+            this.Label_Enable_Affinity_Range_Details.Text = "Allows the game to run on a certain CPU core count set by the Calculator";
+            this.Label_Enable_Affinity_Range_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // Label_Affinity_Core_Calculator
             // 
             this.Label_Affinity_Core_Calculator.BackColor = System.Drawing.Color.Transparent;
@@ -2239,7 +2454,7 @@
             this.TabPage_API.Controls.Add(this.Label_API_Status);
             this.TabPage_API.Location = new System.Drawing.Point(0, 26);
             this.TabPage_API.Name = "TabPage_API";
-            this.TabPage_API.Size = new System.Drawing.Size(200, 74);
+            this.TabPage_API.Size = new System.Drawing.Size(834, 354);
             this.TabPage_API.TabIndex = 4;
             this.TabPage_API.Text = "API";
             this.TabPage_API.UseVisualStyleBackColor = true;
@@ -2497,199 +2712,194 @@
             this.Clock.Enabled = true;
             this.Clock.Interval = 1200;
             // 
-            // Label_API_Status_List_Setup
+            // TabPage_Game_Server_Mod_Packs
             // 
-            this.Label_API_Status_List_Setup.BackColor = System.Drawing.Color.Transparent;
-            this.Label_API_Status_List_Setup.ForeColor = System.Drawing.Color.Black;
-            this.Label_API_Status_List_Setup.Location = new System.Drawing.Point(11, 389);
-            this.Label_API_Status_List_Setup.Name = "Label_API_Status_List_Setup";
-            this.Label_API_Status_List_Setup.Size = new System.Drawing.Size(271, 28);
-            this.Label_API_Status_List_Setup.TabIndex = 201;
-            this.Label_API_Status_List_Setup.Text = "API: PLACEHOLDER DEBUG";
-            this.Label_API_Status_List_Setup.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TabPage_Game_Server_Mod_Packs.Controls.Add(this.control_TabControl1);
+            this.TabPage_Game_Server_Mod_Packs.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_Game_Server_Mod_Packs.Name = "TabPage_Game_Server_Mod_Packs";
+            this.TabPage_Game_Server_Mod_Packs.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_Game_Server_Mod_Packs.Size = new System.Drawing.Size(832, 328);
+            this.TabPage_Game_Server_Mod_Packs.TabIndex = 6;
+            this.TabPage_Game_Server_Mod_Packs.Text = "ModLoader";
+            this.TabPage_Game_Server_Mod_Packs.UseVisualStyleBackColor = true;
             // 
-            // Label_Change_Game_Path_Setup_Details
+            // control_TabControl1
             // 
-            this.Label_Change_Game_Path_Setup_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Change_Game_Path_Setup_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Change_Game_Path_Setup_Details.Location = new System.Drawing.Point(240, 261);
-            this.Label_Change_Game_Path_Setup_Details.Name = "Label_Change_Game_Path_Setup_Details";
-            this.Label_Change_Game_Path_Setup_Details.Size = new System.Drawing.Size(578, 25);
-            this.Label_Change_Game_Path_Setup_Details.TabIndex = 202;
-            this.Label_Change_Game_Path_Setup_Details.Text = "Folder Path for the Game Files installation";
-            this.Label_Change_Game_Path_Setup_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.control_TabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
+            this.control_TabControl1.Controls.Add(this.TabPage_ModLoader_Server);
+            this.control_TabControl1.Controls.Add(this.TabPage_ModLoader_Client);
+            this.control_TabControl1.HotTrack = true;
+            this.control_TabControl1.Location = new System.Drawing.Point(1, 5);
+            this.control_TabControl1.Name = "control_TabControl1";
+            this.control_TabControl1.SelectedIndex = 0;
+            this.control_TabControl1.Size = new System.Drawing.Size(830, 319);
+            this.control_TabControl1.TabIndex = 227;
             // 
-            // Label_Game_User_Settings_Details
+            // TabPage_ModLoader_Server
             // 
-            this.Label_Game_User_Settings_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Game_User_Settings_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Game_User_Settings_Details.Location = new System.Drawing.Point(244, 134);
-            this.Label_Game_User_Settings_Details.Name = "Label_Game_User_Settings_Details";
-            this.Label_Game_User_Settings_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Game_User_Settings_Details.TabIndex = 189;
-            this.Label_Game_User_Settings_Details.Text = "Edit settings not normally visable In-Game";
-            this.Label_Game_User_Settings_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TabPage_ModLoader_Server.Controls.Add(this.button4);
+            this.TabPage_ModLoader_Server.Controls.Add(this.button2);
+            this.TabPage_ModLoader_Server.Controls.Add(this.comboBox3);
+            this.TabPage_ModLoader_Server.Controls.Add(this.label14);
+            this.TabPage_ModLoader_Server.Controls.Add(this.label15);
+            this.TabPage_ModLoader_Server.Controls.Add(this.label16);
+            this.TabPage_ModLoader_Server.Controls.Add(this.ListView_Server_List);
+            this.TabPage_ModLoader_Server.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_ModLoader_Server.Name = "TabPage_ModLoader_Server";
+            this.TabPage_ModLoader_Server.Padding = new System.Windows.Forms.Padding(3);
+            this.TabPage_ModLoader_Server.Size = new System.Drawing.Size(830, 293);
+            this.TabPage_ModLoader_Server.TabIndex = 0;
+            this.TabPage_ModLoader_Server.Text = "Server";
+            this.TabPage_ModLoader_Server.UseVisualStyleBackColor = true;
             // 
-            // Label_Change_Game_Path_Details
+            // comboBox3
             // 
-            this.Label_Change_Game_Path_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Change_Game_Path_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Change_Game_Path_Details.Location = new System.Drawing.Point(244, 78);
-            this.Label_Change_Game_Path_Details.Name = "Label_Change_Game_Path_Details";
-            this.Label_Change_Game_Path_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Change_Game_Path_Details.TabIndex = 190;
-            this.Label_Change_Game_Path_Details.Text = "Folder Path for the Game Files installation";
-            this.Label_Change_Game_Path_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.comboBox3.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(14, 38);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(189, 22);
+            this.comboBox3.TabIndex = 231;
             // 
-            // ComboBox_Display_Timer
+            // label14
             // 
-            this.ComboBox_Display_Timer.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.ComboBox_Display_Timer.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.ComboBox_Display_Timer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ComboBox_Display_Timer.FormattingEnabled = true;
-            this.ComboBox_Display_Timer.Location = new System.Drawing.Point(11, 189);
-            this.ComboBox_Display_Timer.Name = "ComboBox_Display_Timer";
-            this.ComboBox_Display_Timer.Size = new System.Drawing.Size(222, 22);
-            this.ComboBox_Display_Timer.TabIndex = 239;
+            this.label14.BackColor = System.Drawing.Color.Transparent;
+            this.label14.ForeColor = System.Drawing.Color.DarkGray;
+            this.label14.Location = new System.Drawing.Point(243, 39);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(576, 18);
+            this.label14.TabIndex = 230;
+            this.label14.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Label_Display_Timer_Selected_Details
+            // label15
             // 
-            this.Label_Display_Timer_Selected_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Display_Timer_Selected_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Display_Timer_Selected_Details.Location = new System.Drawing.Point(244, 190);
-            this.Label_Display_Timer_Selected_Details.Name = "Label_Display_Timer_Selected_Details";
-            this.Label_Display_Timer_Selected_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Display_Timer_Selected_Details.TabIndex = 238;
-            this.Label_Display_Timer_Selected_Details.Text = "{PLACE HOLDER LIVE DESCRIPTION}";
-            this.Label_Display_Timer_Selected_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label15.BackColor = System.Drawing.Color.Transparent;
+            this.label15.ForeColor = System.Drawing.Color.DarkGray;
+            this.label15.Location = new System.Drawing.Point(243, 15);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(576, 18);
+            this.label15.TabIndex = 229;
+            this.label15.Text = "Changes the Logging System being saved to a File on the Drive";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // Label_Display_Timer_Details
+            // label16
             // 
-            this.Label_Display_Timer_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Display_Timer_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Display_Timer_Details.Location = new System.Drawing.Point(244, 166);
-            this.Label_Display_Timer_Details.Name = "Label_Display_Timer_Details";
-            this.Label_Display_Timer_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Display_Timer_Details.TabIndex = 237;
-            this.Label_Display_Timer_Details.Text = "Changes Window Title Timer Display of the Game";
-            this.Label_Display_Timer_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label16.BackColor = System.Drawing.Color.Transparent;
+            this.label16.ForeColor = System.Drawing.Color.DarkGray;
+            this.label16.Location = new System.Drawing.Point(11, 15);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(223, 16);
+            this.label16.TabIndex = 228;
+            this.label16.Text = "Log to File:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // Label_Display_Timer
+            // ListView_Server_List
             // 
-            this.Label_Display_Timer.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Display_Timer.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Display_Timer.Location = new System.Drawing.Point(10, 166);
-            this.Label_Display_Timer.Name = "Label_Display_Timer";
-            this.Label_Display_Timer.Size = new System.Drawing.Size(223, 16);
-            this.Label_Display_Timer.TabIndex = 236;
-            this.Label_Display_Timer.Text = "Title Window Display Timer:";
-            this.Label_Display_Timer.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
+            this.ListView_Server_List.HideSelection = false;
+            this.ListView_Server_List.Location = new System.Drawing.Point(14, 73);
+            this.ListView_Server_List.MultiSelect = false;
+            this.ListView_Server_List.Name = "ListView_Server_List";
+            this.ListView_Server_List.Size = new System.Drawing.Size(544, 203);
+            this.ListView_Server_List.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.ListView_Server_List.TabIndex = 227;
+            this.ListView_Server_List.UseCompatibleStateImageBehavior = false;
             // 
-            // Label_InGame_Word_Filter_Details
+            // button2
             // 
-            this.Label_InGame_Word_Filter_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_InGame_Word_Filter_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_InGame_Word_Filter_Details.Location = new System.Drawing.Point(244, 224);
-            this.Label_InGame_Word_Filter_Details.Name = "Label_InGame_Word_Filter_Details";
-            this.Label_InGame_Word_Filter_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_InGame_Word_Filter_Details.TabIndex = 240;
-            this.Label_InGame_Word_Filter_Details.Text = "Changes the In-Game Chat \"censor\" or word filter.";
-            this.Label_InGame_Word_Filter_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.BackColor = System.Drawing.Color.Transparent;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Location = new System.Drawing.Point(607, 73);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(154, 25);
+            this.button2.TabIndex = 232;
+            this.button2.Text = "Download";
+            this.button2.UseVisualStyleBackColor = false;
             // 
-            // Label_Enable_Affinity_Range_Details
+            // button4
             // 
-            this.Label_Enable_Affinity_Range_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Enable_Affinity_Range_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Enable_Affinity_Range_Details.Location = new System.Drawing.Point(247, 8);
-            this.Label_Enable_Affinity_Range_Details.Name = "Label_Enable_Affinity_Range_Details";
-            this.Label_Enable_Affinity_Range_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Enable_Affinity_Range_Details.TabIndex = 223;
-            this.Label_Enable_Affinity_Range_Details.Text = "Allows the game to run on a certain CPU core count set by the Calculator";
-            this.Label_Enable_Affinity_Range_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button4.BackColor = System.Drawing.Color.Transparent;
+            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button4.Location = new System.Drawing.Point(607, 113);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(154, 25);
+            this.button4.TabIndex = 234;
+            this.button4.Text = "Install";
+            this.button4.UseVisualStyleBackColor = false;
             // 
-            // Label_Affinity_Core_Range_Details
+            // label18
             // 
-            this.Label_Affinity_Core_Range_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Affinity_Core_Range_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Affinity_Core_Range_Details.Location = new System.Drawing.Point(246, 61);
-            this.Label_Affinity_Core_Range_Details.Name = "Label_Affinity_Core_Range_Details";
-            this.Label_Affinity_Core_Range_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Affinity_Core_Range_Details.TabIndex = 224;
-            this.Label_Affinity_Core_Range_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
-    "itive way";
-            this.Label_Affinity_Core_Range_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label18.BackColor = System.Drawing.Color.Transparent;
+            this.label18.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            this.label18.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label18.Location = new System.Drawing.Point(11, 11);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(177, 14);
+            this.label18.TabIndex = 210;
+            this.label18.Text = "Client Side Mods:";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
-            // Label_Clear_Crash_Logs_Details
+            // TabPage_ModLoader_Client
             // 
-            this.Label_Clear_Crash_Logs_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Clear_Crash_Logs_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Clear_Crash_Logs_Details.Location = new System.Drawing.Point(246, 98);
-            this.Label_Clear_Crash_Logs_Details.Name = "Label_Clear_Crash_Logs_Details";
-            this.Label_Clear_Crash_Logs_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Clear_Crash_Logs_Details.TabIndex = 225;
-            this.Label_Clear_Crash_Logs_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
-    "itive way";
-            this.Label_Clear_Crash_Logs_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.TabPage_ModLoader_Client.Controls.Add(this.label17);
+            this.TabPage_ModLoader_Client.Controls.Add(this.button3);
+            this.TabPage_ModLoader_Client.Controls.Add(this.button5);
+            this.TabPage_ModLoader_Client.Controls.Add(this.listView1);
+            this.TabPage_ModLoader_Client.Controls.Add(this.label18);
+            this.TabPage_ModLoader_Client.Location = new System.Drawing.Point(0, 26);
+            this.TabPage_ModLoader_Client.Name = "TabPage_ModLoader_Client";
+            this.TabPage_ModLoader_Client.Size = new System.Drawing.Size(830, 293);
+            this.TabPage_ModLoader_Client.TabIndex = 3;
+            this.TabPage_ModLoader_Client.Text = "Client";
+            this.TabPage_ModLoader_Client.UseVisualStyleBackColor = true;
             // 
-            // Label_Clear_NFSWO_Logs_Details
+            // button3
             // 
-            this.Label_Clear_NFSWO_Logs_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Clear_NFSWO_Logs_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Clear_NFSWO_Logs_Details.Location = new System.Drawing.Point(246, 133);
-            this.Label_Clear_NFSWO_Logs_Details.Name = "Label_Clear_NFSWO_Logs_Details";
-            this.Label_Clear_NFSWO_Logs_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Clear_NFSWO_Logs_Details.TabIndex = 226;
-            this.Label_Clear_NFSWO_Logs_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
-    "itive way";
-            this.Label_Clear_NFSWO_Logs_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button3.BackColor = System.Drawing.Color.Transparent;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.Location = new System.Drawing.Point(607, 113);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(154, 25);
+            this.button3.TabIndex = 237;
+            this.button3.Text = "Install";
+            this.button3.UseVisualStyleBackColor = false;
             // 
-            // Label_Clear_Server_Mods_Details
+            // button5
             // 
-            this.Label_Clear_Server_Mods_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Clear_Server_Mods_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Clear_Server_Mods_Details.Location = new System.Drawing.Point(246, 168);
-            this.Label_Clear_Server_Mods_Details.Name = "Label_Clear_Server_Mods_Details";
-            this.Label_Clear_Server_Mods_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Clear_Server_Mods_Details.TabIndex = 227;
-            this.Label_Clear_Server_Mods_Details.Text = "Starting Range of the Core Count. Affects Games Performance in a Negative and Pos" +
-    "itive way";
-            this.Label_Clear_Server_Mods_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button5.BackColor = System.Drawing.Color.Transparent;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Location = new System.Drawing.Point(607, 73);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(154, 25);
+            this.button5.TabIndex = 236;
+            this.button5.Text = "Disable";
+            this.button5.UseVisualStyleBackColor = false;
             // 
-            // button1
+            // listView1
             // 
-            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(181)))), ((int)(((byte)(191)))));
-            this.button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(58)))), ((int)(((byte)(76)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(200)))), ((int)(((byte)(0)))));
-            this.button1.Location = new System.Drawing.Point(13, 19);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(222, 24);
-            this.button1.TabIndex = 229;
-            this.button1.Text = "Concept Error Textbox";
-            this.button1.UseVisualStyleBackColor = true;
+            this.listView1.HideSelection = false;
+            this.listView1.Location = new System.Drawing.Point(14, 73);
+            this.listView1.MultiSelect = false;
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(544, 203);
+            this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.listView1.TabIndex = 235;
+            this.listView1.UseCompatibleStateImageBehavior = false;
             // 
-            // Label_Verify_Scan_Details
+            // label17
             // 
-            this.Label_Verify_Scan_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Verify_Scan_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Verify_Scan_Details.Location = new System.Drawing.Point(242, 16);
-            this.Label_Verify_Scan_Details.Name = "Label_Verify_Scan_Details";
-            this.Label_Verify_Scan_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Verify_Scan_Details.TabIndex = 227;
-            this.Label_Verify_Scan_Details.Text = "Please select \"Start Scan\" To begin Validating Gamefiles";
-            this.Label_Verify_Scan_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // Label_Verify_Scan_Scripts_Details
-            // 
-            this.Label_Verify_Scan_Scripts_Details.BackColor = System.Drawing.Color.Transparent;
-            this.Label_Verify_Scan_Scripts_Details.ForeColor = System.Drawing.Color.DarkGray;
-            this.Label_Verify_Scan_Scripts_Details.Location = new System.Drawing.Point(242, 48);
-            this.Label_Verify_Scan_Scripts_Details.Name = "Label_Verify_Scan_Scripts_Details";
-            this.Label_Verify_Scan_Scripts_Details.Size = new System.Drawing.Size(576, 18);
-            this.Label_Verify_Scan_Scripts_Details.TabIndex = 228;
-            this.Label_Verify_Scan_Scripts_Details.Text = "Allows the deletion of the scripts folder that contains asi mods if installed";
-            this.Label_Verify_Scan_Scripts_Details.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.label17.BackColor = System.Drawing.Color.Transparent;
+            this.label17.ForeColor = System.Drawing.Color.DarkGray;
+            this.label17.Location = new System.Drawing.Point(11, 36);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(576, 18);
+            this.label17.TabIndex = 238;
+            this.label17.Text = "Game mods that are installed by the user. Note: Some server side mods will overwr" +
+    "ite client side mods";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // Screen_Settings
             // 
@@ -2752,6 +2962,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Settings)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Button_Close)).EndInit();
+            this.TabPage_Game_Server_Mod_Packs.ResumeLayout(false);
+            this.control_TabControl1.ResumeLayout(false);
+            this.TabPage_ModLoader_Server.ResumeLayout(false);
+            this.TabPage_ModLoader_Client.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2766,8 +2980,6 @@
         public System.Windows.Forms.TextBox Input_Console;
         public System.Windows.Forms.Button Button_Save;
         public System.Windows.Forms.Button Button_Exit;
-        private System.Windows.Forms.TabPage TabPage_Launcher;
-        private System.Windows.Forms.TabPage TabPage_Launcher_Downloader;
         public System.Windows.Forms.Label Label_GameFiles_Downloader_Raw;
         public System.Windows.Forms.Label Label_GameFiles_Downloader_Pack;
         public System.Windows.Forms.Label Label_GameFiles_Downloader_LZMA;
@@ -2786,28 +2998,23 @@
         public System.Windows.Forms.CheckBox CheckBox_Alt_WebCalls;
         public System.Windows.Forms.Label Label_WebClient_Timeout;
         public System.Windows.Forms.NumericUpDown NumericUpDown_WebClient_Timeout;
-        private System.Windows.Forms.TabPage TabPage_Launcher_Proxy;
         public System.Windows.Forms.Label Label_Proxy_Port;
         public System.Windows.Forms.NumericUpDown NumericUpDown_Proxy_Port;
         public System.Windows.Forms.CheckBox CheckBox_Proxy;
         public System.Windows.Forms.CheckBox CheckBox_Proxy_Domain;
         public System.Windows.Forms.CheckBox CheckBox_Host_to_IP;
-        private System.Windows.Forms.TabPage TabPage_Launcher_Miscellaneous;
         public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Selected_Details;
         public System.Windows.Forms.Label Label_Launcher_Builds_Branch_Details;
         public System.Windows.Forms.Label Label_Launcher_Builds_Branch;
         public System.Windows.Forms.CheckBox CheckBox_RPC;
         public System.Windows.Forms.CheckBox CheckBox_JSON_Update_Cache;
         public System.Windows.Forms.CheckBox CheckBox_Theme_Support;
-        private System.Windows.Forms.TabPage TabPage_Game;
-        private System.Windows.Forms.TabPage TabPage_API;
         public System.Windows.Forms.Label Label_API_Status_Five;
         public System.Windows.Forms.Label Label_API_Status_Four;
         public System.Windows.Forms.Label Label_API_Status_Three;
         public System.Windows.Forms.Label Label_API_Status_Two;
         public System.Windows.Forms.Label Label_API_Status_One;
         public System.Windows.Forms.Label Label_API_Status;
-        private System.Windows.Forms.TabPage TabPage_About;
         private System.Windows.Forms.Label label5;
         public System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label3;
@@ -2842,18 +3049,12 @@
         public System.Windows.Forms.Label Label_Proxy_Logging_Details;
         public System.Windows.Forms.Label Label_Proxy_Logging;
         public Core.Theme.Control_TabControl TabControl_Game;
-        private System.Windows.Forms.TabPage TabPage_Game_General;
         public System.Windows.Forms.CheckBox CheckBox_InGame_Word_Filter;
         public System.Windows.Forms.Button Button_Game_User_Settings;
         public System.Windows.Forms.Label Label_Game_Settings;
         public System.Windows.Forms.Button Button_Change_Game_Path;
         public System.Windows.Forms.Label Label_Game_Files;
-        private System.Windows.Forms.TabPage TabPage_Game_Verify_Hash;
-        private System.Windows.Forms.TabPage TabPage_Game_Security_Center;
         public Core.Theme.Control_TabControl TabControl_Security_Center;
-        private System.Windows.Forms.TabPage TabPage_Security_Center_Firewall;
-        private System.Windows.Forms.TabPage TabPage_Security_Center_Defender;
-        private System.Windows.Forms.TabPage TabPage_Security_Center_Permissons;
         private System.Windows.Forms.Button ButtonFirewallRulesAPI;
         private System.Windows.Forms.Button ButtonFirewallRulesCheck;
         private System.Windows.Forms.Button ButtonFirewallRulesAddAll;
@@ -2882,7 +3083,6 @@
         public System.Windows.Forms.GroupBox GroupBox_Firewall;
         public System.Windows.Forms.TextBox TextBox_Console_Firewall;
         public System.Windows.Forms.Timer Clock;
-        private System.Windows.Forms.TabPage TabPage_Experiments;
         public System.Windows.Forms.Button Button_Experiments;
         public System.Windows.Forms.Label label7;
         public System.Windows.Forms.ComboBox ComboBox_Proxy_Logging;
@@ -2890,7 +3090,6 @@
         public System.Windows.Forms.Label Label_Proxy_GZip_Version_Selected_Details;
         public System.Windows.Forms.Label Label_Proxy_GZip_Version_Details;
         public System.Windows.Forms.Label Label_Proxy_GZip_Version;
-        private System.Windows.Forms.TabPage TabPage_Game_Miscellaneous;
         public System.Windows.Forms.Button Button_Clear_NFSWO_Logs;
         public System.Windows.Forms.Button Button_Clear_Server_Mods;
         public System.Windows.Forms.Button Button_Clear_Crash_Logs;
@@ -2954,5 +3153,36 @@
         public System.Windows.Forms.Button button1;
         public System.Windows.Forms.Label Label_Verify_Scan_Details;
         public System.Windows.Forms.Label Label_Verify_Scan_Scripts_Details;
+        public System.Windows.Forms.TabPage TabPage_Launcher_Downloader;
+        public System.Windows.Forms.TabPage TabPage_Launcher_Proxy;
+        public System.Windows.Forms.TabPage TabPage_Launcher_Miscellaneous;
+        public System.Windows.Forms.TabPage TabPage_Game_General;
+        public System.Windows.Forms.TabPage TabPage_Game_Verify_Hash;
+        public System.Windows.Forms.TabPage TabPage_Game_Security_Center;
+        public System.Windows.Forms.TabPage TabPage_Experiments;
+        public System.Windows.Forms.TabPage TabPage_Game_Miscellaneous;
+        public System.Windows.Forms.TabPage TabPage_Launcher;
+        public System.Windows.Forms.TabPage TabPage_Game;
+        public System.Windows.Forms.TabPage TabPage_API;
+        public System.Windows.Forms.TabPage TabPage_About;
+        public System.Windows.Forms.TabPage TabPage_Security_Center_Firewall;
+        public System.Windows.Forms.TabPage TabPage_Security_Center_Defender;
+        public System.Windows.Forms.TabPage TabPage_Security_Center_Permissons;
+        private System.Windows.Forms.TabPage TabPage_Game_Server_Mod_Packs;
+        public Core.Theme.Control_TabControl control_TabControl1;
+        public System.Windows.Forms.TabPage TabPage_ModLoader_Server;
+        public System.Windows.Forms.ComboBox comboBox3;
+        public System.Windows.Forms.Label label14;
+        public System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ListView ListView_Server_List;
+        public System.Windows.Forms.Button button4;
+        public System.Windows.Forms.Button button2;
+        public System.Windows.Forms.TabPage TabPage_ModLoader_Client;
+        private System.Windows.Forms.Label label18;
+        public System.Windows.Forms.Button button3;
+        public System.Windows.Forms.Button button5;
+        private System.Windows.Forms.ListView listView1;
+        public System.Windows.Forms.Label label17;
     }
 }

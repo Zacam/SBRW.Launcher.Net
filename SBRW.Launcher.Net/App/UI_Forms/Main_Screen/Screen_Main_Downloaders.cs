@@ -769,7 +769,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
                     catch (Exception Error)
                     {
-                        LogToFileAddons.OpenLog("New Download Game Files", string.Empty, Error, string.Empty, true);
+                        LogToFileAddons.OpenLog("PACK DOWNLOADER", string.Empty, Error, string.Empty, true);
                     }
                 }
                 else if (Save_Settings.Downloader_Game_LZMA())
@@ -873,7 +873,15 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                 }
                 else
                 {
-                    Log.Debug("[GAME DOWNLOADER] RAW DOWNLOADER NOT IMPLEMENTED");
+                    try
+                    {
+                        //@DavidCarbon -> 9-02-2026
+                        StartScanner_Click();
+                    }
+                    catch (Exception Error)
+                    {
+                        LogToFileAddons.OpenLog("RAW DOWNLOADER", string.Empty, Error, string.Empty, true);
+                    }
                 }
             });
         }

@@ -1,13 +1,24 @@
 ﻿#region Usings
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using SBRW.Launcher.App.UI_Forms.Parent_Screen;
+using SBRW.Launcher.App.UI_Forms.Settings_Screen;
 using SBRW.Launcher.Core.Cache;
 using SBRW.Launcher.Core.Discord.Reference_.List_;
 using SBRW.Launcher.Core.Discord.RPC_;
+using SBRW.Launcher.Core.Downloader;
+using SBRW.Launcher.Core.Downloader.Log_;
+using SBRW.Launcher.Core.Downloader.Models_;
 using SBRW.Launcher.Core.Extension.Hash_;
 using SBRW.Launcher.Core.Extension.Logging_;
+using SBRW.Launcher.Core.Extension.Numbers_;
 using SBRW.Launcher.Core.Extension.String_;
+using SBRW.Launcher.Core.Extension.Time_;
 using SBRW.Launcher.Core.Extension.Validation_;
+using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
+using SBRW.Launcher.Core.Extension.Web_;
 using SBRW.Launcher.Core.Extra.File_;
+using SBRW.Launcher.Core.Extra.File_.Save_;
 using SBRW.Launcher.Core.Proxy.Nancy_;
 using SBRW.Launcher.Core.Recommended.Process_;
 using SBRW.Launcher.Core.Recommended.Time_;
@@ -21,25 +32,21 @@ using SBRW.Launcher.RunTime.LauncherCore.Logger;
 using SBRW.Launcher.RunTime.LauncherCore.ModNet;
 using SBRW.Launcher.RunTime.LauncherCore.ModNet.JSON;
 using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using SBRW.Launcher.RunTime.SystemPlatform.Windows;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net.Cache;
 using System.Net;
+using System.Net.Cache;
+using System.Net.Http;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using SBRW.Launcher.Core.Extension.Web_;
-using SBRW.Launcher.Core.Extension.Validation_.Json_.Newtonsoft_;
-using SBRW.Launcher.App.UI_Forms.Parent_Screen;
-using SBRW.Launcher.RunTime.SystemPlatform.Unix;
-using SBRW.Launcher.Core.Extra.File_.Save_;
-using SBRW.Launcher.Core.Extension.Time_;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -156,6 +163,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                     }
                 }
 
+                Proxy_Settings.ConnectionMaxRetries = Launcher_Value.Launcher_Select_Server_JSON.Server_Proxy_Connection_Retries;
                 Launcher_Value.Launcher_Proxy = Proxy_Settings.Running();
 
                 Nfswstarted = new Thread(() =>
@@ -1375,5 +1383,172 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void Clean_Legacy_Verify_Logs()
+        {
+            string[] filestocheck = { "validfiles.dat", "invalidfiles.dat", "Verify.log" };
+            foreach (string file in filestocheck)
+            {
+                if (File.Exists(file))
+                {
+                    try { File.Delete(file); }
+                    catch (Exception Error)
+                    {
+                        Log_Verify.Error("File: " + file + " Error: " + Error.Message);
+                    }
+                }
+            }
+        }
+        /// <summary>
+        /// Implementation of ILogger that routes messages to the launcher's Log_Verify static class.
+        /// </summary>
+        public class Download_Logger : Downloader_ILogger
+        {
+            public void Info(string message)
+            {
+                Log_Verify.Info(message);
+            }
+
+            public void Warn(string message)
+            {
+                Log_Verify.Error("WARN: " + message);
+            }
+
+            public void Error(string message, Exception? ex = null)
+            {
+                Log_Verify.Error(message);
+                if (ex != null)
+                {
+                    Log_Verify.Error("Exception: " + ex.Message);
+                    Log_Verify.ErrorFR(ex.ToString());
+                }
+            }
+
+            public void Invalid(string message)
+            {
+                Log_Verify.Invalid("File: " + message);
+            }
+
+            public void Deleted(string message)
+            {
+                Log_Verify.Deleted("File: " + message);
+            }
+
+            public void Missing(string message)
+            {
+                Log_Verify.Missing("File: " + message);
+            }
+
+            public void Downloaded(string message)
+            {
+                Log_Verify.Downloaded("File: " + message);
+            }
+        }
+        /// <summary>
+        /// This is called on the UI thread automatically by IProgress
+        /// </summary>
+        /// <param name="In_Progress"></param>
+        private void ReportProgress(Download_Raw_Progress_Model In_Progress)
+        {
+            File_Game_Download_Progress = In_Progress;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Live_Result"></param>
+        private void HandleVerificationComplete(Download_Raw_Result_Model Live_Result)
+        {
+            /**
+            Live_Result.
+            if (Live_Result.WasCancelled)
+            {
+                VerifyHashText.Text = "Verify Hash process has been Terminated";
+            }
+            else if (Live_Result.FilesFailedToDownload > 0)
+            {
+                VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
+                VerifyHashText.Text = $"{Live_Result.FilesFailedToDownload} Files Failed to Download. Check Log for Details";
+                DownloadProgressText.Text = $"{Live_Result.FilesSuccessfullyDownloaded} files downloaded. {result.FilesFailedToDownload} failed.";
+
+                // Prompt to open log
+                if (("Verify Hash has encountered Download Errors.\n" +
+                    "Would you like to Open Verify.Log").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    if (File.Exists(Log_Location.LogVerify))
+                    {
+                        Process.Start(Log_Location.LogCurrentFolder);
+                        Process.Start(Log_Location.LogVerify);
+                    }
+                }
+            }
+            else if (Live_Result.TotalFilesMissingOrInvalid == 0)
+            {
+                VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
+                VerifyHashText.Text = "Excellent News! There are ZERO\nmissing or invalid Gamefiles!";
+                DownloadProgressBar.Visible = false;
+                DownloadProgressText.Visible = false;
+                SetGameIntegrityGood();
+            }
+            else // Downloads finished successfully
+            {
+                VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
+                VerifyHashText.Text = "Yay! Scanning and Downloading\n is now completed on Gamefiles";
+                DownloadProgressText.Text = $"{Live_Result.FilesSuccessfullyDownloaded} Invalid/Missing File(s) were downloaded";
+                SetGameIntegrityGood();
+            }
+            */
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        public async void StartScanner_Click()
+        {
+            if (File_Game_Downloading) return;
+
+            File_Game_Downloading = true;
+
+            TabControl_Login.SelectedTab = TabPage_Downloader;
+
+            Download_Raw_Config config = new Download_Raw_Config
+            {
+                GamePath = Save_Settings.Game_Files_Path(),
+                CdnBaseUrl = Save_Settings.Live_Data.Launcher_CDN,
+                CdnUnpackedPath = "/unpacked",
+                ChecksumFileName = "checksums.dat",
+                ChecksumFileSaveLocation = Path.Combine(Locations.LauncherDataFolder, "Dat", "Checksums.dat"),
+                CleanScriptsFolder = Save_Settings.Verify_Script_Removal()
+            };
+
+            Raw_Downloader = new Download_Raw(config, new Download_Logger(), Http_Client);
+
+            // 3. Set up progress reporting
+            var progress = new Progress<Download_Raw_Progress_Model>(ReportProgress);
+            Cancellation_Token_Download = new CancellationTokenSource();
+
+            // 4. Run the verifier
+            try
+            {
+                Download_Raw_Result_Model result = await Raw_Downloader.RunAsync(progress, Cancellation_Token_Download.Token);
+                HandleVerificationComplete(result);
+            }
+            catch (Exception ex)
+            {
+                Log.Error("VERIFY HASH: A critical error occurred. " + ex.Message);
+                /*
+                VerifyHashText.Text = "A critical error occurred. Check logs.";
+                */
+            }
+            finally
+            {
+                File_Game_Downloading = false;
+                TabControl_Login.SelectedTab = Save_Settings.Account_Manager() ? TabPage_Login_Account_Manager : TabPage_Login_Classic;
+                Cancellation_Token_Download?.Dispose();
+                Cancellation_Token_Download = null;
+            }
+        }
     }
 }

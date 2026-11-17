@@ -395,10 +395,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             /* Save Settings */
             Save_Settings.Save();
 
-            if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
-            {
-                Button_Save.Text = "SAVED";
-            }
+            Button_Save_Text_Changed(false);
 
             if (RestartRequired)
             {
@@ -464,7 +461,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// <param name="e"></param>
         private void Button_Experiments_Click(object sender, EventArgs e)
         {
-            
+            Button_Game_Verify_Files_Click(null, null);
         }
         #endregion
         /// <summary>
@@ -532,9 +529,22 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        private void Button_Save_Text_Changed(bool Text_Reset)
+        {
+            if (TabControl_Shared_Hub.SelectedTab == TabPage_Settings)
+            {
+                Button_Save.Text = Text_Reset ? "SAVE" : "SAVED";
+            }
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheckBox_RPC_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_RPC.Text = $"Discord RPC {(CheckBox_RPC.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -544,6 +554,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_JSON_Update_Cache_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_JSON_Update_Cache.Text = $"JSON Cache {(CheckBox_JSON_Update_Cache.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -553,6 +564,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Theme_Support_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Theme_Support.Text = $"Custom Theme {(CheckBox_Theme_Support.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -562,6 +574,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Account_Manager_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Account_Manager.Text = $"Account Manager {(CheckBox_Account_Manager.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -571,6 +584,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Alt_WebCalls_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Alt_WebCalls.Text = $"Alternative WebCalls {(CheckBox_Alt_WebCalls.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -580,6 +594,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Proxy_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Proxy.Text = $"Proxy {(CheckBox_Proxy.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -589,6 +604,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Host_to_IP_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Host_to_IP.Text = $"IP Converter {(CheckBox_Host_to_IP.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -598,6 +614,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Proxy_Domain_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Proxy_Domain.Text = $"Proxy Domain {(CheckBox_Proxy_Domain.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -607,6 +624,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Custom_Certificate_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Custom_Certificate.Text = $"Custom Certificate {(CheckBox_Custom_Certificate.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -616,6 +634,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Enable_Affinity_Range_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Enable_Affinity_Range.Text = $"Affinity Range {(CheckBox_Enable_Affinity_Range.Checked ? "(Enabled)" :"(Disabled)")}";
+            Button_Save_Text_Changed(true);
             Enable_Affinity_Range(CheckBox_Enable_Affinity_Range.Checked);
         }
         /// <summary>
@@ -626,6 +645,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_Verify_Scan_Scripts_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_Verify_Scan_Scripts.Text = $"Remove Script Files {(CheckBox_Verify_Scan_Scripts.Checked ? "(Enabled)" : "(Disabled)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// 
@@ -635,6 +655,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
         private void CheckBox_InGame_Word_Filter_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox_InGame_Word_Filter.Text = $"Chat Filter {(CheckBox_InGame_Word_Filter.Enabled ? (CheckBox_InGame_Word_Filter.Checked ? "(Enabled)" : "(Disabled)") : "(Pending)")}";
+            Button_Save_Text_Changed(true);
         }
         /// <summary>
         /// Settings Cancel
@@ -821,6 +842,8 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
                 {
                     ButtonsColorSet(Button_Save_Setup, 0, true);
                 }
+
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -888,6 +911,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Proxy_Logging_Selected_Details.Text = ((Json_List_Proxy_Logging)ComboBox_Proxy_Logging.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -900,6 +924,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Proxy_GZip_Version_Selected_Details.Text = ((Json_List_Proxy_GZip_Version)ComboBox_Proxy_GZip_Version.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -912,6 +937,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Launcher_Logging_Selected_Details.Text = ((Json_List_Launcher_Logging)ComboBox_Launcher_Logging.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -924,6 +950,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Launcher_Logging_Cleanup_Selected_Details.Text = ((Json_List_Launcher_Logging_Cleanup)ComboBox_Launcher_Logging_Cleanup.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -936,6 +963,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Launcher_Builds_Branch_Selected_Details.Text = ((Json_List_Launcher_Builds)ComboBox_Launcher_Builds_Branch.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         /// <summary>
@@ -948,6 +976,7 @@ namespace SBRW.Launcher.App.UI_Forms.Settings_Screen
             if (!Screen_Instance.DisposedForm())
             {
                 Label_Display_Timer_Selected_Details.Text = ((Json_List_Tile_Window_Display_Timer)ComboBox_Display_Timer.SelectedItem).Details;
+                Button_Save_Text_Changed(true);
             }
         }
         #region Settings Load

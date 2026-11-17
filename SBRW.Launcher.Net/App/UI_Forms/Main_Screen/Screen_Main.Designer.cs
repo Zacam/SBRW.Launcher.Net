@@ -104,6 +104,9 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Button_Play_OR_Update = new System.Windows.Forms.Button();
             this.Button_Logout = new System.Windows.Forms.Button();
             this.Label_Client_Ping = new System.Windows.Forms.Label();
+            this.TabPage_Downloader = new System.Windows.Forms.TabPage();
+            this.Button_Downloader_Stop = new System.Windows.Forms.Button();
+            this.Button_Downloader_Start = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Logo)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Server_Banner)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Picture_Bar_Outline)).BeginInit();
@@ -130,6 +133,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Password_Register)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Email_Register)).BeginInit();
             this.TabPage_Login_Success.SuspendLayout();
+            this.TabPage_Downloader.SuspendLayout();
             this.SuspendLayout();
             // 
             // Picture_Logo
@@ -578,9 +582,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             // Panel_Form_Screens
             // 
             this.Panel_Form_Screens.BackColor = System.Drawing.Color.Transparent;
-            this.Panel_Form_Screens.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Form_Screens.ForeColor = System.Drawing.Color.Transparent;
-            this.Panel_Form_Screens.Location = new System.Drawing.Point(0, 0);
+            this.Panel_Form_Screens.Location = new System.Drawing.Point(871, 79);
             this.Panel_Form_Screens.Name = "Panel_Form_Screens";
             this.Panel_Form_Screens.Size = new System.Drawing.Size(891, 529);
             this.Panel_Form_Screens.TabIndex = 44;
@@ -623,6 +626,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.TabControl_Login.Controls.Add(this.TabPage_Login_Account_Manager);
             this.TabControl_Login.Controls.Add(this.TabPage_Register);
             this.TabControl_Login.Controls.Add(this.TabPage_Login_Success);
+            this.TabControl_Login.Controls.Add(this.TabPage_Downloader);
             this.TabControl_Login.DoubleBufferTabPages = true;
             this.TabControl_Login.Location = new System.Drawing.Point(587, 159);
             this.TabControl_Login.Multiline = true;
@@ -985,6 +989,37 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             this.Label_Client_Ping.Text = "Your Ping to the Server";
             this.Label_Client_Ping.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // TabPage_Downloader
+            // 
+            this.TabPage_Downloader.Controls.Add(this.Button_Downloader_Start);
+            this.TabPage_Downloader.Controls.Add(this.Button_Downloader_Stop);
+            this.TabPage_Downloader.Location = new System.Drawing.Point(0, 48);
+            this.TabPage_Downloader.Name = "TabPage_Downloader";
+            this.TabPage_Downloader.Size = new System.Drawing.Size(270, 320);
+            this.TabPage_Downloader.TabIndex = 4;
+            this.TabPage_Downloader.Text = "Downloader";
+            this.TabPage_Downloader.UseVisualStyleBackColor = true;
+            // 
+            // Button_Downloader_Stop
+            // 
+            this.Button_Downloader_Stop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Downloader_Stop.Location = new System.Drawing.Point(20, 229);
+            this.Button_Downloader_Stop.Name = "Button_Downloader_Stop";
+            this.Button_Downloader_Stop.Size = new System.Drawing.Size(231, 30);
+            this.Button_Downloader_Stop.TabIndex = 156;
+            this.Button_Downloader_Stop.Text = "Stop";
+            this.Button_Downloader_Stop.UseVisualStyleBackColor = true;
+            // 
+            // Button_Downloader_Start
+            // 
+            this.Button_Downloader_Start.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Button_Downloader_Start.Location = new System.Drawing.Point(20, 182);
+            this.Button_Downloader_Start.Name = "Button_Downloader_Start";
+            this.Button_Downloader_Start.Size = new System.Drawing.Size(231, 30);
+            this.Button_Downloader_Start.TabIndex = 157;
+            this.Button_Downloader_Start.Text = "Start";
+            this.Button_Downloader_Start.UseVisualStyleBackColor = true;
+            // 
             // Screen_Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -1055,6 +1090,7 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Password_Register)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Email_Register)).EndInit();
             this.TabPage_Login_Success.ResumeLayout(false);
+            this.TabPage_Downloader.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1135,5 +1171,8 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public PictureBox PictureBox_Password_Confirm_Register;
         public PictureBox PictureBox_Password_Register;
         public PictureBox PictureBox_Email_Register;
+        private TabPage TabPage_Downloader;
+        public Button Button_Downloader_Stop;
+        public Button Button_Downloader_Start;
     }
 }

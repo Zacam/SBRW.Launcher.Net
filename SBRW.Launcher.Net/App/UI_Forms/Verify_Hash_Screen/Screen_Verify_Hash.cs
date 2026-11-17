@@ -1,17 +1,23 @@
-﻿using SBRW.Launcher.RunTime.InsiderKit;
-using SBRW.Launcher.RunTime.LauncherCore.Global;
-using SBRW.Launcher.RunTime.LauncherCore.Logger;
-using SBRW.Launcher.RunTime.LauncherCore.ModNet;
-using SBRW.Launcher.RunTime.LauncherCore.Support;
-using SBRW.Launcher.RunTime.SystemPlatform.Unix;
+﻿using SBRW.Launcher.App.UI_Forms.Main_Screen;
+using SBRW.Launcher.App.UI_Forms.Verify_Hash_Screen;
 using SBRW.Launcher.Core.Cache;
+using SBRW.Launcher.Core.Discord.RPC_;
+using SBRW.Launcher.Core.Downloader;
+using SBRW.Launcher.Core.Downloader.Models_;
 using SBRW.Launcher.Core.Extension.Hash_;
 using SBRW.Launcher.Core.Extension.Logging_;
 using SBRW.Launcher.Core.Extension.Time_;
 using SBRW.Launcher.Core.Extension.Web_;
-using SBRW.Launcher.Core.Discord.RPC_;
 using SBRW.Launcher.Core.Extra.File_;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.Core.Theme;
+using SBRW.Launcher.RunTime.InsiderKit;
+using SBRW.Launcher.RunTime.LauncherCore.Global;
+using SBRW.Launcher.RunTime.LauncherCore.Logger;
+using SBRW.Launcher.RunTime.LauncherCore.ModNet;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
+using SBRW.Launcher.RunTime.LauncherCore.Visuals;
+using SBRW.Launcher.RunTime.SystemPlatform.Unix;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,38 +26,27 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Cache;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
-using SBRW.Launcher.Core.Theme;
-using System.Net.Cache;
-using SBRW.Launcher.App.UI_Forms.Main_Screen;
-using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 
 namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
 {
     public partial class Screen_Verify_Hash : Form
     {
         private static bool IsVerifyHashOpen { get; set; }
-        /* VerifyHash */
-        public string[][] ScannedHashes { get; set; } = new string[0][];
-        public int FilesToScan { get; set; }
-        public int BadFiles { get; set; }
-        public int TotalFilesScanned { get; set; }
-        public int CurrentCount { get; set; }
-        public int RedownloadedCount { get; set; }
-        public int RedownloadErrorCount { get; set; }
-        public List<string> InvalidFileList { get; set; } = new List<string>();
-        public List<string> ValidFileList { get; set; } = new List<string>();
-        public string FinalCDNURL { get; set; } = string.Empty;
-        public static Thread? StartScan { get; set; }
-        public bool IsScanning { get; set; }
-        public static bool ForceStopScan { get; set; }
-        public static string CurrentDownloadingFile { get; set; } = string.Empty;
-        public static int DeletionError { get; set; }
-        public static bool DeletionErrorBypass { get; set; }
-        public static bool StillDownloading { get; set; }
-        public static bool DownloadErrorEncountered { get; set; }
+        /* DEBUG NEW CODE */
+
+        // Use a single, static HttpClient as recommended
+        private static readonly HttpClient _httpClient = new HttpClient();
+
+        private Download_Raw? _verifier;
+        private CancellationTokenSource? _cts;
+
+        // We still need this to prevent concurrent scans from the static OpenScreen method
+        private static bool _isScanning;
 
         public static void OpenScreen()
         {
@@ -79,7 +74,7 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
             SetVisuals();
             this.Closing += (x, CloseForm) =>
             {
-                if (IsScanning)
+                if (_isScanning)
                 {
                     if ("Do you really want to exit the VerifyHash process?".Message_Box(MessageBoxButtons.YesNo) == DialogResult.No)
                     {
@@ -87,18 +82,17 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
                     }
                     else
                     {
-                        Presence_Launcher.Status(22);
-                        IsVerifyHashOpen = false;
-                        GameScanner(false);
+                        StopScanner_Click(null, null); // Cancel the scan
                         Log_Verify.Stop = true;
                     }
                 }
                 else
                 {
-                    IsVerifyHashOpen = false;
-                    Presence_Launcher.Status(22);
                     Log_Verify.Stop = true;
                 }
+
+                IsVerifyHashOpen = false;
+                Presence_Launcher.Status(22);
             };
         }
 
@@ -107,759 +101,173 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
             VersionLabel.Text = "Version: " + Application.ProductVersion;
             Log.Core("VERIFY HASH: Opened");
 
-            if (!FunctionStatus.IsVerifyHashDisabled)
-            {
-                Log_Verify.Start();
-
-                /* Clean up previous logs and start logging */
-                string[] filestocheck = new string[] { "checksums.dat", "validfiles.dat", "invalidfiles.dat", "Verify.log" };
-                foreach (String file in filestocheck)
-                {
-                    if (File.Exists(file))
-                    {
-                        try { File.Delete(file); }
-                        catch (Exception Error)
-                        {
-                            DeletionError++;
-                            Log_Verify.Error("File: " + file + " Error: " + Error.Message);
-                            Log_Verify.ErrorIC("File: " + file + " Error: " + Error.HResult);
-                            Log_Verify.ErrorFR("File: " + file + " Error: " + Error.ToString());
-                        }
-                    }
-                }
-
-                Log_Verify.Info("VERIFYHASH: Checking Characters in URL");
-                if (Save_Settings.Live_Data.Launcher_CDN.EndsWith("/"))
-                {
-                    char[] charsToTrim = { '/' };
-                    FinalCDNURL = Save_Settings.Live_Data.Launcher_CDN.TrimEnd(charsToTrim);
-                    Log_Verify.Info("VERIFYHASH: Trimed end of CDN URL -> " + FinalCDNURL);
-                }
-                else
-                {
-                    FinalCDNURL = Save_Settings.Live_Data.Launcher_CDN;
-                    Log_Verify.Info("VERIFYHASH: Choosen CDN URL -> " + FinalCDNURL);
-                }
-            }
-            else
+            if (FunctionStatus.IsVerifyHashDisabled)
             {
                 StartScanner.Enabled = false;
+                VerifyHashText.Text = "Verify Hash has already done a Full Scan this run.\n" +
+                                      "Please restart the GameLauncher to do a New Scan.";
+                return;
             }
+
+            // Start logging
+            Log_Verify.Start();
+            CleanPreviousLogs();
         }
 
-        public void GameScanner(bool startScan)
+        private void CleanPreviousLogs()
         {
-            if (startScan)
+            string[] filestocheck = { "checksums.dat", "validfiles.dat", "invalidfiles.dat", "Verify.log" };
+            foreach (String file in filestocheck)
             {
-                if (!FunctionStatus.IsVerifyHashDisabled)
+                if (File.Exists(file))
                 {
-                    StartScan = new Thread(new ThreadStart(StartGameScanner))
+                    try { File.Delete(file); }
+                    catch (Exception Error)
                     {
-                        Name = "FileScanner",
-                        IsBackground = true
-                    };
-
-                    IsScanning = true;
-                    Log.Info("VERIFY HASH: Started Scanner");
-                    StartScan.Start();
-                }
-                else
-                {
-                    ("Verify Hash has already done a Full Scan this run.\n" +
-                        "Please restart the GameLauncher to do a New Scan.").Message_Box(MessageBoxButtons.OK);
-                }
-            }
-            else if (!startScan)
-            {
-                ForceStopScan = true;
-                IsScanning = false;
-                Log.Info("VERIFY HASH: Stopped Scanner");
-                if (DownloadErrorEncountered)
-                {
-                    DownloadErrorEncountered = false;
-
-                    if (("Verify Hash has encountered Download Errors.\n" +
-                        "Would you like to Open Verify.Log").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
-                        if (File.Exists(Log_Location.LogVerify))
-                        {
-                            Process.Start(Log_Location.LogCurrentFolder);
-                            Process.Start(Log_Location.LogVerify);
-                        }
+                        Log_Verify.Error("File: " + file + " Error: " + Error.Message);
                     }
                 }
             }
         }
 
-        private void StartGameScanner()
+        private async void StartScanner_Click(object sender, EventArgs e)
         {
+            if (_isScanning) return;
+
+            // Disable scanning for this launcher session
+            FunctionStatus.IsVerifyHashDisabled = true;
+            _isScanning = true;
+            StartScanner.Visible = false;
+            StopScanner.Visible = true;
             Presence_Launcher.Status(25);
-            Log.Info("VERIFY HASH: Checking and Deleting '.orig' Files and Symbolic Folders");
-            ScanProgressText.SafeInvokeAction(() => ScanProgressText.Text = "Removing any '.orig' Files in Game Directory");
 
-            /* START Show Warning Text */
-            VerifyHashText.SafeInvokeAction(() =>
+            // UI setup for scanning
+            VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
+            VerifyHashText.Text = "Warning:\n Stopping the Scan before it is complete\nWill result in needing to start over!";
+            ScanProgressBar.Value = 0;
+            DownloadProgressBar.Value = 0;
+            DownloadProgressBar.Visible = true;
+            DownloadProgressText.Visible = true;
+
+            // 1. Prompt user *before* starting
+            bool cleanScripts = Save_Settings.Verify_Script_Removal();
+
+            // 2. Configure the verifier
+            var config = new Download_Raw_Config
             {
-                VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-                VerifyHashText.Text = "Warning:\nIf '.orig' Files Exist\nIt will be Removed Permanently";
-            });
-            /* END Show Warning Text */
+                GamePath = Save_Settings.Live_Data.Game_Path,
+                CdnBaseUrl = Save_Settings.Live_Data.Launcher_CDN,
+                CdnUnpackedPath = "/unpacked", // From original code
+                ChecksumFileName = "checksums.dat",
+                CleanScriptsFolder = cleanScripts
+            };
 
+            // Use our logger implementation
+            _verifier = new Download_Raw(config, new Verify_Logger(), _httpClient);
+
+            // 3. Set up progress reporting
+            var progress = new Progress<Download_Raw_Progress_Model>(ReportProgress);
+            _cts = new CancellationTokenSource();
+
+            // 4. Run the verifier
             try
             {
-                DirectoryInfo InstallationDirectory = new DirectoryInfo(Save_Settings.Live_Data.Game_Path);
-
-                foreach (DirectoryInfo FoldersWeFound in InstallationDirectory.GetDirectories())
-                {
-                    if (!ForceStopScan)
-                    {
-                        foreach (FileInfo FoundFile in InstallationDirectory.EnumerateFiles("*.orig", SearchOption.AllDirectories))
-                        {
-                            if (!ForceStopScan)
-                            {
-                                try
-                                {
-                                    FoundFile.Delete();
-                                    Log_Verify.Deleted("File: " + FoundFile.Name);
-                                }
-                                catch (Exception Error)
-                                {
-                                    DeletionError++;
-                                    Log_Verify.Error("File: " + FoundFile.Name + " Error: " + Error.Message);
-                                    Log_Verify.ErrorIC("File: " + FoundFile.Name + " Error: " + Error.HResult);
-                                    Log_Verify.ErrorFR("File: " + FoundFile.Name + " Error: " + Error.ToString());
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-
-                        foreach (FileInfo FoundFile in FoldersWeFound.EnumerateFiles("*.orig", SearchOption.AllDirectories))
-                        {
-                            if (!ForceStopScan)
-                            {
-                                try
-                                {
-                                    FoundFile.Delete();
-                                    Log_Verify.Deleted("File: " + FoundFile.Name);
-                                }
-                                catch (Exception Error)
-                                {
-                                    DeletionError++;
-                                    Log_Verify.Error("File: " + FoundFile.Name + " Error: " + Error.Message);
-                                    Log_Verify.ErrorIC("File: " + FoundFile.Name + " Error: " + Error.HResult);
-                                    Log_Verify.ErrorFR("File: " + FoundFile.Name + " Error: " + Error.ToString());
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-
-                        foreach (DirectoryInfo FoundDirectory in InstallationDirectory.EnumerateDirectories())
-                        {
-                            if (!ForceStopScan)
-                            {
-                                if (ModNetHandler.IsSymbolic(FoundDirectory.FullName))
-                                {
-                                    if (Directory.Exists(FoundDirectory.FullName))
-                                    {
-                                        try
-                                        {
-                                            Directory.Delete(FoundDirectory.FullName, true);
-                                            Log_Verify.Deleted("Folder: " + FoundDirectory.Name);
-                                        }
-                                        catch (Exception Error)
-                                        {
-                                            DeletionError++;
-                                            Log_Verify.Error("Folder: " + FoundDirectory.Name + " Error: " + Error.Message);
-                                            Log_Verify.ErrorIC("Folder: " + FoundDirectory.Name + " Error: " + Error.HResult);
-                                            Log_Verify.ErrorFR("Folder: " + FoundDirectory.Name + " Error: " + Error.ToString());
-                                        }
-                                    }
-                                    else if (File.Exists(FoundDirectory.FullName))
-                                    {
-                                        try
-                                        {
-                                            File.Delete(FoundDirectory.FullName);
-                                            Log_Verify.Deleted("File: " + FoundDirectory.Name);
-                                        }
-                                        catch (Exception Error)
-                                        {
-                                            DeletionError++;
-                                            Log_Verify.Error("File: " + FoundDirectory.Name + " Error: " + Error.Message);
-                                            Log_Verify.ErrorIC("File: " + FoundDirectory.Name + " Error: " + Error.HResult);
-                                            Log_Verify.ErrorFR("File: " + FoundDirectory.Name + " Error: " + Error.ToString());
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-
-                        foreach (DirectoryInfo FoundDirectory in FoldersWeFound.EnumerateDirectories())
-                        {
-                            if (!ForceStopScan)
-                            {
-                                if (ModNetHandler.IsSymbolic(FoundDirectory.FullName))
-                                {
-                                    if (Directory.Exists(FoundDirectory.FullName))
-                                    {
-                                        try
-                                        {
-                                            Directory.Delete(FoundDirectory.FullName, true);
-                                            Log_Verify.Deleted("Folder: " + FoundDirectory.Name);
-                                        }
-                                        catch (Exception Error)
-                                        {
-                                            DeletionError++;
-                                            Log_Verify.Error("Folder: " + FoundDirectory.Name + " Error: " + Error.Message);
-                                            Log_Verify.ErrorIC("Folder: " + FoundDirectory.Name + " Error: " + Error.HResult);
-                                            Log_Verify.ErrorFR("Folder: " + FoundDirectory.Name + " Error: " + Error.ToString());
-                                        }
-                                    }
-                                    else if (File.Exists(FoundDirectory.FullName))
-                                    {
-                                        try
-                                        {
-                                            File.Delete(FoundDirectory.FullName);
-                                            Log_Verify.Deleted("File: " + FoundDirectory.Name);
-                                        }
-                                        catch (Exception Error)
-                                        {
-                                            DeletionError++;
-                                            Log_Verify.Error("File: " + FoundDirectory.Name + " Error: " + Error.Message);
-                                            Log_Verify.ErrorIC("File: " + FoundDirectory.Name + " Error: " + Error.HResult);
-                                            Log_Verify.ErrorFR("File: " + FoundDirectory.Name + " Error: " + Error.ToString());
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-
-                if (Directory.Exists(Path.Combine(Save_Settings.Live_Data.Game_Path, "scripts")) && !ForceStopScan)
-                {
-                    DirectoryInfo ScriptsFolder = new DirectoryInfo(Path.Combine(Save_Settings.Live_Data.Game_Path, "scripts"));
-
-                    if (ScriptsFolder.EnumerateFiles().Count() > 1)
-                    {
-                        if (("Verify Hash has found files in the Scripts folder.\n" +
-                            "If you have installed custom Scripts or have not installed any Scripts" +
-                            "\n\nClick Yes, to Allow Deletion of Files" +
-                            "\nClick No, to Skip Deletion of Files").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
-                            foreach (FileInfo FoundFile in ScriptsFolder.EnumerateFiles())
-                            {
-                                if (FoundFile.Name != "LangPicker.ini")
-                                {
-                                    try
-                                    {
-                                        File.Delete(FoundFile.FullName);
-                                        Log_Verify.Deleted("File: " + FoundFile.Name);
-                                    }
-                                    catch (Exception Error)
-                                    {
-                                        DeletionError++;
-                                        Log_Verify.Error("File: " + FoundFile.Name + " Error: " + Error.Message);
-                                        Log_Verify.ErrorIC("File: " + FoundFile.Name + " Error: " + Error.HResult);
-                                        Log_Verify.ErrorFR("File: " + FoundFile.Name + " Error: " + Error.ToString());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                Download_Raw_Result_Model result = await _verifier.RunAsync(progress, _cts.Token);
+                HandleVerificationComplete(result);
             }
-            catch (Exception Error)
+            catch (Exception ex)
             {
-                LogToFileAddons.OpenLog("VERIFY HASH", string.Empty, Error, string.Empty, true);
+                Log.Error("VERIFY HASH: A critical error occurred. " + ex.Message);
+                VerifyHashText.Text = "A critical error occurred. Check logs.";
             }
-
-            if (DeletionError != 0)
+            finally
             {
-                Log.Info("VERIFY HASH: Completed check for '.orig' Files and Symbolic Folders, BUT Encounterd a File or Folder Deletion Error. " +
-                "Check Verify.log for More Details");
+                _isScanning = false;
+                StopScanner.Visible = false;
+                _cts?.Dispose();
+                _cts = null;
+            }
+        }
 
-                if (("Verify Hash has encountered File or Folder Deletion Errors.\n" +
-                "Would you like to Open Verify.Log and Stop the Scanner?").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
+        private void ReportProgress(Download_Raw_Progress_Model p)
+        {
+            // This is called on the UI thread automatically by IProgress<T>
+
+            // Handle scan progress
+            if (p.Status == Download_Raw_Status.Scanning_Files)
+            {
+                ScanProgressText.Text = p.Message;
+                ScanProgressBar.Value = p.Percentage;
+            }
+            // Handle download progress
+            else if (p.Status == Download_Raw_Status.Downloading)
+            {
+                Presence_Launcher.Status(26);
+                ScanProgressText.Text = "Scan Complete. Downloading files...";
+                DownloadProgressText.Text = $"{p.Message} {p.CurrentFile}\n" +
+                    $"{Time_Conversion.FormatFileSize(p.BytesDownloaded)} of {Time_Conversion.FormatFileSize(p.TotalBytesToDownload)}";
+                DownloadProgressBar.Value = p.Percentage;
+            }
+            // Handle other status messages
+            else
+            {
+                ScanProgressText.Text = p.Message;
+            }
+        }
+
+        private void HandleVerificationComplete(Download_Raw_Result_Model result)
+        {
+            if (result.WasCancelled)
+            {
+                VerifyHashText.Text = "Verify Hash process has been Terminated";
+            }
+            else if (result.FilesFailedToDownload > 0)
+            {
+                VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
+                VerifyHashText.Text = $"{result.FilesFailedToDownload} Files Failed to Download. Check Log for Details";
+                DownloadProgressText.Text = $"{result.FilesSuccessfullyDownloaded} files downloaded. {result.FilesFailedToDownload} failed.";
+
+                // Prompt to open log
+                if (("Verify Hash has encountered Download Errors.\n" +
+                    "Would you like to Open Verify.Log").Message_Box(MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     if (File.Exists(Log_Location.LogVerify))
                     {
                         Process.Start(Log_Location.LogCurrentFolder);
                         Process.Start(Log_Location.LogVerify);
                     }
-
-                    StopScanner_Click(null, null);
                 }
             }
-            else
+            else if (result.TotalFilesMissingOrInvalid == 0)
             {
-                Log.Info("VERIFY HASH: Completed check for '.orig' Files and Symbolic Folders");
+                VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
+                VerifyHashText.Text = "Excellent News! There are ZERO\nmissing or invalid Gamefiles!";
+                DownloadProgressBar.Visible = false;
+                DownloadProgressText.Visible = false;
+                SetGameIntegrityGood();
             }
-
-            if (!ForceStopScan)
+            else // Downloads finished successfully
             {
-                try
-                {
-                    FunctionStatus.IsVerifyHashDisabled = true;
-
-                    String[] getFilesToCheck = { };
-
-                    if (File.Exists("checksums.dat") && BuildDevelopment.Allowed())
-                    {
-                        /* Read Local checksums.dat */
-                        getFilesToCheck = File.ReadAllLines("checksums.dat");
-                    }
-                    else
-                    {
-                        /* Fetch and Read Remote checksums.dat */
-                        ScanProgressText.SafeInvokeAction(() => ScanProgressText.Text = "Downloading Checksums File");
-
-                        Uri URLCall = new Uri(FinalCDNURL + "/unpacked/checksums.dat");
-                        ServicePointManager.FindServicePoint(URLCall).ConnectionLeaseTimeout = (int)TimeSpan.FromSeconds(Launcher_Value.Launcher_WebCall_Timeout_Enable ?
-                                    Launcher_Value.Launcher_WebCall_Timeout() : 60).TotalMilliseconds;
-                        var Client = new WebClient
-                        {
-                            Encoding = Encoding.UTF8,
-                            CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
-                        };
-                        if (!Launcher_Value.Launcher_Alternative_Webcalls()) 
-                        { 
-                            Client = new WebClientWithTimeout { Encoding = Encoding.UTF8, CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore) }; 
-                        }
-                        else
-                        {
-                            Client.Headers.Add("user-agent", "SBRW Launcher " +
-                            Application.ProductVersion + " (+https://github.com/SoapBoxRaceWorld/GameLauncher_NFSW)");
-                        }
-
-                        bool ErrorFree = true;
-
-                        try
-                        {
-                            getFilesToCheck = Client.DownloadString(URLCall).Split('\n');
-                        }
-                        catch (Exception Error)
-                        {
-                            LogToFileAddons.OpenLog("VERIFY HASH CHECKSUMS", "Downloading of the Checksums File has Encountered an Error", Error, "Error", false);
-                            ErrorFree = false;
-                        }
-                        finally
-                        {
-                            Client?.Dispose();
-                        }
-
-                        if (ErrorFree)
-                        {
-                            File.WriteAllLines("checksums.dat", getFilesToCheck);
-                        }
-                        else
-                        {
-                            StopScanner_Click(null, null);
-                        }
-                    }
-
-                    ScannedHashes = new string[getFilesToCheck.Length][];
-                    for (var i = 0; i < getFilesToCheck.Length; i++)
-                    {
-                        if (!ForceStopScan)
-                        {
-                            ScannedHashes[i] = getFilesToCheck[i].Split(' ');
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    FilesToScan = ScannedHashes.Length;
-                    TotalFilesScanned = 0;
-
-                    /* START Show Warning Text */
-                    VerifyHashText.SafeInvokeAction(() =>
-                    {
-                        VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-                        VerifyHashText.Text = "Warning:\n Stopping the Scan before it is complete\nWill result in needing to start over!";
-                    });
-                    /* END Show Warning Text */
-
-                    foreach (string[] file in ScannedHashes)
-                    {
-                        if (!ForceStopScan)
-                        {
-                            string FileHash = file[0].Trim();
-                            string FileName = file[1].Trim();
-                            string RealPathToFile = Path.Combine(Save_Settings.Live_Data.Game_Path + FileName);
-
-                            if (!File.Exists(RealPathToFile))
-                            {
-                                InvalidFileList.Add(FileName);
-                                Log_Verify.Missing("File: " + FileName);
-                            }
-                            else
-                            {
-                                if (FileHash != Hashes.Hash_SHA(RealPathToFile).Trim())
-                                {
-                                    InvalidFileList.Add(FileName);
-                                    Log_Verify.Invalid("File: " + FileName);
-                                }
-                                else
-                                {
-                                    Log_Verify.Valid("File: " + FileName);
-                                }
-                            }
-                            TotalFilesScanned++;
-                            ScanProgressText.SafeInvokeAction(() => ScanProgressText.Text = "Scanning Files: " + (TotalFilesScanned * 100 / getFilesToCheck.Length) + "%");
-                            ScanProgressBar.SafeInvokeAction(() => ScanProgressBar.Value = TotalFilesScanned * 100 / getFilesToCheck.Length);
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-
-                    Log.Info("VERIFY HASH: Scan Completed");
-                    if (!InvalidFileList.Any() || ForceStopScan)
-                    {
-                        StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                        StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
-                        ScanProgressText.SafeInvokeAction(() => ScanProgressText.Text = ForceStopScan ? "User Stopped Scan." : "Scan Complete. No Files Missing or Invalid!");
-
-                        /* Hide the DownloadProgressBar as un-needed */
-                        DownloadProgressBar.SafeInvokeAction(() => DownloadProgressBar.Visible = false);
-                        DownloadProgressText.SafeInvokeAction(() => DownloadProgressText.Visible = false);
-                        /* Update the player messaging that we're done */
-                        VerifyHashText.SafeInvokeAction(() =>
-                        {
-                            if (!ForceStopScan) 
-                            { 
-                                VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
-                            }
-                            VerifyHashText.Text = ForceStopScan ? "Verify Hash Scan Process has been Terminated" : "Excellent News! There are ZERO\nmissing or invalid Gamefiles!";
-                        });
-
-                        Integrity();
-                        GameScanner(false);
-                    }
-                    else
-                    {
-                        ScanProgressText.SafeInvokeAction(() => ScanProgressText.Text = "Found Invalid or Missing Files");
-
-                        File.WriteAllLines("invalidfiles.dat", InvalidFileList);
-                        Log.Info("VERIFY HASH: Found Invalid or Missing Files and will Start File Downloader");
-                        CorruptedFilesFound();
-                    }
-                }
-                catch (Exception Error)
-                {
-                    LogToFileAddons.OpenLog("VERIFY HASH", string.Empty, Error, string.Empty, true);
-                }
+                VerifyHashText.ForeColor = Color_Winform.Success_Text_Fore_Color;
+                VerifyHashText.Text = "Yay! Scanning and Downloading\n is now completed on Gamefiles";
+                DownloadProgressText.Text = $"{result.FilesSuccessfullyDownloaded} Invalid/Missing File(s) were downloaded";
+                SetGameIntegrityGood();
             }
         }
 
-        private void Integrity()
+        private void SetGameIntegrityGood()
         {
             Presence_Launcher.Status(27);
             Save_Settings.Live_Data.Game_Integrity = "Good";
             Save_Settings.Save();
-            /* @DavidCarbon OR @Zacam 
-            * Ini File Save Error Happens Above
-            */
+
+            // Update main screen icon
             if (Screen_Main.Screen_Instance != null)
             {
-                if (Screen_Main.Screen_Instance.Button_Settings.InvokeRequired)
-                {
-                    Screen_Main.Screen_Instance.Button_Settings.SafeInvokeAction(() =>
+                Screen_Main.Screen_Instance.Button_Settings.SafeInvokeAction(() =>
                     Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
                     Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White));
-                }
-                else
-                {
-                    Screen_Main.Screen_Instance.Button_Settings.BackgroundImage =
-                        Screen_Main.Screen_Instance.Button_Settings.Icon_Order(SVG_Icon.Gear, SVG_Color.White);
-                }
             }
-        }
-
-        private void CorruptedFilesFound()
-        {
-            Presence_Launcher.Status(26);
-            /* START Show Redownloader Progress*/
-            StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-            StopScanner.SafeInvokeAction(() => StopScanner.Visible = true);
-
-            VerifyHashText.SafeInvokeAction(() => VerifyHashText.Text = "Currently (re)downloading files\nThis part may take awhile\ndepending on your connection.");
-
-            if (File.Exists("invalidfiles.dat") && File.ReadAllLines("invalidfiles.dat") != null)
-            {
-                DownloadProgressText.SafeInvokeAction(() => DownloadProgressText.Text = "\nPreparing to Download Files");
-
-                string[] files = File.ReadAllLines("invalidfiles.dat");
-
-                foreach (string text in files)
-                {
-                    if (!ForceStopScan)
-                    {
-                        try
-                        {
-                            while (StillDownloading) { }
-
-                            if (!ForceStopScan)
-                            {
-                                CurrentCount = files.Count();
-
-                                string text2 = Save_Settings.Live_Data.Game_Path + text;
-                                string address = FinalCDNURL + "/unpacked" + text.Replace("\\", "/");
-                                if (File.Exists(text2))
-                                {
-                                    try
-                                    {
-                                        Log_Verify.Deleted("File: " + text2);
-                                        File.Delete(text2);
-                                    }
-                                    catch (Exception Error)
-                                    {
-                                        Log_Verify.Error("File: " + text2 + " Error: " + Error.Message);
-                                        Log_Verify.ErrorIC("File: " + text2 + " Error: " + Error.HResult);
-                                        Log_Verify.ErrorFR("File: " + text2 + " Error: " + Error.ToString());
-                                    }
-                                }
-
-                                try
-                                {
-                                    if (!string.IsNullOrWhiteSpace(text2))
-                                    {
-#pragma warning disable CS8602 // Dereference of a possibly null reference.
-                                        if (!new FileInfo(text2).Directory.Exists)
-                                        {
-                                            new FileInfo(text2).Directory.Create();
-                                        }
-#pragma warning restore CS8602 // Dereference of a possibly null reference.
-                                    }
-                                }
-                                catch (Exception Error) { LogToFileAddons.OpenLog("VERIFY HASH File Info", string.Empty, Error, string.Empty, true); }
-
-                                Uri URLCall = new Uri(address);
-                                int Timeout = (int)TimeSpan.FromMinutes(5).TotalMilliseconds;
-
-                                if (address.Contains("copspeechdat"))
-                                {
-                                    Timeout = (int)TimeSpan.FromMinutes(30).TotalMilliseconds;
-                                }
-                                else if (address.Contains("nfs09mx.mus"))
-                                {
-                                    Timeout = (int)TimeSpan.FromMinutes(15).TotalMilliseconds;
-                                }
-
-                                ServicePointManager.FindServicePoint(URLCall).ConnectionLeaseTimeout = Timeout;
-
-                                var Client = new WebClient() 
-                                { 
-                                    Encoding = Encoding.UTF8,
-                                    CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
-                                };
-                                if (!Launcher_Value.Launcher_Alternative_Webcalls()) 
-                                { 
-                                    Client = new WebClientWithTimeout()
-                                    {
-                                        Encoding = Encoding.UTF8,
-                                        CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore)
-                                    }; 
-                                }
-                                else
-                                {
-                                    Client.Headers.Add("user-agent", "SBRW Launcher " +
-                                    Application.ProductVersion + " (+https://github.com/SoapBoxRaceWorld/GameLauncher_NFSW)");
-                                }
-
-                                Client.DownloadProgressChanged += (Systems, RecevingData) =>
-                                {
-                                    if (RecevingData.TotalBytesToReceive >= 1 && !ForceStopScan)
-                                    {
-                                        DownloadProgressText.SafeInvokeAction(() =>
-                                        DownloadProgressText.Text = "Downloading File [ " + RedownloadedCount + " / " +
-                                        CurrentCount + " ]:\n" + CurrentDownloadingFile + "\n" + Time_Conversion.FormatFileSize(RecevingData.BytesReceived) +
-                                        " of " + Time_Conversion.FormatFileSize(RecevingData.TotalBytesToReceive));
-                                    }
-                                    else if (ForceStopScan)
-                                    {
-                                        Client.CancelAsync();
-                                    }
-                                };
-                                Client.DownloadFileCompleted += new AsyncCompletedEventHandler(Client_DownloadFileCompleted);
-
-                                try
-                                {
-                                    Client.DownloadFileAsync(URLCall, text2);
-                                    CurrentDownloadingFile = text;
-                                    StillDownloading = true;
-                                }
-                                catch (Exception Error)
-                                {
-                                    if (!ForceStopScan) { RedownloadErrorCount++; }
-                                    LogToFileAddons.OpenLog("VERIFY HASH", string.Empty, Error, string.Empty, true);
-                                }
-                                finally
-                                {
-                                    Client?.Dispose();
-                                }
-                            }
-                            else
-                            {
-                                break;
-                            }
-                        }
-                        catch (Exception Error)
-                        {
-                            if (!ForceStopScan) { RedownloadErrorCount++; }
-                            LogToFileAddons.OpenLog("VERIFY HASH", string.Empty, Error, string.Empty, true);
-                        }
-                        finally
-                        {
-                            if (IsVerifyHashOpen)
-                            {
-                                Application.DoEvents();
-                            }
-                        }
-                    }
-                    else
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        private void Client_DownloadFileCompleted(object sender, AsyncCompletedEventArgs e)
-        {
-            StillDownloading = false;
-
-            if (e.Error != null && IsVerifyHashOpen && !ForceStopScan)
-            {
-                RedownloadErrorCount++;
-                Log_Verify.Downloaded("File: " + CurrentDownloadingFile);
-                Presence_Launcher.Status(26, RedownloadedCount + RedownloadErrorCount + " out of " + CurrentCount);
-
-                DownloadProgressText.SafeInvokeAction(() =>
-                DownloadProgressText.Text = "Failed To Download File [ " + 
-                RedownloadedCount + RedownloadErrorCount + " / " + CurrentCount + " ]:" + "\n" + CurrentDownloadingFile);
-                
-                DownloadProgressBar.SafeInvokeAction(() => DownloadProgressBar.Value = RedownloadedCount + RedownloadErrorCount * 100 / CurrentCount);
-
-                Log_Verify.Error("Download for [" + CurrentDownloadingFile + "] - " +
-                (e.Error != null ? (string.IsNullOrWhiteSpace(e.Error.Message) ? e.Error.ToString() : e.Error.Message) : "No Exception Error Provided"));
-
-                if (RedownloadedCount + RedownloadErrorCount == CurrentCount)
-                {
-                    StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                    StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
-
-                    DownloadProgressText.SafeInvokeAction(() =>
-                         DownloadProgressText.Text = "\n" + RedownloadedCount + " Invalid/Missing File(s) were Redownloaded");
-
-                    VerifyHashText.SafeInvokeAction(() =>
-                    {
-                        VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-                        VerifyHashText.Text = RedownloadErrorCount + " Files Failed to Download. Check Log for Details";
-                    }, this);
-
-                    DownloadErrorEncountered = true;
-                    GameScanner(false);
-                }
-            }
-            else if (IsVerifyHashOpen && !ForceStopScan)
-            {
-                RedownloadedCount++;
-
-                Presence_Launcher.Status(26, RedownloadedCount + " out of " + CurrentCount);
-                Log_Verify.Downloaded("File: " + CurrentDownloadingFile);
-
-                DownloadProgressText.SafeInvokeAction(() =>
-                DownloadProgressText.Text = "Downloaded File [ " + RedownloadedCount + " / " + CurrentCount + " ]:\n" + CurrentDownloadingFile);
-                DownloadProgressBar.SafeInvokeAction(() => DownloadProgressBar.Value = RedownloadedCount * 100 / CurrentCount);
-
-                if (RedownloadedCount == CurrentCount)
-                {
-                    Integrity();
-                    Log.Info("VERIFY HASH: Re-downloaded Count: " + RedownloadedCount + " Current File Count: " + CurrentCount);
-                    DownloadProgressText.SafeInvokeAction(() => DownloadProgressText.Text = "\n" + RedownloadedCount + " Invalid/Missing File(s) were downloaded");
-
-                    VerifyHashText.SafeInvokeAction(() =>
-                    {
-                        VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-                        VerifyHashText.Text = "Yay! Scanning and Downloading\n is now completed on Gamefiles";
-                    }, this);
-
-                    StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                    StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
-
-                    GameScanner(false);
-                }
-                else if (RedownloadedCount + RedownloadErrorCount == CurrentCount)
-                {
-                    DownloadProgressText.SafeInvokeAction(() => DownloadProgressText.Text = "\n" + RedownloadedCount + " Invalid/Missing File(s) were downloaded");
-
-                    VerifyHashText.SafeInvokeAction(() =>
-                    {
-                        VerifyHashText.ForeColor = Color_Winform.Warning_Text_Fore_Color;
-                        VerifyHashText.Text = RedownloadErrorCount + " Files Failed to Download. Check Log for Details";
-                    }, this);
-
-                    StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                    StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
-
-                    DownloadErrorEncountered = true;
-                    GameScanner(false);
-                }
-            }
-            else if (IsVerifyHashOpen && ForceStopScan)
-            {
-                Log.Info("VERIFY HASH: Download Process has Stopped");
-                Presence_Launcher.Status(26, RedownloadedCount + " out of " + CurrentCount);
-
-                DownloadProgressText.SafeInvokeAction(() =>
-                DownloadProgressText.Text = "Download Stopped on File [ " + 
-                RedownloadedCount + " / " + CurrentCount + " ]:" + "\n" + CurrentDownloadingFile);
-
-                DownloadProgressBar.SafeInvokeAction(() => DownloadProgressBar.Value = RedownloadedCount * 100 / CurrentCount);
-
-                Log_Verify.Error("Download for [" + CurrentDownloadingFile + "] -  has been Cancelled");
-
-                StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-                StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
-                VerifyHashText.SafeInvokeAction(() =>
-                {
-                    VerifyHashText.Text = "Verify Hash Download Process has been Terminated";
-                }, this);
-            }
-            else if (ForceStopScan)
-            {
-                Log.Info("VERIFY HASH: Download Process has Stopped");
-                Log_Verify.Error("Download for [" + CurrentDownloadingFile + "] -  has been Cancelled");
-            }
-        }
-
-        private void StartScanner_Click(object sender, EventArgs e)
-        {
-            StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
-            StopScanner.SafeInvokeAction(() => StopScanner.Visible = true);
-
-            GameScanner(true);
         }
 
         private void StopScanner_Click(object? sender, EventArgs? e)
@@ -867,7 +275,13 @@ namespace SBRW.Launcher.App.UI_Forms.VerifyHash_Screen
             StartScanner.SafeInvokeAction(() => StartScanner.Visible = false);
             StopScanner.SafeInvokeAction(() => StopScanner.Visible = false);
 
-            GameScanner(false);
+            if (_isScanning && _cts != null)
+            {
+                _cts.Cancel(); // Request cancellation
+                Log.Info("VERIFY HASH: User requested stop.");
+                VerifyHashText.Text = "Stopping... Please wait.";
+                StopScanner.Enabled = false; // Prevent multiple clicks
+            }
         }
 
         private void SetVisuals()

@@ -1,14 +1,16 @@
-﻿using SBRW.Launcher.RunTime.LauncherCore.Global;
-using SBRW.Launcher.RunTime.LauncherCore.ModNet;
-using SBRW.Launcher.Core.Downloader;
+﻿using SBRW.Launcher.Core.Downloader;
 using SBRW.Launcher.Core.Downloader.LZMA;
+using SBRW.Launcher.Core.Downloader.Models_;
+using SBRW.Launcher.RunTime.LauncherCore.Global;
+using SBRW.Launcher.RunTime.LauncherCore.ModNet;
+using SBRW.Launcher.RunTime.LauncherCore.Support;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Threading;
 using System.Windows.Forms;
-using System.Linq;
-using SBRW.Launcher.RunTime.LauncherCore.Support;
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
 {
@@ -36,6 +38,12 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
         public static Download_Extract? Pack_SBRW_Unpacker { get; set; }
         private static Download_Information_ModNet? ModNet_Download_Status { get; set; }
         public static bool Pack_SBRW_Downloader_Unpack_Lock { get; set; }
+        private static readonly HttpClient Http_Client = new HttpClient();
+        private Download_Raw? Raw_Downloader { get; set; }
+        public CancellationTokenSource? Cancellation_Token_Download { get; set; }
+        private static bool File_Game_Downloading { get; set; }
+        public static Download_Raw_Result_Model? File_Game_Download_Result { get; set; }
+        public static Download_Raw_Progress_Model? File_Game_Download_Progress { get; set; }
 
 
         private static string JsonGSI { get; set; } = string.Empty;

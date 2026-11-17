@@ -36,6 +36,8 @@ using SBRW.Launcher.App.UI_Forms.Account_Manager_Screen;
 using SBRW.Launcher.App.UI_Forms.Parent_Screen;
 using SBRW.Launcher.RunTime.LauncherCore.Visuals;
 using SBRW.Launcher.Core.Extra.File_.Save_;
+using SBRW.Launcher.App.UI_Forms.Settings_Screen;
+using SBRW.Launcher.Core.Downloader;
 #endregion
 
 namespace SBRW.Launcher.App.UI_Forms.Main_Screen
@@ -1857,6 +1859,119 @@ namespace SBRW.Launcher.App.UI_Forms.Main_Screen
                                 Presence_Launcher.Status(2, string.Format("Downloaded {0}% of the Game!", Cached_Status.Download_Percentage));
                             }
                         }
+                        break;
+                    /* Raw Download Progress */
+                    case 16:
+                        if (File_Game_Download_Progress == default)
+                        {
+                            return;
+                        }
+
+                        bool Setting_Scan_Tab = false;
+                        int ProgressBar_Current_Data_Value = 0;
+                        string Download_Information_Live_Status = string.Empty;
+                        string Download_Information_Support_Live_Status = string.Empty;
+                        string TextBox_Information_Live_Status = string.Empty;
+
+                        if (Screen_Settings.Screen_Instance != default)
+                        {
+                            Setting_Scan_Tab = Screen_Settings.Screen_Instance.TabPage_Game_Verify_Hash.Created;
+                        }
+
+                        switch (File_Game_Download_Progress.Status)
+                        {
+                            case Download_Raw_Status.Cancelled:
+                                break;
+                            case Download_Raw_Status.Downloading:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"Downloading: {File_Game_Download_Progress.CurrentFile}" +
+                                $"{Environment.NewLine}" +
+                                $"{Time_Conversion.FormatFileSize(File_Game_Download_Progress.BytesDownloaded)} of " +
+                                $"{Time_Conversion.FormatFileSize(File_Game_Download_Progress.TotalBytesToDownload)}";
+                                Download_Information_Support_Live_Status = "Scan Complete. Downloading files.";
+                                Download_Information_Live_Status = "Downloading: " + Path.GetFileName(File_Game_Download_Progress.CurrentFile);
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Download_Checksums:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"Downloading: Checksums" +
+                                $"{Environment.NewLine}" +
+                                $"{Time_Conversion.FormatFileSize(File_Game_Download_Progress.BytesDownloaded)} of " +
+                                $"{Time_Conversion.FormatFileSize(File_Game_Download_Progress.TotalBytesToDownload)}";
+                                Download_Information_Support_Live_Status = "Downloading Checksums File";
+                                Download_Information_Live_Status = "Downloading: " + Path.GetFileName(File_Game_Download_Progress.CurrentFile);
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Download_Error_Checksums:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"Error: Internal Error on Checksums File Download" +
+                                $"{Environment.NewLine}" +
+                                $"{File_Game_Download_Progress.Message}";
+                                Download_Information_Support_Live_Status = File_Game_Download_Progress.Message;
+                                Download_Information_Live_Status = "Error: Internal Error on Checksums File Download";
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Download_Invalid_Files:
+                                break;
+                            case Download_Raw_Status.Error:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"Error: Internal Error on Download" +
+                                $"{Environment.NewLine}" +
+                                $"{File_Game_Download_Progress.Message}";
+                                Download_Information_Support_Live_Status = File_Game_Download_Progress.Message;
+                                Download_Information_Live_Status = "Error: Internal Error on Download";
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Idle:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"STANDBY_DEFAULT_TEXT" +
+                                $"{Environment.NewLine}";
+                                Download_Information_Support_Live_Status = File_Game_Download_Progress.Message;
+                                Download_Information_Live_Status = "Error: Internal Error on Download";
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Scanned_Invalid_Files:
+                                break;
+                            case Download_Raw_Status.Scanning_Files:
+                                /* TODO: Reimplement Invalid File Count - DavidCarbon */
+                                Presence_Launcher.Status(26);
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                    $"Scanning: {File_Game_Download_Progress.CurrentFile}";
+                                Download_Information_Support_Live_Status = "Scanning Game Files for Integrity";
+                                Download_Information_Live_Status = Path.GetFileName(File_Game_Download_Progress.CurrentFile);
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Symbolic_Orig_Cleanup:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" +
+                                $"Scanning: {File_Game_Download_Progress.CurrentFile}";
+                                Download_Information_Support_Live_Status = "Scanning Game Files for Integrity";
+                                Download_Information_Live_Status = Path.GetFileName(File_Game_Download_Progress.CurrentFile);
+                                ProgressBar_Current_Data_Value = File_Game_Download_Progress.Percentage.Clamp(0, 100);
+                                break;
+                            case Download_Raw_Status.Verification_Completed:
+                                /* Completed Scan and Download of Files */
+                                break;
+                            case Download_Raw_Status.Verification_Completed_Scan_Only:
+                                /* Completed Scan no Download (offline) */
+                                break;
+                            default:
+                                TextBox_Information_Live_Status = $"{Environment.NewLine}" + $"DEFAULT_DOWNLOADER_PROGRESS";
+                                Download_Information_Support_Live_Status = "DEFAULT_DOWNLOADER_PROGRESS_SUPPORT";
+                                Download_Information_Live_Status = "DEFAULT_DOWNLOADER_PROGRESS";
+                                ProgressBar_Current_Data_Value = 100;
+                                break;
+                        }
+
+                        if (Setting_Scan_Tab)
+                        {
+                            Screen_Settings.Screen_Instance.Label_Verify_Scan_Progress.Text = Download_Information_Live_Status;
+                            Screen_Settings.Screen_Instance.ProgressBar_Verify_Scan.Value = ProgressBar_Current_Data_Value;
+                            Screen_Settings.Screen_Instance.TextBox_Verify_Scan.AppendText(TextBox_Information_Live_Status);
+                        }
+
+                        Label_Download_Information_Support.Text = Download_Information_Support_Live_Status;
+                        Label_Download_Information.Text = Download_Information_Live_Status;
+                        ProgressBar.Value = ProgressBar_Current_Data_Value;
                         break;
                 }
 
